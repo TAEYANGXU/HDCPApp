@@ -58,6 +58,7 @@ class MainViewController: UITabBarController {
             hdsc01vc.tabBarItem = UITabBarItem(title: "搜索", image: UIImage(named: "tab_icon_off_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdsc01vc.title = "搜索"
             navc = UINavigationController(rootViewController: hdsc01vc)
+            navc.navigationController?.navigationBar.barTintColor = Constants.HDMainColor
             self.addChildViewController(navc)
             
         }
@@ -71,6 +72,7 @@ class MainViewController: UITabBarController {
             hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdcg01vc.title = "分类"
             navc = UINavigationController(rootViewController: hdcg01vc)
+            navc.navigationController?.navigationBar.barTintColor = Constants.HDMainColor
             self.addChildViewController(navc)
             
         }
@@ -84,6 +86,7 @@ class MainViewController: UITabBarController {
             hdgg01vc.tabBarItem = UITabBarItem(title: "逛逛", image: UIImage(named: "tab_icon_off_04")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_04")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdgg01vc.title = "逛逛"
             navc = UINavigationController(rootViewController: hdgg01vc)
+            navc.navigationController?.navigationBar.barTintColor = Constants.HDMainColor
             self.addChildViewController(navc)
             
         }
@@ -97,6 +100,7 @@ class MainViewController: UITabBarController {
             hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdct01vc.title = "我的"
             navc = UINavigationController(rootViewController: hdct01vc)
+            navc.navigationBar.barTintColor = Constants.HDMainColor
             self.addChildViewController(navc)
             
         }

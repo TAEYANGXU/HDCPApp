@@ -13,15 +13,21 @@ import SnapKit
 
 class HDHM01Controller: BaseViewController {
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+    
         
+        Alamofire.request(.GET, Constants.HDHM01_URL)
+            .responseJSON { response in
         
-//        Alamofire.request(.GET, Constants.HDHM01_URL).responseData { (Response,<NSData, NSError>) -> Void in
-//            
-//        }
-        
+                print("\(response.result.value)")
+                
+                
+        }
+
+
     }
 
 
@@ -43,3 +49,5 @@ class HDHM01Controller: BaseViewController {
     */
 
 }
+
+

@@ -20,8 +20,19 @@ class BaseViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
+    /**
+     提供给子类调用 子类也可以重写
+     
+     - parameter btn:
+     */
+    func doThing(btn:UIButton){
+        
+        
+        print("so some thing ha ha")
+        
+    }
+    
     /*
     // MARK: - Navigation
 

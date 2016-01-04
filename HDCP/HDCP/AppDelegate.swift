@@ -54,15 +54,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func NavigationBarStyle(){
     
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDColor(105, g: 105, b: 105, a: 1),NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDColor(148, g: 205, b: 106, a: 1),NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        UINavigationBar.appearance().barTintColor = Constants.HDColor(148, g: 205, b: 106, a: 1)
+        UINavigationBar.appearance().barTintColor = Constants.HDMainColor
         
     }
 

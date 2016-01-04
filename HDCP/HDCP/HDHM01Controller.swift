@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import SDWebImage
+import Alamofire
+import SnapKit
 
 class HDHM01Controller: BaseViewController {
-
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
-        // Do any additional setup after loading the view.
+        
+        
+//        Alamofire.request(.GET, Constants.HDHM01_URL).responseData { (Response,<NSData, NSError>) -> Void in
+//            
+//        }
+        
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

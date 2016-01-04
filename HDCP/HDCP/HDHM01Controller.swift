@@ -13,6 +13,7 @@ import SnapKit
 
 class HDHM01Controller: BaseViewController {
     
+    var label:UILabel!
     
     override func viewDidLoad() {
         
@@ -26,6 +27,20 @@ class HDHM01Controller: BaseViewController {
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 
         }
+        
+        label = UILabel()
+        label.backgroundColor = Constants.HDMainColor
+        self.view.addSubview(label)
+        
+        label.snp_makeConstraints { (make) -> Void in
+            
+            make.left.equalTo(self.view).offset(20)
+            make.right.equalTo(self.view).offset(-20)
+            make.top.equalTo(self.view).offset(100)
+            make.height.equalTo(140)
+        }
+
+        
 
 
     }

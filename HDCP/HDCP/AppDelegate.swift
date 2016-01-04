@@ -62,6 +62,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
+        /**
+        *  导航栏颜色
+        */
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
         
     }

@@ -25,7 +25,7 @@ class Constants: NSObject {
     /**
      *   主题颜色
      **/
-    static let HDMainColor = UIColor(red: 148/255.0, green: 148/255.0, blue: 106/255.0, alpha: 1.0);
+    static let HDMainColor = UIColor(red: 105/255.0, green: 149/255.0, blue: 0/255.0, alpha: 1.0);
     static let HDMainTextColor = UIColor(red: 105/255.0, green: 105/255.0, blue: 105/255.0, alpha: 1.0);
 
     /**

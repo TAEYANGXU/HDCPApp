@@ -18,12 +18,12 @@ class HDHM01Controller: BaseViewController {
         
         super.viewDidLoad()
     
-        
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         Alamofire.request(.GET, Constants.HDHM01_URL)
             .responseJSON { response in
         
                 print("\(response.result.value)")
-                
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 
         }
 

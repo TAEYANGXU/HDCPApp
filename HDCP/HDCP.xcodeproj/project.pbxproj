@@ -40,6 +40,8 @@
 		356F39B51C3A76FE0056DF44 /* TransformType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39A61C3A76FD0056DF44 /* TransformType.swift */; };
 		356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39A71C3A76FD0056DF44 /* URLTransform.swift */; };
 		356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39B71C3A774A0056DF44 /* HDHM01Model.swift */; };
+		356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BA1C3A81580056DF44 /* MBProgressHUD.m */; };
+		356F39BD1C3A81870056DF44 /* CoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* CoreUtils.swift */; };
 		CAF7CED5983EC115E4776E4E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BF8DE8F3C161749DDFB9FB /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +106,9 @@
 		356F39A61C3A76FD0056DF44 /* TransformType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformType.swift; sourceTree = "<group>"; };
 		356F39A71C3A76FD0056DF44 /* URLTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTransform.swift; sourceTree = "<group>"; };
 		356F39B71C3A774A0056DF44 /* HDHM01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Model.swift; sourceTree = "<group>"; };
+		356F39B91C3A81580056DF44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		356F39BA1C3A81580056DF44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		356F39BC1C3A81870056DF44 /* CoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUtils.swift; sourceTree = "<group>"; };
 		76A42561F2613855E722082A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F8BF8DE8F3C161749DDFB9FB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -261,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				356F397F1C3A43EE0056DF44 /* Constants.swift */,
+				356F39BC1C3A81870056DF44 /* CoreUtils.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -276,6 +282,8 @@
 		356F39841C3A4B150056DF44 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				356F39B91C3A81580056DF44 /* MBProgressHUD.h */,
+				356F39BA1C3A81580056DF44 /* MBProgressHUD.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -570,7 +578,9 @@
 				356F397C1C3A403D0056DF44 /* HDHM01Controller.swift in Sources */,
 				356F39B41C3A76FE0056DF44 /* TransformOf.swift in Sources */,
 				356F396C1C3A3E900056DF44 /* MainViewController.swift in Sources */,
+				356F39BD1C3A81870056DF44 /* CoreUtils.swift in Sources */,
 				356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */,
+				356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,14 @@
 		356F39431C3A23EA0056DF44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356F39411C3A23EA0056DF44 /* LaunchScreen.storyboard */; };
 		356F394E1C3A23EA0056DF44 /* HDCPTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F394D1C3A23EA0056DF44 /* HDCPTests.swift */; };
 		356F39591C3A23EA0056DF44 /* HDCPUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39581C3A23EA0056DF44 /* HDCPUITests.swift */; };
+		356F396C1C3A3E900056DF44 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F396B1C3A3E900056DF44 /* MainViewController.swift */; };
+		356F39741C3A3FEE0056DF44 /* HDGG01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */; };
+		356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39751C3A3FFF0056DF44 /* HDCT01Controller.swift */; };
+		356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39771C3A40130056DF44 /* HDCG01Controller.swift */; };
+		356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39791C3A402B0056DF44 /* HDSC01Controller.swift */; };
+		356F397C1C3A403D0056DF44 /* HDHM01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */; };
+		356F39801C3A43EE0056DF44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F397F1C3A43EE0056DF44 /* Constants.swift */; };
+		356F39831C3A4AB80056DF44 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39821C3A4AB80056DF44 /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +57,14 @@
 		356F39541C3A23EA0056DF44 /* HDCPUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HDCPUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		356F39581C3A23EA0056DF44 /* HDCPUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDCPUITests.swift; sourceTree = "<group>"; };
 		356F395A1C3A23EA0056DF44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		356F396B1C3A3E900056DF44 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Controller.swift; sourceTree = "<group>"; };
+		356F39751C3A3FFF0056DF44 /* HDCT01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT01Controller.swift; sourceTree = "<group>"; };
+		356F39771C3A40130056DF44 /* HDCG01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG01Controller.swift; sourceTree = "<group>"; };
+		356F39791C3A402B0056DF44 /* HDSC01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDSC01Controller.swift; sourceTree = "<group>"; };
+		356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
+		356F397F1C3A43EE0056DF44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		356F39821C3A4AB80056DF44 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +115,15 @@
 		356F39341C3A23E90056DF44 /* HDCP */ = {
 			isa = PBXGroup;
 			children = (
+				356F39861C3A4B2E0056DF44 /* Model */,
+				356F39851C3A4B250056DF44 /* Service */,
+				356F39841C3A4B150056DF44 /* Extension */,
+				356F39811C3A4AA30056DF44 /* BaseClass */,
+				356F397E1C3A43A30056DF44 /* Core */,
+				356F396D1C3A3EEA0056DF44 /* Controllers */,
 				356F39351C3A23E90056DF44 /* AppDelegate.swift */,
 				356F39371C3A23EA0056DF44 /* ViewController.swift */,
+				356F396B1C3A3E900056DF44 /* MainViewController.swift */,
 				356F39391C3A23EA0056DF44 /* Main.storyboard */,
 				356F393F1C3A23EA0056DF44 /* Assets.xcassets */,
 				356F39411C3A23EA0056DF44 /* LaunchScreen.storyboard */,
@@ -126,6 +149,95 @@
 				356F395A1C3A23EA0056DF44 /* Info.plist */,
 			);
 			path = HDCPUITests;
+			sourceTree = "<group>";
+		};
+		356F396D1C3A3EEA0056DF44 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				356F39721C3A3F7F0056DF44 /* GG */,
+				356F39711C3A3F790056DF44 /* Center */,
+				356F39701C3A3F640056DF44 /* Category */,
+				356F396F1C3A3F300056DF44 /* Search */,
+				356F396E1C3A3F100056DF44 /* Home */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		356F396E1C3A3F100056DF44 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		356F396F1C3A3F300056DF44 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				356F39791C3A402B0056DF44 /* HDSC01Controller.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		356F39701C3A3F640056DF44 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				356F39771C3A40130056DF44 /* HDCG01Controller.swift */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		356F39711C3A3F790056DF44 /* Center */ = {
+			isa = PBXGroup;
+			children = (
+				356F39751C3A3FFF0056DF44 /* HDCT01Controller.swift */,
+			);
+			name = Center;
+			sourceTree = "<group>";
+		};
+		356F39721C3A3F7F0056DF44 /* GG */ = {
+			isa = PBXGroup;
+			children = (
+				356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */,
+			);
+			name = GG;
+			sourceTree = "<group>";
+		};
+		356F397E1C3A43A30056DF44 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				356F397F1C3A43EE0056DF44 /* Constants.swift */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		356F39811C3A4AA30056DF44 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				356F39821C3A4AB80056DF44 /* BaseViewController.swift */,
+			);
+			name = BaseClass;
+			sourceTree = "<group>";
+		};
+		356F39841C3A4B150056DF44 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		356F39851C3A4B250056DF44 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		356F39861C3A4B2E0056DF44 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +371,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */,
 				356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */,
+				356F39831C3A4AB80056DF44 /* BaseViewController.swift in Sources */,
+				356F39741C3A3FEE0056DF44 /* HDGG01Controller.swift in Sources */,
+				356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */,
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
+				356F39801C3A43EE0056DF44 /* Constants.swift in Sources */,
 				356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */,
+				356F397C1C3A403D0056DF44 /* HDHM01Controller.swift in Sources */,
+				356F396C1C3A3E900056DF44 /* MainViewController.swift in Sources */,
+				356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,7 +521,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = HDCP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.haodou.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,7 +534,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = HDCP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.haodou.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -486,6 +610,7 @@
 				356F395F1C3A23EA0056DF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		356F39601C3A23EA0056DF44 /* Build configuration list for PBXNativeTarget "HDCPTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +619,7 @@
 				356F39621C3A23EA0056DF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		356F39631C3A23EA0056DF44 /* Build configuration list for PBXNativeTarget "HDCPUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +628,7 @@
 				356F39651C3A23EA0056DF44 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

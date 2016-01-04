@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        NavigationBarStyle()
+        
+        self.window?.rootViewController = MainViewController()
+        
         return true
     }
 
@@ -42,6 +47,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    //  MARK: - Style
+    
+    func NavigationBarStyle(){
+    
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDColor(105, g: 105, b: 105, a: 1),NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDColor(148, g: 205, b: 106, a: 1),NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
+        
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
+        
+        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
+        UINavigationBar.appearance().barTintColor = Constants.HDColor(148, g: 205, b: 106, a: 1)
+        
     }
 
     // MARK: - Core Data stack

@@ -45,6 +45,11 @@
 		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
 		35F8CF3D1C3B8A1D003B1364 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */; };
+		35F8CF3F1C3B9AFA003B1364 /* GG.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */; };
+		35F8CF411C3B9B0B003B1364 /* Center.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF401C3B9B0B003B1364 /* Center.xcassets */; };
+		35F8CF431C3B9B17003B1364 /* Category.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF421C3B9B17003B1364 /* Category.xcassets */; };
+		35F8CF451C3B9B20003B1364 /* Search.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF441C3B9B20003B1364 /* Search.xcassets */; };
+		35F8CF471C3B9B2F003B1364 /* Home.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF461C3B9B2F003B1364 /* Home.xcassets */; };
 		CAF7CED5983EC115E4776E4E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BF8DE8F3C161749DDFB9FB /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +120,11 @@
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
 		35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GG.xcassets; sourceTree = "<group>"; };
+		35F8CF401C3B9B0B003B1364 /* Center.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Center.xcassets; sourceTree = "<group>"; };
+		35F8CF421C3B9B17003B1364 /* Category.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Category.xcassets; sourceTree = "<group>"; };
+		35F8CF441C3B9B20003B1364 /* Search.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Search.xcassets; sourceTree = "<group>"; };
+		35F8CF461C3B9B2F003B1364 /* Home.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Home.xcassets; sourceTree = "<group>"; };
 		76A42561F2613855E722082A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F8BF8DE8F3C161749DDFB9FB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -231,6 +241,7 @@
 		356F396E1C3A3F100056DF44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF461C3B9B2F003B1364 /* Home.xcassets */,
 				356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */,
 			);
 			name = Home;
@@ -239,6 +250,7 @@
 		356F396F1C3A3F300056DF44 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF441C3B9B20003B1364 /* Search.xcassets */,
 				356F39791C3A402B0056DF44 /* HDSC01Controller.swift */,
 			);
 			name = Search;
@@ -247,6 +259,7 @@
 		356F39701C3A3F640056DF44 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF421C3B9B17003B1364 /* Category.xcassets */,
 				356F39771C3A40130056DF44 /* HDCG01Controller.swift */,
 			);
 			name = Category;
@@ -255,6 +268,7 @@
 		356F39711C3A3F790056DF44 /* Center */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF401C3B9B0B003B1364 /* Center.xcassets */,
 				356F39751C3A3FFF0056DF44 /* HDCT01Controller.swift */,
 			);
 			name = Center;
@@ -263,6 +277,7 @@
 		356F39721C3A3F7F0056DF44 /* GG */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */,
 				356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */,
 			);
 			name = GG;
@@ -486,9 +501,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				356F39AE1C3A76FE0056DF44 /* Info.plist in Resources */,
+				35F8CF451C3B9B20003B1364 /* Search.xcassets in Resources */,
+				35F8CF431C3B9B17003B1364 /* Category.xcassets in Resources */,
 				356F39431C3A23EA0056DF44 /* LaunchScreen.storyboard in Resources */,
+				35F8CF411C3B9B0B003B1364 /* Center.xcassets in Resources */,
+				35F8CF3F1C3B9AFA003B1364 /* GG.xcassets in Resources */,
 				356F39401C3A23EA0056DF44 /* Assets.xcassets in Resources */,
 				356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */,
+				35F8CF471C3B9B2F003B1364 /* Home.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

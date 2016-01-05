@@ -33,4 +33,63 @@ class CoreUtils: NSObject {
         return backItem;
     }
     
+
+    /**
+     二进制转RGB
+     
+     - parameter hex:   二进制
+     - parameter alpha: 透明度
+     
+     - returns: UIColor
+     */
+    class func HDfromHexValue(hex:UInt,alpha:CGFloat)->UIColor{
+    
+        return UIColor(
+            red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((hex & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(hex & 0x0000FF) / 255.0,
+            alpha: CGFloat(alpha)
+        )
+        
+    }
+    
+    class func showProgressHUD(view:UIView){
+    
+        MBProgressHUD.hideHUDForView(view, animated: false)
+        
+        let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.mode = MBProgressHUDMode.CustomView
+        hud.color = CoreUtils.HDfromHexValue(0x000000, alpha: 0.4)
+        hud.margin = 10
+        hud.dimBackground = false
+        
+        let waitView:UIView = UIView(frame: CGRectMake(0,0,50,50))
+        
+        let animation:UIImageView = UIImageView(frame: CGRectMake(0,0,50,50))
+        animation.image = UIImage(named: "hud_waiting_animation_white");
+        waitView.addSubview(animation)
+        
+        let logo = UIImageView(frame: CGRectMake(0,0,50,50))
+        logo.image = UIImage(named: "hud_waiting_logo")
+        waitView.addSubview(logo)
+        
+        hud.customView = waitView
+        
+        /**
+        *  动画
+        */
+        
+        let rotationAnimation:CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotationAnimation.toValue = CGFloat(M_PI*2.0)
+        rotationAnimation.duration = 1;
+        rotationAnimation.cumulative = true;
+        rotationAnimation.repeatCount = .infinity
+        animation.layer.addAnimation(rotationAnimation, forKey: "rotationAnimation")
+        
+        hud.removeFromSuperViewOnHide = true
+        
+        hud.show(true)
+        
+    }
+    
 }

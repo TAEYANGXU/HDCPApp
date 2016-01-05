@@ -17,14 +17,10 @@ class MainViewController: UITabBarController {
     var hdct01vc:HDCT01Controller!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         setupTabBarView()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     /**

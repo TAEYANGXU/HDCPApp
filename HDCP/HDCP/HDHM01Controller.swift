@@ -35,10 +35,10 @@ class HDHM01Controller: BaseViewController {
             make.height.equalTo(140)
         }
 
-       MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        CoreUtils.showProgressHUD(self.view)
         HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
             
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+//            MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             for model:CollectListModel in (hdResponse.result?.collectList)! {
                 

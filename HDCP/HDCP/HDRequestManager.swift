@@ -30,9 +30,9 @@ class HDRequestManager: NSObject {
                      *  请求成功
                      */
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
-                    completeBlock(response: response)
-                    
                     print("Data:   \(text)")
+                    
+                    completeBlock(response: response)
                     
                 }else{
                 
@@ -69,9 +69,10 @@ class HDRequestManager: NSObject {
                      *  请求成功
                      */
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
-                    completeBlock(response: response)
-                    
                     print("Data:   \(text)")
+                    
+                    
+                    completeBlock(response: response)
                     
                 }else{
                     

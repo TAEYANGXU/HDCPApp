@@ -34,21 +34,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     // MARK: - 创建UI视图
     
     func setupUI(){
-    
-        baseView = UIScrollView()
+        
+        baseView = UIScrollView(frame: self.view.bounds)
         self.view.addSubview(baseView)
         
-        
-        baseView.snp_makeConstraints { (make) -> Void in
-            
-            make.top.equalTo(self.view).offset(0)
-            make.bottom.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.right.equalTo(self.view).offset(0)
-            
-        }
-        
-        
+        createHeaderView()
     }
     
     /**
@@ -61,7 +51,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             /**
             *  创建容器
             */
-            headView = UIView(frame: CGRectMake(0,64,Constants.kSCREENWITH,HeadViewHeight))
+            headView = UIView(frame: CGRectMake(0,0,Constants.kSCREENWITH,HeadViewHeight))
             baseView.addSubview(headView)
             
             headerSView = UIScrollView(frame: headView.bounds)

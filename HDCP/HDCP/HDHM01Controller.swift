@@ -11,67 +11,158 @@ import SDWebImage
 import Alamofire
 import SnapKit
 
-class HDHM01Controller: BaseViewController {
+let HeadViewHeight:CGFloat = 200.0
+
+class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
-    var label:UILabel!
+    var baseView:UIScrollView!
     var hdHM01Response:HDHM01Response?
     
-    
+    var headView:UIView!
+    var headerSView:UIScrollView!
+    var pageControl:UIPageControl!
+    var headerTitle:UILabel!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
     
+        doGetRequestData()
         
-        label = UILabel()
-        label.backgroundColor = Constants.HDMainColor
-        self.view.addSubview(label)
+    }
+    
+    // MARK: - 创建UI视图
+    
+    func setupUI(){
+    
+        baseView = UIScrollView()
+        self.view.addSubview(baseView)
         
-        label.snp_makeConstraints { (make) -> Void in
+        
+        baseView.snp_makeConstraints { (make) -> Void in
             
-            make.left.equalTo(self.view).offset(20)
-            make.right.equalTo(self.view).offset(-20)
-            make.top.equalTo(self.view).offset(100)
-            make.height.equalTo(140)
+            make.top.equalTo(self.view).offset(0)
+            make.bottom.equalTo(self.view).offset(0)
+            make.left.equalTo(self.view).offset(0)
+            make.right.equalTo(self.view).offset(0)
+            
         }
-
-        CoreUtils.showProgressHUD(self.view)
-        HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
+        
+        
+    }
+    
+    /**
+     *  创建头部滚动视图
+     */
+    func createHeaderView(){
+    
+        if self.hdHM01Response?.result?.recipeList?.count > 0 {
             
-//            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            /**
+            *  创建容器
+            */
+            headView = UIView(frame: CGRectMake(0,64,Constants.kSCREENWITH,HeadViewHeight))
+            baseView.addSubview(headView)
             
-            for model:CollectListModel in (hdResponse.result?.collectList)! {
+            headerSView = UIScrollView(frame: headView.bounds)
+            headerSView.pagingEnabled = true
+            headerSView.userInteractionEnabled = true;
+            headerSView.delegate = self;
+            headerSView.showsVerticalScrollIndicator = false;
+            headerSView.showsHorizontalScrollIndicator = false;
+            
+            headerSView.contentSize = CGSizeMake(Constants.kSCREENWITH*CGFloat((self.hdHM01Response?.result?.recipeList?.count)!), HeadViewHeight)
+            headView.addSubview(headerSView)
+            
+            /**
+            *  显示图片
+            */
+            for var i=0;i<self.hdHM01Response?.result?.recipeList?.count;i++ {
                 
-                
-                print("\(model.userName)")
+                let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![i])!
+                let imageView = UIImageView(frame: CGRectMake(Constants.kSCREENWITH*CGFloat(i),0,Constants.kSCREENWITH,HeadViewHeight))
+                headerSView.addSubview(imageView)
+                imageView.setImageWithURL(NSURL(string: recopeMddel.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
                 
             }
             
-            }) { (error) -> Void in
+            /**
+            *  分页栏
+            */
+            pageControl = UIPageControl(frame: CGRectMake(Constants.kSCREENWITH-100,HeadViewHeight-40,100,40))
+            pageControl?.addTarget(self, action: "pageAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            pageControl?.numberOfPages = 3;
+            pageControl?.currentPage = 0;
+            pageControl?.pageIndicatorTintColor = Constants.HDMainColor
+            headView.addSubview(pageControl!)
             
+            /**
+            *  菜粕名称
+            */
+            headerTitle = UILabel(frame: CGRectMake(20,HeadViewHeight-40,Constants.kSCREENWITH-150,40))
+            headerTitle.font = UIFont.systemFontOfSize(18)
+            headerTitle.textColor = Constants.HDMainColor
+            headView.addSubview(headerTitle)
+            
+            /**
+             *  默认初始给第一个的名称
+             */
+            let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![0])!
+            headerTitle.text = recopeMddel.title
+            
+        }
+        
+    }
+    
+    // MARK: - 数据加载
+    /**
+     *  加载数据
+     */
+    func doGetRequestData(){
+    
+        CoreUtils.showProgressHUD(self.view)
+        
+        HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
+            
+            CoreUtils.hidProgressHUD(self.view)
+            
+            self.hdHM01Response = hdResponse
+            
+            self.setupUI()
+            
+            }) { (error) -> Void in
                 
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
                 
         }
 
-    }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - events 
+    func pageAction(sender:AnyObject){
+        
+        headerSView.contentOffset = CGPointMake(Constants.kSCREENWITH*CGFloat((pageControl?.currentPage)!),0)
+        
     }
-    */
+    
+    // MARK: - UIScrollView delegate
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        
+        let index = NSInteger(scrollView.contentOffset.x/Constants.kSCREENWITH)
+        
+        if index<0 || index>3 {
+        
+            return
+        }
+        
+        pageControl?.currentPage = index
+        /**
+         *  更新菜谱名称
+         */
+        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![index])!
+        headerTitle.text = recopeMddel.title
+    }
 
 }
 

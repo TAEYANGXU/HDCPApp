@@ -53,9 +53,14 @@ class CoreUtils: NSObject {
         
     }
     
+    /**
+     加载数据时显示的动画
+     
+     - parameter view: hud的父视图
+     */
     class func showProgressHUD(view:UIView){
     
-        MBProgressHUD.hideHUDForView(view, animated: false)
+        hidProgressHUD(view)
         
         let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.mode = MBProgressHUDMode.CustomView
@@ -90,6 +95,31 @@ class CoreUtils: NSObject {
         
         hud.show(true)
         
+    }
+    
+    /**
+     隐藏动画
+     
+     - parameter view: hud的父视图
+     */
+    class func hidProgressHUD(view:UIView){
+    
+        MBProgressHUD.hideHUDForView(view, animated: true)
+    }
+    
+    /**
+     显示文本
+     
+     - parameter view:  hud的父视图
+     - parameter title: 显示的文本内容
+     */
+    class func showProgressHUD(view:UIView,title:String){
+    
+        hidProgressHUD(view)
+        
+        let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.labelText = title;
+        hud.hide(true, afterDelay: 1.5)
     }
     
 }

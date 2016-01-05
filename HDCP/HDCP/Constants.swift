@@ -21,13 +21,19 @@ class Constants: NSObject {
      **/
     static let kSCREENHEIGHT = UIScreen.mainScreen().bounds.height
     
+    /**
+     *   提示消息
+     **/
+     
+    static let HD_NO_NET_MSG = "网络不给力"
     
     /**
      *   主题颜色
      **/
     static let HDMainColor = UIColor(red: 105/255.0, green: 149/255.0, blue: 0/255.0, alpha: 1.0);
     static let HDMainTextColor = UIColor(red: 105/255.0, green: 105/255.0, blue: 105/255.0, alpha: 1.0);
-
+    static let HDBGViewColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0);
+    
     /**
     *  颜色
     */
@@ -36,6 +42,14 @@ class Constants: NSObject {
     }
     class func HDHEXRGBA(hex:UInt)->(UIColor){
         return CoreUtils.HDfromHexValue(hex, alpha: 1.0)
+    }
+    
+    /**
+     *  frame
+     */
+     
+    class func HDFrame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)->CGRect{
+        return CGRectMake(x, y, width, height)
     }
     
     /*******************************************URL*********************************************/

@@ -42,6 +42,9 @@
 		356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39B71C3A774A0056DF44 /* HDHM01Model.swift */; };
 		356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BA1C3A81580056DF44 /* MBProgressHUD.m */; };
 		356F39BD1C3A81870056DF44 /* CoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* CoreUtils.swift */; };
+		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
+		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
+		35F8CF3D1C3B8A1D003B1364 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */; };
 		CAF7CED5983EC115E4776E4E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8BF8DE8F3C161749DDFB9FB /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +112,9 @@
 		356F39B91C3A81580056DF44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		356F39BA1C3A81580056DF44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		356F39BC1C3A81870056DF44 /* CoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUtils.swift; sourceTree = "<group>"; };
+		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
+		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
+		35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		76A42561F2613855E722082A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F8BF8DE8F3C161749DDFB9FB /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -267,6 +273,8 @@
 			children = (
 				356F397F1C3A43EE0056DF44 /* Constants.swift */,
 				356F39BC1C3A81870056DF44 /* CoreUtils.swift */,
+				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
+				35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -291,6 +299,7 @@
 		356F39851C3A4B250056DF44 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -555,8 +564,10 @@
 				356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */,
 				356F39AA1C3A76FE0056DF44 /* Mappable.swift in Sources */,
 				356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */,
+				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,
 				356F39AF1C3A76FE0056DF44 /* CustomDateFormatTransform.swift in Sources */,
 				356F39831C3A4AB80056DF44 /* BaseViewController.swift in Sources */,
+				35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */,
 				356F39B31C3A76FE0056DF44 /* ISO8601DateTransform.swift in Sources */,
 				356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */,
 				356F39901C3A68DB0056DF44 /* SwiftyJSON.swift in Sources */,
@@ -564,6 +575,7 @@
 				356F39A81C3A76FE0056DF44 /* FromJSON.swift in Sources */,
 				356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */,
 				356F39B01C3A76FE0056DF44 /* DateFormatterTransform.swift in Sources */,
+				35F8CF3D1C3B8A1D003B1364 /* CoreDataManager.swift in Sources */,
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
 				356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */,
 				356F39801C3A43EE0056DF44 /* Constants.swift in Sources */,
@@ -726,7 +738,7 @@
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.haodou.HDCP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haodou.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HDCP/HDCP-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -743,7 +755,7 @@
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.haodou.HDCP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.haodou.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "HDCP/HDCP-Bridging-Header.h";
 			};

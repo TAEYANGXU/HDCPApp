@@ -14,19 +14,14 @@ import SnapKit
 class HDHM01Controller: BaseViewController {
     
     var label:UILabel!
+    var hdHM01Response:HDHM01Response?
+    
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
     
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        Alamofire.request(.GET, Constants.HDHM01_URL)
-            .responseJSON { response in
-        
-                print("\(response.result.value)")
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
-                
-        }
         
         label = UILabel()
         label.backgroundColor = Constants.HDMainColor
@@ -40,8 +35,23 @@ class HDHM01Controller: BaseViewController {
             make.height.equalTo(140)
         }
 
-        
-
+       MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
+            
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            
+            for model:CollectListModel in (hdResponse.result?.collectList)! {
+                
+                
+                print("\(model.userName)")
+                
+            }
+            
+            }) { (error) -> Void in
+            
+                
+                
+        }
 
     }
 

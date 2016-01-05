@@ -8,116 +8,139 @@
 
 import Foundation
 
+class CollectListModel:Mappable {
+    
+    var cid:String?
+    var content:String?
+    var cover:String?
+    var title:String?
+    var userName:String?
+    
+    init(){}
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        cid <- map["Cid"]
+        content <- map["Content"]
+        cover <- map["Cover"]
+        title <- map["Title"]
+        userName <- map["UserName"]
+        
+    }
+    
+}
+
+class RecipeListModel: Mappable {
+    
+    var cover:String?
+    var rid:String?
+    var title:String?
+    var userName:String?
+    
+    init(){}
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        rid <- map["Rid"]
+        cover <- map["Cover"]
+        title <- map["Title"]
+        userName <- map["UserName"]
+    }
+}
+
+class TagListModel: Mappable {
+    
+    var id:String?
+    var name:String?
+    
+    init(){}
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        id <- map["Id"]
+        name <- map["Name"]
+    }
+}
+
+class WikiListModel:Mappable {
+    
+    var url:String?
+    var content:String?
+    var cover:String?
+    var title:String?
+    var userName:String?
+    
+    init(){}
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        url <- map["Url"]
+        content <- map["Content"]
+        cover <- map["Cover"]
+        title <- map["Title"]
+        userName <- map["UserName"]
+        
+    }
+    
+}
+
+class HDHM01Result: Mappable {
+
+    var collectList:Array<CollectListModel>?
+    var recipeList:Array<RecipeListModel>?
+    var tagList:Array<TagListModel>?
+    var wikiList:Array<WikiListModel>?
+    
+    init(){}
+
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        collectList <- map["collect_list"]
+        recipeList <- map["recipe_list"]
+        tagList <- map["tag_list"]
+        wikiList <- map["wiki_list"]
+
+    }
+
+}
+
+class HDHM01Response: Mappable {
+
+    var request_id:String?
+    var result:HDHM01Result?
+
+    init(){}
+
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    func mapping(map: Map) {
+
+        request_id <- map["request_id"]
+        result <- map["result"]
+
+    }
+
+}
 
 
-//class Stuff: Mappable {
-//    
-//    var id:Int?
-//    var name:String?
-//    var type:Int?
-//    var weight:String?
-//    
-//    init(id:Int,name:String,type:Int,weight:String){
-//        
-//        self.id = id;
-//        self.name = name;
-//        self.type = type;
-//        self.weight = weight;
-//        
-//    }
-//    
-//    required init?(_ map: Map){
-//        mapping(map)
-//    }
-//    
-//    func mapping(map: Map) {
-//        
-//        id <- map["id"]
-//        name <- map["name"]
-//        type <- map["type"]
-//        weight <- map["weight"]
-//        
-//    }
-//    
-//}
-//
-//class ListModel: Mappable {
-//    
-//    var avatar:String?
-//    var commentCount:Int?
-//    var cover:String?
-//    var favoriteCount:Int?
-//    var intro:String?
-//    var recipeId:String?
-//    
-//    var stuff:Array<Stuff>?
-//    
-//    var title:String?
-//    var userId:String?
-//    var userName:String?
-//    var viewCount:String?
-//    
-//    init(){}
-//    
-//    required init?(_ map: Map){
-//        mapping(map)
-//    }
-//    
-//    func mapping(map: Map) {
-//        
-//        avatar <- map["Avatar"]
-//        commentCount <- map["CommentCount"]
-//        cover <- map["Cover"]
-//        favoriteCount <- map["FavoriteCount"]
-//        intro <- map["Intro"]
-//        recipeId <- map["RecipeId"]
-//        
-//        stuff <- map["Stuff"]
-//        
-//        title <- map["Title"]
-//        userId <- map["UserId"]
-//        userName <- map["UserName"]
-//        viewCount <- map["ViewCount"]
-//        
-//    }
-//    
-//}
-//
-//
-//class HDResult: Mappable {
-//    
-//    var count:Int?
-//    var list:[ListModel]?
-//    
-//    init(){}
-//    
-//    required init?(_ map: Map){
-//        mapping(map)
-//    }
-//    func mapping(map: Map) {
-//        
-//        count <- map["count"]
-//        list <- map["list"]
-//        
-//    }
-//    
-//}
-//
-//class HDResponse: Mappable {
-//    
-//    var request_id:String?
-//    var result:HDResult?
-//    
-//    init(){}
-//    
-//    required init?(_ map: Map){
-//        mapping(map)
-//    }
-//    func mapping(map: Map) {
-//        
-//        request_id <- map["request_id"]
-//        result <- map["result"]
-//        
-//    }
-//    
-//}

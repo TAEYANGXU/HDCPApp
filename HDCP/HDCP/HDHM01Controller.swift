@@ -409,7 +409,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(collectListView).offset(260)
                 make.width.equalTo(Constants.kSCREENWITH-16)
-                make.height.equalTo(2)
+                make.height.equalTo(1)
                 
             }
             
@@ -459,7 +459,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 
                 rowView!.title.text = model?.title
-                rowView!.userName.text = model?.userName
+                rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                 rowView!.detail.text = model?.content
                 
                 rowView!.snp_makeConstraints { (make) -> Void in
@@ -524,7 +524,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(wikiListView).offset(260)
                 make.width.equalTo(Constants.kSCREENWITH-16)
-                make.height.equalTo(2)
+                make.height.equalTo(1)
                 
             }
             
@@ -575,7 +575,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 
                 rowView!.title.text = model?.title
-                rowView!.userName.text = model?.userName
+                rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                 rowView!.detail.text = model?.content
                 
                 rowView!.snp_makeConstraints { (make) -> Void in

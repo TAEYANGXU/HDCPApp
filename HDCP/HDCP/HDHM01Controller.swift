@@ -53,6 +53,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.modalPresentationCapturesStatusBarAppearance = false;
         self.automaticallyAdjustsScrollViewInsets = true;
         
+        showHud()
         doGetRequestData()
         
     }
@@ -73,28 +74,38 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     func setupUI(){
         
-        baseView = UIScrollView()
+        if baseView == nil {
         
-        self.view.addSubview(baseView)
-        
-        baseView.snp_makeConstraints { (make) -> Void in
+            baseView = UIScrollView(frame: self.view.bounds)
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.width.equalTo(Constants.kSCREENWITH)
-            make.bottom.equalTo(self.view).offset(0)
+            self.view.addSubview(baseView)
+            
+            baseView.snp_makeConstraints { (make) -> Void in
+                
+                make.top.equalTo(self.view).offset(0)
+                make.left.equalTo(self.view).offset(0)
+                make.width.equalTo(Constants.kSCREENWITH)
+                make.bottom.equalTo(self.view).offset(0)
+            }
+            
+            createHeaderView()
+            
+            createMenuView()
+            
+            createTagListView()
+            
+            createCollectListView()
+            
+            createWikiListView()
+            
+            baseView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+                
+                self.doGetRequestData()
+                
+                
+            })
         }
-        
-        createHeaderView()
-        
-        createMenuView()
-        
-        createTagListView()
-        
-        createCollectListView()
-        
-        createWikiListView()
-        
+ 
     }
     
     /**
@@ -596,15 +607,24 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
-    // MARK: - 数据加载
-    
-    func doGetRequestData(){
+    func showHud(){
     
         CoreUtils.showProgressHUD(self.view)
         
+    }
+    
+    func hidenHud(){
+    
+        CoreUtils.hidProgressHUD(self.view)
+    }
+    
+    // MARK: - 数据加载
+    
+    func doGetRequestData(){
+
         HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
             
-            CoreUtils.hidProgressHUD(self.view)
+            self.hidenHud()
             
             self.hdHM01Response = hdResponse
             
@@ -613,10 +633,19 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             */
             self.setupUI()
             
+            /**
+            *  结束刷新
+            */
+            self.baseView.mj_header.endRefreshing()
+            
             }) { (error) -> Void in
                 
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                /**
+                *  结束刷新
+                */
+                self.baseView.mj_header.endRefreshing()
                 
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
 
         

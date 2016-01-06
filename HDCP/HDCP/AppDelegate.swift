@@ -52,16 +52,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //  MARK: - Style
     
     func NavigationBarStyle(){
-    
-        
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
-        
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
         
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
+        
+        UITabBar.appearance().shadowImage = UIImage()
+        UITabBar.appearance().tintColor = Constants.HDHEXRGBA(0xFFFFFF)
+        UITabBar.appearance().backgroundColor = Constants.HDHEXRGBA(0xFFFFFF)
+        UITabBar.appearance().barTintColor = Constants.HDHEXRGBA(0xFFFFFF)
+        UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
+
         /**
         *  导航栏颜色
         */

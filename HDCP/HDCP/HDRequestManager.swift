@@ -32,7 +32,6 @@ class HDRequestManager: NSObject {
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
                     print("Data:   \(text)")
                     
-                    completeBlock(response: response)
                     
                 }else{
                 
@@ -44,6 +43,8 @@ class HDRequestManager: NSObject {
                     print("error:   \(response.result.error?.description)")
                     
                 }
+                
+                completeBlock(response: response)
                 
         }
         
@@ -71,9 +72,6 @@ class HDRequestManager: NSObject {
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
                     print("Data:   \(text)")
                     
-                    
-                    completeBlock(response: response)
-                    
                 }else{
                     
                     /**
@@ -85,6 +83,7 @@ class HDRequestManager: NSObject {
                     
                 }
         
+                completeBlock(response: response)
         }
         
     }

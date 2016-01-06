@@ -28,6 +28,11 @@ class Constants: NSObject {
     static let HD_NO_NET_MSG = "网络不给力"
     
     /**
+     *   视图间隔
+     **/
+    static let HDSpace = 10
+    
+    /**
      *   主题颜色
      **/
     static let HDMainColor = UIColor(red: 105/255.0, green: 149/255.0, blue: 0/255.0, alpha: 1.0);

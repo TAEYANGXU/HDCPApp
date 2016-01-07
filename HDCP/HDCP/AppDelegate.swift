@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         *  导航栏颜色
         */
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
-        UINavigationBar.appearance().translucent = false
+//        UINavigationBar.appearance().translucent = false
     }
 
     // MARK: - Core Data stack

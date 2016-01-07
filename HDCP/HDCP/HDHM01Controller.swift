@@ -702,7 +702,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func pageAction(sender:AnyObject){
         
         headerSView.contentOffset = CGPointMake(Constants.kSCREENWITH*CGFloat((pageControl?.currentPage)!),0)
-        
+        /**
+         *  更新菜谱名称
+         */
+        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![(pageControl?.currentPage)!])!
+        headerTitle.text = recopeMddel.title
     }
     
     // MARK: - UIScrollView delegate

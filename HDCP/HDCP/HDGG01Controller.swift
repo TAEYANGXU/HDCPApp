@@ -315,6 +315,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
             
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
             return cell
         }else{
         
@@ -404,6 +406,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let bottomModel = array2d[2] as! HDGG01ListModel
             bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
             
             return cell
         }

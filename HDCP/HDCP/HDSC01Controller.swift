@@ -89,8 +89,10 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     {
         let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
         
+        /**
+         *  图标
+         */
         var icon:UIImageView? = cell.viewWithTag(1000) as? UIImageView
-        
         if icon == nil {
         
             icon = UIImageView()
@@ -107,8 +109,11 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
             
         }
         
-        var title:UILabel? = cell.viewWithTag(2000) as? UILabel
         
+        /**
+         *  名称
+         */
+        var title:UILabel? = cell.viewWithTag(2000) as? UILabel
         if title == nil {
         
             title = UILabel()
@@ -125,8 +130,10 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
             })
         }
         
+        /**
+         *  箭头
+         */
         var arrow:UIImageView? = cell.viewWithTag(3000) as? UIImageView
-        
         if arrow == nil {
         
             arrow = UIImageView()

@@ -8,15 +8,17 @@
 
 import UIKit
 
-let searchArray = [["title":"热门搜索","image":"RMSSIcon"],
-    ["title":"最近搜索","image":"ZJSSIcon"],
-    ["title":"最近浏览","image":"ZJLLIcon"],
-    ["title":"最近流行","image":"ZJLXIcon"],
-    ["title":"摇一摇","image":"YYYIcon"]]
+
 
 class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
 
     var searchController:UISearchController?
+    
+    let searchArray = [["title":"热门搜索","image":"RMSSIcon"],
+        ["title":"最近搜索","image":"ZJSSIcon"],
+        ["title":"最近浏览","image":"ZJLLIcon"],
+        ["title":"最近流行","image":"ZJLXIcon"],
+        ["title":"摇一摇","image":"YYYIcon"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,18 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     override func viewDidDisappear(animated: Bool) {
         
         super.viewDidDisappear(animated)
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        if (self.searchController!.active) {
+            print(true)
+        }else{
+            
+            print("flase")
+        }
         
     }
     
@@ -50,6 +64,7 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
         searchController?.searchBar.layer.borderWidth = 1;
         searchController?.searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
         searchController?.searchBar.showsCancelButton = false
+        searchController?.hidesNavigationBarDuringPresentation = false
         self.tableView.tableHeaderView = searchController?.searchBar
         
     }

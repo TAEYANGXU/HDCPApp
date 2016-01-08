@@ -58,18 +58,18 @@ class MainViewController: UITabBarController {
             
         }
         
-        /**
-        *  分类
-        */
-        if hdcg01vc == nil {
-            
-            hdcg01vc = HDCG01Controller()
-            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
-            hdcg01vc.title = "分类"
-            navc = UINavigationController(rootViewController: hdcg01vc)
-            self.addChildViewController(navc)
-            
-        }
+//        /**
+//        *  分类
+//        */
+//        if hdcg01vc == nil {
+//            
+//            hdcg01vc = HDCG01Controller()
+//            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+//            hdcg01vc.title = "分类"
+//            navc = UINavigationController(rootViewController: hdcg01vc)
+//            self.addChildViewController(navc)
+//            
+//        }
         
         
         /**

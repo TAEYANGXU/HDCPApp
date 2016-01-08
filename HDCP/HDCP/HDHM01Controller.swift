@@ -15,17 +15,17 @@ let HeadViewHeight:CGFloat = 200.0
 
 let TagHeight:Int = 40
 
-let resourceArray = [["title":"排行榜","image":"PHBIcon"],
-    ["title":"营养餐桌","image":"YYCZIcon"],
-    ["title":"发布菜谱","image":"FBCPIcon"],
-    ["title":"晒一晒","image":"SYSIcon"]]
-
 class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     enum HDHM01MenuTag: Int {
         case PHB, YYCZ, FBCP, SYS
     }
 
+    let resourceArray = [["title":"排行榜","image":"PHBIcon"],
+        ["title":"营养餐桌","image":"YYCZIcon"],
+        ["title":"发布菜谱","image":"FBCPIcon"],
+        ["title":"晒一晒","image":"SYSIcon"]]
+    
     var baseView:UIScrollView!
     var hdHM01Response:HDHM01Response?
     
@@ -49,9 +49,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         super.viewDidLoad()
     
         self.edgesForExtendedLayout = UIRectEdge.None;
-        self.extendedLayoutIncludesOpaqueBars = false;
-        self.modalPresentationCapturesStatusBarAppearance = false;
-        self.automaticallyAdjustsScrollViewInsets = true;
+        self.navigationController?.navigationBar.translucent = false
         
         showHud()
         doGetRequestData()
@@ -76,7 +74,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         if baseView == nil {
         
-            baseView = UIScrollView(frame: self.view.bounds)
+            baseView = UIScrollView()
             
             self.view.addSubview(baseView)
             
@@ -98,7 +96,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             createWikiListView()
             
-            baseView.mj_header = MJRefreshNormalHeader(refreshingBlock: { () -> Void in
+            baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
                 
                 self.doGetRequestData()
                 

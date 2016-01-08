@@ -55,7 +55,7 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
         self.tableView.tableFooterView = UIView()
         
         searchController = UISearchController(searchResultsController: nil)
-        searchController?.dimsBackgroundDuringPresentation =  false
+//        searchController?.dimsBackgroundDuringPresentation =  false
         searchController?.searchBar.placeholder = "搜索菜谱"
         searchController?.delegate = self
         searchController?.searchBar.frame = CGRectMake(0, 0, Constants.kSCREENWITH, 44)
@@ -64,7 +64,6 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
         searchController?.searchBar.layer.borderWidth = 1;
         searchController?.searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
         searchController?.searchBar.showsCancelButton = false
-        searchController?.hidesNavigationBarDuringPresentation = false
         self.tableView.tableHeaderView = searchController?.searchBar
         
     }
@@ -78,7 +77,7 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     func didPresentSearchController(searchController: UISearchController){
     
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
-        
+        self.tabBarController?.tabBar.hidden = true
         print("didPresentSearchController")
     }
 
@@ -90,7 +89,9 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     func didDismissSearchController(searchController: UISearchController){
     
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+        
         print("didDismissSearchController")
+        self.tabBarController?.tabBar.hidden = false
     }
     
     // MARK: - UITableView delegate/datasource

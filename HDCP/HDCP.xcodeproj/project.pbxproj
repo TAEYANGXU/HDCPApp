@@ -40,8 +40,8 @@
 		356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39771C3A40130056DF44 /* HDCG01Controller.swift */; };
 		356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39791C3A402B0056DF44 /* HDSC01Controller.swift */; };
 		356F397C1C3A403D0056DF44 /* HDHM01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */; };
-		356F39801C3A43EE0056DF44 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F397F1C3A43EE0056DF44 /* Constants.swift */; };
-		356F39831C3A4AB80056DF44 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39821C3A4AB80056DF44 /* BaseViewController.swift */; };
+		356F39801C3A43EE0056DF44 /* HDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F397F1C3A43EE0056DF44 /* HDConstants.swift */; };
+		356F39831C3A4AB80056DF44 /* HDBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39821C3A4AB80056DF44 /* HDBaseViewController.swift */; };
 		356F39901C3A68DB0056DF44 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F398F1C3A68DB0056DF44 /* SwiftyJSON.swift */; };
 		356F39A81C3A76FE0056DF44 /* FromJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39971C3A76FD0056DF44 /* FromJSON.swift */; };
 		356F39A91C3A76FE0056DF44 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39981C3A76FD0056DF44 /* Map.swift */; };
@@ -60,11 +60,16 @@
 		356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39A71C3A76FD0056DF44 /* URLTransform.swift */; };
 		356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39B71C3A774A0056DF44 /* HDHM01Model.swift */; };
 		356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BA1C3A81580056DF44 /* MBProgressHUD.m */; };
-		356F39BD1C3A81870056DF44 /* CoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* CoreUtils.swift */; };
+		356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */; };
 		35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */; };
+		35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */; };
+		35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703431C3F81570024A329 /* HDGG01Service.swift */; };
+		35B703461C3F83130024A329 /* HDGG01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703451C3F83130024A329 /* HDGG01Model.swift */; };
+		35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034B1C3F95E20024A329 /* HDGG01Button.swift */; };
+		35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */; };
 		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
-		35F8CF3D1C3B8A1D003B1364 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */; };
+		35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */; };
 		35F8CF3F1C3B9AFA003B1364 /* GG.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */; };
 		35F8CF411C3B9B0B003B1364 /* Center.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF401C3B9B0B003B1364 /* Center.xcassets */; };
 		35F8CF431C3B9B17003B1364 /* Category.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35F8CF421C3B9B17003B1364 /* Category.xcassets */; };
@@ -151,8 +156,8 @@
 		356F39771C3A40130056DF44 /* HDCG01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG01Controller.swift; sourceTree = "<group>"; };
 		356F39791C3A402B0056DF44 /* HDSC01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDSC01Controller.swift; sourceTree = "<group>"; };
 		356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
-		356F397F1C3A43EE0056DF44 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		356F39821C3A4AB80056DF44 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		356F397F1C3A43EE0056DF44 /* HDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDConstants.swift; sourceTree = "<group>"; };
+		356F39821C3A4AB80056DF44 /* HDBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDBaseViewController.swift; sourceTree = "<group>"; };
 		356F39881C3A677A0056DF44 /* HDCP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HDCP-Bridging-Header.h"; sourceTree = "<group>"; };
 		356F398E1C3A68DB0056DF44 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		356F398F1C3A68DB0056DF44 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -175,11 +180,16 @@
 		356F39B71C3A774A0056DF44 /* HDHM01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Model.swift; sourceTree = "<group>"; };
 		356F39B91C3A81580056DF44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		356F39BA1C3A81580056DF44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		356F39BC1C3A81870056DF44 /* CoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUtils.swift; sourceTree = "<group>"; };
+		356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreUtils.swift; sourceTree = "<group>"; };
 		35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01RowView.swift; sourceTree = "<group>"; };
+		35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifHeader.swift; sourceTree = "<group>"; };
+		35B703431C3F81570024A329 /* HDGG01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Service.swift; sourceTree = "<group>"; };
+		35B703451C3F83130024A329 /* HDGG01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Model.swift; sourceTree = "<group>"; };
+		35B7034B1C3F95E20024A329 /* HDGG01Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Button.swift; sourceTree = "<group>"; };
+		35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01RowView.swift; sourceTree = "<group>"; };
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
-		35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreDataManager.swift; sourceTree = "<group>"; };
 		35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GG.xcassets; sourceTree = "<group>"; };
 		35F8CF401C3B9B0B003B1364 /* Center.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Center.xcassets; sourceTree = "<group>"; };
 		35F8CF421C3B9B17003B1364 /* Category.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Category.xcassets; sourceTree = "<group>"; };
@@ -432,6 +442,7 @@
 		356F39721C3A3F7F0056DF44 /* GG */ = {
 			isa = PBXGroup;
 			children = (
+				35B7034A1C3F95C70024A329 /* View */,
 				35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */,
 				356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */,
 			);
@@ -441,10 +452,10 @@
 		356F397E1C3A43A30056DF44 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				356F397F1C3A43EE0056DF44 /* Constants.swift */,
-				356F39BC1C3A81870056DF44 /* CoreUtils.swift */,
+				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
+				356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */,
 				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
-				35F8CF3C1C3B8A1D003B1364 /* CoreDataManager.swift */,
+				35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -452,7 +463,7 @@
 		356F39811C3A4AA30056DF44 /* BaseClass */ = {
 			isa = PBXGroup;
 			children = (
-				356F39821C3A4AB80056DF44 /* BaseViewController.swift */,
+				356F39821C3A4AB80056DF44 /* HDBaseViewController.swift */,
 			);
 			name = BaseClass;
 			sourceTree = "<group>";
@@ -462,6 +473,7 @@
 			children = (
 				356F39B91C3A81580056DF44 /* MBProgressHUD.h */,
 				356F39BA1C3A81580056DF44 /* MBProgressHUD.m */,
+				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -469,7 +481,8 @@
 		356F39851C3A4B250056DF44 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */,
+				35B703421C3F81370024A329 /* GG */,
+				35B703411C3F81300024A329 /* HM */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -477,7 +490,8 @@
 		356F39861C3A4B2E0056DF44 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				356F39B71C3A774A0056DF44 /* HDHM01Model.swift */,
+				35B703481C3F838D0024A329 /* GG */,
+				35B703471C3F83870024A329 /* HM */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -538,6 +552,47 @@
 				356F39A71C3A76FD0056DF44 /* URLTransform.swift */,
 			);
 			path = Transforms;
+			sourceTree = "<group>";
+		};
+		35B703411C3F81300024A329 /* HM */ = {
+			isa = PBXGroup;
+			children = (
+				35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */,
+			);
+			name = HM;
+			sourceTree = "<group>";
+		};
+		35B703421C3F81370024A329 /* GG */ = {
+			isa = PBXGroup;
+			children = (
+				35B703431C3F81570024A329 /* HDGG01Service.swift */,
+			);
+			name = GG;
+			sourceTree = "<group>";
+		};
+		35B703471C3F83870024A329 /* HM */ = {
+			isa = PBXGroup;
+			children = (
+				356F39B71C3A774A0056DF44 /* HDHM01Model.swift */,
+			);
+			name = HM;
+			sourceTree = "<group>";
+		};
+		35B703481C3F838D0024A329 /* GG */ = {
+			isa = PBXGroup;
+			children = (
+				35B703451C3F83130024A329 /* HDGG01Model.swift */,
+			);
+			name = GG;
+			sourceTree = "<group>";
+		};
+		35B7034A1C3F95C70024A329 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				35B7034B1C3F95E20024A329 /* HDGG01Button.swift */,
+				35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		35F8CF481C3BCDC7003B1364 /* View */ = {
@@ -758,9 +813,10 @@
 				356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */,
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,
 				356F39AF1C3A76FE0056DF44 /* CustomDateFormatTransform.swift in Sources */,
+				35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */,
 				1B0FD0F81C3D5749009E85CD /* MJRefreshAutoGifFooter.m in Sources */,
 				1B0FD0F41C3D5749009E85CD /* MJRefreshBackFooter.m in Sources */,
-				356F39831C3A4AB80056DF44 /* BaseViewController.swift in Sources */,
+				356F39831C3A4AB80056DF44 /* HDBaseViewController.swift in Sources */,
 				35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */,
 				356F39B31C3A76FE0056DF44 /* ISO8601DateTransform.swift in Sources */,
 				356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */,
@@ -771,11 +827,11 @@
 				356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */,
 				356F39B01C3A76FE0056DF44 /* DateFormatterTransform.swift in Sources */,
 				1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */,
-				35F8CF3D1C3B8A1D003B1364 /* CoreDataManager.swift in Sources */,
+				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
 				356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */,
-				356F39801C3A43EE0056DF44 /* Constants.swift in Sources */,
+				356F39801C3A43EE0056DF44 /* HDConstants.swift in Sources */,
 				1B0FD0FC1C3D5749009E85CD /* MJRefreshBackNormalFooter.m in Sources */,
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
@@ -790,12 +846,16 @@
 				356F39AD1C3A76FE0056DF44 /* ToJSON.swift in Sources */,
 				35F8CF4A1C3BCDF4003B1364 /* HDHM01Button.swift in Sources */,
 				356F39B51C3A76FE0056DF44 /* TransformType.swift in Sources */,
+				35B703461C3F83130024A329 /* HDGG01Model.swift in Sources */,
+				35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */,
 				356F397C1C3A403D0056DF44 /* HDHM01Controller.swift in Sources */,
 				356F39B41C3A76FE0056DF44 /* TransformOf.swift in Sources */,
+				35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */,
 				1B0FD1041C3D5749009E85CD /* UIScrollView+MJRefresh.m in Sources */,
 				1B0FD0F71C3D5749009E85CD /* MJRefreshHeader.m in Sources */,
+				35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */,
 				356F396C1C3A3E900056DF44 /* MainViewController.swift in Sources */,
-				356F39BD1C3A81870056DF44 /* CoreUtils.swift in Sources */,
+				356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */,
 				1B0FD0FB1C3D5749009E85CD /* MJRefreshBackGifFooter.m in Sources */,
 				356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */,
 				356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */,

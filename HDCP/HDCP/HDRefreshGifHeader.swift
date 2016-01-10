@@ -24,7 +24,7 @@ class HDRefreshGifHeader: MJRefreshGifHeader {
         super.prepare()
         
         let idleImages = NSMutableArray()
-        for var i=1;i<4;i++ {
+        for var i=1;i<3;i++ {
         
             let name:String = String(format: "Refresh%ld",i )
             let image = UIImage(named: name)

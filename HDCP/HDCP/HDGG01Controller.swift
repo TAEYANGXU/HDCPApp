@@ -200,6 +200,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
         HDGG01Service().doGetRequest_HDGG01_URL({ (hdResponse) -> Void in
             
+            NSThread.sleepForTimeInterval(2)
+            
             self.hidenHud()
             self.count = hdResponse.array2D!.count
             self.hdGG01Response = hdResponse

@@ -17,11 +17,11 @@ class HDGG01RowView: UIView {
         
         super.init(frame: frame)
         
-        layoutSubviews()
+        createSubviews()
         
     }
     
-    override func layoutSubviews() {
+    func createSubviews() {
         
         if imageView == nil {
             
@@ -52,8 +52,8 @@ class HDGG01RowView: UIView {
             title.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.bottom.equalTo(self).offset(0)
-                make.left.equalTo(self).offset(5)
-                make.right.equalTo(self).offset(-5)
+                make.left.equalTo(self).offset(0)
+                make.right.equalTo(self).offset(0)
                 make.height.equalTo(20)
                 
             })

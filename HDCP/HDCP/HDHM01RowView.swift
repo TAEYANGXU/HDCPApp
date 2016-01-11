@@ -19,11 +19,11 @@ class HDHM01RowView: UIView {
         
         super.init(frame: frame)
         
-        layoutSubviews()
+        createSubviews()
         
     }
     
-    override func layoutSubviews() {
+    func createSubviews() {
         
         if imageView == nil {
         

@@ -6,7 +6,7 @@
     SDWebImage : 图片加载库(OC)
     MJRefresh : 下拉刷新(OC)
     MBProgressHUD ：提示HUD(OC)
-    SnapKit ：Swift版的Masonry,屏幕适配库
+    SnapKit ：Swift版的Masonry,自动布局
     ObjectMapper ：对象映射，Json转Model(Swift)
 
 目录结构分析
@@ -30,7 +30,7 @@
 备注
 
     App有些功能还没有实现,会抽空在后续更新,敬请期待。
-    App支持IOS8.0以上版本,包含IOS8.0
+    App支持IOS8.0以上版本,包含IOS8.0。
 
 效果图
 

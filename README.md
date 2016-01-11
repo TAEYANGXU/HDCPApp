@@ -1,4 +1,3 @@
-![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/logo.png)
                                                             微菜谱
 
 用到的第三方库

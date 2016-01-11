@@ -1,4 +1,4 @@
-                                                            微菜谱 
+                                                            微菜谱 ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/logo.png) 
 =============================================
 用到的第三方库
 
@@ -35,7 +35,7 @@
 
 APP运行
 
-  运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，打开终端进入HDCP目录,执行pod install,下载完成即可运行。
+  运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，安装完成后,打开终端进入HDCP目录,执行pod install,下载完成即可运行。
 
 效果图
 

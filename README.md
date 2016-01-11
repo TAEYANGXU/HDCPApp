@@ -35,7 +35,7 @@
 
 APP运行
 
-  运行App需要安装CocoaPods,[安装](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，利用终端进入HDCP目录,执行pod install
+  运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，利用终端进入HDCP目录,执行pod install
 
 效果图
 

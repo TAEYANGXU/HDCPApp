@@ -33,5 +33,4 @@
     该App支持IOS8.0以上版本，包含IOS8.0
 
 效果图
-
-    ![](https://raw.githubusercontent.com/AlbertXYZ/HDCP/master/Images/CP.gif)  
+![](https://raw.githubusercontent.com/AlbertXYZ/HDCP/master/Images/CP.gif)  

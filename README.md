@@ -31,8 +31,11 @@
 
     App有些功能还没有实现,会抽空在后续更新,敬请期待。
     App支持IOS8.0以上版本,包含IOS8.0。
-  运行App需要安装CocoaPods,[安装](http://blog.csdn.net/showhilllee/article/details/38398119 "CocoaPods使用详细说明")，利用终端进入HDCP目录,执行pod install
     如果哪里写得不好可以相互交流,本人QQ:498193471 非诚勿扰 谢谢
+
+APP运行
+
+  运行App需要安装CocoaPods,[安装](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，利用终端进入HDCP目录,执行pod install
 
 效果图
 

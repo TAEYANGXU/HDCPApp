@@ -105,6 +105,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             tableView?.dataSource = self
             tableView?.backgroundColor = UIColor.clearColor()
             tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
+            self.tableView?.hidden = true
             self.view.addSubview(self.tableView!)
             tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
             tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell2")
@@ -203,6 +204,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.count = hdResponse.array2D!.count
             self.hdGG01Response = hdResponse
             self.tableView!.reloadData()
+            
+            self.tableView?.hidden = false
             
             self.tableView?.mj_header.endRefreshing()
             

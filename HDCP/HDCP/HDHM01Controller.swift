@@ -22,7 +22,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     }
 
     let resourceArray = [["title":"排行榜","image":"PHBIcon"],
-        ["title":"营养餐桌","image":"YYCZIcon"],
+        ["title":"营养餐桌","image":"HYYCZIcon"],
         ["title":"发布菜谱","image":"FBCPIcon"],
         ["title":"晒一晒","image":"SYSIcon"]]
     

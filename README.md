@@ -13,7 +13,7 @@
 
     BaseClass : 项目的一些基类
     Extension : 视图扩展
-    Library : 第三方库(有些已用Pods导入进来)
+    Library : 第三方库(有些需要用Pods导入进来)
     Service : 网络请求及业务处理
     Model : 模型
     Core : 常用方法和常量数值

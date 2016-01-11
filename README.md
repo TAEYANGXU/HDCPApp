@@ -34,4 +34,4 @@
 
 效果图
 
-    
+    ![](https://raw.githubusercontent.com/AlbertXYZ/HDCP/master/Images/CP.gif)  

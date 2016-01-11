@@ -200,7 +200,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
         HDGG01Service().doGetRequest_HDGG01_URL({ (hdResponse) -> Void in
             
-            NSThread.sleepForTimeInterval(2)
+            NSThread.sleepForTimeInterval(1)
             
             self.hidenHud()
             self.count = hdResponse.array2D!.count
@@ -234,8 +234,13 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
         if indexPath.row%2==0 {
         
+            /**
+             *  左边大图
+             */
+            
             let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
             
+            // 大图 左
             var leftImageView = cell.viewWithTag(1000)  as? HDGG01RowView
             if leftImageView == nil {
                 
@@ -253,6 +258,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 
             }
             
+            // 小图 上
             var topImageView = cell.viewWithTag(2000)  as? HDGG01RowView
             if topImageView == nil {
                 
@@ -269,7 +275,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 })
                 
             }
-            
+            // 小图 下
             var bottomImageView = cell.viewWithTag(3000)  as? HDGG01RowView
             if bottomImageView == nil {
                 
@@ -325,8 +331,13 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             return cell
         }else{
         
+            /**
+             *  右边大图
+             */
+
             let cell = tableView .dequeueReusableCellWithIdentifier("mycell2", forIndexPath: indexPath)
             
+            //  右大图
             var rightImageView = cell.viewWithTag(4000)  as? HDGG01RowView
             if rightImageView == nil {
                 rightImageView = HDGG01RowView()
@@ -343,7 +354,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 
             }
 
-            
+            //  上小图
             var topImageView = cell.viewWithTag(5000)  as? HDGG01RowView
             if topImageView == nil {
                 
@@ -361,6 +372,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 
             }
             
+            //  下小图
             var bottomImageView = cell.viewWithTag(6000)  as? HDGG01RowView
             if bottomImageView == nil {
                 

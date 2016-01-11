@@ -21,27 +21,48 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         case PHB, YYCZ, FBCP, SYS
     }
 
+    /**
+     *  resource/数据源
+     */
     let resourceArray = [["title":"排行榜","image":"PHBIcon"],
         ["title":"营养餐桌","image":"HYYCZIcon"],
         ["title":"发布菜谱","image":"FBCPIcon"],
         ["title":"晒一晒","image":"SYSIcon"]]
     
     var baseView:UIScrollView!
+    
+    /**
+     *  数据请求结果集
+     */
     var hdHM01Response:HDHM01Response?
     
+    /**
+     *  头部滚动视图
+     */
     var headView:UIView!
     var headerSView:UIScrollView!
+    
+    /**
+     *  分页栏
+     */
     var pageControl:UIPageControl!
     var headerTitle:UILabel!
     
+    /**
+     *  标签栏
+     */
     var menuView:UIView!
     
     var tagListView:UIView!
     
-    /// 菜谱专辑
+    /**
+    *  菜谱专辑
+    */
     var collectListView:UIView!
     
-    /// 厨房宝典
+    /**
+    *  厨房宝典
+    */
     var wikiListView:UIView!
     
     override func viewDidLoad() {
@@ -249,6 +270,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    /**
+     *  标签
+     */
     func createMenuView(){
         
         
@@ -305,7 +329,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     }
     
     
-    
+    /**
+     *  按钮
+     */
     func createTagListView(){
     
         if tagListView == nil {

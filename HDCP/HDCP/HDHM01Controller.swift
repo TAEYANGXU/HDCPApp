@@ -72,8 +72,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
         
+        
         showHud()
         doGetRequestData()
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
     }
     
@@ -686,6 +692,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             /**
             *   排行榜
             */
+            
+            let hdHM02VC = HDHM02Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM02VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             print("排行榜")
             break
         case 1:

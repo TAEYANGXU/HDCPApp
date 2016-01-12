@@ -40,12 +40,12 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
-        if (self.searchController!.active) {
-            print(true)
-        }else{
-            
-            print("flase")
-        }
+//        if (self.searchController!.active) {
+//            print(true)
+//        }else{
+//            
+//            print("flase")
+//        }
         
     }
     
@@ -74,26 +74,26 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     // MARK: - UISearchController delegate
     func willPresentSearchController(searchController: UISearchController){
         
-        print("willPresentSearchController")
+//        print("willPresentSearchController")
     }
     
     func didPresentSearchController(searchController: UISearchController){
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
         self.tabBarController?.tabBar.hidden = true
-        print("didPresentSearchController")
+//        print("didPresentSearchController")
     }
     
     func willDismissSearchController(searchController: UISearchController){
         
-        print("willDismissSearchController")
+//        print("willDismissSearchController")
     }
     
     func didDismissSearchController(searchController: UISearchController){
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        print("didDismissSearchController")
+//        print("didDismissSearchController")
         self.tabBarController?.tabBar.hidden = false
     }
     

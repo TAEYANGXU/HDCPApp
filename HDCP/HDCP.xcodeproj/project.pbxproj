@@ -29,6 +29,7 @@
 		3502FF361C44D6D70083F303 /* HDHM02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF351C44D6D70083F303 /* HDHM02Model.swift */; };
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
+		3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3502FF421C450FDC0083F303 /* 画面ID介绍.strings */; };
 		356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39351C3A23E90056DF44 /* AppDelegate.swift */; };
 		356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39371C3A23EA0056DF44 /* ViewController.swift */; };
 		356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356F39391C3A23EA0056DF44 /* Main.storyboard */; };
@@ -142,6 +143,7 @@
 		3502FF351C44D6D70083F303 /* HDHM02Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Model.swift; sourceTree = "<group>"; };
 		3502FF3A1C44DA620083F303 /* HDHM02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Service.swift; sourceTree = "<group>"; };
 		3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Controller.swift; sourceTree = "<group>"; };
+		3502FF421C450FDC0083F303 /* 画面ID介绍.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "画面ID介绍.strings"; sourceTree = "<group>"; };
 		356F39321C3A23E90056DF44 /* HDCP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDCP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		356F39351C3A23E90056DF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		356F39371C3A23EA0056DF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -333,6 +335,15 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		3502FF401C450E4B0083F303 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				356F39B91C3A81580056DF44 /* MBProgressHUD.h */,
+				356F39BA1C3A81580056DF44 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 		356F39291C3A23E90056DF44 = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +415,7 @@
 				356F39701C3A3F640056DF44 /* Category */,
 				356F396F1C3A3F300056DF44 /* Search */,
 				356F396E1C3A3F100056DF44 /* Home */,
+				3502FF421C450FDC0083F303 /* 画面ID介绍.strings */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -478,8 +490,6 @@
 		356F39841C3A4B150056DF44 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				356F39B91C3A81580056DF44 /* MBProgressHUD.h */,
-				356F39BA1C3A81580056DF44 /* MBProgressHUD.m */,
 				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
 			);
 			name = Extension;
@@ -506,6 +516,7 @@
 		356F398C1C3A68830056DF44 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				3502FF401C450E4B0083F303 /* MBProgressHUD */,
 				1B0FD0C61C3D5749009E85CD /* MJRefresh */,
 				356F39951C3A76FD0056DF44 /* ObjectMapper */,
 				356F398D1C3A68DB0056DF44 /* SwiftyJSON */,
@@ -732,6 +743,7 @@
 				356F39AE1C3A76FE0056DF44 /* Info.plist in Resources */,
 				35F8CF451C3B9B20003B1364 /* Search.xcassets in Resources */,
 				35F8CF431C3B9B17003B1364 /* Category.xcassets in Resources */,
+				3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */,
 				356F39431C3A23EA0056DF44 /* LaunchScreen.storyboard in Resources */,
 				35F8CF411C3B9B0B003B1364 /* Center.xcassets in Resources */,
 				35F8CF3F1C3B9AFA003B1364 /* GG.xcassets in Resources */,

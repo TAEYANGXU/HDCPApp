@@ -12,7 +12,6 @@ class HDHM02Controller: UITableViewController {
 
     
     var hdHM02Response:HDHM02Response!
-    var count:Int!
     var dataArray:Array<HDHM02List>!
     
     override func viewDidLoad() {
@@ -114,7 +113,7 @@ class HDHM02Controller: UITableViewController {
         
     }
     
-    // MARK: - UIScrollView delegate
+    // MARK: - UITableView delegate
     override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         let model:HDHM02List = dataArray[section]

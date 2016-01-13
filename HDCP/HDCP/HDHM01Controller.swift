@@ -703,6 +703,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             /**
             *   营养餐桌
             */
+            
+            let hdHM03VC = HDHM03Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM03VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             print("营养餐桌")
             break
             
@@ -730,6 +735,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
         
         let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag])!
+        let hdHM04VC = HDHM04Controller()
+        hdHM04VC.tagModel = model;
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM04VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
+
         print("点击了 \(model.name)")
         
     }

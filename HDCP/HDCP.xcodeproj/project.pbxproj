@@ -30,6 +30,11 @@
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
 		3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3502FF421C450FDC0083F303 /* 画面ID介绍.strings */; };
+		35321D1A1C4638BE00023637 /* HDHM03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D191C4638BE00023637 /* HDHM03Controller.swift */; };
+		35321D1C1C4639BA00023637 /* HDHM03Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D1B1C4639BA00023637 /* HDHM03Model.swift */; };
+		35321D1E1C463AC000023637 /* HDHM03Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D1D1C463AC000023637 /* HDHM03Service.swift */; };
+		35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D201C46499F00023637 /* HDRefreshGifFooter.swift */; };
+		35321D231C464CF500023637 /* HDHM04Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D221C464CF500023637 /* HDHM04Controller.swift */; };
 		356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39351C3A23E90056DF44 /* AppDelegate.swift */; };
 		356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39371C3A23EA0056DF44 /* ViewController.swift */; };
 		356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356F39391C3A23EA0056DF44 /* Main.storyboard */; };
@@ -144,6 +149,11 @@
 		3502FF3A1C44DA620083F303 /* HDHM02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Service.swift; sourceTree = "<group>"; };
 		3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Controller.swift; sourceTree = "<group>"; };
 		3502FF421C450FDC0083F303 /* 画面ID介绍.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "画面ID介绍.strings"; sourceTree = "<group>"; };
+		35321D191C4638BE00023637 /* HDHM03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM03Controller.swift; sourceTree = "<group>"; };
+		35321D1B1C4639BA00023637 /* HDHM03Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM03Model.swift; sourceTree = "<group>"; };
+		35321D1D1C463AC000023637 /* HDHM03Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM03Service.swift; sourceTree = "<group>"; };
+		35321D201C46499F00023637 /* HDRefreshGifFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifFooter.swift; sourceTree = "<group>"; };
+		35321D221C464CF500023637 /* HDHM04Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Controller.swift; sourceTree = "<group>"; };
 		356F39321C3A23E90056DF44 /* HDCP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDCP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		356F39351C3A23E90056DF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		356F39371C3A23EA0056DF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -344,6 +354,13 @@
 			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		35321D1F1C463FF100023637 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		356F39291C3A23E90056DF44 = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +427,7 @@
 		356F396D1C3A3EEA0056DF44 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				35321D1F1C463FF100023637 /* Common */,
 				356F39721C3A3F7F0056DF44 /* GG */,
 				356F39711C3A3F790056DF44 /* Center */,
 				356F39701C3A3F640056DF44 /* Category */,
@@ -427,6 +445,8 @@
 				35F8CF461C3B9B2F003B1364 /* Home.xcassets */,
 				356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */,
 				3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */,
+				35321D191C4638BE00023637 /* HDHM03Controller.swift */,
+				35321D221C464CF500023637 /* HDHM04Controller.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -491,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
+				35321D201C46499F00023637 /* HDRefreshGifFooter.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -577,6 +598,7 @@
 			children = (
 				35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */,
 				3502FF3A1C44DA620083F303 /* HDHM02Service.swift */,
+				35321D1D1C463AC000023637 /* HDHM03Service.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -594,6 +616,7 @@
 			children = (
 				356F39B71C3A774A0056DF44 /* HDHM01Model.swift */,
 				3502FF351C44D6D70083F303 /* HDHM02Model.swift */,
+				35321D1B1C4639BA00023637 /* HDHM03Model.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -827,6 +850,7 @@
 				1B0FD1001C3D5749009E85CD /* MJRefreshStateHeader.m in Sources */,
 				356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */,
 				1B0FD0FF1C3D5749009E85CD /* MJRefreshNormalHeader.m in Sources */,
+				35321D1E1C463AC000023637 /* HDHM03Service.swift in Sources */,
 				1B0FD1031C3D5749009E85CD /* UIScrollView+MJExtension.m in Sources */,
 				1B0FD0FA1C3D5749009E85CD /* MJRefreshAutoStateFooter.m in Sources */,
 				35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */,
@@ -841,6 +865,7 @@
 				35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */,
 				356F39B31C3A76FE0056DF44 /* ISO8601DateTransform.swift in Sources */,
 				356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */,
+				35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */,
 				356F39901C3A68DB0056DF44 /* SwiftyJSON.swift in Sources */,
 				1B0FD0F61C3D5749009E85CD /* MJRefreshFooter.m in Sources */,
 				356F39741C3A3FEE0056DF44 /* HDGG01Controller.swift in Sources */,
@@ -859,8 +884,11 @@
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
 				356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */,
 				356F39A91C3A76FE0056DF44 /* Map.swift in Sources */,
+				35321D1A1C4638BE00023637 /* HDHM03Controller.swift in Sources */,
 				356F39B11C3A76FE0056DF44 /* DateTransform.swift in Sources */,
 				1B0FD1051C3D5749009E85CD /* UIView+MJExtension.m in Sources */,
+				35321D1C1C4639BA00023637 /* HDHM03Model.swift in Sources */,
+				35321D231C464CF500023637 /* HDHM04Controller.swift in Sources */,
 				1B0FD0F91C3D5749009E85CD /* MJRefreshAutoNormalFooter.m in Sources */,
 				356F39B21C3A76FE0056DF44 /* EnumTransform.swift in Sources */,
 				356F39AC1C3A76FE0056DF44 /* Operators.swift in Sources */,

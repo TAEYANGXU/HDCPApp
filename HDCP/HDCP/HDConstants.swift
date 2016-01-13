@@ -25,7 +25,7 @@ class Constants: NSObject {
      *   提示消息
      **/
      
-    static let HD_NO_NET_MSG = "网络不给力"
+    static let HD_NO_NET_MSG = "网络好像不给力"
     
     /**
      *   视图间隔

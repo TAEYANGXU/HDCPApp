@@ -87,7 +87,7 @@ class HDHM03Controller: UITableViewController {
             }) { (error) -> Void in
                 
                 self.tableView.mj_footer.endRefreshing()
-                CoreUtils.showProgressHUD(self.view, title: "网络不给力")
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }
@@ -180,5 +180,19 @@ class HDHM03Controller: UITableViewController {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 185
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        /**
+        *   根据URL显示web页面
+        */
+        let hdWebVC = HDWebController()
+        let model = dataArray[indexPath.row] as! HDHM03List
+        self.hidesBottomBarWhenPushed = true;
+        hdWebVC.name = model.title
+        hdWebVC.url = model.url
+        self.navigationController?.pushViewController(hdWebVC, animated: true)
+        
     }
 }

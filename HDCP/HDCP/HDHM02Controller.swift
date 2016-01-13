@@ -325,6 +325,8 @@ class HDHM02Controller: UITableViewController {
             
             /// 第一名
             icon?.image = UIImage(named: "HM02OneIcon")
+            //防止复用
+            num?.text = ""
             
         }else if indexPath.row == 1 {
         

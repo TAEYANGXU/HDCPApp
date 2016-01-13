@@ -331,12 +331,12 @@ class HDHM02Controller: UITableViewController {
         
             /// 第二名
             icon?.image = UIImage(named: "HM02TwoIcon")
-            
+            num?.text = String(format: "%ld", indexPath.row+1)
         }else if indexPath.row == 2 {
         
             /// 第三名
             icon?.image = UIImage(named: "HM02ThreeIcon")
-            
+            num?.text = String(format: "%ld", indexPath.row+1)
         }else{
         
             /// 其他

@@ -10,7 +10,7 @@ import Foundation
 
 class CollectListModel:Mappable {
     
-    var cid:String?
+    var cid:Int?
     var content:String?
     var cover:String?
     var title:String?
@@ -58,7 +58,7 @@ class RecipeListModel: Mappable {
 
 class TagListModel: Mappable {
     
-    var id:String?
+    var id:Int?
     var name:String?
     
     init(){}

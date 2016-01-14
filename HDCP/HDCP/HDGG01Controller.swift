@@ -8,18 +8,15 @@
 
 import UIKit
 
-
+private let gg01Array = [["title":"厨房宝典","image":"CFBDIcon"],
+    ["title":"应用推荐","image":"YYTJIcon"],
+    ["title":"意见反馈","image":"YJFKIcon"],
+    ["title":"菜谱专辑","image":"CPZJIcon"],
+    ["title":"营养餐桌","image":"YYCZIcon"],
+    ["title":"食材百科","image":"SCBKIcon"]]
 
 class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
 
-    let gg01Array = [["title":"厨房宝典","image":"CFBDIcon"],
-        ["title":"应用推荐","image":"YYTJIcon"],
-        ["title":"意见反馈","image":"YJFKIcon"],
-        ["title":"菜谱专辑","image":"CPZJIcon"],
-        ["title":"营养餐桌","image":"YYCZIcon"],
-        ["title":"食材百科","image":"SCBKIcon"]]
-    
-    
     var hdGG01Response:HDGG01Response!
     var tableView:UITableView?
     var headerView:UIView?
@@ -107,7 +104,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
             self.tableView?.hidden = true
             self.view.addSubview(self.tableView!)
-            tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+            tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
             tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell2")
             tableView?.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -236,7 +233,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
              *  左边大图
              */
             
-            let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+            let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
             
             // 大图 左
             var leftImageView = cell.viewWithTag(1000)  as? HDGG01RowView

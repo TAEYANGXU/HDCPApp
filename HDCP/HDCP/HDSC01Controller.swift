@@ -50,7 +50,7 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     
     func setupUI(){
     
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
@@ -103,7 +103,7 @@ class HDSC01Controller: UITableViewController,UISearchControllerDelegate{
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         
         /**
          *  图标

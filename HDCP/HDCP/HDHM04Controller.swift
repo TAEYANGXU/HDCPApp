@@ -8,18 +8,28 @@
 
 import UIKit
 
-class HDHM04Controller: UIViewController {
+class HDHM04Controller: UITableViewController {
     
     var tagModel:TagListModel!
-    
+    var dataArray:NSMutableArray!
+    var offset:Int!
+
+        
     override func viewDidLoad() {
         
         
-        //http://api.hoto.cn/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&format=json&sessionid=1404903331&vc=25&vn=v3.5.2&loguid=&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7CFFDD5AB8-D715-4007-9E15-DF103EB9DD01%7C825300FA-E7F0-4E82-9181-E914E3EBEEA0&channel=appstore&uuid=8332A3FB-D4DF-416D-AA3D-443277ECAD26&method=Search.getListV3
-        
         super.viewDidLoad()
         
-        print("\(tagModel.name)")
+        self.title = tagModel.name
+        
+        offset = 0
+        dataArray  = NSMutableArray()
+        
+        setupUI()
+        showHud()
+        doGetRequestData(self.tagModel.id!,limit: 20,offset: self.offset)
+        
+        print("\(tagModel.name)     \(self.tagModel.id!)")
         
     }
     
@@ -29,12 +39,108 @@ class HDHM04Controller: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
     }
+    
+    // MARK: - 创建UI视图
+    
+    func setupUI(){
+        
+        self.tableView.tableFooterView = UIView()
+        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.backgroundColor = Constants.HDBGViewColor
+        
+        //当列表滚动到底端 视图自动刷新
+        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
+            self.doGetRequestData(self.tagModel.id!,limit: 10,offset: self.offset)
+        })
+        
+    }
+    
+    func showHud(){
+        
+        CoreUtils.showProgressHUD(self.view)
+        
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
+    }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(tagId:Int,limit:Int,offset:Int){
+    
+        HDHM04Service().doGetRequest_HDHM04_URL(tagId, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
+            
+            self.offset = self.offset+1
+            
+            self.hidenHud()
+            
+            self.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
+            
+            self.tableView.mj_footer.endRefreshing()
+            
+            self.tableView.reloadData()
+            
+            }) { (error) -> Void in
+                
+                self.tableView.mj_footer.endRefreshing()
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+        }
+        
+    }
 
     // MARK: - events
     
     func backAction(){
         
         self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    
+    // MARK: - UITableView delegate/datasource
+    
+    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    {
+        return self.dataArray.count
+    }
+    
+    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    {
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM04Cell
+        
+        let model = dataArray[indexPath.row] as! HDHM04ListModel
+        
+        cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        cell.title?.text = model.title
+        cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
+        
+        var stuffStr = String()
+        for var i=0;i<model.stuff?.count;i++ {
+        
+            let stuff = model.stuff![i] 
+            
+            if i == (model.stuff?.count)!-1 {
+                stuffStr.appendContentsOf(stuff.name!)
+                
+            }else{
+                stuffStr.appendContentsOf(String(format: "%@、", stuff.name!))
+            }
+            
+        }
+        
+        cell.stuff?.text = stuffStr
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
         
     }
 }

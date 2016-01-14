@@ -11,23 +11,23 @@ import SDWebImage
 import Alamofire
 import SnapKit
 
-let HeadViewHeight:CGFloat = 200.0
+private let HeadViewHeight:CGFloat = 200.0
 
-let TagHeight:Int = 40
+private let TagHeight:Int = 40
+
+/**
+*  resource/数据源
+*/
+private let resourceArray = [["title":"排行榜","image":"HPHBIcon"],
+    ["title":"营养餐桌","image":"HYYCZIcon"],
+    ["title":"热门菜谱","image":"HFBCPIcon"],
+    ["title":"晒一晒","image":"HSYSIcon"]]
 
 class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     enum HDHM01MenuTag: Int {
         case PHB, YYCZ, FBCP, SYS
     }
-
-    /**
-     *  resource/数据源
-     */
-    let resourceArray = [["title":"排行榜","image":"HPHBIcon"],
-        ["title":"营养餐桌","image":"HYYCZIcon"],
-        ["title":"发布菜谱","image":"HFBCPIcon"],
-        ["title":"晒一晒","image":"HSYSIcon"]]
     
     var baseView:UIScrollView!
     
@@ -482,6 +482,22 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             })
             
+            //添加点击Button
+            let onclickBtn = UIButton()
+            onclickBtn.tag = 10000
+            onclickBtn.backgroundColor = UIColor.clearColor()
+            collectListView.addSubview(onclickBtn)
+            onclickBtn.addTarget(self, action: "moreAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+            onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(collectListView).offset(0)
+                make.top.equalTo(line).offset(0)
+                make.width.equalTo(Constants.kSCREENWITH)
+                make.height.equalTo(40)
+                
+            })
+            
 
         }
         
@@ -498,6 +514,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.tag = i;
                 collectListView.addSubview(rowView!)
                 
+                let collectGes =  UITapGestureRecognizer(target: self, action: "collectGesAction:")
+                rowView!.addGestureRecognizer(collectGes)
                 
                 rowView!.title.text = model?.title
                 rowView!.userName.text = String(format: "by %@",(model?.userName)!)
@@ -597,6 +615,22 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 make.height.equalTo(20)
                 
             })
+            
+            //添加点击Button
+            let onclickBtn = UIButton()
+            onclickBtn.tag = 20000
+            onclickBtn.backgroundColor = UIColor.clearColor()
+            wikiListView.addSubview(onclickBtn)
+            onclickBtn.addTarget(self, action: "moreAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+            onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(collectListView).offset(0)
+                make.top.equalTo(line).offset(0)
+                make.width.equalTo(Constants.kSCREENWITH)
+                make.height.equalTo(40)
+                
+            })
 
         }
         
@@ -614,6 +648,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.tag = i;
                 wikiListView.addSubview(rowView!)
                 
+                let wikiGes =  UITapGestureRecognizer(target: self, action: "wikiGesAction:")
+                rowView!.addGestureRecognizer(wikiGes)
                 
                 rowView!.title.text = model?.title
                 rowView!.userName.text = String(format: "by %@",(model?.userName)!)
@@ -631,6 +667,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
             rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            
             
         }
         
@@ -683,6 +720,45 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     // MARK: - events 
     
+    /**
+    *   菜谱列表
+    */
+    func collectGesAction(ges:UITapGestureRecognizer){
+        
+        let view = ges.view as! HDHM01RowView
+        let model = self.hdHM01Response?.result?.collectList?[view.tag]
+        
+        let hdhm05VC = HDHM05Controller()
+        hdhm05VC.name = model?.title
+        hdhm05VC.cid = model?.cid
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdhm05VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
+        
+        print("collect")
+        
+    }
+
+    
+    /**
+    *   厨房宝典详情
+    */
+    func wikiGesAction(ges:UITapGestureRecognizer){
+    
+        let view = ges.view as! HDHM01RowView
+        let model = self.hdHM01Response?.result?.wikiList?[view.tag]
+        
+        let hdWebVC = HDWebController()
+        self.hidesBottomBarWhenPushed = true;
+        hdWebVC.name = model!.title
+        hdWebVC.url = model!.url
+        self.navigationController?.pushViewController(hdWebVC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
+        print("rowView")
+        
+    }
+    
+    
     func menuBtnOnclick(btn:UIButton){
     
         let tag:Int = btn.tag - 300
@@ -731,6 +807,26 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    //更多
+    
+    func moreAction(btn:UIButton){
+    
+        
+        switch(btn.tag){
+        
+            case 10000:
+                print("全部菜谱")
+                break
+            case 20000:
+                print("全部宝典")
+                break
+            default:
+                "default"
+        }
+        
+    }
+    
+    //分类
     func tagBtnOnclick(btn:UIButton){
     
         

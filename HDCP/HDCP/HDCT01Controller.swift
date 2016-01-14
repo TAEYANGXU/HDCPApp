@@ -8,16 +8,15 @@
 
 import UIKit
 
+private let ct01Array = [[["title":"我的菜谱","image":"WDCPIcon"],
+    ["title":"我的收藏","image":"SCIcon"]],
+    [["title":"扫一扫","image":"SYSCIcon"],
+        ["title":"晒一晒","image":"SYSIcon"]],
+    [["title":"动态","image":"DTIcon"],
+        ["title":"设置","image":"SZIcon"]]]
+
 class HDCT01Controller: UITableViewController {
 
-    let ct01Array = [[["title":"我的菜谱","image":"WDCPIcon"],
-        ["title":"我的收藏","image":"SCIcon"]],
-        [["title":"扫一扫","image":"SYSCIcon"],
-            ["title":"晒一晒","image":"SYSIcon"]],
-        [["title":"动态","image":"DTIcon"],
-            ["title":"设置","image":"SZIcon"]]]
-    
-    
     var headerView:UIView?
     var headerBg:UIImageView?
     var headerIcon:UIImageView?
@@ -93,7 +92,7 @@ class HDCT01Controller: UITableViewController {
         
         self.tableView.tableHeaderView = headerView;
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
     }
@@ -118,7 +117,7 @@ class HDCT01Controller: UITableViewController {
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         
         /**
          *  图标

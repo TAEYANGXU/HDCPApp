@@ -38,7 +38,7 @@ class HDHM03Controller: UITableViewController {
     func setupUI(){
 
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -101,7 +101,7 @@ class HDHM03Controller: UITableViewController {
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         
         /// 图片
         var hm03ImageView = cell.viewWithTag(1000) as? UIImageView

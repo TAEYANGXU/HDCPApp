@@ -41,7 +41,7 @@ class HDHM02Controller: UITableViewController {
     
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
     }
@@ -218,7 +218,7 @@ class HDHM02Controller: UITableViewController {
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         
-        let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         
         /// 图标
         var icon =  cell.contentView.viewWithTag(1000) as? UIImageView

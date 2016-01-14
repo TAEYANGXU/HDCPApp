@@ -78,7 +78,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        self.performSelector("hidenHud", withObject: self, afterDelay: 1)
+        self.performSelector("hidenHud", withObject: self, afterDelay: 0.5)
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {

@@ -8,20 +8,20 @@
 
 import UIKit
 
+private let cateArray = [["title":"口味","image":"KWIcon"],
+    ["title":"菜系","image":"CXIcon"],
+    ["title":"菜品","image":"CPIcon"],
+    ["title":"场景","image":"CJIcon"],
+    ["title":"热门分类","image":"RMFLIcon"],
+    ["title":"流行食材","image":"LXSCIcon"],
+    ["title":"常见功效","image":"CJGXIcon"],
+    ["title":"加工工艺","image":"JGGYIcon"],
+    ["title":"厨房用具","image":"CFYJIcon"]]
+
 class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
 
  
     var searchController:UISearchController?
-    
-    let cateArray = [["title":"口味","image":"KWIcon"],
-        ["title":"菜系","image":"CXIcon"],
-        ["title":"菜品","image":"CPIcon"],
-        ["title":"场景","image":"CJIcon"],
-        ["title":"热门分类","image":"RMFLIcon"],
-        ["title":"流行食材","image":"LXSCIcon"],
-        ["title":"常见功效","image":"CJGXIcon"],
-        ["title":"加工工艺","image":"JGGYIcon"],
-        ["title":"厨房用具","image":"CFYJIcon"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     
     func setupUI(){
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell")
+        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
@@ -106,7 +106,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("mycell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         
         /**
          *  图标

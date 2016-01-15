@@ -101,9 +101,8 @@ class MainViewController: UITabBarController {
         
     }
 
-    /**
-     *  mark - TabBar 代理实现
-     */
+    // MARK: - UITabBarController delegate
+    
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         
     }

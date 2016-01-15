@@ -45,6 +45,8 @@
 		3566C8FD1C479E5400573D97 /* HDCG02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C8FC1C479E5400573D97 /* HDCG02Controller.swift */; };
 		3566C9011C479E8B00573D97 /* HDCG02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9001C479E8B00573D97 /* HDCG02Model.swift */; };
 		3566C9031C479EA000573D97 /* HDCG02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9021C479EA000573D97 /* HDCG02Service.swift */; };
+		3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9041C48C52500573D97 /* HDHM06Controller.swift */; };
+		3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9061C48C53600573D97 /* HDHM07Controller.swift */; };
 		356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39351C3A23E90056DF44 /* AppDelegate.swift */; };
 		356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39371C3A23EA0056DF44 /* ViewController.swift */; };
 		356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356F39391C3A23EA0056DF44 /* Main.storyboard */; };
@@ -174,6 +176,8 @@
 		3566C8FC1C479E5400573D97 /* HDCG02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG02Controller.swift; sourceTree = "<group>"; };
 		3566C9001C479E8B00573D97 /* HDCG02Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG02Model.swift; sourceTree = "<group>"; };
 		3566C9021C479EA000573D97 /* HDCG02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG02Service.swift; sourceTree = "<group>"; };
+		3566C9041C48C52500573D97 /* HDHM06Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM06Controller.swift; sourceTree = "<group>"; };
+		3566C9061C48C53600573D97 /* HDHM07Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Controller.swift; sourceTree = "<group>"; };
 		356F39321C3A23E90056DF44 /* HDCP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDCP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		356F39351C3A23E90056DF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		356F39371C3A23EA0056DF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -485,6 +489,8 @@
 				35321D191C4638BE00023637 /* HDHM03Controller.swift */,
 				35321D221C464CF500023637 /* HDHM04Controller.swift */,
 				3566C8F81C4783E300573D97 /* HDHM05Controller.swift */,
+				3566C9041C48C52500573D97 /* HDHM06Controller.swift */,
+				3566C9061C48C53600573D97 /* HDHM07Controller.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -936,6 +942,7 @@
 				356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */,
 				356F39801C3A43EE0056DF44 /* HDConstants.swift in Sources */,
 				1B0FD0FC1C3D5749009E85CD /* MJRefreshBackNormalFooter.m in Sources */,
+				3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */,
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
 				356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */,
@@ -964,6 +971,7 @@
 				356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */,
 				1B0FD0FB1C3D5749009E85CD /* MJRefreshBackGifFooter.m in Sources */,
 				3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */,
+				3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */,
 				3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */,
 				356F397A1C3A402B0056DF44 /* HDSC01Controller.swift in Sources */,
 				356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */,

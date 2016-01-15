@@ -200,8 +200,6 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         let model = dataArray[indexPath.row] as HDCG02ListModel
         icon?.sd_setImageWithURL(NSURL(string: model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text =   model.cate!
-//        icon?.image = UIImage(named: cateArray[indexPath.row]["image"]!)
-//        title?.text =   cateArray[indexPath.row]["title"]
         
         
         arrow?.image = UIImage(named: "arrowIcon")
@@ -211,6 +209,22 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        /**
+        *  分类列表
+        */
+        let model = dataArray[indexPath.row] as HDCG02ListModel
+        
+        let hdcg02VC = HDCG02Controller()
+        hdcg02VC.dataArray = model.tags
+        hdcg02VC.name = model.cate
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdcg02VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
+        
     }
 
 }

@@ -11,7 +11,8 @@
     HDHM03Controller -> 营养餐桌
     HDHM04Controller -> 菜谱分类
     HDHM05Controller -> 菜谱分专辑列表
- 
+    HDHM06Controller -> 菜谱专辑
+    HDHM07Controller -> 厨房宝典
  
  
     HDGG01Controller -> 逛逛

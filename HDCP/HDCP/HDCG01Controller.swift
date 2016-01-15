@@ -22,10 +22,14 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
 
  
     var searchController:UISearchController?
+    var dataArray:Array<HDCG02ListModel>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dataArray = Array<HDCG02ListModel>()
+        
+        doGetRequestData()
         
         setupUI()
         
@@ -38,15 +42,15 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    func showHud(){
         
-//        if (self.searchController!.active) {
-//            print(true)
-//        }else{
-//            
-//            print("flase")
-//        }
+        CoreUtils.showProgressHUD(self.view)
         
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
     }
     
     // MARK: - 创建UI视图
@@ -70,6 +74,28 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         self.tableView.tableHeaderView = searchController?.searchBar
         
     }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(){
+        
+        
+        showHud()
+        
+        HDCG02Service().doGetRequest_HDCG02_URL({ (hdCG02Response) -> Void in
+            
+            self.hidenHud()
+            self.dataArray = hdCG02Response.result?.list!
+            self.tableView!.reloadData()
+            
+            }) { (error) -> Void in
+                
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                
+        }
+        
+        
+    }
+
     
     // MARK: - UISearchController delegate
     func willPresentSearchController(searchController: UISearchController){
@@ -101,7 +127,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
     
     override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
-        return cateArray.count
+        return dataArray.count
     }
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
@@ -170,8 +196,14 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
             
         }
         
-        icon?.image = UIImage(named: cateArray[indexPath.row]["image"]!)
-        title?.text =   cateArray[indexPath.row]["title"]
+        
+        let model = dataArray[indexPath.row] as HDCG02ListModel
+        icon?.sd_setImageWithURL(NSURL(string: model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        title?.text =   model.cate!
+//        icon?.image = UIImage(named: cateArray[indexPath.row]["image"]!)
+//        title?.text =   cateArray[indexPath.row]["title"]
+        
+        
         arrow?.image = UIImage(named: "arrowIcon")
         
         return cell

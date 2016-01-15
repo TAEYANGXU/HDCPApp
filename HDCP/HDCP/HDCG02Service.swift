@@ -1,4 +1,4 @@
-//
+ //
 //  HDCG02Service.swift
 //  HDCP
 //
@@ -8,6 +8,33 @@
 
 import UIKit
 
-class HDCG02Service: NSObject {
+class HDCG02Service: HDRequestManager {
 
+    /**
+     分类
+     
+     - parameter successBlock: 成功
+     - parameter failBlock:    失败
+     */
+    func doGetRequest_HDCG02_URL(successBlock:(hdCG02Response:HDCG02Response)->Void,failBlock:(error:NSError)->Void){
+        
+        
+        super.doGetRequest(Constants.HDCG01_URL) { (response) -> Void in
+            
+            if response.result.error == nil {
+                
+                let response = Mapper<HDCG02Response>().map(response.result.value)
+                successBlock(hdCG02Response: response!)
+                
+            }else{
+                
+                failBlock(error: response.result.error!)
+            }
+            
+        }
+
+        
+    }
+
+    
 }

@@ -49,29 +49,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
-    //  MARK: - Style
+    //  MARK: - UINavigationBar/UITabBar Style
     
     func setUpBarStyle(){
         
+        /**
+        *  导航栏样式
+        */
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
+        UINavigationBar.appearance().barTintColor = Constants.HDMainColor
         
+        /**
+        *  状态栏字体设置白色
+        */
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
-        
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
-        
+        /**
+        *  底部TabBar的颜色
+        */
         UITabBar.appearance().shadowImage = UIImage()
         UITabBar.appearance().tintColor = Constants.HDHEXRGBA(0xFFFFFF)
         UITabBar.appearance().backgroundColor = Constants.HDHEXRGBA(0xFFFFFF)
         UITabBar.appearance().barTintColor = Constants.HDHEXRGBA(0xFFFFFF)
         UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
-
+        
         /**
-        *  导航栏颜色
+        *  底部TabBar字体正常状态颜色
         */
-        UINavigationBar.appearance().barTintColor = Constants.HDMainColor
-//        UINavigationBar.appearance().translucent = false
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Normal)
+        /**
+        *  底部TabBar字体选择状态颜色
+        */
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
+
     }
 
     // MARK: - Core Data stack

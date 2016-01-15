@@ -117,7 +117,7 @@ class HDHM03Controller: UITableViewController {
                 
                 make.top.equalTo(cell.contentView).offset(5)
                 make.left.equalTo(cell.contentView).offset(15)
-                make.width.equalTo(Constants.kSCREENWITH-30)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(120)
                 
             })
@@ -139,7 +139,7 @@ class HDHM03Controller: UITableViewController {
                 
                 make.top.equalTo(hm03ImageView!.snp_bottom).offset(0)
                 make.left.equalTo(cell.contentView).offset(15)
-                make.width.equalTo(Constants.kSCREENWITH-30)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(20)
                 
             })
@@ -162,7 +162,7 @@ class HDHM03Controller: UITableViewController {
                 
                 make.top.equalTo(title!.snp_bottom).offset(0)
                 make.left.equalTo(cell.contentView).offset(15)
-                make.width.equalTo(Constants.kSCREENWITH-30)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(40)
                 
             })

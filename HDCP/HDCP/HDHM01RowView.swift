@@ -52,7 +52,7 @@ class HDHM01RowView: UIView {
                 
                 make.top.equalTo(self).offset(0)
                 make.left.equalTo(imageView.snp_right).offset(5)
-                make.width.equalTo(Constants.kSCREENWITH-36-100)
+                make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(25)
                 
             })
@@ -70,7 +70,7 @@ class HDHM01RowView: UIView {
                 
                 make.top.equalTo(title.snp_bottom).offset(2)
                 make.left.equalTo(imageView.snp_right).offset(5)
-                make.width.equalTo(Constants.kSCREENWITH-36-100)
+                make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(25)
                 
             })
@@ -91,7 +91,7 @@ class HDHM01RowView: UIView {
                 
                 make.top.equalTo(userName.snp_bottom).offset(0)
                 make.left.equalTo(imageView.snp_right).offset(5)
-                make.width.equalTo(Constants.kSCREENWITH-36-100)
+                make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(50)
             })
         }

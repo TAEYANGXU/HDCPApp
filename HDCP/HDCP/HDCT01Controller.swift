@@ -33,7 +33,7 @@ class HDCT01Controller: UITableViewController {
     func setupUI(){
     
         
-        headerView = UIView(frame: CGRectMake(0,0,Constants.kSCREENWITH,160))
+        headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,160))
         headerView?.backgroundColor = UIColor.clearColor()
         
         /**
@@ -46,7 +46,7 @@ class HDCT01Controller: UITableViewController {
         
         headerBg?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.width.equalTo(Constants.kSCREENWITH)
+            make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(160)
             make.top.equalTo(headerView!).offset(0)
             make.left.equalTo(headerView!).offset(0)
@@ -67,7 +67,7 @@ class HDCT01Controller: UITableViewController {
             
             make.width.equalTo(80)
             make.height.equalTo(80)
-            make.left.equalTo(headerView!).offset(Constants.kSCREENWITH/2-40)
+            make.left.equalTo(headerView!).offset(Constants.HDSCREENWITH/2-40)
             make.top.equalTo(headerView!).offset(30)
         })
         
@@ -84,7 +84,7 @@ class HDCT01Controller: UITableViewController {
         loginBtn?.snp_makeConstraints(closure: { (make) -> Void in
             
             make.top.equalTo(headerIcon!.snp_bottom).offset(0)
-            make.width.equalTo(Constants.kSCREENWITH)
+            make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(40)
             make.left.equalTo(headerView!).offset(0)
             

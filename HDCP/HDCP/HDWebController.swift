@@ -40,7 +40,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
             make.top.equalTo(self.view).offset(0)
             make.left.equalTo(self.view).offset(0)
             make.bottom.equalTo(self.view).offset(0)
-            make.width.equalTo(Constants.kSCREENWITH)
+            make.width.equalTo(Constants.HDSCREENWITH)
             
         })
 

@@ -52,7 +52,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
         if headerView == nil {
             
-            headerView = UIView(frame: CGRectMake(0,0,Constants.kSCREENWITH/3,2*Constants.kSCREENWITH/3+2*CGFloat(Constants.HDSpace)))
+            headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH/3,2*Constants.HDSCREENWITH/3+2*CGFloat(Constants.HDSpace)))
             headerView?.backgroundColor = UIColor.clearColor()
             tableView?.tableHeaderView = headerView
             
@@ -77,10 +77,10 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
 
                     btn.snp_makeConstraints(closure: { (make) -> Void in
                         
-                        make.top.equalTo(headerView!).offset(CGFloat(i)*Constants.kSCREENWITH/3+10)
-                        make.left.equalTo(headerView!).offset(CGFloat(j)*Constants.kSCREENWITH/3)
-                        make.width.equalTo(Constants.kSCREENWITH/3)
-                        make.height.equalTo(Constants.kSCREENWITH/3)
+                        make.top.equalTo(headerView!).offset(CGFloat(i)*Constants.HDSCREENWITH/3+10)
+                        make.left.equalTo(headerView!).offset(CGFloat(j)*Constants.HDSCREENWITH/3)
+                        make.width.equalTo(Constants.HDSCREENWITH/3)
+                        make.height.equalTo(Constants.HDSCREENWITH/3)
                         
                     })
                     index++
@@ -111,7 +111,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 make.top.equalTo(self.view).offset(0)
                 make.left.equalTo(self.view).offset(0)
                 make.bottom.equalTo(self.view).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 
             })
             
@@ -247,8 +247,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.top.equalTo(cell.contentView).offset(10)
-                    make.height.equalTo(3*Constants.kSCREENWITH/5)
-                    make.width.equalTo(3*Constants.kSCREENWITH/5)
+                    make.height.equalTo(3*Constants.HDSCREENWITH/5)
+                    make.width.equalTo(3*Constants.HDSCREENWITH/5)
                 })
                 
             }
@@ -265,8 +265,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.top.equalTo(cell.contentView).offset(10)
-                    make.height.equalTo((3*Constants.kSCREENWITH/5-5)/2)
-                    make.width.equalTo(2*Constants.kSCREENWITH/5-30)
+                    make.height.equalTo((3*Constants.HDSCREENWITH/5-5)/2)
+                    make.width.equalTo(2*Constants.HDSCREENWITH/5-30)
                 })
                 
             }
@@ -282,8 +282,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.bottom.equalTo(cell.contentView).offset(-20)
-                    make.height.equalTo((3*Constants.kSCREENWITH/5-5)/2)
-                    make.width.equalTo(2*Constants.kSCREENWITH/5-30)
+                    make.height.equalTo((3*Constants.HDSCREENWITH/5-5)/2)
+                    make.width.equalTo(2*Constants.HDSCREENWITH/5-30)
                 })
                 
             }
@@ -301,7 +301,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(0)
-                    make.width.equalTo(Constants.kSCREENWITH)
+                    make.width.equalTo(Constants.HDSCREENWITH)
                     make.height.equalTo(Constants.HDSpace)
                     
                 })
@@ -343,8 +343,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.top.equalTo(cell.contentView).offset(10)
-                    make.height.equalTo(3*Constants.kSCREENWITH/5)
-                    make.width.equalTo(3*Constants.kSCREENWITH/5)
+                    make.height.equalTo(3*Constants.HDSCREENWITH/5)
+                    make.width.equalTo(3*Constants.HDSCREENWITH/5)
                 })
                 
             }
@@ -361,8 +361,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.top.equalTo(cell.contentView).offset(10)
-                    make.height.equalTo((3*Constants.kSCREENWITH/5-5)/2)
-                    make.width.equalTo(2*Constants.kSCREENWITH/5-30)
+                    make.height.equalTo((3*Constants.HDSCREENWITH/5-5)/2)
+                    make.width.equalTo(2*Constants.HDSCREENWITH/5-30)
                 })
                 
             }
@@ -379,8 +379,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.bottom.equalTo(cell.contentView).offset(-20)
-                    make.height.equalTo((3*Constants.kSCREENWITH/5-5)/2)
-                    make.width.equalTo(2*Constants.kSCREENWITH/5-30)
+                    make.height.equalTo((3*Constants.HDSCREENWITH/5-5)/2)
+                    make.width.equalTo(2*Constants.HDSCREENWITH/5-30)
                 })
                 
             }
@@ -399,7 +399,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(0)
-                    make.width.equalTo(Constants.kSCREENWITH)
+                    make.width.equalTo(Constants.HDSCREENWITH)
                     make.height.equalTo(Constants.HDSpace)
                     
                 })
@@ -427,7 +427,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 3*Constants.kSCREENWITH/5+20+10
+        return 3*Constants.HDSCREENWITH/5+20+10
     }
 
 }

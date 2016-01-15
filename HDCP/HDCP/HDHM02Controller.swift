@@ -138,7 +138,7 @@ class HDHM02Controller: UITableViewController {
         
         let model:HDHM02List = dataArray[section]
         
-        let headerView = UIView(frame: CGRectMake(0,0,Constants.kSCREENWITH,49))
+        let headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,49))
         headerView.backgroundColor = UIColor.whiteColor()
         
         /// 名称
@@ -153,7 +153,7 @@ class HDHM02Controller: UITableViewController {
             make.left.equalTo(headerView).offset(16)
             make.top.equalTo(headerView).offset(5)
             make.height.equalTo(40)
-            make.width.equalTo(Constants.kSCREENWITH-100)
+            make.width.equalTo(Constants.HDSCREENWITH-100)
             
         }
         
@@ -174,7 +174,7 @@ class HDHM02Controller: UITableViewController {
             
             make.width.equalTo(20)
             make.height.equalTo(20)
-            make.left.equalTo(headerView).offset(Constants.kSCREENWITH-40)
+            make.left.equalTo(headerView).offset(Constants.HDSCREENWITH-40)
             make.top.equalTo(headerView).offset(15)
             
         }
@@ -186,7 +186,7 @@ class HDHM02Controller: UITableViewController {
         
         lineTopView.snp_makeConstraints { (make) -> Void in
             
-            make.width.equalTo(Constants.kSCREENWITH)
+            make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace/2)
             make.left.equalTo(headerView).offset(0)
             make.top.equalTo(headerView).offset(0)
@@ -200,7 +200,7 @@ class HDHM02Controller: UITableViewController {
         
         lineBottomView.snp_makeConstraints { (make) -> Void in
             
-            make.width.equalTo(Constants.kSCREENWITH)
+            make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace/2)
             make.left.equalTo(headerView).offset(0)
             make.top.equalTo(headerView).offset(50-Constants.HDSpace/2)
@@ -280,7 +280,7 @@ class HDHM02Controller: UITableViewController {
                 make.left.equalTo(icon!.snp_right).offset(10)
                 make.top.equalTo(cell.contentView).offset(0)
                 make.bottom.equalTo(cell.contentView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH-140)
+                make.width.equalTo(Constants.HDSCREENWITH-140)
                 
             })
             
@@ -300,7 +300,7 @@ class HDHM02Controller: UITableViewController {
             
             rconut?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.left.equalTo(cell.contentView).offset(Constants.kSCREENWITH-100)
+                make.left.equalTo(cell.contentView).offset(Constants.HDSCREENWITH-100)
                 make.top.equalTo(cell.contentView).offset(0)
                 make.bottom.equalTo(cell.contentView).offset(0)
                 make.width.equalTo(80)

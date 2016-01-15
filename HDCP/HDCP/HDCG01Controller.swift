@@ -65,7 +65,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         searchController?.dimsBackgroundDuringPresentation =  false
         searchController?.searchBar.placeholder = "搜索菜谱"
         searchController?.delegate = self
-        searchController?.searchBar.frame = CGRectMake(0, 0, Constants.kSCREENWITH, 44)
+        searchController?.searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
         searchController?.searchBar.sizeToFit()
         searchController?.searchBar.barTintColor = Constants.HDBGViewColor
         searchController?.searchBar.layer.borderWidth = 1;

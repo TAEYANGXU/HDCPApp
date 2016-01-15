@@ -89,7 +89,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         if self.hdHM01Response?.result?.tagList?.count>0 {
             let height:Int = (self.hdHM01Response?.result?.tagList?.count)!/4*TagHeight
-            baseView.contentSize = CGSizeMake(Constants.kSCREENWITH, HeadViewHeight+Constants.kSCREENWITH/4+5+CGFloat(height)+300+300+CGFloat(Constants.HDSpace*4))
+            baseView.contentSize = CGSizeMake(Constants.HDSCREENWITH, HeadViewHeight+Constants.HDSCREENWITH/4+5+CGFloat(height)+300+300+CGFloat(Constants.HDSpace*4))
         }
         
         
@@ -109,7 +109,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.top.equalTo(self.view).offset(0)
                 make.left.equalTo(self.view).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.bottom.equalTo(self.view).offset(0)
             }
             
@@ -155,7 +155,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     make.top.equalTo(baseView).offset(0)
                     make.left.equalTo(baseView).offset(0)
-                    make.width.equalTo(Constants.kSCREENWITH)
+                    make.width.equalTo(Constants.HDSCREENWITH)
                     make.height.equalTo(HeadViewHeight)
                     
                 })
@@ -176,14 +176,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     make.top.equalTo(headView).offset(0)
                     make.left.equalTo(headView).offset(0)
-                    make.width.equalTo(Constants.kSCREENWITH)
+                    make.width.equalTo(Constants.HDSCREENWITH)
                     make.height.equalTo(HeadViewHeight)
                     
                     
                 })
             }
             
-            headerSView.contentSize = CGSizeMake(Constants.kSCREENWITH*CGFloat((self.hdHM01Response?.result?.recipeList?.count)!), HeadViewHeight)
+            headerSView.contentSize = CGSizeMake(Constants.HDSCREENWITH*CGFloat((self.hdHM01Response?.result?.recipeList?.count)!), HeadViewHeight)
             
             
             /**
@@ -205,8 +205,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     imageView!.snp_makeConstraints(closure: { (make) -> Void in
                         
                         make.top.equalTo(headerSView).offset(0)
-                        make.left.equalTo(headerSView).offset(Constants.kSCREENWITH*CGFloat(i))
-                        make.width.equalTo(Constants.kSCREENWITH)
+                        make.left.equalTo(headerSView).offset(Constants.HDSCREENWITH*CGFloat(i))
+                        make.width.equalTo(Constants.HDSCREENWITH)
                         make.height.equalTo(HeadViewHeight)
                     })
                     
@@ -257,7 +257,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(20)
-                    make.width.equalTo(Constants.kSCREENWITH-150)
+                    make.width.equalTo(Constants.HDSCREENWITH-150)
                     make.height.equalTo(40)
                     
                 })
@@ -292,8 +292,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.top.equalTo(headView.snp_bottom).offset(0)
                 make.left.equalTo(baseView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
-                make.height.equalTo(Constants.kSCREENWITH/4+5)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(Constants.HDSCREENWITH/4+5)
                 
             }
             
@@ -321,10 +321,10 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 btn!.snp_makeConstraints { (make) -> Void in
                     
-                    make.left.equalTo(menuView).offset(CGFloat(i)*Constants.kSCREENWITH/4)
+                    make.left.equalTo(menuView).offset(CGFloat(i)*Constants.HDSCREENWITH/4)
                     make.top.equalTo(menuView).offset(0)
-                    make.width.equalTo(Constants.kSCREENWITH/4)
-                    make.height.equalTo(Constants.kSCREENWITH/4)
+                    make.width.equalTo(Constants.HDSCREENWITH/4)
+                    make.height.equalTo(Constants.HDSCREENWITH/4)
                     
                 }
                 
@@ -350,7 +350,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.top.equalTo(menuView.snp_bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo((self.hdHM01Response?.result?.tagList?.count)!/4*TagHeight)
                 
             }
@@ -387,9 +387,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     btn!.snp_makeConstraints(closure: { (make) -> Void in
                         
-                        make.width.equalTo(Constants.kSCREENWITH/4)
+                        make.width.equalTo(Constants.HDSCREENWITH/4)
                         make.height.equalTo(TagHeight)
-                        make.left.equalTo(CGFloat(j)*Constants.kSCREENWITH/4)
+                        make.left.equalTo(CGFloat(j)*Constants.HDSCREENWITH/4)
                         make.top.equalTo(i*TagHeight)
                         
                     })
@@ -419,7 +419,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.top.equalTo(tagListView.snp_bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(300)
                 
             }
@@ -434,7 +434,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(collectListView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(40)
                 
             }
@@ -449,7 +449,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(collectListView).offset(260)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(1)
                 
             }
@@ -465,7 +465,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(line).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(40)
                 
             }
@@ -493,7 +493,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(collectListView).offset(0)
                 make.top.equalTo(line).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(40)
                 
             })
@@ -525,7 +525,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     make.left.equalTo(collectListView).offset(16)
                     make.top.equalTo(collectListView).offset(i*110+40)
-                    make.width.equalTo(Constants.kSCREENWITH-36)
+                    make.width.equalTo(Constants.HDSCREENWITH-36)
                     make.height.equalTo(100)
                 }
 
@@ -553,7 +553,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.top.equalTo(collectListView.snp_bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(300)
                 
             }
@@ -568,7 +568,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(wikiListView).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(40)
                 
             }
@@ -582,7 +582,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(wikiListView).offset(260)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(1)
                 
             }
@@ -599,7 +599,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(line).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH-16)
+                make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(40)
                 
             }
@@ -627,7 +627,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 make.left.equalTo(collectListView).offset(0)
                 make.top.equalTo(line).offset(0)
-                make.width.equalTo(Constants.kSCREENWITH)
+                make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(40)
                 
             })
@@ -659,7 +659,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                     make.left.equalTo(wikiListView).offset(16)
                     make.top.equalTo(wikiListView).offset(i*110+40)
-                    make.width.equalTo(Constants.kSCREENWITH-36)
+                    make.width.equalTo(Constants.HDSCREENWITH-36)
                     make.height.equalTo(100)
                 }
                 
@@ -843,7 +843,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     func pageAction(sender:AnyObject){
         
-        headerSView.contentOffset = CGPointMake(Constants.kSCREENWITH*CGFloat((pageControl?.currentPage)!),0)
+        headerSView.contentOffset = CGPointMake(Constants.HDSCREENWITH*CGFloat((pageControl?.currentPage)!),0)
         /**
          *  更新菜谱名称
          */
@@ -854,7 +854,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     // MARK: - UIScrollView delegate
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        let index = NSInteger(scrollView.contentOffset.x/Constants.kSCREENWITH)
+        let index = NSInteger(scrollView.contentOffset.x/Constants.HDSCREENWITH)
         
         if index<0 || index>3 {
         
@@ -879,7 +879,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
 menuView.translatesAutoresizingMaskIntoConstraints = false;
 let leftConstraint = NSLayoutConstraint(item: menuView,attribute: .Left,relatedBy: .Equal,toItem: baseView,attribute: .Left,multiplier: 1.0,constant: 0.0);
 baseView.addConstraint(leftConstraint)
-let rightConstraint = NSLayoutConstraint(item: menuView,attribute: .Width,relatedBy: .Equal,toItem: baseView,attribute: .Width,multiplier: 1.0,constant: Constants.kSCREENWITH);
+let rightConstraint = NSLayoutConstraint(item: menuView,attribute: .Width,relatedBy: .Equal,toItem: baseView,attribute: .Width,multiplier: 1.0,constant: Constants.HDSCREENWITH);
 baseView.addConstraint(rightConstraint)
 let topConstraint = NSLayoutConstraint(item: menuView,attribute: .Top,relatedBy: .Equal,toItem: headView,attribute: .Bottom,multiplier: 1.0,constant: 0.0);
 baseView.addConstraint(topConstraint)

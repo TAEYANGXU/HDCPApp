@@ -14,12 +14,12 @@ class Constants: NSObject {
     /**
      *   当前设备屏幕的宽带
      **/
-    static let kSCREENWITH = UIScreen.mainScreen().bounds.width
+    static let HDSCREENWITH = UIScreen.mainScreen().bounds.width
     
     /**
      *   当前设备屏幕的高度
      **/
-    static let kSCREENHEIGHT = UIScreen.mainScreen().bounds.height
+    static let HDSCREENHEIGHT = UIScreen.mainScreen().bounds.height
     
     /**
      *   提示消息

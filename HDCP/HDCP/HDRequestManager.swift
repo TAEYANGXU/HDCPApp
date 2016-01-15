@@ -19,7 +19,7 @@ class HDRequestManager: NSObject {
      */
     func doGetRequest(URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
-        print("URL:  \(URL)")
+        print("Get URL:  \(URL)")
         
         Alamofire.request(.GET, URL)
             .responseJSON { response in
@@ -59,7 +59,7 @@ class HDRequestManager: NSObject {
      */
     func doPostRequest(param:[String : AnyObject],URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
-        print("URL:  \(URL)")
+        print("Post URL:  \(URL)")
         
         Alamofire.request(.POST, URL,parameters: param)
             .responseJSON { response in

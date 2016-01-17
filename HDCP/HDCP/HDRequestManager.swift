@@ -6,7 +6,7 @@
 //  Copyright © 2016年 batonsoft. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 
 class HDRequestManager: NSObject {

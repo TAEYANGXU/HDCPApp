@@ -1,39 +1,48 @@
 //
-//  HDHM05Model.swift
+//  HDHM06Model.swift
 //  HDCP
 //
-//  Created by 徐琰璋 on 16/1/14.
+//  Created by 徐琰璋 on 16/1/17.
 //  Copyright © 2016年 batonsoft. All rights reserved.
 //
 
 import Foundation
 
-class HDHM05ListModel: Mappable {
+class HDHM06ListModel: Mappable {
     
-    var rid:Int?
+    var id:Int?
     var title:String?
     var cover:String?
+    var userId:String?
+    var userName:String?
+    var avatar:String?
+    var recipeCount:String?
     
     init(){}
     
     required init?(_ map: Map){
         mapping(map)
     }
+    
     func mapping(map: Map) {
         
-        rid <- map["Rid"]
+        id <- map["Rid"]
         title <- map["Title"]
         cover <- map["Cover"]
+        userId <- map["UserId"]
+        userName <- map["UserName"]
+        avatar <- map["Avatar"]
+        recipeCount <- map["RecipeCount"]
         
     }
     
 }
 
 
-class HDHM05Result: Mappable {
+class HDHM06Result: Mappable {
     
     var count:Int?
-    var list:[HDHM05ListModel]?
+    var list:[HDHM06ListModel]?
     
     init(){}
     
@@ -49,10 +58,10 @@ class HDHM05Result: Mappable {
     
 }
 
-class HDHM05Response: Mappable {
+class HDHM06Response: Mappable {
     
     var request_id:String?
-    var result:HDHM05Result?
+    var result:HDHM06Result?
     
     init(){}
     

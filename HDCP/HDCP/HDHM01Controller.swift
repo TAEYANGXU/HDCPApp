@@ -810,14 +810,23 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     //更多
     
     func moreAction(btn:UIButton){
-    
         
         switch(btn.tag){
         
             case 10000:
+                
+                let hdHM06VC = HDHM06Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdHM06VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
                 print("全部菜谱")
                 break
             case 20000:
+                
+                let hdHM07VC = HDHM07Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdHM07VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
                 print("全部宝典")
                 break
             default:

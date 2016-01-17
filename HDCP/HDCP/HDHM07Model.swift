@@ -1,39 +1,19 @@
 //
-//  HDGG01Model.swift
+//  HDHM07Model.swift
 //  HDCP
 //
-//  Created by 徐琰璋 on 16/1/8.
+//  Created by 徐琰璋 on 16/1/17.
 //  Copyright © 2016年 batonsoft. All rights reserved.
 //
 
 import Foundation
 
-class HDGG01ListModel:Mappable {
+class HDHM07ListModel: Mappable {
     
-    var image:String?
     var title:String?
-    var type:String?
     var url:String?
-    
-    required init?(_ map: Map) {
-        
-        mapping(map)
-    }
-    
-    func mapping(map: Map) {
-        
-        image <- map["Image"]
-        title <- map["Title"]
-        type <- map["Type"]
-        url <- map["Url"]
-        
-    }
-    
-}
-
-class HDGG01Result: Mappable {
-    
-    var gg01List:Array<HDGG01ListModel>?
+    var image:String?
+    var content:String?
     
     init(){}
     
@@ -43,17 +23,39 @@ class HDGG01Result: Mappable {
     
     func mapping(map: Map) {
         
-        gg01List <- map["list"]
+        url <- map["Url"]
+        title <- map["Title"]
+        image <- map["Image"]
+        content <- map["Content"]
         
     }
     
 }
 
-class HDGG01Response: Mappable {
+
+class HDHM07Result: Mappable {
+    
+    var count:Int?
+    var list:[HDHM07ListModel]?
+    
+    init(){}
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    func mapping(map: Map) {
+        
+        count <- map["count"]
+        list <- map["list"]
+        
+    }
+    
+}
+
+class HDHM07Response: Mappable {
     
     var request_id:String?
-    var result:HDGG01Result?
-    var array2D:NSArray?
+    var result:HDHM07Result?
     
     init(){}
     

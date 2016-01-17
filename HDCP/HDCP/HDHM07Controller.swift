@@ -8,22 +8,44 @@
 
 import UIKit
 
-class HDHM07Controller: UIViewController {
+class HDHM07Controller: UITableViewController {
 
+    var dataArray:NSMutableArray!
+    var offset:Int!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        "http://api.hoto.cn/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&format=json&sessionid=1404979448&vc=25&vn=v3.5.2&loguid=&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7CFFDD5AB8-D715-4007-9E15-DF103EB9DD01%7C825300FA-E7F0-4E82-9181-E914E3EBEEA0&channel=appstore&uuid=8332A3FB-D4DF-416D-AA3D-443277ECAD26&method=Wiki.getListByType"
-//        "type=1&limit=20&offset=0&tagid=0"
         
-        // Do any additional setup after loading the view.
+        offset = 0
+        dataArray  = NSMutableArray()
+        
+        setupUI()
+        showHud()
+        doGetRequestData(20,offset: self.offset)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
+        self.title = "厨房宝典"
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
     }
+    
+    // MARK: - 创建UI视图
+    
+    func setupUI(){
+        
+        self.tableView.tableFooterView = UIView()
+        self.tableView.registerClass(HDHM07Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.backgroundColor = Constants.HDBGViewColor
+        
+        //当列表滚动到底端 视图自动刷新
+        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
+            self.doGetRequestData(10,offset: self.offset)
+        })
+    }
+    
     
     func showHud(){
         
@@ -35,7 +57,7 @@ class HDHM07Controller: UIViewController {
         
         CoreUtils.hidProgressHUD(self.view)
     }
-
+    
     // MARK: - events
     
     func backAction(){
@@ -43,5 +65,59 @@ class HDHM07Controller: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
         
     }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(limit:Int,offset:Int){
+        
+        HDHM07Service().doGetRequest_HDHM07_URL(limit, offset: offset, successBlock: { (hm07Response) -> Void in
+            
+            self.offset = self.offset+1
+            
+            self.hidenHud()
+            
+            self.dataArray.addObjectsFromArray((hm07Response.result?.list)!)
+            
+            self.tableView.mj_footer.endRefreshing()
+            
+            self.tableView.reloadData()
+            
+            }) { (error) -> Void in
+                
+                self.tableView.mj_footer.endRefreshing()
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+        }
+        
+    }
+    
+    // MARK: - UITableView delegate/datasource
+    
+    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    {
+        return self.dataArray.count
+    }
+    
+    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    {
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM07Cell
+        
+        let model = dataArray[indexPath.row] as! HDHM07ListModel
+        cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        cell.title?.text = model.title
+        cell.content?.text = model.content
+
+        
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        
+    }
+
 
 }

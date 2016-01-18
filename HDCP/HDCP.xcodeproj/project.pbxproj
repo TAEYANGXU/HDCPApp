@@ -41,6 +41,9 @@
 		35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D201C46499F00023637 /* HDRefreshGifFooter.swift */; };
 		35321D231C464CF500023637 /* HDHM04Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D221C464CF500023637 /* HDHM04Controller.swift */; };
 		35321D251C46512E00023637 /* HDWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D241C46512E00023637 /* HDWebController.swift */; };
+		3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */; };
+		3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */; };
+		3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */; };
 		3566C8ED1C47499A00573D97 /* HDHM04Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C8EC1C47499A00573D97 /* HDHM04Model.swift */; };
 		3566C8EF1C474BCA00573D97 /* HDHM04Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C8EE1C474BCA00573D97 /* HDHM04Service.swift */; };
 		3566C8F11C47533B00573D97 /* HDHM04Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C8F01C47533B00573D97 /* HDHM04Cell.swift */; };
@@ -93,6 +96,7 @@
 		35B703461C3F83130024A329 /* HDGG01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703451C3F83130024A329 /* HDGG01Model.swift */; };
 		35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034B1C3F95E20024A329 /* HDGG01Button.swift */; };
 		35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */; };
+		35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */; };
 		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
 		35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */; };
@@ -177,6 +181,9 @@
 		35321D201C46499F00023637 /* HDRefreshGifFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifFooter.swift; sourceTree = "<group>"; };
 		35321D221C464CF500023637 /* HDHM04Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Controller.swift; sourceTree = "<group>"; };
 		35321D241C46512E00023637 /* HDWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWebController.swift; sourceTree = "<group>"; };
+		3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Controller.swift; sourceTree = "<group>"; };
+		3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Model.swift; sourceTree = "<group>"; };
+		3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Service.swift; sourceTree = "<group>"; };
 		3566C8EC1C47499A00573D97 /* HDHM04Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Model.swift; sourceTree = "<group>"; };
 		3566C8EE1C474BCA00573D97 /* HDHM04Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Service.swift; sourceTree = "<group>"; };
 		3566C8F01C47533B00573D97 /* HDHM04Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Cell.swift; sourceTree = "<group>"; };
@@ -239,6 +246,7 @@
 		35B703451C3F83130024A329 /* HDGG01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Model.swift; sourceTree = "<group>"; };
 		35B7034B1C3F95E20024A329 /* HDGG01Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Button.swift; sourceTree = "<group>"; };
 		35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01RowView.swift; sourceTree = "<group>"; };
+		35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM09Controller.swift; sourceTree = "<group>"; };
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
 		35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreDataManager.swift; sourceTree = "<group>"; };
@@ -501,6 +509,8 @@
 				3566C8F81C4783E300573D97 /* HDHM05Controller.swift */,
 				3566C9041C48C52500573D97 /* HDHM06Controller.swift */,
 				3566C9061C48C53600573D97 /* HDHM07Controller.swift */,
+				3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */,
+				35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -660,6 +670,7 @@
 				3566C8F61C477DB000573D97 /* HDHM05Service.swift */,
 				1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */,
 				1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */,
+				3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -682,6 +693,7 @@
 				3566C8F41C477DA200573D97 /* HDHM05Model.swift */,
 				1B6B082C1C4B4382004B2CE2 /* HDHM06Model.swift */,
 				1B6B082E1C4B4395004B2CE2 /* HDHM07Model.swift */,
+				3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -915,6 +927,7 @@
 			files = (
 				1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */,
 				1B0FD1001C3D5749009E85CD /* MJRefreshStateHeader.m in Sources */,
+				3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */,
 				356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */,
 				1B0FD0FF1C3D5749009E85CD /* MJRefreshNormalHeader.m in Sources */,
 				35321D251C46512E00023637 /* HDWebController.swift in Sources */,
@@ -952,8 +965,10 @@
 				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,
+				3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */,
 				1B6B08351C4B564E004B2CE2 /* HDHM07Cell.swift in Sources */,
 				3566C9031C479EA000573D97 /* HDCG02Service.swift in Sources */,
+				3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */,
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
 				356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */,
 				1B6B082F1C4B4395004B2CE2 /* HDHM07Model.swift in Sources */,
@@ -963,6 +978,7 @@
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
 				356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */,
+				35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */,
 				1B6B082D1C4B4382004B2CE2 /* HDHM06Model.swift in Sources */,
 				356F39A91C3A76FE0056DF44 /* Map.swift in Sources */,
 				35321D1A1C4638BE00023637 /* HDHM03Controller.swift in Sources */,
@@ -1085,7 +1101,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1123,7 +1139,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

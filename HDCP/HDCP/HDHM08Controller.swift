@@ -403,6 +403,30 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+    /**
+     *  选中cell 进入烹饪步骤页面
+     */
+    func selectRowAction(ges:UITapGestureRecognizer){
+    
+        
+        let touchView = ges.view
+        let indexPath = NSIndexPath(forRow: (touchView?.tag)!, inSection: 1)
+        tableView?.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.None)
+        
+        
+        let model = hm08Response.result?.info?.steps![indexPath.row]
+        let hdHM09VC = HDHM09Controller()
+        hdHM09VC.stepModel = model
+        self.hidesBottomBarWhenPushed = true;
+        self.presentViewController(hdHM09VC, animated: true, completion: { () -> Void in
+            /**
+            *  取消cell选择状态
+            */
+            self.tableView?.deselectRowAtIndexPath(self.tableView!.indexPathForSelectedRow!, animated: true)
+        })
+        
+    }
+    
     // MARK: - 数据加载
     func doGetRequestData(){
         
@@ -512,6 +536,10 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
+            let tapGes = UITapGestureRecognizer(target: self, action: "selectRowAction:")
+            cell.contentView.tag = indexPath.row
+            cell.contentView.addGestureRecognizer(tapGes)
+            
         }
         
         return cell
@@ -566,16 +594,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         if indexPath.section == 1 {
         
-            let model = hm08Response.result?.info?.steps![indexPath.row]
-            let hdHM09VC = HDHM09Controller()
-            hdHM09VC.stepModel = model
-            self.hidesBottomBarWhenPushed = true;
-            self.presentViewController(hdHM09VC, animated: true, completion: { () -> Void in
-                /**
-                *  取消cell选择状态
-                */
-                self.tableView?.deselectRowAtIndexPath(self.tableView!.indexPathForSelectedRow!, animated: true)
-            })
+            
             
         }
         

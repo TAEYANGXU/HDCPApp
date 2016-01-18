@@ -37,7 +37,7 @@ class CollectListModel:Mappable {
 class RecipeListModel: Mappable {
     
     var cover:String?
-    var rid:String?
+    var rid:Int?
     var title:String?
     var userName:String?
     

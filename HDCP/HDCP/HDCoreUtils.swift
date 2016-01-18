@@ -14,9 +14,9 @@ class CoreUtils: NSObject {
     /**
      返回按钮
      
-     - parameter sel: 事件
+     *  @ parameter sel: 事件
      
-     - returns: 按钮
+     *  @ returns: 按钮
      
      self.navigationItem.leftBarButtonItem = Constants.HDBackBarButtonItem("doThing:", taget: self)
      
@@ -37,10 +37,10 @@ class CoreUtils: NSObject {
     /**
      二进制转RGB
      
-     - parameter hex:   二进制
-     - parameter alpha: 透明度
+     *  @ parameter hex:   二进制
+     *  @ parameter alpha: 透明度
      
-     - returns: UIColor
+     *  @ returns: UIColor
      */
     class func HDfromHexValue(hex:UInt,alpha:CGFloat)->UIColor{
     
@@ -56,7 +56,7 @@ class CoreUtils: NSObject {
     /**
      加载数据时显示的动画
      
-     - parameter view: hud的父视图
+     *  @ parameter view: hud的父视图
      */
     class func showProgressHUD(view:UIView){
     
@@ -100,7 +100,7 @@ class CoreUtils: NSObject {
     /**
      隐藏动画
      
-     - parameter view: hud的父视图
+     *  @ parameter view: hud的父视图
      */
     class func hidProgressHUD(view:UIView){
     
@@ -110,16 +110,47 @@ class CoreUtils: NSObject {
     /**
      显示文本
      
-     - parameter view:  hud的父视图
-     - parameter title: 显示的文本内容
+     *  @ parameter view:  hud的父视图
+     *  @ parameter title: 显示的文本内容
      */
     class func showProgressHUD(view:UIView,title:String){
     
         hidProgressHUD(view)
         
         let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        
         hud.labelText = title;
+        
         hud.hide(true, afterDelay: 1.5)
+    }
+    
+    
+    /**
+     
+     *  获取字符串的宽度和高度
+     
+     *
+     
+     *  @param text:NSString
+     
+     *  @param font:UIFont
+     
+     *
+     
+     *  @return CGRect
+     
+     */
+    
+    class func getTextRectSize(text:NSString,font:UIFont,size:CGSize) -> CGRect {
+        
+        let attributes = [NSFontAttributeName: font]
+        
+        let option = NSStringDrawingOptions.UsesLineFragmentOrigin
+        
+        let rect:CGRect = text.boundingRectWithSize(size, options: option, attributes: attributes, context: nil)
+        
+        return rect;
+        
     }
     
 }

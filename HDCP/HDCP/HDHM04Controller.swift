@@ -55,6 +55,7 @@ class HDHM04Controller: UITableViewController {
         
     }
     
+    // MARK: - 提示动画显示和隐藏
     func showHud(){
         
         CoreUtils.showProgressHUD(self.view)

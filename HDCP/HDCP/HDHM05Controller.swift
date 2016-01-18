@@ -82,6 +82,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
     }
     
+    // MARK: - 提示动画显示和隐藏
     func showHud(){
         
         CoreUtils.showProgressHUD(self.view)

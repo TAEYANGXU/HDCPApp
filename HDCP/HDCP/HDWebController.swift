@@ -63,6 +63,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
     }
     
     // MARK: - HUD
+    // MARK: - 提示动画显示和隐藏
     func showHud(){
         
         CoreUtils.showProgressHUD(self.webView!)

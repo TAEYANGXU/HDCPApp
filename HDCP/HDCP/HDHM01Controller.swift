@@ -201,7 +201,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                     imageView = UIImageView()
                     imageView!.tag = i+200
+                    imageView?.userInteractionEnabled = true
                     headerSView.addSubview(imageView!)
+                    
+                    let tapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+                    imageView?.addGestureRecognizer(tapGes)
+                    
                     imageView!.snp_makeConstraints(closure: { (make) -> Void in
                         
                         make.top.equalTo(headerSView).offset(0)
@@ -674,6 +679,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    // MARK: - 提示动画显示和隐藏
     func showHud(){
     
         CoreUtils.showProgressHUD(self.view)
@@ -758,6 +764,22 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    /**
+     *   菜谱详情
+     */
+    func headGesAction(ges:UITapGestureRecognizer){
+    
+        
+        let view = ges.view as! UIImageView
+        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![view.tag-200])!
+        let hdHM08VC = HDHM08Controller()
+        hdHM08VC.rid = recopeMddel.rid
+        hdHM08VC.name = recopeMddel.title
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM08VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
+        
+    }
     
     func menuBtnOnclick(btn:UIButton){
     

@@ -1,0 +1,584 @@
+//
+//  HDHM08Controller.swift
+//  HDCP
+//
+//  Created by 徐琰璋 on 16/1/18.
+//  Copyright © 2016年 batonsoft. All rights reserved.
+//
+
+import UIKit
+
+class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+
+    var rid:Int?
+    var name:String?
+    var hm08Response:HDHM08Response!
+    
+    var baseView:UIScrollView?
+    var headImageView:UIImageView?
+    var infoView:UIView?
+    var introView:UILabel?
+    var tableView:UITableView?
+    var tipsView:UIView?
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        self.title = name
+        showHud()
+        doGetRequestData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        super.viewDidLayoutSubviews()
+        
+        
+    }
+
+
+    // MARK: - 创建UI视图
+    
+    func setupUI(){
+    
+        createBaseView()
+        createHeaderView()
+        createInfoView()
+        createIntroView()
+        createTableView()
+        createTipsView()
+    }
+    
+    /**
+     *  滚动视图
+     */
+    func createBaseView(){
+    
+        
+        if baseView == nil {
+            
+            baseView = UIScrollView()
+            baseView?.backgroundColor = UIColor.whiteColor()
+            self.view.addSubview(baseView!)
+            
+            baseView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(self.view).offset(0)
+                make.left.equalTo(self.view).offset(0)
+                make.bottom.equalTo(self.view).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                
+            })
+            
+            //计算容器的大小
+            let size = CoreUtils.getTextRectSize((hm08Response.result?.info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+            let stepHeight = (hm08Response.result?.info?.steps?.count)!*80+30
+            let stuffHeight = (hm08Response.result?.info?.stuff?.count)!*44+40
+            let tipsSize = CoreUtils.getTextRectSize((hm08Response.result?.info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+
+            baseView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, CGFloat(200+20+110+5+stepHeight+stuffHeight+40)+size.size.height+tipsSize.size.height+60)
+            
+        }
+
+        
+    }
+    
+    /**
+     *  顶部图片视图
+     */
+    func createHeaderView(){
+    
+        if headImageView == nil {
+            
+            headImageView = UIImageView()
+            baseView?.addSubview(headImageView!)
+            
+            headImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(baseView!).offset(0)
+                make.left.equalTo(baseView!).offset(0)
+                make.height.equalTo(200)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                
+            })
+            
+            self.headImageView?.sd_setImageWithURL(NSURL(string: (hm08Response.result?.info?.cover)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        }
+
+        
+    }
+    
+    /**
+     *  发布人信息
+     */
+    func createInfoView(){
+    
+        if infoView == nil {
+        
+            
+            infoView = UIView()
+            baseView?.addSubview(infoView!)
+            
+            infoView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(self.headImageView!.snp_bottom).offset(Constants.HDSpace*2)
+                make.left.equalTo(baseView!).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(110)
+                
+            })
+            
+            
+            let title = UILabel()
+            title.textColor = Constants.HDMainTextColor
+            title.font = UIFont.systemFontOfSize(20)
+            infoView?.addSubview(title)
+            
+            title.text = hm08Response.result?.info?.title
+            
+            title.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(infoView!).offset(0)
+                make.left.equalTo(infoView!).offset(15)
+                make.height.equalTo(25)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                
+            })
+            
+            let createTime = UILabel()
+            createTime.textColor = UIColor.lightGrayColor()
+            createTime.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(createTime)
+            
+            createTime.text = String(format: "创建日期:%@", (hm08Response.result?.info?.reviewTime)!)
+            
+            createTime.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(title.snp_bottom).offset(5)
+                make.left.equalTo(infoView!).offset(15)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/2-30)
+                
+            })
+            
+            let headIcon = UIImageView()
+            headIcon.layer.cornerRadius = 25
+            headIcon.layer.masksToBounds = true
+            infoView?.addSubview(headIcon)
+            
+            headIcon.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(createTime.snp_bottom).offset(5)
+                make.left.equalTo(infoView!).offset(15)
+                make.width.equalTo(50)
+                make.height.equalTo(50)
+            })
+            
+            headIcon.sd_setImageWithURL(NSURL(string: (hm08Response.result?.info?.avatar)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            
+            
+            
+            let viewCount = UILabel()
+            viewCount.textColor = UIColor.lightGrayColor()
+            viewCount.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(viewCount)
+            
+            viewCount.text = String(format: "浏览:%d", (hm08Response.result?.info?.viewCount)!)
+            
+            viewCount.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(title.snp_bottom).offset(5)
+                make.left.equalTo(infoView!).offset(Constants.HDSCREENWITH/2+20)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/4-10)
+                
+            })
+            
+            
+            let commentCount = UILabel()
+            commentCount.textColor = UIColor.lightGrayColor()
+            commentCount.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(commentCount)
+            
+            commentCount.text = String(format: "浏览:%d", (hm08Response.result?.info?.commentCount)!)
+            
+            commentCount.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(title.snp_bottom).offset(5)
+                make.left.equalTo(viewCount.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/4-20)
+                
+            })
+
+            
+            
+            let userName = UILabel()
+            userName.textColor = UIColor.lightGrayColor()
+            userName.font = UIFont.systemFontOfSize(16)
+            infoView?.addSubview(userName)
+            
+            userName.text = hm08Response.result?.info?.userName
+            
+            userName.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(createTime.snp_bottom).offset(5)
+                make.left.equalTo(headIcon.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                
+            })
+
+            let tags = UILabel()
+            tags.textColor = UIColor.lightGrayColor()
+            tags.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(tags)
+            
+            
+//            var stuffStr = String()
+//            for var i=0;i<hm08Response.result?.info?.tags!.count;i++ {
+//                
+//                let tag = hm08Response.result?.info?.tags![i]
+//                
+//                if i == (hm08Response.result?.info?.tags!.count)!-1 {
+//                    stuffStr.appendContentsOf((tag?.name)!)
+//                    
+//                }else{
+//                    stuffStr.appendContentsOf(String(format: "%@、", (tag?.name)!))
+//                }
+//                
+//            }
+            
+            tags.text = "美食明星、生活联盟"
+            
+            tags.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(userName.snp_bottom).offset(5)
+                make.left.equalTo(headIcon.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH-100)
+                
+            })
+
+            
+        }
+        
+        
+    }
+    
+    /**
+     *  菜谱介绍
+     */
+    func createIntroView(){
+    
+        if introView == nil {
+            
+            let size = CoreUtils.getTextRectSize((hm08Response.result?.info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+            
+            introView = UILabel()
+            introView?.textColor = Constants.HDMainTextColor
+            introView?.font = UIFont.systemFontOfSize(15)
+            introView?.numberOfLines = 0
+            baseView?.addSubview(introView!)
+            
+            introView?.text = hm08Response.result?.info?.intro
+            
+            introView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(infoView!.snp_bottom).offset(5)
+                make.left.equalTo(baseView!).offset(15)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                make.height.equalTo(size.size.height+10)
+                
+            })
+            
+            
+        }
+        
+    }
+    
+    /**
+     *  食材/步骤
+     */
+    func createTableView(){
+    
+        tableView = UITableView()
+        tableView?.delegate = self
+        tableView?.dataSource = self
+        tableView?.scrollEnabled = false
+        baseView?.addSubview(tableView!)
+        
+        tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        
+        let stepHeight = (hm08Response.result?.info?.steps?.count)!*80+30
+        let stuffHeight = (hm08Response.result?.info?.stuff?.count)!*44+40
+        
+        tableView?.snp_makeConstraints(closure: { (make) -> Void in
+            
+            make.top.equalTo(introView!.snp_bottom).offset(10)
+            make.left.equalTo(baseView!).offset(0)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.height.equalTo(stepHeight+stuffHeight)
+        })
+        
+    }
+    
+    /**
+     *  小贴士
+     */
+
+    func createTipsView(){
+    
+        if tipsView == nil {
+            
+            let tipsSize = CoreUtils.getTextRectSize((hm08Response.result?.info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+        
+            tipsView = UIView()
+            baseView?.addSubview(tipsView!)
+            tipsView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(tableView!.snp_bottom).offset(0)
+                make.left.equalTo(baseView!).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(60+tipsSize.size.height+5)
+            })
+            
+            let title = UILabel()
+            title.font = UIFont.systemFontOfSize(18)
+            title.text = "小贴士"
+            title.textColor = UIColor.lightGrayColor()
+            tipsView?.addSubview(title)
+            
+            title.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(tipsView!).offset(20)
+                make.left.equalTo(tipsView!).offset(15)
+                make.width.equalTo(150)
+                make.height.equalTo(20)
+            })
+            
+            let tips = UILabel()
+            tips.font = UIFont.systemFontOfSize(14)
+            tips.textColor = Constants.HDMainTextColor
+            tips.numberOfLines = 0
+            tipsView?.addSubview(tips)
+            
+            tips.text = hm08Response.result?.info?.tips!
+            tips.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(title.snp_bottom).offset(20)
+                make.left.equalTo(tipsView!).offset(15)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                make.height.equalTo(tipsSize.size.height+5)
+            })
+            
+            
+        }
+        
+        
+    }
+    
+    // MARK: - 提示动画显示和隐藏
+    func showHud(){
+        
+        CoreUtils.showProgressHUD(self.view)
+        
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
+    }
+    
+    // MARK: - events
+    
+    func backAction(){
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(){
+        
+        HDHM08Service().doGetRequest_HDHM08_URL(rid!, successBlock: { (hm08Response) -> Void in
+            
+                self.hidenHud()
+                self.hm08Response = hm08Response
+                self.setupUI()
+            
+            }) { (error) -> Void in
+                
+                
+                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+        }
+        
+    }
+    
+    
+    // MARK: - UITableView delegate/datasource
+    
+    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    {
+        if section == 0 {
+        
+            return (hm08Response.result?.info?.stuff?.count)!
+        }else{
+        
+            return (hm08Response.result?.info?.steps?.count)!
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 2
+    }
+    
+    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    {
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        
+        
+        if indexPath.section == 0 {
+            
+            /**
+            *   食材
+            */
+            let model = hm08Response.result?.info?.stuff![indexPath.row]
+            let title = UILabel()
+            title.textColor = UIColor.lightGrayColor()
+            title.font = UIFont.systemFontOfSize(15)
+            cell.contentView.addSubview(title)
+            title.text = model?.name
+            title.snp_makeConstraints(closure: { (make) -> Void in
+                make.top.equalTo(cell.contentView).offset(0)
+                make.left.equalTo(cell.contentView).offset(15)
+                make.height.equalTo(44)
+                make.width.equalTo(Constants.HDSCREENWITH/2-15)
+            })
+
+            let weight = UILabel()
+            weight.textColor = UIColor.lightGrayColor()
+            weight.font = UIFont.systemFontOfSize(15)
+            cell.contentView.addSubview(weight)
+            weight.text = model?.weight
+            weight.snp_makeConstraints(closure: { (make) -> Void in
+                make.top.equalTo(cell.contentView).offset(0)
+                make.left.equalTo(title.snp_right).offset(30)
+                make.height.equalTo(44)
+                make.width.equalTo(Constants.HDSCREENWITH/2-30)
+            })
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+        }else{
+            /**
+            *   步骤
+            */
+            let model = hm08Response.result?.info?.steps![indexPath.row]
+            
+            let imageView = UIImageView()
+            cell.contentView.addSubview(imageView)
+            imageView.sd_setImageWithURL(NSURL(string: model!.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            
+            imageView.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(cell.contentView).offset(10)
+                make.left.equalTo(cell.contentView).offset(15)
+                make.width.equalTo(80)
+                make.height.equalTo(60)
+            })
+            
+            let intro = UILabel()
+            intro.text = String(format: "%d.%@",indexPath.row+1, model!.intro!)
+            intro.font = UIFont.systemFontOfSize(16)
+            intro.textColor = UIColor.lightGrayColor()
+            intro.numberOfLines = 3
+            cell.contentView.addSubview(intro)
+            
+            let introSize = CoreUtils.getTextRectSize(model!.intro!, font: UIFont.systemFontOfSize(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
+            
+            intro.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(cell.contentView).offset(5)
+                make.left.equalTo(imageView.snp_right).offset(10)
+                make.width.equalTo(Constants.HDSCREENWITH-120)
+                make.height.equalTo(introSize.size.height+5)
+                
+            })
+            
+        }
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,30))
+        
+        
+        if section == 0 {
+            let title = UILabel(frame: CGRectMake(15,0,Constants.HDSCREENWITH-15,30))
+            title.textColor = UIColor.lightGrayColor()
+            title.font = UIFont.systemFontOfSize(15)
+            view.addSubview(title)
+
+            title.text = "食材"
+        }else{
+            
+            let line = UILabel(frame: CGRectMake(15,0,Constants.HDSCREENWITH,1))
+            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1.0)
+            view.addSubview(line)
+            
+            let title = UILabel(frame: CGRectMake(15,15,Constants.HDSCREENWITH-15,20))
+            title.textColor = UIColor.lightGrayColor()
+            title.font = UIFont.systemFontOfSize(15)
+            view.addSubview(title)
+
+            title.text = "步骤"
+        }
+        
+        return view
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return CGFloat(Constants.HDSpace*3)
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if indexPath.section == 0 {
+            
+            return 44
+        }else{
+            
+            return 80
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == 1 {
+        
+            let model = hm08Response.result?.info?.steps![indexPath.row]
+            let hdHM09VC = HDHM09Controller()
+            hdHM09VC.stepModel = model
+            self.hidesBottomBarWhenPushed = true;
+            self.presentViewController(hdHM09VC, animated: true, completion: { () -> Void in
+                /**
+                *  取消cell选择状态
+                */
+                self.tableView?.deselectRowAtIndexPath(self.tableView!.indexPathForSelectedRow!, animated: true)
+            })
+            
+        }
+        
+    }
+    
+}

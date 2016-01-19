@@ -19,6 +19,8 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         
         super.viewDidLoad()
         
+        self.title = name
+        
         setupUI()
         
         showHud()
@@ -27,6 +29,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         
     }
     
+    // MARK: - 创建UI视图
     func setupUI(){
     
         let request:NSURLRequest = NSURLRequest(URL: NSURL(string: url!)!, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: 30)
@@ -62,7 +65,6 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         
     }
     
-    // MARK: - HUD
     // MARK: - 提示动画显示和隐藏
     func showHud(){
         

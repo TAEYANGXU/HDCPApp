@@ -20,7 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUpBarStyle()
         
-        self.window?.rootViewController = MainViewController()
+        /**
+         *  判断欢迎界面是否已经执行
+         */
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        if String(userDefault.stringForKey(Constants.HDShowWelcome)!) == Constants.HDShowWelcome {
+            
+            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+            self.window?.rootViewController = MainViewController()
+        }else{
+            self.window?.rootViewController = WelcomeController()
+            
+        }
         
         return true
     }
@@ -62,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         *  状态栏字体设置白色
         */
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+//        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
         
         /**
         *  底部TabBar的颜色

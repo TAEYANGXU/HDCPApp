@@ -78,7 +78,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             //计算容器的大小
             let size = CoreUtils.getTextRectSize((hm08Response.result?.info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
             let stepHeight = (hm08Response.result?.info?.steps?.count)!*80+30
-            let stuffHeight = (hm08Response.result?.info?.stuff?.count)!*44+40
+            let stuffHeight = ((hm08Response.result?.info?.stuff?.count)!+1)*44+40
             let tipsSize = CoreUtils.getTextRectSize((hm08Response.result?.info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
 
             baseView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, CGFloat(200+20+110+5+stepHeight+stuffHeight+40)+size.size.height+tipsSize.size.height+60)
@@ -316,7 +316,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         
         let stepHeight = (hm08Response.result?.info?.steps?.count)!*80+30
-        let stuffHeight = (hm08Response.result?.info?.stuff?.count)!*44+40
+        let stuffHeight = ((hm08Response.result?.info?.stuff?.count)!+1)*44+40
         
         tableView?.snp_makeConstraints(closure: { (make) -> Void in
             
@@ -413,10 +413,9 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         let indexPath = NSIndexPath(forRow: (touchView?.tag)!, inSection: 1)
         tableView?.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.None)
         
-        
-        let model = hm08Response.result?.info?.steps![indexPath.row]
         let hdHM09VC = HDHM09Controller()
-        hdHM09VC.stepModel = model
+        hdHM09VC.index = touchView?.tag
+        hdHM09VC.steps = hm08Response.result?.info?.steps
         self.hidesBottomBarWhenPushed = true;
         self.presentViewController(hdHM09VC, animated: true, completion: { () -> Void in
             /**
@@ -451,7 +450,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     {
         if section == 0 {
         
-            return (hm08Response.result?.info?.stuff?.count)!
+            return (hm08Response.result?.info?.stuff?.count)!+1
         }else{
         
             return (hm08Response.result?.info?.steps?.count)!
@@ -473,30 +472,54 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             /**
             *   食材
             */
-            let model = hm08Response.result?.info?.stuff![indexPath.row]
-            let title = UILabel()
-            title.textColor = UIColor.lightGrayColor()
-            title.font = UIFont.systemFontOfSize(15)
-            cell.contentView.addSubview(title)
-            title.text = model?.name
-            title.snp_makeConstraints(closure: { (make) -> Void in
-                make.top.equalTo(cell.contentView).offset(0)
-                make.left.equalTo(cell.contentView).offset(15)
-                make.height.equalTo(44)
-                make.width.equalTo(Constants.HDSCREENWITH/2-15)
-            })
+            
+            
+            if indexPath.row == (hm08Response.result?.info?.stuff?.count)! {
+                let title = UILabel()
+                title.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(title)
+                
+                title.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH-30)
+                })
+                
+                title.textColor = Constants.HDMainTextColor
+                title.text = String(format: "制作时间:%@", (hm08Response.result?.info?.readyTime)!)
+            }else{
+                
+                
+                let title = UILabel()
+                title.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(title)
+                
+                title.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH/2-15)
+                })
+                
+                let weight = UILabel()
+                weight.textColor = UIColor.lightGrayColor()
+                weight.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(weight)
+                
+                weight.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(title.snp_right).offset(30)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH/2-30)
+                })
 
-            let weight = UILabel()
-            weight.textColor = UIColor.lightGrayColor()
-            weight.font = UIFont.systemFontOfSize(15)
-            cell.contentView.addSubview(weight)
-            weight.text = model?.weight
-            weight.snp_makeConstraints(closure: { (make) -> Void in
-                make.top.equalTo(cell.contentView).offset(0)
-                make.left.equalTo(title.snp_right).offset(30)
-                make.height.equalTo(44)
-                make.width.equalTo(Constants.HDSCREENWITH/2-30)
-            })
+                
+                title.textColor = UIColor.lightGrayColor()
+                let model = hm08Response.result?.info?.stuff![indexPath.row]
+                title.text = model?.name
+                weight.text = model?.weight
+            }
             
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             
@@ -525,7 +548,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             intro.numberOfLines = 3
             cell.contentView.addSubview(intro)
             
-            let introSize = CoreUtils.getTextRectSize(model!.intro!, font: UIFont.systemFontOfSize(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
+            let introSize = CoreUtils.getTextRectSize(String(format: "%d.%@",indexPath.row+1, model!.intro!), font: UIFont.systemFontOfSize(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
             
             intro.snp_makeConstraints(closure: { (make) -> Void in
                 

@@ -41,6 +41,7 @@
 		35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D201C46499F00023637 /* HDRefreshGifFooter.swift */; };
 		35321D231C464CF500023637 /* HDHM04Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D221C464CF500023637 /* HDHM04Controller.swift */; };
 		35321D251C46512E00023637 /* HDWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D241C46512E00023637 /* HDWebController.swift */; };
+		3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */; };
 		3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */; };
 		3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */; };
 		3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */; };
@@ -181,6 +182,7 @@
 		35321D201C46499F00023637 /* HDRefreshGifFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifFooter.swift; sourceTree = "<group>"; };
 		35321D221C464CF500023637 /* HDHM04Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Controller.swift; sourceTree = "<group>"; };
 		35321D241C46512E00023637 /* HDWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWebController.swift; sourceTree = "<group>"; };
+		3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Controller.swift; sourceTree = "<group>"; };
 		3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Model.swift; sourceTree = "<group>"; };
 		3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Service.swift; sourceTree = "<group>"; };
@@ -404,6 +406,14 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		3538902B1C4E1E04006C9CE6 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
 		3566C8FE1C479E5C00573D97 /* CG */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +496,7 @@
 		356F396D1C3A3EEA0056DF44 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3538902B1C4E1E04006C9CE6 /* Welcome */,
 				35321D1F1C463FF100023637 /* Common */,
 				356F39721C3A3F7F0056DF44 /* GG */,
 				356F39711C3A3F790056DF44 /* Center */,
@@ -1006,6 +1017,7 @@
 				356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */,
 				1B0FD0FB1C3D5749009E85CD /* MJRefreshBackGifFooter.m in Sources */,
 				3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */,
+				3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */,
 				3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */,
 				3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */,
 				1B6B08331C4B4418004B2CE2 /* HDHM07Service.swift in Sources */,

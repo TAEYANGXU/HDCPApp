@@ -57,6 +57,11 @@ class Constants: NSObject {
         return CGRectMake(x, y, width, height)
     }
     
+    /**
+     *   key
+     **/
+    static let HDShowWelcome:String = "HDShowWelcome"
+    
     /*******************************************URL*********************************************/
      
      /**

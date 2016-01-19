@@ -114,7 +114,7 @@ class HDHM06Controller: UITableViewController {
                 make.top.equalTo(cell.contentView).offset(0)
                 make.left.equalTo(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
-                make.height.equalTo(160)
+                make.height.equalTo(200)
                 
             })
             
@@ -192,7 +192,7 @@ class HDHM06Controller: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 220
+        return 260
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -162,12 +162,15 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             }
             
+            
+            
             if headerSView == nil {
             
                 headerSView = UIScrollView()
                 headerSView.pagingEnabled = true
                 headerSView.userInteractionEnabled = true;
                 headerSView.delegate = self;
+                headerSView.bounces = false
                 headerSView.showsVerticalScrollIndicator = false;
                 headerSView.showsHorizontalScrollIndicator = false;
                 headView.addSubview(headerSView)

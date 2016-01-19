@@ -10,10 +10,12 @@
     HDHM02Controller -> 排行榜
     HDHM03Controller -> 营养餐桌
     HDHM04Controller -> 菜谱分类
-    HDHM05Controller -> 菜谱分专辑列表
+    HDHM05Controller -> 菜谱专辑列表
     HDHM06Controller -> 全部菜谱
     HDHM07Controller -> 全部宝典
     HDHM08Controller -> 菜谱详情
+    HDHM09Controller -> 烹饪步骤
+ 
  
     HDGG01Controller -> 逛逛
  
@@ -33,5 +35,5 @@
  
     //共通
     HDWebController -> 展示web页面
- 
+    WelcomeController -> 欢迎界面
 */

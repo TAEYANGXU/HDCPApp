@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = Constants.HDHEXRGBA(0xFFFFFF)
         UITabBar.appearance().backgroundColor = Constants.HDHEXRGBA(0xFFFFFF)
         UITabBar.appearance().barTintColor = Constants.HDHEXRGBA(0xFFFFFF)
-        UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
+//        UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
         
         /**
         *  底部TabBar字体正常状态颜色

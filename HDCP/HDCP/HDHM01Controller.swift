@@ -65,6 +65,15 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     */
     var wikiListView:UIView!
     
+    
+    /**
+     *   UIImageView重用
+     */
+    var index:Int?
+    var centerImageView:UIImageView?
+    var leftImageView:UIImageView?
+    var rightImageView:UIImageView?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -186,43 +195,32 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 })
             }
             
-            headerSView.contentSize = CGSizeMake(Constants.HDSCREENWITH*CGFloat((self.hdHM01Response?.result?.recipeList?.count)!), HeadViewHeight)
+            headerSView?.contentSize = CGSizeMake(CGFloat(3)*Constants.HDSCREENWITH, HeadViewHeight)
+            headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
             
             
-            /**
-            *  显示图片
-            */
-            for var i=0;i<self.hdHM01Response?.result?.recipeList?.count;i++ {
-                
-                let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![i])!
-                
-                var imageView:UIImageView?
-                
-                imageView = headerSView.viewWithTag(i+200) as? UIImageView
-                
-                if imageView == nil {
-                
-                    imageView = UIImageView()
-                    imageView!.tag = i+200
-                    imageView?.userInteractionEnabled = true
-                    headerSView.addSubview(imageView!)
-                    
-                    let tapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
-                    imageView?.addGestureRecognizer(tapGes)
-                    
-                    imageView!.snp_makeConstraints(closure: { (make) -> Void in
-                        
-                        make.top.equalTo(headerSView).offset(0)
-                        make.left.equalTo(headerSView).offset(Constants.HDSCREENWITH*CGFloat(i))
-                        make.width.equalTo(Constants.HDSCREENWITH)
-                        make.height.equalTo(HeadViewHeight)
-                    })
-                    
-                }
-                
-                imageView!.sd_setImageWithURL(NSURL(string: recopeMddel.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-                
-            }
+            centerImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH,0,Constants.HDSCREENWITH,HeadViewHeight))
+            centerImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            centerImageView?.userInteractionEnabled = true
+            headerSView?.addSubview(centerImageView!)
+            let ctapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            centerImageView?.addGestureRecognizer(ctapGes)
+
+            
+            leftImageView = UIImageView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,HeadViewHeight))
+            leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            leftImageView?.userInteractionEnabled = true
+            headerSView?.addSubview(leftImageView!)
+            let ltapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            centerImageView?.addGestureRecognizer(ltapGes)
+            
+            rightImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH*2,0,Constants.HDSCREENWITH,HeadViewHeight))
+            rightImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            rightImageView?.userInteractionEnabled = true
+            headerSView?.addSubview(rightImageView!)
+            let rtapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            centerImageView?.addGestureRecognizer(rtapGes)
+            
             
             /**
             *  分页栏
@@ -274,11 +272,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
             
-            /**
-             *  默认初始给第一个的名称
-             */
-            let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![0])!
-            headerTitle.text = recopeMddel.title
+            index = 0;
+            setInfoByCurrentImageIndex(index!)
             
         }
         
@@ -682,6 +677,47 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    // MARK: - 图片循环滚动
+    func loadImage(){
+        
+        
+        if headerSView!.contentOffset.x>Constants.HDSCREENWITH {
+            
+            //向左滑动
+            index = (index!+1+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!
+            
+        }else if headerSView!.contentOffset.x<Constants.HDSCREENWITH{
+            
+            //向右滑动
+            index = (index!-1+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!
+        }
+        
+        setInfoByCurrentImageIndex(index!)
+        
+        
+    }
+    
+    func setInfoByCurrentImageIndex(index:Int){
+        
+        let cmodel = self.hdHM01Response?.result?.recipeList?[index]
+        
+        /// 文本信息
+        pageControl?.currentPage = index
+        /**
+         *  更新菜谱名称
+         */
+        headerTitle.text = cmodel!.title
+        
+        centerImageView!.sd_setImageWithURL(NSURL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let lmodel = self.hdHM01Response?.result?.recipeList![((index-1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
+        leftImageView!.sd_setImageWithURL(NSURL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let rmodel = self.hdHM01Response?.result?.recipeList![((index+1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
+        rightImageView!.sd_setImageWithURL(NSURL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        
+        
+        
+    }
+    
     // MARK: - 提示动画显示和隐藏
     func showHud(){
     
@@ -772,9 +808,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      */
     func headGesAction(ges:UITapGestureRecognizer){
     
-        
-        let view = ges.view as! UIImageView
-        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![view.tag-200])!
+        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![index!])!
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = recopeMddel.rid
         hdHM08VC.name = recopeMddel.title
@@ -877,30 +911,19 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     func pageAction(sender:AnyObject){
         
-        headerSView.contentOffset = CGPointMake(Constants.HDSCREENWITH*CGFloat((pageControl?.currentPage)!),0)
-        /**
-         *  更新菜谱名称
-         */
-        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![(pageControl?.currentPage)!])!
-        headerTitle.text = recopeMddel.title
+        
+        headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+        index = pageControl?.currentPage
+        loadImage()
     }
     
     // MARK: - UIScrollView delegate
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
-        let index = NSInteger(scrollView.contentOffset.x/Constants.HDSCREENWITH)
+        loadImage()
+        headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
         
-        if index<0 || index>3 {
-        
-            return
-        }
-        
-        pageControl?.currentPage = index
-        /**
-         *  更新菜谱名称
-         */
-        let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![index])!
-        headerTitle.text = recopeMddel.title
+//        pageControl?.currentPage = index
     }
 
 }

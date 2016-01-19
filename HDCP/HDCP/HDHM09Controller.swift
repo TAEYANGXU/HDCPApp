@@ -17,6 +17,13 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
     var pageFlag:UILabel?
     var context:UILabel?
     
+    /**
+     *   UIImageView重用
+     */
+    var centerImageView:UIImageView?
+    var leftImageView:UIImageView?
+    var rightImageView:UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +32,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         setupUI()
     }
 
-    // MARK: - 创建UI视图 245 161 0
+    // MARK: - 创建UI视图
     
     func setupUI(){
         
@@ -68,11 +75,10 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             
             imageScrollView = UIScrollView()
             imageScrollView!.pagingEnabled = true
-            imageScrollView!.userInteractionEnabled = true;
-            imageScrollView!.delegate = self;
-            imageScrollView?.bounces = false
-            imageScrollView!.showsVerticalScrollIndicator = false;
-            imageScrollView!.showsHorizontalScrollIndicator = false;
+            imageScrollView!.userInteractionEnabled = true
+            imageScrollView!.delegate = self
+            imageScrollView!.showsVerticalScrollIndicator = false
+            imageScrollView!.showsHorizontalScrollIndicator = false
             self.view.addSubview(imageScrollView!)
             
             imageScrollView!.snp_makeConstraints(closure: { (make) -> Void in
@@ -85,26 +91,24 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
                 
             })
             
-            imageScrollView!.contentOffset = CGPointMake(Constants.HDSCREENWITH*CGFloat(index!),0)
+            imageScrollView?.contentSize = CGSizeMake(CGFloat(3)*Constants.HDSCREENWITH, 200)
+            imageScrollView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+
             
-            imageScrollView?.contentSize = CGSizeMake(CGFloat((steps?.count)!)*Constants.HDSCREENWITH, 200)
+            centerImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH,0,Constants.HDSCREENWITH,200))
+            centerImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            imageScrollView?.addSubview(centerImageView!)
+
             
-            for var i=0;i<steps?.count;i++ {
-            
-                let model = steps![i]
-                let imageView = UIImageView()
-                imageView.sd_setImageWithURL(NSURL(string: model.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-                imageScrollView?.addSubview(imageView)
-                
-                imageView.snp_makeConstraints(closure: { (make) -> Void in
-                    
-                    make.top.equalTo(imageScrollView!).offset(0)
-                    make.left.equalTo(imageScrollView!).offset(CGFloat(i)*Constants.HDSCREENWITH)
-                    make.width.equalTo(Constants.HDSCREENWITH)
-                    make.height.equalTo(200)
-                })
-                
-            }
+            leftImageView = UIImageView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,200))
+            leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            imageScrollView?.addSubview(leftImageView!)
+
+
+            rightImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH*2,0,Constants.HDSCREENWITH,200))
+            rightImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            imageScrollView?.addSubview(rightImageView!)
+
             
         }
 
@@ -118,12 +122,6 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             pageFlag = UILabel()
             pageFlag?.textColor = Constants.HDMainTextColor
             
-            let str = String(format: "%d/%d", index!+1,(steps?.count)!)
-            let str2:String =  str.componentsSeparatedByString("/")[0]
-            let attributed = NSMutableAttributedString(string: str)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(26), range: NSMakeRange(0, str2.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str2.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
-            pageFlag?.attributedText =  attributed
             pageFlag?.font = UIFont.systemFontOfSize(26)
             self.view.addSubview(pageFlag!)
             
@@ -139,12 +137,8 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         }
         
         if context == nil {
-        
-            let model = steps![index!]
-            let rect = CoreUtils.getTextRectSize(model.intro!, font: UIFont.systemFontOfSize(18), size: CGSizeMake(Constants.HDSCREENWITH-60, 999))
             
             context = UILabel()
-            context?.text = model.intro
             context?.numberOfLines = 0
             context?.textColor = Constants.HDMainTextColor
             context?.font = UIFont.systemFontOfSize(18)
@@ -153,13 +147,15 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             context?.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
-                make.height.equalTo(rect.size.height+10)
+                make.height.equalTo(0)
                 make.top.equalTo(imageScrollView!.snp_bottom).offset(20)
                 make.left.equalTo(self.view).offset(30)
                 
             })
 
         }
+        
+        setInfoByCurrentImageIndex(index!)
         
     }
     
@@ -171,26 +167,60 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         
     }
     
-    // MARK: - UIScrollView  Delegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView){
+    func loadImage(){
     
-        index = NSInteger(scrollView.contentOffset.x/Constants.HDSCREENWITH)
         
-        if index<0 || index>=steps?.count {
+        if imageScrollView!.contentOffset.x>Constants.HDSCREENWITH {
             
-            return
+            //向左滑动
+            index = (index!+1+(steps?.count)!)%(steps?.count)!
+            
+        }else if imageScrollView!.contentOffset.x<Constants.HDSCREENWITH{
+            
+             //向右滑动
+            index = (index!-1+(steps?.count)!)%(steps?.count)!
         }
-
         
-        let model = steps![index!]
-        context?.text = model.intro
+        setInfoByCurrentImageIndex(index!)
         
-        let str = String(format: "%d/%d", index!+1,(steps?.count)!)
+        
+    }
+    
+    func setInfoByCurrentImageIndex(index:Int){
+    
+        let cmodel = steps![index]
+        
+        /// 文本信息
+        let str = String(format: "%d/%d", index+1,(steps?.count)!)
         let str2:String =  str.componentsSeparatedByString("/")[0]
         let attributed = NSMutableAttributedString(string: str)
         attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(26), range: NSMakeRange(0, str2.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
         attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str2.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
         pageFlag?.attributedText =  attributed
+        
+        centerImageView!.sd_setImageWithURL(NSURL(string: cmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let lmodel = steps![((index-1)+(steps?.count)!)%(steps?.count)!]
+        leftImageView!.sd_setImageWithURL(NSURL(string: lmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let rmodel = steps![((index+1)+(steps?.count)!)%(steps?.count)!]
+        rightImageView!.sd_setImageWithURL(NSURL(string: rmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        
+        context?.text = cmodel.intro
+        /// 计算文本高度 重新赋值
+        let rect = CoreUtils.getTextRectSize(cmodel.intro!, font: UIFont.systemFontOfSize(18), size: CGSizeMake(Constants.HDSCREENWITH-60, 999))
+        context?.snp_updateConstraints(closure: { (make) -> Void in
+            make.height.equalTo(rect.size.height+10)
+        })
+        
+        
+    }
+    
+    // MARK: - UIScrollView  Delegate
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView){
+    
+        loadImage()
+
+        imageScrollView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+        
         
     }
 }

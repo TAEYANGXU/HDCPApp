@@ -116,8 +116,12 @@ class HDHM07Controller: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        
+        let model = dataArray[indexPath.row] as! HDHM07ListModel
+        let hdWebVC = HDWebController()
+        hdWebVC.name = model.title
+        hdWebVC.url = model.url
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdWebVC, animated: true)
     }
 
 

@@ -191,7 +191,12 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         
-        
+        let model = dataArray[indexPath.row] as! HDHM05ListModel
+        let hdHM08VC = HDHM08Controller()
+        hdHM08VC.rid = model.rid
+        hdHM08VC.name = model.title
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM08VC, animated: true)
     }
 
 }

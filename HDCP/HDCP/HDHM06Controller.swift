@@ -197,7 +197,12 @@ class HDHM06Controller: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        let model = dataArray[indexPath.row] as! HDHM06ListModel
+        let hdhm05VC = HDHM05Controller()
+        hdhm05VC.name = model.title
+        hdhm05VC.cid = model.id
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdhm05VC, animated: true)
         
     }
     

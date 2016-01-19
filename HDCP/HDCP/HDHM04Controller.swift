@@ -141,7 +141,13 @@ class HDHM04Controller: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        let model = dataArray[indexPath.row] as! HDHM04ListModel
+
+        let hdHM08VC = HDHM08Controller()
+        hdHM08VC.rid = model.recipeId
+        hdHM08VC.name = model.title
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM08VC, animated: true)
         
     }
 }

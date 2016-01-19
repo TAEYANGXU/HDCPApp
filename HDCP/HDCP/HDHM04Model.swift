@@ -47,7 +47,7 @@ class HDHM04ListModel: Mappable {
     var cover:String?
     var favoriteCount:Int?
     var intro:String?
-    var recipeId:String?
+    var recipeId:Int?
     
     var stuff:Array<HDHM04Stuff>?
     

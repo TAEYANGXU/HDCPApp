@@ -13,10 +13,10 @@ class HDHM06ListModel: Mappable {
     var id:Int?
     var title:String?
     var cover:String?
-    var userId:String?
+    var userId:Int?
     var userName:String?
     var avatar:String?
-    var recipeCount:String?
+    var recipeCount:Int?
     
     init(){}
     
@@ -26,7 +26,7 @@ class HDHM06ListModel: Mappable {
     
     func mapping(map: Map) {
         
-        id <- map["Rid"]
+        id <- map["Id"]
         title <- map["Title"]
         cover <- map["Cover"]
         userId <- map["UserId"]

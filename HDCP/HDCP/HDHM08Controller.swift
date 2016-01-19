@@ -205,7 +205,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             commentCount.font = UIFont.systemFontOfSize(12)
             infoView?.addSubview(commentCount)
             
-            commentCount.text = String(format: "浏览:%d", (hm08Response.result?.info?.commentCount)!)
+            commentCount.text = String(format: "评论:%d", (hm08Response.result?.info?.commentCount)!)
             
             commentCount.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -487,7 +487,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 })
                 
                 title.textColor = Constants.HDMainTextColor
-                title.text = String(format: "制作时间:%@", (hm08Response.result?.info?.readyTime)!)
+                title.text = String(format: "制作时间:%@   用餐人数:%@", (hm08Response.result?.info?.readyTime)!,(hm08Response.result?.info?.userCount)!)
             }else{
                 
                 

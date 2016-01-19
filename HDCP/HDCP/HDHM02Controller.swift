@@ -361,4 +361,18 @@ class HDHM02Controller: UITableViewController {
         
         return 50
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let model:HDHM02List = dataArray[indexPath.section]
+        let repice:HDHM02RecipeModel = model.recipe![indexPath.row]
+        
+        let hdHM08VC = HDHM08Controller()
+        hdHM08VC.rid = repice.recipeId
+        hdHM08VC.name = repice.title
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM08VC, animated: true)
+        
+        
+    }
 }

@@ -154,7 +154,7 @@ class CoreUtils: NSObject {
         hud.labelFont = UIFont.systemFontOfSize(15)
         
         hud.mode = MBProgressHUDMode.CustomView;
-        hud.customView = UIImageView(image: UIImage(named: "37x-warning"))
+        hud.customView = UIImageView(image: UIImage(named: "37x-success"))
         
         if title.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>0 {
             

@@ -15,3 +15,9 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'SnapKit', '~> 0.15.0'
+
+
+pod 'ShareSDK3'
+pod 'MOBFoundation'
+pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+pod 'ShareSDK3/ShareSDKPlatforms/QQ'

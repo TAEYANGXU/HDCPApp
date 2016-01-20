@@ -574,8 +574,6 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
      *  选中cell 进入烹饪步骤页面
      */
     func selectRowAction(ges:UITapGestureRecognizer){
-    
-        hideShareView()
         
         let touchView = ges.view
         let indexPath = NSIndexPath(forRow: (touchView?.tag)!, inSection: 1)

@@ -8,36 +8,6 @@
 
 import UIKit
 
-extension UIViewController{
-    
-    /**
-    *   显示Tabar
-    */
-    func showTabBar(){
-    
-        if (self.tabBarController != nil) {
-        
-            self.tabBarController?.tabBar.hidden = false
-            
-        }
-        
-    }
-    
-    /**
-     *   隐藏Tabar
-     */
-    func hideTabBar(){
-        
-        if (self.tabBarController != nil) {
-            
-            self.tabBarController?.tabBar.hidden = true
-            
-        }
-        
-    }
-    
-}
-
 class BaseViewController: UIViewController {
 
     override func viewDidLoad() {

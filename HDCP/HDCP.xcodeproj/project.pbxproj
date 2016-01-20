@@ -92,6 +92,7 @@
 		356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39B71C3A774A0056DF44 /* HDHM01Model.swift */; };
 		356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BA1C3A81580056DF44 /* MBProgressHUD.m */; };
 		356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */; };
+		358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FB91C4F260500A4EF3E /* HDExtension.swift */; };
 		35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */; };
 		35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */; };
 		35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703431C3F81570024A329 /* HDGG01Service.swift */; };
@@ -243,6 +244,7 @@
 		356F39B91C3A81580056DF44 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		356F39BA1C3A81580056DF44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreUtils.swift; sourceTree = "<group>"; };
+		358C1FB91C4F260500A4EF3E /* HDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDExtension.swift; sourceTree = "<group>"; };
 		35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01RowView.swift; sourceTree = "<group>"; };
 		35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifHeader.swift; sourceTree = "<group>"; };
 		35B703431C3F81570024A329 /* HDGG01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Service.swift; sourceTree = "<group>"; };
@@ -456,11 +458,10 @@
 		356F39341C3A23E90056DF44 /* HDCP */ = {
 			isa = PBXGroup;
 			children = (
-				356F398C1C3A68830056DF44 /* Library */,
+				356F398C1C3A68830056DF44 /* Vendors */,
 				356F39861C3A4B2E0056DF44 /* Model */,
 				356F39851C3A4B250056DF44 /* Service */,
-				356F39841C3A4B150056DF44 /* Extension */,
-				356F39811C3A4AA30056DF44 /* BaseClass */,
+				356F39841C3A4B150056DF44 /* General */,
 				356F397E1C3A43A30056DF44 /* Core */,
 				356F396D1C3A3EEA0056DF44 /* Controllers */,
 				356F39351C3A23E90056DF44 /* AppDelegate.swift */,
@@ -512,7 +513,7 @@
 		356F396E1C3A3F100056DF44 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				35F8CF481C3BCDC7003B1364 /* View */,
+				35F8CF481C3BCDC7003B1364 /* CustomUI */,
 				35F8CF461C3B9B2F003B1364 /* Home.xcassets */,
 				356F397B1C3A403D0056DF44 /* HDHM01Controller.swift */,
 				3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */,
@@ -558,7 +559,7 @@
 		356F39721C3A3F7F0056DF44 /* GG */ = {
 			isa = PBXGroup;
 			children = (
-				35B7034A1C3F95C70024A329 /* View */,
+				35B7034A1C3F95C70024A329 /* CustomUI */,
 				35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */,
 				356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */,
 			);
@@ -570,27 +571,20 @@
 			children = (
 				35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */,
 				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
-				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
-				356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		356F39811C3A4AA30056DF44 /* BaseClass */ = {
+		356F39841C3A4B150056DF44 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				356F39821C3A4AB80056DF44 /* HDBaseViewController.swift */,
+				358C1FB81C4F259300A4EF3E /* Marco */,
+				358C1FB71C4F256500A4EF3E /* Helper */,
+				358C1FB61C4F255400A4EF3E /* CustomUI */,
+				358C1FB51C4F254A00A4EF3E /* Extension */,
+				358C1FB41C4F252B00A4EF3E /* Base */,
 			);
-			name = BaseClass;
-			sourceTree = "<group>";
-		};
-		356F39841C3A4B150056DF44 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
-				35321D201C46499F00023637 /* HDRefreshGifFooter.swift */,
-			);
-			name = Extension;
+			name = General;
 			sourceTree = "<group>";
 		};
 		356F39851C3A4B250056DF44 /* Service */ = {
@@ -613,7 +607,7 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		356F398C1C3A68830056DF44 /* Library */ = {
+		356F398C1C3A68830056DF44 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
 				3502FF401C450E4B0083F303 /* MBProgressHUD */,
@@ -621,7 +615,7 @@
 				356F39951C3A76FD0056DF44 /* ObjectMapper */,
 				356F398D1C3A68DB0056DF44 /* SwiftyJSON */,
 			);
-			name = Library;
+			name = Vendors;
 			sourceTree = "<group>";
 		};
 		356F398D1C3A68DB0056DF44 /* SwiftyJSON */ = {
@@ -672,6 +666,47 @@
 			path = Transforms;
 			sourceTree = "<group>";
 		};
+		358C1FB41C4F252B00A4EF3E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				356F39821C3A4AB80056DF44 /* HDBaseViewController.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		358C1FB51C4F254A00A4EF3E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				358C1FB91C4F260500A4EF3E /* HDExtension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		358C1FB61C4F255400A4EF3E /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
+				35321D201C46499F00023637 /* HDRefreshGifFooter.swift */,
+			);
+			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		358C1FB71C4F256500A4EF3E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		358C1FB81C4F259300A4EF3E /* Marco */ = {
+			isa = PBXGroup;
+			children = (
+				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
+			);
+			name = Marco;
+			sourceTree = "<group>";
+		};
 		35B703411C3F81300024A329 /* HM */ = {
 			isa = PBXGroup;
 			children = (
@@ -718,16 +753,16 @@
 			name = GG;
 			sourceTree = "<group>";
 		};
-		35B7034A1C3F95C70024A329 /* View */ = {
+		35B7034A1C3F95C70024A329 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
 				35B7034B1C3F95E20024A329 /* HDGG01Button.swift */,
 				35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */,
 			);
-			name = View;
+			name = CustomUI;
 			sourceTree = "<group>";
 		};
-		35F8CF481C3BCDC7003B1364 /* View */ = {
+		35F8CF481C3BCDC7003B1364 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
 				35F8CF491C3BCDF4003B1364 /* HDHM01Button.swift */,
@@ -735,7 +770,7 @@
 				3566C8F01C47533B00573D97 /* HDHM04Cell.swift */,
 				1B6B08341C4B564E004B2CE2 /* HDHM07Cell.swift */,
 			);
-			name = View;
+			name = CustomUI;
 			sourceTree = "<group>";
 		};
 		A9B4BC402DE6875F2C276BD1 /* Pods */ = {
@@ -974,6 +1009,7 @@
 				3566C9011C479E8B00573D97 /* HDCG02Model.swift in Sources */,
 				356F39B01C3A76FE0056DF44 /* DateFormatterTransform.swift in Sources */,
 				1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */,
+				358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */,
 				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,

@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          *  判断欢迎界面是否已经执行
          */
         let userDefault = NSUserDefaults.standardUserDefaults()
-        if String(userDefault.stringForKey(Constants.HDShowWelcome)!) == Constants.HDShowWelcome {
+        if (userDefault.stringForKey(Constants.HDShowWelcome) != nil) {
             
             UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
             self.window?.rootViewController = MainViewController()

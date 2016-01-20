@@ -112,7 +112,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
             }) { (error) -> Void in
                 
                 self.collectionView!.mj_footer.endRefreshing()
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

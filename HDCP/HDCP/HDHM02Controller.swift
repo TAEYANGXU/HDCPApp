@@ -107,7 +107,7 @@ class HDHM02Controller: UITableViewController {
             }) { (error) -> Void in
                 
                 self.tableView?.mj_header.endRefreshing()
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
                 
         }
         

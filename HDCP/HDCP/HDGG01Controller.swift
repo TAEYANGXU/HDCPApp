@@ -210,7 +210,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             }) { (error) -> Void in
                 
                 self.tableView?.mj_header.endRefreshing()
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
                 
         }
 

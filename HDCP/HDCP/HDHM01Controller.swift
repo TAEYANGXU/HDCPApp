@@ -755,9 +755,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 /**
                 *  结束刷新
                 */
-                self.baseView.mj_header.endRefreshing()
+                if  (self.baseView != nil) {
                 
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                    self.baseView.mj_header.endRefreshing()
+                    
+                }
+                
+                
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
 
         

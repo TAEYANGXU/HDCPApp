@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUpBarStyle()
         
+        HDShareSDKManager.initializeShareSDK()
+        
         /**
          *  判断欢迎界面是否已经执行
          */

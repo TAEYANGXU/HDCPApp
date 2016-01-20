@@ -90,7 +90,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
             
             }) { (error) -> Void in
                 
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
                 
         }
         

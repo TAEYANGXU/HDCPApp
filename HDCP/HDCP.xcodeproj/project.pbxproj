@@ -93,6 +93,14 @@
 		356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BA1C3A81580056DF44 /* MBProgressHUD.m */; };
 		356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */; };
 		358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FB91C4F260500A4EF3E /* HDExtension.swift */; };
+		358C1FBC1C4F56FE00A4EF3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBB1C4F56FE00A4EF3E /* libz.tbd */; };
+		358C1FBE1C4F571500A4EF3E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */; };
+		358C1FC01C4F571D00A4EF3E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBF1C4F571D00A4EF3E /* JavaScriptCore.framework */; };
+		358C1FC21C4F572A00A4EF3E /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FC11C4F572A00A4EF3E /* libicucore.tbd */; };
+		358C1FC41C4F573D00A4EF3E /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FC31C4F573D00A4EF3E /* libsqlite3.tbd */; };
+		358C1FC61C4F58EC00A4EF3E /* HDShareSDKManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FC51C4F58EB00A4EF3E /* HDShareSDKManager.swift */; };
+		358C1FC81C4F69EB00A4EF3E /* HDShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FC71C4F69EB00A4EF3E /* HDShareView.swift */; };
+		358C1FCA1C4F7E0A00A4EF3E /* Common.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 358C1FC91C4F7E0A00A4EF3E /* Common.xcassets */; };
 		35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */; };
 		35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */; };
 		35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703431C3F81570024A329 /* HDGG01Service.swift */; };
@@ -245,6 +253,14 @@
 		356F39BA1C3A81580056DF44 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreUtils.swift; sourceTree = "<group>"; };
 		358C1FB91C4F260500A4EF3E /* HDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDExtension.swift; sourceTree = "<group>"; };
+		358C1FBB1C4F56FE00A4EF3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		358C1FBF1C4F571D00A4EF3E /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		358C1FC11C4F572A00A4EF3E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		358C1FC31C4F573D00A4EF3E /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		358C1FC51C4F58EB00A4EF3E /* HDShareSDKManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDShareSDKManager.swift; sourceTree = "<group>"; };
+		358C1FC71C4F69EB00A4EF3E /* HDShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDShareView.swift; sourceTree = "<group>"; };
+		358C1FC91C4F7E0A00A4EF3E /* Common.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Common.xcassets; sourceTree = "<group>"; };
 		35A1384F1C3CF75E0050F282 /* HDHM01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01RowView.swift; sourceTree = "<group>"; };
 		35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifHeader.swift; sourceTree = "<group>"; };
 		35B703431C3F81570024A329 /* HDGG01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Service.swift; sourceTree = "<group>"; };
@@ -270,6 +286,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				358C1FC41C4F573D00A4EF3E /* libsqlite3.tbd in Frameworks */,
+				358C1FC21C4F572A00A4EF3E /* libicucore.tbd in Frameworks */,
+				358C1FC01C4F571D00A4EF3E /* JavaScriptCore.framework in Frameworks */,
+				358C1FBE1C4F571500A4EF3E /* libstdc++.tbd in Frameworks */,
+				358C1FBC1C4F56FE00A4EF3E /* libz.tbd in Frameworks */,
 				CAF7CED5983EC115E4776E4E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +315,11 @@
 		0FE20ED4C6ED96A5FFF64458 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				358C1FC31C4F573D00A4EF3E /* libsqlite3.tbd */,
+				358C1FC11C4F572A00A4EF3E /* libicucore.tbd */,
+				358C1FBF1C4F571D00A4EF3E /* JavaScriptCore.framework */,
+				358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */,
+				358C1FBB1C4F56FE00A4EF3E /* libz.tbd */,
 				F8BF8DE8F3C161749DDFB9FB /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -405,6 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				35321D241C46512E00023637 /* HDWebController.swift */,
+				358C1FC91C4F7E0A00A4EF3E /* Common.xcassets */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -571,6 +598,7 @@
 			children = (
 				35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */,
 				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
+				358C1FC51C4F58EB00A4EF3E /* HDShareSDKManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -687,6 +715,7 @@
 			children = (
 				35A138541C3F7A700050F282 /* HDRefreshGifHeader.swift */,
 				35321D201C46499F00023637 /* HDRefreshGifFooter.swift */,
+				358C1FC71C4F69EB00A4EF3E /* HDShareView.swift */,
 			);
 			name = CustomUI;
 			sourceTree = "<group>";
@@ -897,6 +926,7 @@
 				35F8CF411C3B9B0B003B1364 /* Center.xcassets in Resources */,
 				35F8CF3F1C3B9AFA003B1364 /* GG.xcassets in Resources */,
 				356F39401C3A23EA0056DF44 /* Assets.xcassets in Resources */,
+				358C1FCA1C4F7E0A00A4EF3E /* Common.xcassets in Resources */,
 				356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */,
 				1B0FD1011C3D5749009E85CD /* MJRefresh.bundle in Resources */,
 				35F8CF471C3B9B2F003B1364 /* Home.xcassets in Resources */,
@@ -983,10 +1013,12 @@
 				1B0FD1031C3D5749009E85CD /* UIScrollView+MJExtension.m in Sources */,
 				3566C8ED1C47499A00573D97 /* HDHM04Model.swift in Sources */,
 				1B0FD0FA1C3D5749009E85CD /* MJRefreshAutoStateFooter.m in Sources */,
+				358C1FC61C4F58EC00A4EF3E /* HDShareSDKManager.swift in Sources */,
 				35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */,
 				356F39AA1C3A76FE0056DF44 /* Mappable.swift in Sources */,
 				356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */,
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,
+				358C1FC81C4F69EB00A4EF3E /* HDShareView.swift in Sources */,
 				356F39AF1C3A76FE0056DF44 /* CustomDateFormatTransform.swift in Sources */,
 				35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */,
 				1B0FD0F81C3D5749009E85CD /* MJRefreshAutoGifFooter.m in Sources */,

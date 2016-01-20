@@ -20,6 +20,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     var introView:UILabel?
     var tableView:UITableView?
     var tipsView:UIView?
+    var shareView:UIView!
+    var shareSubView:HDShareView!
     
     override func viewDidLoad() {
         
@@ -32,7 +34,16 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        
+        let button = UIButton(type: UIButtonType.Custom) as UIButton
+        button.frame = CGRectMake(0, 0, 40, 30)
+        button.setTitle("分享", forState: UIControlState.Normal)
+        button.addTarget(self, action: "share", forControlEvents: UIControlEvents.TouchUpInside)
+        button.contentMode = UIViewContentMode.ScaleToFill
+        let rightItem = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = rightItem
     }
+    
     
     override func viewDidLayoutSubviews() {
         
@@ -52,6 +63,42 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         createIntroView()
         createTableView()
         createTipsView()
+        createShareView()
+    }
+    
+    /**
+     *  分享视图
+     */
+    func createShareView(){
+        
+        
+        if shareView == nil {
+            
+            shareView = UIView()
+            shareView.hidden = true
+            shareView.backgroundColor = Constants.HDColor(0, g: 0, b: 0, a: 0.2)
+            shareView.alpha = 0.0
+            self.view.addSubview(shareView!)
+            let tapGes = UITapGestureRecognizer(target: self, action: "hideShareView")
+            shareView.addGestureRecognizer(tapGes)
+            
+            shareView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(self.view).offset(0)
+                make.left.equalTo(self.view).offset(0)
+                make.bottom.equalTo(self.view).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                
+                
+            })
+            
+            shareSubView = HDShareView(frame: CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230))
+            shareSubView.completeClosuse(shareAction)
+            shareView.addSubview(shareSubView)
+            
+            
+        }
+        
     }
     
     /**
@@ -403,6 +450,132 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+    func hideShareView(){
+    
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230)
+            self.shareView.alpha = 0.0
+            }, completion: { (ret) -> Void in
+                self.shareView?.hidden = true
+        })
+
+    }
+    
+    func share(){
+        
+        if (shareView.hidden) {
+            
+            shareView?.hidden = false
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.shareView.alpha = 1
+                self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64-230,Constants.HDSCREENWITH,230)
+            })
+            
+        }else{
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230)
+                self.shareView.alpha = 0.0
+                }, completion: { (ret) -> Void in
+                    self.shareView?.hidden = true
+            })
+            
+        }
+        
+    }
+    
+    func shareAction(tag:Int){
+    
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230)
+            self.shareView.alpha = 0.0
+            }, completion: { (ret) -> Void in
+                self.shareView?.hidden = true
+        })
+        
+        //http://m.haodou.com/recipe/332644?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0
+        let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", rid!)
+        
+        switch tag {
+        
+        case 0:
+            /**
+            *  微信好友
+            */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                print("成功")
+                }, shareFail: { () -> Void in
+                    print("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    print("取消")
+            })
+
+            break
+        case 1:
+            /**
+            *  微信朋友圈
+            */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                print("成功")
+                }, shareFail: { () -> Void in
+                    print("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    print("取消")
+            })
+
+
+            break
+        case 2:
+            /**
+            *  QQ
+            */
+            
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                print("成功")
+                }, shareFail: { () -> Void in
+                    print("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    print("取消")
+            })
+
+
+            break
+        case 3:
+            /**
+            *  QQ空间
+            */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                print("成功")
+                }, shareFail: { () -> Void in
+                    print("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    print("取消")
+            })
+
+            break
+        case 4:
+            
+            break
+        default:
+            ""
+            
+        }
+        print("tag = \(tag)")
+        
+    }
+    
     /**
      *  选中cell 进入烹饪步骤页面
      */
@@ -438,7 +611,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             }) { (error) -> Void in
                 
                 
-                CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

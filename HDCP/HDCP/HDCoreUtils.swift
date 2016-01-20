@@ -113,15 +113,58 @@ class CoreUtils: NSObject {
      *  @ parameter view:  hud的父视图
      *  @ parameter title: 显示的文本内容
      */
-    class func showProgressHUD(view:UIView,title:String){
+    class func  showWarningHUD(view:UIView,title:String){
     
         hidProgressHUD(view)
         
         let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.color = HDfromHexValue(0x000000, alpha: 0.6)
+        hud.margin = 10
+        hud.labelColor = Constants.HDColor(255, g: 255, b: 255, a: 1.0)
+        hud.labelFont = UIFont.systemFontOfSize(15)
         
-        hud.labelText = title;
+        hud.mode = MBProgressHUDMode.CustomView;
+        hud.customView = UIImageView(image: UIImage(named: "37x-warning"))
         
+        if title.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>0 {
+        
+            hud.labelText = title;
+            
+        }
+        
+        hud.removeFromSuperViewOnHide = true;
         hud.hide(true, afterDelay: 1.5)
+        
+    }
+    
+    /**
+     显示文本
+     
+     *  @ parameter view:  hud的父视图
+     *  @ parameter title: 显示的文本内容
+     */
+    class func  showSuccessHUD(view:UIView,title:String){
+        
+        hidProgressHUD(view)
+        
+        let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        hud.color = HDfromHexValue(0x000000, alpha: 0.6)
+        hud.margin = 10
+        hud.labelColor = Constants.HDColor(255, g: 255, b: 255, a: 1.0)
+        hud.labelFont = UIFont.systemFontOfSize(15)
+        
+        hud.mode = MBProgressHUDMode.CustomView;
+        hud.customView = UIImageView(image: UIImage(named: "37x-warning"))
+        
+        if title.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)>0 {
+            
+            hud.labelText = title;
+            
+        }
+        
+        hud.removeFromSuperViewOnHide = true;
+        hud.hide(true, afterDelay: 1.5)
+        
     }
     
     

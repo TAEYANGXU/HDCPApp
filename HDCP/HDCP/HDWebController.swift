@@ -87,6 +87,6 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         
         
-        CoreUtils.showProgressHUD(self.view, title: Constants.HD_NO_NET_MSG)
+        CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
     }
 }

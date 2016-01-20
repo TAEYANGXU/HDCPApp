@@ -17,7 +17,7 @@ class HDGG01Button: UIButton {
     
     override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
         
-        return CGRectMake(contentRect.size.width*0.2, contentRect.size.height*0.1,contentRect.size.width*0.5,contentRect.size.height*0.5);
+        return CGRectMake(contentRect.size.width*0.25, contentRect.size.height*0.1,contentRect.size.width*0.5,contentRect.size.height*0.5);
     }
     
 }

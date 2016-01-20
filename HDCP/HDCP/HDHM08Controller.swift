@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let shareViewHeight = CGFloat(255)
+
 class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     var rid:Int?
@@ -92,7 +94,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
-            shareSubView = HDShareView(frame: CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230))
+            shareSubView = HDShareView(frame: CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,shareViewHeight))
             shareSubView.completeClosuse(shareAction)
             shareView.addSubview(shareSubView)
             
@@ -442,31 +444,32 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         CoreUtils.hidProgressHUD(self.view)
     }
     
+    // MARK: - 分享视图显示和隐藏
+    func hideShareView(){
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,shareViewHeight)
+            self.shareView.alpha = 0.0
+            }, completion: { (ret) -> Void in
+                self.shareView?.hidden = true
+        })
+        
+    }
+    func showShareView(){
+        
+        shareView?.hidden = false
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.shareView.alpha = 1
+            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
+        })
+    }
+    
     // MARK: - events
     
     func backAction(){
         
         self.navigationController?.popViewControllerAnimated(true)
         
-    }
-    
-    func hideShareView(){
-    
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,230)
-            self.shareView.alpha = 0.0
-            }, completion: { (ret) -> Void in
-                self.shareView?.hidden = true
-        })
-
-    }
-    func showShareView(){
-    
-        shareView?.hidden = false
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.shareView.alpha = 1
-            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64-230,Constants.HDSCREENWITH,230)
-        })
     }
     
     func share(){

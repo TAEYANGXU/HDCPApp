@@ -51,7 +51,7 @@ class HDShareView: UIView {
                 btn.snp_makeConstraints(closure: { (make) -> Void in
                     
                     
-                    make.top.equalTo(self).offset(HDShareButtonHeight+20+20+10)
+                    make.top.equalTo(self).offset(HDShareButtonHeight+20+20+15)
                     make.width.equalTo(HDShareButtonHeight)
                     make.height.equalTo(HDShareButtonHeight+20)
                     make.left.equalTo(space)
@@ -118,6 +118,18 @@ class HDShareView: UIView {
             }
         }
         
+        let line = UILabel()
+        line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1.0)
+        self.addSubview(line)
+        line.snp_makeConstraints { (make) -> Void in
+            
+            make.left.equalTo(self).offset(0)
+            make.bottom.equalTo(self.snp_bottom).offset(-44)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.height.equalTo(1)
+        }
+        
+        
         let cancelBtn = UIButton()
         cancelBtn.backgroundColor = UIColor.whiteColor()
         cancelBtn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
@@ -132,7 +144,7 @@ class HDShareView: UIView {
             make.left.equalTo(self).offset(0)
             make.bottom.equalTo(self.snp_bottom).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
-            make.height.equalTo(40)
+            make.height.equalTo(44)
             
         }
 
@@ -143,7 +155,7 @@ class HDShareView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func completeClosuse(closuse:(tag:Int) -> Void){
+    func completeClosuse(closuse:CompleteClosuse){
      
         shareClosuse = closuse
         

@@ -9,6 +9,7 @@
     SnapKit ：Swift版的Masonry,自动布局
     ObjectMapper ：对象映射，Json转Model(Swift)
     ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享
+    CoreData ：所有Tab主页做了本地存储
 
 目录结构分析
 

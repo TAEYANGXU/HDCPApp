@@ -32,6 +32,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     var baseView:UIScrollView!
     
     /**
+     
      *  数据请求结果集
      */
     var hdHM01Response:HDHM01Response?
@@ -56,13 +57,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     var tagListView:UIView!
     
     /**
-    *  菜谱专辑
-    */
+     *  菜谱专辑
+     */
     var collectListView:UIView!
     
     /**
-    *  厨房宝典
-    */
+     *  厨房宝典
+     */
     var wikiListView:UIView!
     
     
@@ -77,7 +78,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-    
+        
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
         
@@ -109,7 +110,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func setupUI(){
         
         if baseView == nil {
-        
+            
             baseView = UIScrollView()
             
             self.view.addSubview(baseView)
@@ -139,14 +140,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             })
         }
- 
+        
     }
     
     /**
      *  创建头部滚动视图
      */
     func createHeaderView(){
-    
+        
         
         
         if self.hdHM01Response?.result?.recipeList?.count > 0 {
@@ -156,7 +157,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             */
             
             if headView == nil {
-            
+                
                 headView = UIView()
                 baseView.addSubview(headView)
                 
@@ -174,7 +175,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             
             if headerSView == nil {
-            
+                
                 headerSView = UIScrollView()
                 headerSView.pagingEnabled = true
                 headerSView.userInteractionEnabled = true;
@@ -205,7 +206,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             headerSView?.addSubview(centerImageView!)
             let ctapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
             centerImageView?.addGestureRecognizer(ctapGes)
-
+            
             
             leftImageView = UIImageView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,HeadViewHeight))
             leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
@@ -227,7 +228,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             */
             
             if pageControl == nil {
-            
+                
                 pageControl = UIPageControl()
                 pageControl?.addTarget(self, action: "pageAction:", forControlEvents: UIControlEvents.TouchUpInside)
                 pageControl?.numberOfPages = 3;
@@ -253,7 +254,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             */
             
             if headerTitle == nil {
-            
+                
                 headerTitle = UILabel()
                 headerTitle.font = UIFont.systemFontOfSize(18)
                 headerTitle.textColor = Constants.HDMainColor
@@ -267,7 +268,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     make.height.equalTo(40)
                     
                 })
-
+                
                 
             }
             
@@ -286,7 +287,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         
         if menuView == nil {
-        
+            
             menuView = UIView()
             menuView.backgroundColor = UIColor.whiteColor()
             baseView.addSubview(menuView)
@@ -304,14 +305,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         
         for  var i=0;i<resourceArray.count;i++ {
-        
+            
             
             var btn:HDHM01Button?
             
             btn = menuView.viewWithTag(i+300) as? HDHM01Button
             
             if btn == nil {
-            
+                
                 btn = HDHM01Button()
                 btn!.tag = i+300
                 btn!.setImage(UIImage(named: resourceArray[i]["image"]!), forState: UIControlState.Normal)
@@ -334,7 +335,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
         }
-
+        
     }
     
     
@@ -342,9 +343,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      *  按钮
      */
     func createTagListView(){
-    
-        if tagListView == nil {
         
+        if tagListView == nil {
+            
             tagListView = UIView()
             tagListView.backgroundColor = UIColor.whiteColor()
             baseView.addSubview(tagListView)
@@ -361,14 +362,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         }
         
         /**
-        *  几行4列
-        */
+         *  几行4列
+         */
         
         var index = 0
         for var i=0;i<(self.hdHM01Response?.result?.tagList?.count)!/4;i++ {
-        
-            for var j=0;j<4;j++ {
             
+            for var j=0;j<4;j++ {
+                
                 let model:TagListModel = (self.hdHM01Response?.result?.tagList![index])!
                 
                 var btn:UIButton?
@@ -376,7 +377,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 btn = tagListView.viewWithTag(index) as? UIButton
                 
                 if btn == nil {
-                
+                    
                     btn = UIButton()
                     btn!.backgroundColor = UIColor.whiteColor()
                     btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
@@ -396,7 +397,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                         make.top.equalTo(i*TagHeight)
                         
                     })
-
+                    
                 }
                 
                 index++;
@@ -410,10 +411,10 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      *  菜谱专辑
      */
     func createCollectListView(){
-    
+        
         
         if  collectListView == nil {
-        
+            
             collectListView = UIView()
             collectListView.backgroundColor = UIColor.whiteColor()
             baseView.addSubview(collectListView)
@@ -501,18 +502,18 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             })
             
-
+            
         }
         
         for var i=0;i<self.hdHM01Response?.result?.collectList?.count;i++ {
-        
+            
             let model = self.hdHM01Response?.result?.collectList?[i]
             
             var rowView:HDHM01RowView?
             rowView = collectListView.viewWithTag(i) as? HDHM01RowView
             
             if  rowView == nil {
-            
+                
                 rowView = HDHM01RowView()
                 rowView!.tag = i;
                 collectListView.addSubview(rowView!)
@@ -531,7 +532,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     make.width.equalTo(Constants.HDSCREENWITH-36)
                     make.height.equalTo(100)
                 }
-
+                
                 
             }
             
@@ -545,9 +546,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      *  厨房宝典
      */
     func createWikiListView(){
-    
-        if wikiListView == nil {
         
+        if wikiListView == nil {
+            
             wikiListView = UIView()
             wikiListView.backgroundColor = UIColor.whiteColor()
             baseView.addSubview(wikiListView)
@@ -634,7 +635,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 make.height.equalTo(40)
                 
             })
-
+            
         }
         
         
@@ -704,8 +705,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         /// 文本信息
         pageControl?.currentPage = index
         /**
-         *  更新菜谱名称
-         */
+        *  更新菜谱名称
+        */
         headerTitle.text = cmodel!.title
         
         centerImageView!.sd_setImageWithURL(NSURL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
@@ -720,20 +721,20 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     // MARK: - 提示动画显示和隐藏
     func showHud(){
-    
+        
         CoreUtils.showProgressHUD(self.view)
         
     }
     
     func hidenHud(){
-    
+        
         CoreUtils.hidProgressHUD(self.view)
     }
     
     // MARK: - 数据加载
     
     func doGetRequestData(){
-
+        
         HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
             
             self.hidenHud()
@@ -756,7 +757,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 *  结束刷新
                 */
                 if  (self.baseView != nil) {
-                
+                    
                     self.baseView.mj_header.endRefreshing()
                     
                 }
@@ -764,11 +765,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
-
+        
         
     }
     
-    // MARK: - events 
+    // MARK: - events
     
     /**
     *   菜谱列表
@@ -788,13 +789,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         print("collect")
         
     }
-
+    
     
     /**
-    *   厨房宝典详情
-    */
+     *   厨房宝典详情
+     */
     func wikiGesAction(ges:UITapGestureRecognizer){
-    
+        
         let view = ges.view as! HDHM01RowView
         let model = self.hdHM01Response?.result?.wikiList?[view.tag]
         
@@ -812,7 +813,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      *   菜谱详情
      */
     func headGesAction(ges:UITapGestureRecognizer){
-    
+        
         let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![index!])!
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = recopeMddel.rid
@@ -824,7 +825,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     }
     
     func menuBtnOnclick(btn:UIButton){
-    
+        
         let tag:Int = btn.tag - 300
         switch tag {
             
@@ -876,32 +877,32 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func moreAction(btn:UIButton){
         
         switch(btn.tag){
-        
-            case 10000:
-                
-                let hdHM06VC = HDHM06Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdHM06VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-                print("全部菜谱")
-                break
-            case 20000:
-                
-                let hdHM07VC = HDHM07Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdHM07VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-                print("全部宝典")
-                break
-            default:
-                "default"
+            
+        case 10000:
+            
+            let hdHM06VC = HDHM06Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM06VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+            print("全部菜谱")
+            break
+        case 20000:
+            
+            let hdHM07VC = HDHM07Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM07VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+            print("全部宝典")
+            break
+        default:
+            "default"
         }
         
     }
     
     //分类
     func tagBtnOnclick(btn:UIButton){
-    
+        
         
         let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag])!
         let hdHM04VC = HDHM04Controller()
@@ -909,7 +910,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(hdHM04VC, animated: true)
         self.hidesBottomBarWhenPushed = false;
-
+        
         print("点击了 \(model.name)")
         
     }
@@ -928,9 +929,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         loadImage()
         headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
         
-//        pageControl?.currentPage = index
+        //        pageControl?.currentPage = index
     }
-
+    
 }
 
 

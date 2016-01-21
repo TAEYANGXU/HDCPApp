@@ -15,7 +15,7 @@
     Vendors : 第三方库(有些需要用Pods导入进来)
     Service : 网络请求及业务处理
     Model : 数据模型
-    Core : 常用方法和常量数据
+    Core : 核心管理类
     GG : 逛逛
     Center : 我的
     Category : 分类

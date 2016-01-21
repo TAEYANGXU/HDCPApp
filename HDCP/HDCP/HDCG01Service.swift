@@ -124,7 +124,11 @@ class HDCG01Service: HDRequestManager {
         
         let context = HDCoreDataManager.shareInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDCG01ResponseEntity")
+        let request = NSFetchRequest(entityName: "HDCG01ListEntity")
+        
+        //排序
+        let sort = NSSortDescriptor(key: "cate", ascending: false)
+        request.sortDescriptors = [sort]
         
         request.relationshipKeyPathsForPrefetching = ["HDCG01ResultEntity","HDCG01ListEntity","HDCG01TagEntity"]
         
@@ -135,10 +139,7 @@ class HDCG01Service: HDRequestManager {
             let list = try context.executeFetchRequest(request)
             if list.count>0 {
                 
-                let response = list[0] as! HDCG01ResponseEntity
-                
-                
-                for model in (response.result?.list)! {
+                for model in list {
                     
                     let tagModel = HDCG01ListModel()
                     tagModel.imgUrl = model.imgUrl
@@ -163,6 +164,10 @@ class HDCG01Service: HDRequestManager {
     
         let context = HDCoreDataManager.shareInstance.managedObjectContext
         let request = NSFetchRequest(entityName: "HDCG01TagEntity")
+        
+        //排序
+        let sort = NSSortDescriptor(key: "name", ascending: false)
+        request.sortDescriptors = [sort]
         
         let predicate = NSPredicate(format: "cate = %@", cate)
         request.predicate = predicate

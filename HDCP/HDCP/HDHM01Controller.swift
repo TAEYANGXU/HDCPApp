@@ -20,7 +20,7 @@ private let TagHeight:Int = 40
 */
 private let resourceArray = [["title":"排行榜","image":"HPHBIcon"],
     ["title":"营养餐桌","image":"HYYCZIcon"],
-    ["title":"热门菜谱","image":"HFBCPIcon"],
+    ["title":"热门分类","image":"HFBCPIcon"],
     ["title":"晒一晒","image":"HSYSIcon"]]
 
 class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
@@ -870,9 +870,16 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
         case 2:
             /**
-            *   发布菜谱
+            *  热门分类
             */
-            print("发布菜谱")
+            
+            let hdcg02VC = HDCG02Controller()
+            hdcg02VC.name = "热门分类"
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdcg02VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+            
+            print("热门分类")
             break
             
         case 3:

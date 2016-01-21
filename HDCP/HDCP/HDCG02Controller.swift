@@ -10,13 +10,15 @@ import UIKit
 
 class HDCG02Controller: UITableViewController {
 
-    var dataArray:Array<HDCG02TagModel>!
+    var dataArray:Array<HDCG01TagModel>!
     var name:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = name
+        
+        dataArray = HDCG01Service().getTagListByCate(name)
         
         setupUI()
         

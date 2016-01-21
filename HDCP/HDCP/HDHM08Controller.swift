@@ -39,6 +39,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         let button = UIButton(type: UIButtonType.Custom) as UIButton
         button.frame = CGRectMake(0, 0, 40, 30)
+        button.titleLabel?.font = UIFont.systemFontOfSize(15)
         button.setTitle("分享", forState: UIControlState.Normal)
         button.addTarget(self, action: "share", forControlEvents: UIControlEvents.TouchUpInside)
         button.contentMode = UIViewContentMode.ScaleToFill
@@ -48,10 +49,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     
     override func viewDidLayoutSubviews() {
-        
         super.viewDidLayoutSubviews()
-        
-        
     }
 
 
@@ -486,7 +484,9 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    
+    /**
+     *  菜谱分享
+     */
     func shareAction(tag:Int){
     
         hideShareView()
@@ -563,7 +563,9 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
 
             break
         case 4:
-            
+            /**
+            *   取消
+            */
             break
         default:
             ""
@@ -728,6 +730,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
+            /// 添加点击事件 由于scrollview滚动后会拦截cell默认的点击事件
             let tapGes = UITapGestureRecognizer(target: self, action: "selectRowAction:")
             cell.contentView.tag = indexPath.row
             cell.contentView.addGestureRecognizer(tapGes)

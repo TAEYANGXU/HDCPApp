@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import CoreData
 
 class HDHM01Service: HDRequestManager {
 
     /**
-     菜谱主页数据
-     
-     - parameter successBlock: 成功
-     - parameter failBlock:    失败
+     *  菜谱主页数据
+     *
+     * parameter successBlock: 成功
+     * parameter failBlock:    失败
      */
     func doGetRequest_HDHM01_URL(successBlock:((hdResponse:HDHM01Response)->Void),failBlock:((error:NSError)->Void)){
     
@@ -24,6 +25,12 @@ class HDHM01Service: HDRequestManager {
             if response.result.error == nil {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
+               
+                self.deleteEntity()
+                self.addEntity(hdHM01Response!)
+                self.getAllResponseEntity()
+                
+                
                 successBlock(hdResponse:hdHM01Response!)
                 
             }else{
@@ -32,6 +39,172 @@ class HDHM01Service: HDRequestManager {
             }
 
         }
+        
+    }
+    
+    /**
+     *  将数据存到本地
+     */
+    func addEntity(hdHM01Response:HDHM01Response){
+    
+        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        
+        
+        let result = NSEntityDescription.insertNewObjectForEntityForName("HDHM01ResultEntity", inManagedObjectContext: context) as? HDHM01ResultEntity
+        
+        /// 菜谱专辑
+        
+        for var i=0;i<hdHM01Response.result?.collectList?.count;i++ {
+            
+            let model = hdHM01Response.result?.collectList![i]
+            
+            let collectModel = NSEntityDescription.insertNewObjectForEntityForName("HM01CollectListEntity", inManagedObjectContext: context) as? HM01CollectListEntity
+            
+            collectModel!.cid = model!.cid
+            collectModel!.content = model!.content
+            collectModel!.cover = model!.cover
+            collectModel!.title = model!.title
+            collectModel!.userName = model!.userName
+            /**
+            *   设置关联
+            */
+            collectModel?.result = result
+        }
+        
+        /// 滚动栏
+        for var i=0;i<hdHM01Response.result?.recipeList?.count;i++ {
+            
+            let model = hdHM01Response.result?.recipeList?[i]
+            
+            let recipeModel = NSEntityDescription.insertNewObjectForEntityForName("HM01RecipeListEntity", inManagedObjectContext: context) as? HM01RecipeListEntity
+            recipeModel!.rid = model!.rid
+            recipeModel!.cover = model!.cover
+            recipeModel!.title = model!.title
+            recipeModel!.userName = model!.userName
+            /**
+            *   设置关联
+            */
+            recipeModel?.result = result
+        }
+        
+        /// 厨房宝典
+        for var i=0;i<hdHM01Response.result?.wikiList?.count;i++ {
+            
+            let model = hdHM01Response.result?.wikiList?[i]
+            
+            let wikiModel = NSEntityDescription.insertNewObjectForEntityForName("HM01WikiListEntity", inManagedObjectContext: context) as? HM01WikiListEntity
+
+            wikiModel!.cover = model!.cover
+            wikiModel!.title = model!.title
+            wikiModel!.userName = model!.userName
+            wikiModel?.url = model!.url
+            wikiModel?.content = model!.content
+            /**
+            *   设置关联
+            */
+            wikiModel?.result = result
+        }
+        
+        //分类
+        for var i=0;i<hdHM01Response.result?.tagList?.count;i++ {
+            
+            let model = hdHM01Response.result?.tagList?[i]
+            
+            let tagModel = NSEntityDescription.insertNewObjectForEntityForName("HM01TagListEntity", inManagedObjectContext: context) as? HM01TagListEntity
+            
+            tagModel!.id = model!.id
+            tagModel!.name = model!.name
+            /**
+            *   设置关联
+            */
+            tagModel?.result = result
+        }
+        
+        
+        let response = NSEntityDescription.insertNewObjectForEntityForName("HDHM01ResponseEntity", inManagedObjectContext: context) as? HDHM01ResponseEntity
+        response?.request_id = hdHM01Response.request_id
+        response?.result = result
+        
+        /**
+        *  保存
+        */
+        HDCoreDataManager.shareInstance.saveContext()
+    }
+    
+    /**
+     *  删除本地数据 因为设置了Cascade级联关系  当我们删除HDHM01ResponseEntity会把所有的数据删除
+     */
+    func deleteEntity(){
+    
+        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        
+        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        
+        do {
+            
+           let list =  try context.executeFetchRequest(request) as Array
+            
+            if list.count>0 {
+                
+                for model in list {
+                    
+                    context.deleteObject(model as! NSManagedObject)
+                    
+                }
+                
+                HDCoreDataManager.shareInstance.saveContext()
+                
+            }
+            
+            
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+      
+    }
+    
+    /**
+    *  查询本地数据
+    */
+    func getAllResponseEntity(){
+    
+        
+        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        
+        //一句SQL查出所有数据
+        request.relationshipKeyPathsForPrefetching = ["HDHM01ResultEntity","HM01TagListEntity","HM01WikiListEntity","HM01RecipeListEntity","HM01CollectListEntity"]
+        
+        do {
+            
+            let list =  try context.executeFetchRequest(request) as Array
+            
+            if list.count>0 {
+                
+                let response = list[0] as! HDHM01ResponseEntity
+                
+                print("request_id = \(response.request_id)")
+                
+                for model in response.result!.collectList! {
+                    
+                    print("title = \(model.title)")
+                    print("userName = \(model.userName)")
+                    print("content = \(model.content)")
+                    print("cover = \(model.cover)")
+                    print("cid = \(model.cid!!.intValue)")
+                    
+                    
+                }
+            }
+            
+        } catch {
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+        }
+
         
     }
     

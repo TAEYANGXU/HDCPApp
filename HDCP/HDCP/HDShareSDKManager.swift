@@ -10,6 +10,9 @@ import Foundation
 
 class HDShareSDKManager {
     
+    /**
+     *  ShareSDK 初始化
+     */
     class func initializeShareSDK(){
         
         /**
@@ -55,6 +58,24 @@ class HDShareSDKManager {
         
     }
     
+    /**
+     
+     我自己自定义了分享视图(HDShareView.swift)，没有使用自带的分享视图(PS:自带的分享视图真不咋地)。
+     
+     **/
+    
+    /**
+     * 自定义分享
+     *
+     * parameter title:        标题
+     * parameter context:      文本
+     * parameter image:        图片集合,传入参数可以为单张图片信息，也可以为一个NSArray，数组元素可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage。如: @"http://www.mob.com/images/logo_black.png" 或 @[@"http://www.mob.com/images/logo_black.png"]
+     * parameter type:         分享类型
+     * parameter url:          网页路径/应用路径
+     * parameter shareSuccess: 分享成功
+     * parameter shareFail:    分享失败
+     * parameter shareCancel:  取消分享
+     */
     
     class func doShareSDK(title:String,context:String,image:UIImage,type:SSDKPlatformType,url:String,shareSuccess:()->Void,shareFail:()->Void,shareCancel:()->Void){
         

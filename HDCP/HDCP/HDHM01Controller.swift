@@ -93,6 +93,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        hidenHud()
+    }
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()
@@ -101,7 +106,6 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             let height:Int = (self.hdHM01Response?.result?.tagList?.count)!/4*TagHeight
             baseView.contentSize = CGSizeMake(Constants.HDSCREENWITH, HeadViewHeight+Constants.HDSCREENWITH/4+5+CGFloat(height)+300+300+CGFloat(Constants.HDSpace*4))
         }
-        
         
     }
     

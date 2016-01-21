@@ -1,4 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="HDCG01ListEntity" representedClassName=".HDCG01ListEntity" syncable="YES">
+        <attribute name="cate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imgUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDCG01ResultEntity" inverseName="list" inverseEntity="HDCG01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDCG01ResponseEntity" representedClassName=".HDCG01ResponseEntity" syncable="YES">
+        <attribute name="request_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDCG01ResultEntity" inverseName="response" inverseEntity="HDCG01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDCG01ResultEntity" representedClassName=".HDCG01ResultEntity" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HDCG01ListEntity" inverseName="result" inverseEntity="HDCG01ListEntity" syncable="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDCG01ResponseEntity" inverseName="result" inverseEntity="HDCG01ResponseEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDCG01TagEntity" representedClassName=".HDCG01TagEntity" syncable="YES">
+        <attribute name="cate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="HDGG01ListEntity" representedClassName=".HDGG01ListEntity" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDGG01ResultEntity" inverseName="gg01List" inverseEntity="HDGG01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDGG01ResponseEntity" representedClassName=".HDGG01ResponseEntity" syncable="YES">
+        <attribute name="request_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDGG01ResultEntity" inverseName="response" inverseEntity="HDGG01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDGG01ResultEntity" representedClassName=".HDGG01ResultEntity" syncable="YES">
+        <relationship name="gg01List" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HDGG01ListEntity" inverseName="result" inverseEntity="HDGG01ListEntity" syncable="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDGG01ResponseEntity" inverseName="result" inverseEntity="HDGG01ResponseEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDHM01ResponseEntity" representedClassName=".HDHM01ResponseEntity" syncable="YES">
+        <attribute name="request_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDHM01ResultEntity" inverseName="response" inverseEntity="HDHM01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDHM01ResultEntity" representedClassName=".HDHM01ResultEntity" syncable="YES">
+        <relationship name="collectList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HM01CollectListEntity" inverseName="result" inverseEntity="HM01CollectListEntity" syncable="YES"/>
+        <relationship name="recipeList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HM01RecipeListEntity" inverseName="result" inverseEntity="HM01RecipeListEntity" syncable="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDHM01ResponseEntity" inverseName="result" inverseEntity="HDHM01ResponseEntity" syncable="YES"/>
+        <relationship name="tagList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HM01TagListEntity" inverseName="result" inverseEntity="HM01TagListEntity" syncable="YES"/>
+        <relationship name="wikiList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HM01WikiListEntity" inverseName="result" inverseEntity="HM01WikiListEntity" syncable="YES"/>
+    </entity>
+    <entity name="HM01CollectListEntity" representedClassName=".HM01CollectListEntity" syncable="YES">
+        <attribute name="cid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cover" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDHM01ResultEntity" inverseName="collectList" inverseEntity="HDHM01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HM01RecipeListEntity" representedClassName=".HM01RecipeListEntity" syncable="YES">
+        <attribute name="cover" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDHM01ResultEntity" inverseName="recipeList" inverseEntity="HDHM01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HM01TagListEntity" representedClassName=".HM01TagListEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDHM01ResultEntity" inverseName="tagList" inverseEntity="HDHM01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HM01WikiListEntity" representedClassName=".HM01WikiListEntity" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cover" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDHM01ResultEntity" inverseName="wikiList" inverseEntity="HDHM01ResultEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="HM01RecipeListEntity" positionX="90" positionY="126" width="128" height="58"/>
+        <element name="HM01TagListEntity" positionX="-495" positionY="108" width="128" height="30"/>
+        <element name="HM01WikiListEntity" positionX="-135" positionY="405" width="128" height="133"/>
+        <element name="HDHM01ResultEntity" positionX="-128" positionY="197" width="128" height="118"/>
+        <element name="HDHM01ResponseEntity" positionX="-495" positionY="279" width="128" height="73"/>
+        <element name="HM01CollectListEntity" positionX="-144" positionY="351" width="128" height="135"/>
+        <element name="HDGG01ListEntity" positionX="-297" positionY="252" width="128" height="120"/>
+        <element name="HDGG01ResultEntity" positionX="-288" positionY="261" width="128" height="75"/>
+        <element name="HDGG01ResponseEntity" positionX="-279" positionY="270" width="128" height="75"/>
+        <element name="HDCG01TagEntity" positionX="-270" positionY="279" width="128" height="90"/>
+        <element name="HDCG01ListEntity" positionX="-261" positionY="288" width="128" height="90"/>
+        <element name="HDCG01ResultEntity" positionX="-252" positionY="297" width="128" height="90"/>
+        <element name="HDCG01ResponseEntity" positionX="-243" positionY="306" width="128" height="75"/>
+    </elements>
 </model>

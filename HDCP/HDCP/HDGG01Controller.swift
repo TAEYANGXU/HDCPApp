@@ -32,6 +32,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        hidenHud()
+    }
+    
     override func viewDidLayoutSubviews() {
         
         super.viewDidLayoutSubviews()

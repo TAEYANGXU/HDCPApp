@@ -22,24 +22,32 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
 
  
     var searchController:UISearchController?
-    var dataArray:Array<HDCG02ListModel>!
+    var dataArray:Array<HDCG01ListModel>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataArray = Array<HDCG02ListModel>()
-        
-        doGetRequestData()
+        dataArray = Array<HDCG01ListModel>()
         
         setupUI()
+        
+        if HDCG01Service().isExistEntity() {
+            /**
+            *  读取缓存数据
+            */
+            dataArray = HDCG01Service().getAllTagListEntity()
+            
+        }else{
+        
+            doGetRequestData()
+        }
+        
         
     }
     
     override func viewDidDisappear(animated: Bool) {
-        
         super.viewDidDisappear(animated)
-        
-        
+        hidenHud()
     }
     
     // MARK: - 提示动画显示和隐藏
@@ -82,10 +90,10 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         
         showHud()
         
-        HDCG02Service().doGetRequest_HDCG02_URL({ (hdCG02Response) -> Void in
+        HDCG01Service().doGetRequest_HDCG02_URL({ (HDCG01Response) -> Void in
             
             self.hidenHud()
-            self.dataArray = hdCG02Response.result?.list!
+            self.dataArray = HDCG01Response.result?.list!
             self.tableView!.reloadData()
             
             }) { (error) -> Void in
@@ -198,7 +206,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         }
         
         
-        let model = dataArray[indexPath.row] as HDCG02ListModel
+        let model = dataArray[indexPath.row] as HDCG01ListModel
         icon?.sd_setImageWithURL(NSURL(string: model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text =   model.cate!
         
@@ -217,10 +225,9 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         /**
         *  分类列表
         */
-        let model = dataArray[indexPath.row] as HDCG02ListModel
+        let model = dataArray[indexPath.row] as HDCG01ListModel
         
         let hdcg02VC = HDCG02Controller()
-        hdcg02VC.dataArray = model.tags
         hdcg02VC.name = model.cate
         self.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(hdcg02VC, animated: true)

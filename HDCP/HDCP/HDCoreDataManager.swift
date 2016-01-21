@@ -9,7 +9,21 @@
 import Foundation
 import CoreData
 
-class CoreDataManager: NSObject {
+class HDCoreDataManager: NSObject {
+    
+    class var shareInstance: HDCoreDataManager {
+    
+        struct Singleton {
+            static var instance: HDCoreDataManager?
+            static var token: dispatch_once_t = 0
+        }
+        
+        dispatch_once(&Singleton.token) {
+            Singleton.instance = HDCoreDataManager()
+        }
+        
+        return Singleton.instance!
+    }
     
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.dentiyun.haodou.HDCP" in the application's documents Application Support directory.

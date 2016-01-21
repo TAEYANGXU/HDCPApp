@@ -29,7 +29,10 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         setupUI()
         
         if HDGG01Service().isExistEntity() {
-        
+            /**
+            *  读取本地数据
+            */
+            
             hdGG01Response =  HDGG01Service().getAllResponseEntity()
             self.count = hdGG01Response.array2D!.count
             

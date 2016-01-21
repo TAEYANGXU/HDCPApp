@@ -46,7 +46,7 @@ class HDGG01Service: HDRequestManager {
                 
                 hdggResponse?.array2D = array2D
                 
-                
+                //更新本地数据
                 self.deleteEntity()
                 self.addEntity(hdggResponse!)
                 
@@ -131,6 +131,7 @@ class HDGG01Service: HDRequestManager {
                 hdGG01Response.result = result
                 
                 
+                //数据合成
                 let array2D = NSMutableArray()
                 var array:NSMutableArray?
                 

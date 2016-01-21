@@ -82,9 +82,21 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
         
+        if HDHM01Service().isExistEntity() {
         
-        showHud()
-        doGetRequestData()
+            /**
+            *  读取本地数据
+            */
+            self.hdHM01Response = HDHM01Service().getAllResponseEntity()
+            setupUI()
+            doGetRequestData()
+            
+        }else{
+        
+            showHud()
+            doGetRequestData()
+            
+        }
         
     }
     

@@ -26,10 +26,9 @@ class HDHM01Service: HDRequestManager {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
                
+                //更新本地数据
                 self.deleteEntity()
                 self.addEntity(hdHM01Response!)
-                self.getAllResponseEntity()
-                
                 
                 successBlock(hdResponse:hdHM01Response!)
                 
@@ -168,7 +167,7 @@ class HDHM01Service: HDRequestManager {
     /**
     *  查询本地数据
     */
-    func getAllResponseEntity(){
+    func getAllResponseEntity() -> HDHM01Response{
     
         
         let context = HDCoreDataManager.shareInstance.managedObjectContext
@@ -177,6 +176,8 @@ class HDHM01Service: HDRequestManager {
         //一句SQL查出所有数据
         request.relationshipKeyPathsForPrefetching = ["HDHM01ResultEntity","HM01TagListEntity","HM01WikiListEntity","HM01RecipeListEntity","HM01CollectListEntity"]
         
+        let hmResponse = HDHM01Response()
+        
         do {
             
             let list =  try context.executeFetchRequest(request) as Array
@@ -184,19 +185,64 @@ class HDHM01Service: HDRequestManager {
             if list.count>0 {
                 
                 let response = list[0] as! HDHM01ResponseEntity
+                hmResponse.request_id = response.request_id
                 
-                print("request_id = \(response.request_id)")
+                let collectList = NSMutableArray()
                 
                 for model in response.result!.collectList! {
                     
-                    print("title = \(model.title)")
-                    print("userName = \(model.userName)")
-                    print("content = \(model.content)")
-                    print("cover = \(model.cover)")
-                    print("cid = \(model.cid!!.intValue)")
-                    
+                    let cModel = CollectListModel()
+                    cModel.title = model.title
+                    cModel.userName = model.userName
+                    cModel.content = model.content
+                    cModel.cover = model.cover
+                    cModel.cid = model.cid!!.longValue
+                    collectList.addObject(cModel)
                     
                 }
+                
+                let recipeList = NSMutableArray()
+                for model in response.result!.recipeList! {
+                    
+                    let rModel = RecipeListModel()
+                    rModel.title = model.title
+                    rModel.userName = model.userName
+                    rModel.cover = model.cover
+                    rModel.rid = model.rid!!.longValue
+                    recipeList.addObject(rModel)
+                    
+                }
+                
+                let wikiList = NSMutableArray()
+                for model in response.result!.wikiList! {
+                    
+                    let wModel = WikiListModel()
+                    wModel.title = model.title
+                    wModel.userName = model.userName
+                    wModel.cover = model.cover
+                    wModel.content = model.content
+                    wModel.url = model.url
+                    wikiList.addObject(wModel)
+                    
+                }
+                
+                let tagList = NSMutableArray()
+                for model in response.result!.tagList! {
+                    
+                    let tModel = TagListModel()
+                    tModel.id = model.id!!.longValue
+                    tModel.name = model.name
+                    tagList.addObject(tModel)
+                    
+                }
+                
+                let result = HDHM01Result()
+                result.collectList = NSArray(array: collectList) as? Array<CollectListModel>
+                result.recipeList = NSArray(array: recipeList) as? Array<RecipeListModel>
+                result.tagList = NSArray(array: tagList) as? Array<TagListModel>
+                result.wikiList = NSArray(array: wikiList) as? Array<WikiListModel>
+                
+                hmResponse.result = result
             }
             
         } catch {
@@ -204,8 +250,35 @@ class HDHM01Service: HDRequestManager {
             NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
             abort()
         }
-
         
+        return hmResponse
+    }
+    
+    
+    /**
+     *  本地缓存是否存在
+     */
+    func isExistEntity()->Bool {
+        
+        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        
+        var ret:Bool = false
+        
+        do{
+            let list = try context.executeFetchRequest(request)
+            if list.count>0 {
+                ret = true
+            }
+        }catch{
+            
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+            
+        }
+        
+        return ret
     }
     
 }

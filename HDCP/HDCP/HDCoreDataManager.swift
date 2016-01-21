@@ -11,6 +11,7 @@ import CoreData
 
 class HDCoreDataManager: NSObject {
     
+    //单利
     class var shareInstance: HDCoreDataManager {
     
         struct Singleton {

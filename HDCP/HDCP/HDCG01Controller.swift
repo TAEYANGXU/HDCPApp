@@ -33,7 +33,7 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         
         if HDCG01Service().isExistEntity() {
             /**
-            *  读取缓存数据
+            *  读取本地数据
             */
             dataArray = HDCG01Service().getAllTagListEntity()
             

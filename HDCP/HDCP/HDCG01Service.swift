@@ -140,9 +140,6 @@ class HDCG01Service: HDRequestManager {
                 
                 for model in (response.result?.list)! {
                     
-                    print("model.imgUrl = \(model.imgUrl)")
-                    print("model.cate = \(model.cate)")
-                    
                     let tagModel = HDCG01ListModel()
                     tagModel.imgUrl = model.imgUrl
                     tagModel.cate = model.cate

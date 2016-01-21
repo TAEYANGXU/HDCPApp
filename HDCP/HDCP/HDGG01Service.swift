@@ -110,24 +110,50 @@ class HDGG01Service: HDRequestManager {
             let list = try context.executeFetchRequest(request)
             let gg01List = NSMutableArray()
             
-            
-//            var image:String?
-//            var title:String?
-//            var type:Int!
-//            var url:String?
-//    
-//            
             if list.count>0 {
             
                 let response = list[0] as! HDGG01ResponseEntity
                 
                 for model in (response.result?.gg01List)! {
                 
+                    let ggModel = HDGG01ListModel()
                     
+                    ggModel.image = model.image
+                    ggModel.title = model.title
+                    ggModel.type = model.type!!.longValue
+                    ggModel.url = model.url
+                    
+                    gg01List.addObject(ggModel)
+                }
+                
+                let result = HDGG01Result()
+                result.gg01List = NSArray(array: gg01List) as? Array<HDGG01ListModel>
+                hdGG01Response.result = result
+                
+                
+                let array2D = NSMutableArray()
+                var array:NSMutableArray?
+                
+                for var i=0;i<gg01List.count;i++ {
+                    
+                    if i%3 == 0 {
+                        array = nil
+                        array = NSMutableArray()
+                        array2D.addObject(array!)
+                        
+                    }
+                    
+                    array?.addObject(gg01List[i])
                     
                 }
                 
+                array2D.removeLastObject()
+                
+                hdGG01Response?.array2D = array2D
+
+                
             }
+            
         }catch{
         
             let nserror = error as NSError

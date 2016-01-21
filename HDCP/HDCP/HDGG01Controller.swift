@@ -27,8 +27,21 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
 
         count = 0
         setupUI()
-        showHud()
-        doGetRequestData()
+        
+        if HDGG01Service().isExistEntity() {
+        
+            hdGG01Response =  HDGG01Service().getAllResponseEntity()
+            self.count = hdGG01Response.array2D!.count
+            
+            tableView?.reloadData()
+            
+            doGetRequestData()
+            
+        }else{
+        
+            showHud()
+            doGetRequestData()
+        }
         
     }
     

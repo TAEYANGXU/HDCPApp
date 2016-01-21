@@ -15,6 +15,8 @@ class HDGG01ListModel:Mappable {
     var type:Int!
     var url:String?
     
+    init(){}
+    
     required init?(_ map: Map) {
         
         mapping(map)

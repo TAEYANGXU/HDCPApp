@@ -30,16 +30,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
          *  判断欢迎界面是否已经执行
          */
+        
         let userDefault = NSUserDefaults.standardUserDefaults()
-        if (userDefault.stringForKey(Constants.HDShowWelcome) != nil) {
-            
-            UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-            self.window?.rootViewController = MainViewController()
-        }else{
+        let appVersion:String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        
+        if (userDefault.stringForKey(Constants.HDAppVersion)) == nil {
+        
+            userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
+            userDefault.synchronize()
             self.window?.rootViewController = WelcomeController()
             
-        }
+        }else{
         
+            let version:String =  (userDefault.stringForKey(Constants.HDAppVersion))!
+            if ( appVersion == version) {
+                
+                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+                self.window?.rootViewController = MainViewController()
+                
+            }else{
+                
+                
+                userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
+                userDefault.synchronize()
+                self.window?.rootViewController = WelcomeController()
+                
+            }
+            
+        }
         
         return true
     }

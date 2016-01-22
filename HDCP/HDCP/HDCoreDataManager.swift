@@ -54,15 +54,19 @@ class HDCoreDataManager: NSObject {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
+        
+        /// 版本升级需要添加的参数
+        let optionsDictionary = NSDictionary(dictionary: [NSMigratePersistentStoresAutomaticallyOption:NSNumber(bool: true),NSInferMappingModelAutomaticallyOption:NSNumber(bool: true)])
+        
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: optionsDictionary as [NSObject : AnyObject])
         } catch {
             
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as NSError
+            dict[NSUnderlyingErrorKey] = error as! NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
@@ -93,7 +97,7 @@ class HDCoreDataManager: NSObject {
                 try managedObjectContext.save()
             } catch {
                 
-                let nserror = error as NSError
+                let nserror = error as! NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }

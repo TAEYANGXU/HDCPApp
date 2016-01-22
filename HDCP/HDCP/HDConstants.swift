@@ -60,7 +60,7 @@ class Constants: NSObject {
     /**
      *   key
      **/
-    static let HDShowWelcome:String = "HDShowWelcome"
+    static let HDAppVersion:String = "Version"
     
     /*******************************************URL*********************************************/
      

@@ -323,6 +323,7 @@
 		35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM09Controller.swift; sourceTree = "<group>"; };
 		35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Controller.swift; sourceTree = "<group>"; };
 		35EF56741C51D5D900352E7D /* HDCG03Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Service.swift; sourceTree = "<group>"; };
+		35EF56761C52176000352E7D /* HDCP1_1_1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDCP1_1_1.xcdatamodel; sourceTree = "<group>"; };
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
 		35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreDataManager.swift; sourceTree = "<group>"; };
@@ -1528,9 +1529,10 @@
 		356F393C1C3A23EA0056DF44 /* HDCP.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				35EF56761C52176000352E7D /* HDCP1_1_1.xcdatamodel */,
 				356F393D1C3A23EA0056DF44 /* HDCP.xcdatamodel */,
 			);
-			currentVersion = 356F393D1C3A23EA0056DF44 /* HDCP.xcdatamodel */;
+			currentVersion = 35EF56761C52176000352E7D /* HDCP1_1_1.xcdatamodel */;
 			path = HDCP.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

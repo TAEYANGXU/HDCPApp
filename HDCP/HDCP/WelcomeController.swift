@@ -91,9 +91,9 @@ class WelcomeController: UIViewController {
         /**
          *  欢迎界面只展示一次
          */
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        userDefault.setValue(Constants.HDShowWelcome, forKey: Constants.HDShowWelcome)
-        userDefault.synchronize()
+//        let userDefault = NSUserDefaults.standardUserDefaults()
+//        userDefault.setValue(Constants.HDShowWelcome, forKey: Constants.HDShowWelcome)
+//        userDefault.synchronize()
         
         UIApplication.sharedApplication().statusBarHidden = false
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)

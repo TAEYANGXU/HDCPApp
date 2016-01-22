@@ -133,6 +133,8 @@
 		35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034B1C3F95E20024A329 /* HDGG01Button.swift */; };
 		35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */; };
 		35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */; };
+		35EF56721C51CBAE00352E7D /* HDCG03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */; };
+		35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56741C51D5D900352E7D /* HDCG03Service.swift */; };
 		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
 		35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */; };
@@ -319,6 +321,8 @@
 		35B7034B1C3F95E20024A329 /* HDGG01Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Button.swift; sourceTree = "<group>"; };
 		35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01RowView.swift; sourceTree = "<group>"; };
 		35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM09Controller.swift; sourceTree = "<group>"; };
+		35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Controller.swift; sourceTree = "<group>"; };
+		35EF56741C51D5D900352E7D /* HDCG03Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Service.swift; sourceTree = "<group>"; };
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
 		35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreDataManager.swift; sourceTree = "<group>"; };
@@ -481,10 +485,10 @@
 		352A41EC1C50A506009D0F9F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				352A41F21C50A55B009D0F9F /* CT */,
+				352A41EF1C50A544009D0F9F /* HM */,
 				352A41F11C50A556009D0F9F /* CG */,
 				352A41F01C50A550009D0F9F /* GG */,
-				352A41EF1C50A544009D0F9F /* HM */,
+				352A41F21C50A55B009D0F9F /* CT */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -492,10 +496,10 @@
 		352A41ED1C50A51F009D0F9F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				352A41EE1C50A535009D0F9F /* CT */,
+				35B703471C3F83870024A329 /* HM */,
 				3566C8FF1C479E6300573D97 /* CG */,
 				35B703481C3F838D0024A329 /* GG */,
-				35B703471C3F83870024A329 /* HM */,
+				352A41EE1C50A535009D0F9F /* CT */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -582,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				3566C9021C479EA000573D97 /* HDCG01Service.swift */,
+				35EF56741C51D5D900352E7D /* HDCG03Service.swift */,
 			);
 			name = CG;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 		356F396D1C3A3EEA0056DF44 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3502FF421C450FDC0083F303 /* 画面ID介绍.strings */,
 				3538902B1C4E1E04006C9CE6 /* Welcome */,
 				35321D1F1C463FF100023637 /* Common */,
 				356F39721C3A3F7F0056DF44 /* GG */,
@@ -666,7 +672,6 @@
 				356F39701C3A3F640056DF44 /* Category */,
 				356F396F1C3A3F300056DF44 /* Search */,
 				356F396E1C3A3F100056DF44 /* Home */,
-				3502FF421C450FDC0083F303 /* 画面ID介绍.strings */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -704,6 +709,7 @@
 				35F8CF421C3B9B17003B1364 /* Category.xcassets */,
 				356F39771C3A40130056DF44 /* HDCG01Controller.swift */,
 				3566C8FC1C479E5400573D97 /* HDCG02Controller.swift */,
+				35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -752,9 +758,10 @@
 		356F39851C3A4B250056DF44 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				35B703411C3F81300024A329 /* HM */,
 				3566C8FE1C479E5C00573D97 /* CG */,
 				35B703421C3F81370024A329 /* GG */,
-				35B703411C3F81300024A329 /* HM */,
+				35EF56731C51D26000352E7D /* CT */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -922,6 +929,13 @@
 				35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */,
 			);
 			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		35EF56731C51D26000352E7D /* CT */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CT;
 			sourceTree = "<group>";
 		};
 		35F8CF481C3BCDC7003B1364 /* CustomUI */ = {
@@ -1146,6 +1160,7 @@
 				35321D251C46512E00023637 /* HDWebController.swift in Sources */,
 				3566C8F71C477DB000573D97 /* HDHM05Service.swift in Sources */,
 				352A42871C50E190009D0F9F /* HDGG01ResponseEntity.swift in Sources */,
+				35EF56721C51CBAE00352E7D /* HDCG03Controller.swift in Sources */,
 				35321D1E1C463AC000023637 /* HDHM03Service.swift in Sources */,
 				1B0FD1031C3D5749009E85CD /* UIScrollView+MJExtension.m in Sources */,
 				3566C8ED1C47499A00573D97 /* HDHM04Model.swift in Sources */,
@@ -1194,6 +1209,7 @@
 				358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */,
 				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
+				35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,
 				3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */,
 				1B6B08351C4B564E004B2CE2 /* HDHM07Cell.swift in Sources */,

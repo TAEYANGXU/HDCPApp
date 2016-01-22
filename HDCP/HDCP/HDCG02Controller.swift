@@ -113,7 +113,14 @@ class HDCG02Controller: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        let model = dataArray[indexPath.row]
+        let hdHM04VC = HDHM04Controller()
+        let tmodel = TagListModel()
+        tmodel.id = model.id;
+        tmodel.name = model.name;
+        hdHM04VC.tagModel = tmodel;
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM04VC, animated: true)
     }
     
 

@@ -18,10 +18,10 @@ private let cateArray = [["title":"口味","image":"KWIcon"],
     ["title":"加工工艺","image":"JGGYIcon"],
     ["title":"厨房用具","image":"CFYJIcon"]]
 
-class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
+class HDCG01Controller: UITableViewController,UISearchBarDelegate {
 
  
-    var searchController:UISearchController?
+    var searchBar:UISearchBar!
     var dataArray:Array<HDCG01ListModel>!
     
     override func viewDidLoad() {
@@ -70,17 +70,17 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
-        searchController = UISearchController(searchResultsController: nil)
-        searchController?.dimsBackgroundDuringPresentation =  false
-        searchController?.searchBar.placeholder = "搜索菜谱"
-        searchController?.delegate = self
-        searchController?.searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.barTintColor = Constants.HDBGViewColor
-        searchController?.searchBar.layer.borderWidth = 1;
-        searchController?.searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
-        searchController?.searchBar.showsCancelButton = false
-        self.tableView.tableHeaderView = searchController?.searchBar
+        
+        searchBar =  UISearchBar()
+        searchBar.placeholder = "搜索菜谱、食材或功效"
+        searchBar.delegate = self
+        searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
+        searchBar.sizeToFit()
+        searchBar.barTintColor = Constants.HDBGViewColor
+        searchBar.layer.borderWidth = 1;
+        searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
+        searchBar.showsCancelButton = false
+        self.tableView.tableHeaderView = searchBar
         
     }
     
@@ -104,33 +104,20 @@ class HDCG01Controller: UITableViewController,UISearchControllerDelegate {
         
         
     }
+    
 
+    // MARK: - UISearchBar delegate
     
-    // MARK: - UISearchController delegate
-    func willPresentSearchController(searchController: UISearchController){
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         
-//        print("willPresentSearchController")
+        let hdHM04VC = HDCG03Controller()
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM04VC, animated: false)
+        self.hidesBottomBarWhenPushed = false;
+        
+        return false
     }
     
-    func didPresentSearchController(searchController: UISearchController){
-        
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.Default, animated: true)
-        self.tabBarController?.tabBar.hidden = true
-//        print("didPresentSearchController")
-    }
-    
-    func willDismissSearchController(searchController: UISearchController){
-        
-//        print("willDismissSearchController")
-    }
-    
-    func didDismissSearchController(searchController: UISearchController){
-        
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        
-//        print("didDismissSearchController")
-        self.tabBarController?.tabBar.hidden = false
-    }
     
     // MARK: - UITableView delegate/datasource
     

@@ -13,9 +13,9 @@ class HDRequestManager: NSObject {
 
     /**
      服务器数据请求:GET方式
-     
-     - parameter url:    URL地址
-     - parameter block:  返回结果集
+     *
+     * parameter url:    URL地址
+     * parameter block:  返回结果集
      */
     func doGetRequest(URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
@@ -53,9 +53,9 @@ class HDRequestManager: NSObject {
     
     /**
      服务器数据请求:POST方式
-     
-     - parameter url:    URL地址
-     - parameter block:  返回结果集
+     *
+     * parameter url:    URL地址
+     * parameter block:  返回结果集
      */
     func doPostRequest(param:[String : AnyObject],URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         

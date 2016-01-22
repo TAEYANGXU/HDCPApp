@@ -184,6 +184,7 @@ class HDHM01Service: HDRequestManager {
             
             if list.count>0 {
                 
+                // 组装Response
                 let response = list[0] as! HDHM01ResponseEntity
                 hmResponse.request_id = response.request_id
                 

@@ -1,20 +1,19 @@
 //
-//  HDHM04Controller.swift
+//  HDCG03Controller.swift
 //  HDCP
 //
-//  Created by 徐琰璋 on 16/1/13.
+//  Created by 徐琰璋 on 16/1/22.
 //  Copyright © 2016年 batonsoft. All rights reserved.
 //
 
 import UIKit
 
-class HDHM04Controller: UITableViewController {
-    
-    var tagModel:TagListModel?
+class HDCG03Controller: UITableViewController,UISearchBarDelegate {
+
     var dataArray:NSMutableArray!
     var offset:Int!
-
-        
+    var searchBar:UISearchBar!
+    
     override func viewDidLoad() {
         
         
@@ -22,12 +21,9 @@ class HDHM04Controller: UITableViewController {
         
         offset = 0
         dataArray  = NSMutableArray()
+        
         setupUI()
-        showHud()
         
-        self.title = tagModel?.name
-        
-        doGetRequestData(self.tagModel!.id!,limit: 20,offset: self.offset)
         
     }
     
@@ -35,7 +31,18 @@ class HDHM04Controller: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.hidesBackButton = true
+        
+        
+        let button = UIButton(type: UIButtonType.Custom) as UIButton
+        button.frame = CGRectMake(0, 0, 40, 30)
+        button.titleLabel?.font = UIFont.systemFontOfSize(16)
+        button.setTitle("取消", forState: UIControlState.Normal)
+        button.addTarget(self, action: "cancel", forControlEvents: UIControlEvents.TouchUpInside)
+        button.contentMode = UIViewContentMode.ScaleToFill
+        let rightItem = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = rightItem
+        
     }
     
     // MARK: - 创建UI视图
@@ -48,9 +55,35 @@ class HDHM04Controller: UITableViewController {
         
         //当列表滚动到底端 视图自动刷新
         self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-            self.doGetRequestData(self.tagModel!.id!,limit: 10,offset: self.offset)
+            self.offset = self.offset + 1
+            self.doGetRequestData(self.searchBar.text!,limit: 10,offset: self.offset)
         })
         
+        searchBar =  UISearchBar()
+        searchBar.placeholder = "搜索菜谱、食材或功效"
+        searchBar.delegate = self
+        searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH-40, 44)
+        searchBar.barTintColor = Constants.HDBGViewColor
+        searchBar.showsCancelButton = false
+        self.navigationItem.titleView = searchBar
+        searchBar.becomeFirstResponder()
+        
+//        searchController = UISearchController(searchResultsController: nil)
+//        searchController?.dimsBackgroundDuringPresentation =  false
+//        searchController?.searchBar.placeholder = "搜索菜谱"
+//        searchController?.delegate = self
+//        searchController?.searchBar.delegate = self
+//        searchController?.searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
+//        searchController?.searchBar.sizeToFit()
+//        searchController?.searchBar.barTintColor = Constants.HDBGViewColor
+//        searchController?.searchBar.layer.borderWidth = 1;
+//        searchController?.searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
+//        searchController?.searchBar.showsCancelButton = false
+//        self.tableView.tableHeaderView = searchController?.searchBar
+//        
+//        searchController?.becomeFirstResponder()
+//        searchController!.active = true
+//        searchController?.becomeFirstResponder()
     }
     
     // MARK: - 提示动画显示和隐藏
@@ -65,11 +98,16 @@ class HDHM04Controller: UITableViewController {
         CoreUtils.hidProgressHUD(self.view)
     }
     
-    // MARK: - 数据加载
-    func doGetRequestData(tagId:Int,limit:Int,offset:Int){
+    func cancel(){
     
-        HDHM04Service().doGetRequest_HDHM04_URL(tagId, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
-            
+        self.navigationController?.popToRootViewControllerAnimated(false)
+        
+    }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(keyWord:String,limit:Int,offset:Int){
+        
+        HDCG03Service().doGetRequest_HDCG03_URL(keyWord, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
             self.offset = self.offset+1
             
             self.hidenHud()
@@ -95,6 +133,13 @@ class HDHM04Controller: UITableViewController {
         self.navigationController?.popViewControllerAnimated(true)
         
     }
+    // MARK: - UISearchBar delegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar){
+    
+        showHud()
+        searchBar.resignFirstResponder()
+        doGetRequestData(searchBar.text!,limit: 20,offset: self.offset)
+    }
     
     
     // MARK: - UITableView delegate/datasource
@@ -116,8 +161,8 @@ class HDHM04Controller: UITableViewController {
         
         var stuffStr = String()
         for var i=0;i<model.stuff?.count;i++ {
-        
-            let stuff = model.stuff![i] 
+            
+            let stuff = model.stuff![i]
             
             if i == (model.stuff?.count)!-1 {
                 stuffStr.appendContentsOf(stuff.name!)
@@ -140,7 +185,7 @@ class HDHM04Controller: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let model = dataArray[indexPath.row] as! HDHM04ListModel
-
+        
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = model.recipeId
         hdHM08VC.name = model.title
@@ -148,4 +193,6 @@ class HDHM04Controller: UITableViewController {
         self.navigationController?.pushViewController(hdHM08VC, animated: true)
         
     }
+
+
 }

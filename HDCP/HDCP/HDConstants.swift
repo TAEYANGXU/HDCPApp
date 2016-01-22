@@ -61,6 +61,7 @@ class Constants: NSObject {
      *   key
      **/
     static let HDAppVersion:String = "Version"
+    static let HDHistory:String = "History"
     
     /*******************************************URL*********************************************/
      

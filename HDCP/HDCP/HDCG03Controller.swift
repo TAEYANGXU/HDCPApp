@@ -8,25 +8,59 @@
 
 import UIKit
 
+class ArrayCount: NSObject {
+    
+    var count:NSNumber!
+    
+}
+
 class HDCG03Controller: UITableViewController,UISearchBarDelegate {
 
     var dataArray:NSMutableArray!
     var offset:Int!
     var searchBar:UISearchBar!
     
+    var result:HDHM04Result?
+    /// 初始显示历史记录
+    var isShowHis:Bool! = true
+    
+    var objCont:ArrayCount!
+    
     override func viewDidLoad() {
         
         
         super.viewDidLoad()
         
+        objCont = ArrayCount()
+        objCont.setValue(NSNumber(integer: 0), forKey: "count")
+        
         offset = 0
         dataArray  = NSMutableArray()
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let array = userDefault.objectForKey(Constants.HDHistory) as? NSArray
+        
+        if array?.count>0 {
+        
+            dataArray.addObjectsFromArray(array! as [AnyObject])
+            dataArray.insertObject("清除历史记录", atIndex: 0)
+        }
+        
+        
+        objCont.addObserver(self, forKeyPath: "count", options: NSKeyValueObservingOptions.New, context: nil)
         
         setupUI()
         
         
+        
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        objCont.removeObserver(self, forKeyPath: "count")
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
         
@@ -45,19 +79,47 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         
     }
     
+    // MARK: - KVO
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        
+        
+        if keyPath == "count" {
+        
+            let count = change!["new"] as! NSNumber
+            
+            if !isShowHis!{
+            
+                if count.integerValue*80 > Constants.HDSCREENHEIGHT-64 {
+                    
+                    if self.tableView?.mj_footer == nil {
+                        //当列表滚动到底端 视图自动刷新
+                        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
+                            self.offset = self.offset + 1
+                            self.doGetRequestData(self.searchBar.text!,limit: 10,offset: self.offset)
+                        })
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){
         
         self.tableView.tableFooterView = UIView()
         self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
-        self.tableView.backgroundColor = Constants.HDBGViewColor
-        
-        //当列表滚动到底端 视图自动刷新
-        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-            self.offset = self.offset + 1
-            self.doGetRequestData(self.searchBar.text!,limit: 10,offset: self.offset)
-        })
+        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell2")
+        self.tableView.backgroundColor = UIColor.whiteColor()
         
         searchBar =  UISearchBar()
         searchBar.placeholder = "搜索菜谱、食材或功效"
@@ -89,13 +151,13 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     // MARK: - 提示动画显示和隐藏
     func showHud(){
         
-        CoreUtils.showProgressHUD(self.view)
+        CoreUtils.showProgressHUD(self.tableView)
         
     }
     
     func hidenHud(){
         
-        CoreUtils.hidProgressHUD(self.view)
+        CoreUtils.hidProgressHUD(self.tableView)
     }
     
     func cancel(){
@@ -107,6 +169,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     // MARK: - 数据加载
     func doGetRequestData(keyWord:String,limit:Int,offset:Int){
         
+        
         HDCG03Service().doGetRequest_HDCG03_URL(keyWord, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
             self.offset = self.offset+1
             
@@ -114,7 +177,12 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
             
             self.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
             
-            self.tableView.mj_footer.endRefreshing()
+            self.objCont.setValue(NSNumber(integer: self.dataArray.count), forKey: "count")
+            
+            if (self.tableView.mj_footer  != nil){
+            
+                self.tableView.mj_footer.endRefreshing()
+            }
             
             self.tableView.reloadData()
             
@@ -136,6 +204,29 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     // MARK: - UISearchBar delegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar){
     
+        //保存历史记录
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let array = userDefault.objectForKey(Constants.HDHistory) as? NSArray
+        let hisArray = NSMutableArray()
+        
+        if array?.count>0 {
+        
+            hisArray.addObjectsFromArray(array! as [AnyObject])
+            hisArray.addObject(searchBar.text!)
+            
+        }else{
+        
+            hisArray.addObject(searchBar.text!)
+            
+        }
+        
+        userDefault.setObject(NSArray(array: hisArray), forKey: Constants.HDHistory)
+        userDefault.synchronize()
+        
+        self.dataArray = NSMutableArray()
+        
+        isShowHis = false
         showHud()
         searchBar.resignFirstResponder()
         doGetRequestData(searchBar.text!,limit: 20,offset: self.offset)
@@ -146,53 +237,120 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     
     override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
-        return self.dataArray.count
+       return self.dataArray.count
     }
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM04Cell
         
-        let model = dataArray[indexPath.row] as! HDHM04ListModel
+        if isShowHis! {
         
-        cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        cell.title?.text = model.title
-        cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
-        
-        var stuffStr = String()
-        for var i=0;i<model.stuff?.count;i++ {
+            let cell = tableView .dequeueReusableCellWithIdentifier("myCell2", forIndexPath: indexPath) as! HDHM04Cell
             
-            let stuff = model.stuff![i]
+            var title = cell.viewWithTag(1000) as? UILabel
             
-            if i == (model.stuff?.count)!-1 {
-                stuffStr.appendContentsOf(stuff.name!)
+            if title == nil {
+            
+                title = UILabel()
+                title?.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(title!)
                 
-            }else{
-                stuffStr.appendContentsOf(String(format: "%@、", stuff.name!))
+                title?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.bottom.equalTo(cell.contentView).offset(0)
+                    make.width.equalTo(Constants.HDSCREENWITH-30)
+                    
+                    
+                })
+                
             }
             
+            title?.textColor = Constants.HDMainTextColor
+            let name = dataArray[indexPath.row] as! String
+            title?.text = name
+            return cell
+            
+        }else{
+        
+            
+            let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM04Cell
+            
+            let model = dataArray[indexPath.row] as! HDHM04ListModel
+            
+            cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            cell.title?.text = model.title
+            cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
+            
+            var stuffStr = String()
+            for var i=0;i<model.stuff?.count;i++ {
+                
+                let stuff = model.stuff![i]
+                
+                if i == (model.stuff?.count)!-1 {
+                    stuffStr.appendContentsOf(stuff.name!)
+                    
+                }else{
+                    stuffStr.appendContentsOf(String(format: "%@、", stuff.name!))
+                }
+                
+            }
+            
+            cell.stuff?.text = stuffStr
+            
+            return cell
         }
         
-        cell.stuff?.text = stuffStr
         
-        return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        
+        if isShowHis! {
+            return 44
+        }else{
+        
+            return 80
+        }
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let model = dataArray[indexPath.row] as! HDHM04ListModel
-        
-        let hdHM08VC = HDHM08Controller()
-        hdHM08VC.rid = model.recipeId
-        hdHM08VC.name = model.title
-        self.hidesBottomBarWhenPushed = true;
-        self.navigationController?.pushViewController(hdHM08VC, animated: true)
-        
+        if isShowHis! {
+            
+            if indexPath.row == 0 {
+                //清除历史记录
+                let userDefault = NSUserDefaults.standardUserDefaults()
+                userDefault.setObject(nil, forKey: Constants.HDHistory)
+                userDefault.synchronize()
+                
+                dataArray = NSMutableArray()
+                self.tableView.reloadData()
+                
+            }else{
+            
+                isShowHis = false
+                let name = dataArray[indexPath.row] as! String
+                showHud()
+                searchBar.resignFirstResponder()
+                doGetRequestData(name,limit: 20,offset: self.offset)
+                
+            }
+            
+            
+        }else{
+            
+            let model = dataArray[indexPath.row] as! HDHM04ListModel
+            let hdHM08VC = HDHM08Controller()
+            hdHM08VC.rid = model.recipeId
+            hdHM08VC.name = model.title
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM08VC, animated: true)
+        }
     }
+
 
 
 }

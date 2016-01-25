@@ -15,7 +15,7 @@ private let gg01Array = [["title":"厨房宝典","image":"CFBDIcon"],
     ["title":"营养餐桌","image":"YYCZIcon"],
     ["title":"食材百科","image":"SCBKIcon"]]
 
-class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataSource{
+class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataSource,HDGG01RowViewProtocol{
 
     var hdGG01Response:HDGG01Response!
     var tableView:UITableView?
@@ -84,7 +84,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 for var j=0;j<3;j++ {
                 
                     let btn = HDGG01Button()
-                    btn.tag = i+400
+                    btn.tag = index+400
                     btn.setImage(UIImage(named: gg01Array[index]["image"]!), forState: UIControlState.Normal)
                     btn.setTitle(gg01Array[index]["title"]!, forState: UIControlState.Normal)
                     btn.titleLabel?.font = UIFont.systemFontOfSize(16)
@@ -169,6 +169,10 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             /**
             *   厨房宝典
             */
+            let hdHM07VC = HDHM07Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM07VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             print("\(btn.currentTitle)")
             break
         case 1:
@@ -189,12 +193,20 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             /**
             *   菜谱专辑
             */
+            let hdHM06VC = HDHM06Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM06VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             print("\(btn.currentTitle)")
             break
         case 4:
             /**
             *   营养餐桌
             */
+            let hdHM03VC = HDHM03Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdHM03VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             print("\(btn.currentTitle)")
             break
         case 5:
@@ -235,6 +247,40 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 
         }
 
+        
+    }
+    
+    // MARK: - HDGG01RowView delegate
+    func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void{
+    
+        print("\(indexPath.row)    \(index) ")
+        
+        let array2d = self.hdGG01Response.array2D![indexPath.row]
+        let model:HDGG01ListModel = array2d[index] as! HDGG01ListModel
+        
+        if model.url.hasPrefix("http") {
+        
+            //进入webView
+            let webVC = HDWebController()
+            webVC.name = model.title
+            webVC.url = model.url
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(webVC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+            
+        }else{
+        
+            //菜谱专辑
+            let hdhm05VC = HDHM05Controller()
+            hdhm05VC.name = model.title
+            hdhm05VC.cid = NSInteger(model.url)
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdhm05VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+            
+            
+        }
+        
         
     }
     
@@ -334,14 +380,23 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let leftModel:HDGG01ListModel = array2d[0] as! HDGG01ListModel
             leftImageView!.imageView.sd_setImageWithURL(NSURL(string: leftModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             leftImageView?.title.text = leftModel.title
+            leftImageView?.delegate = self
+            leftImageView?.indexPath = indexPath
+            leftImageView!.index = 0
             
             let topModel = array2d[1] as! HDGG01ListModel
             topImageView!.imageView.sd_setImageWithURL(NSURL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             topImageView?.title.text = topModel.title
+            topImageView?.delegate = self
+            topImageView?.indexPath = indexPath
+            topImageView!.index = 1
             
             let bottomModel = array2d[2] as! HDGG01ListModel
             bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
+            bottomImageView?.delegate = self
+            bottomImageView?.indexPath = indexPath
+            bottomImageView!.index = 2
             
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             
@@ -432,15 +487,24 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let rightModel:HDGG01ListModel = array2d[0] as! HDGG01ListModel
             rightImageView!.imageView.sd_setImageWithURL(NSURL(string: rightModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             rightImageView?.title.text = rightModel.title
+            rightImageView?.delegate = self
+            rightImageView?.indexPath = indexPath
+            rightImageView!.index = 0
             
             let topModel = array2d[1] as! HDGG01ListModel
             topImageView!.imageView.sd_setImageWithURL(NSURL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             topImageView?.title.text = topModel.title
+            topImageView?.delegate = self
+            topImageView?.indexPath = indexPath
+            topImageView!.index = 1
             
             let bottomModel = array2d[2] as! HDGG01ListModel
             bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
-            
+            bottomImageView?.delegate = self
+            bottomImageView?.indexPath = indexPath
+            bottomImageView!.index = 2
+        
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             
             return cell

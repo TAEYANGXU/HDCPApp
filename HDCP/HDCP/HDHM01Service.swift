@@ -26,11 +26,22 @@ class HDHM01Service: HDRequestManager {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
                
-                //更新本地数据
-                self.deleteEntity()
-                self.addEntity(hdHM01Response!)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    
+                    //更新本地数据
+                    self.deleteEntity()
+                    self.addEntity(hdHM01Response!)
+                    
+                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                        
+                        successBlock(hdResponse:hdHM01Response!)
+                        
+                    })
+                    
+                })
                 
-                successBlock(hdResponse:hdHM01Response!)
+                
+                
                 
             }else{
                 

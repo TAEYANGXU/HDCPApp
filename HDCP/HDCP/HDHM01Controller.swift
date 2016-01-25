@@ -538,6 +538,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.addGestureRecognizer(collectGes)
                 
                 rowView!.title.text = model?.title
+                rowView?.title.textColor = Constants.HDMainTextColor
                 rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                 rowView!.detail.text = model?.content
                 
@@ -672,6 +673,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.addGestureRecognizer(wikiGes)
                 
                 rowView!.title.text = model?.title
+                rowView!.title.textColor = Constants.HDMainTextColor
                 rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                 rowView!.detail.text = model?.content
                 

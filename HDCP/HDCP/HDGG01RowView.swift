@@ -8,10 +8,21 @@
 
 import UIKit
 
+public protocol HDGG01RowViewProtocol{
+
+    func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void;
+    
+}
+
 class HDGG01RowView: UIView {
 
     var imageView:UIImageView!
     var title:UILabel!
+    
+    var delegate:HDGG01RowViewProtocol?
+    
+    var indexPath:NSIndexPath!
+    var index:Int!
     
     override init(frame: CGRect) {
         
@@ -60,7 +71,18 @@ class HDGG01RowView: UIView {
             
         }
         
+        let tapGes = UITapGestureRecognizer(target: self, action: "onClickAction")
+        self.addGestureRecognizer(tapGes)
         
+    }
+    
+    func onClickAction(){
+    
+        if (self.delegate != nil) {
+        
+            self.delegate?.didSelectHDGG01RowView(self.indexPath, index: self.index)
+            
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

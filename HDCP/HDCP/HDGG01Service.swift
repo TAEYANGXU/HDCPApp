@@ -46,11 +46,21 @@ class HDGG01Service: HDRequestManager {
                 
                 hdggResponse?.array2D = array2D
                 
-                //更新本地数据
-                self.deleteEntity()
-                self.addEntity(hdggResponse!)
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    
+                    //更新本地数据
+                    self.deleteEntity()
+                    self.addEntity(hdggResponse!)
+                    
+                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                        
+                        successBlock(hdResponse: hdggResponse!)
+                        
+                    })
+                    
+                })
                 
-                successBlock(hdResponse: hdggResponse!)
+                
                 
             }else{
                 

@@ -26,6 +26,7 @@ class HDCG01Service: HDRequestManager {
                 
                 let response = Mapper<HDCG01Response>().map(response.result.value)
                 
+                
                 self.addEntity(response!, finishBlcok: { () -> Void in
                     
                     successBlock(HDCG01Response: response!)

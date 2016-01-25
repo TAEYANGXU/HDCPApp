@@ -13,7 +13,7 @@ class HDGG01ListModel:Mappable {
     var image:String?
     var title:String?
     var type:Int!
-    var url:String?
+    var url:String!
     
     init(){}
     

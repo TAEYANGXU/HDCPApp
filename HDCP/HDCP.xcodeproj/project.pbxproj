@@ -35,6 +35,8 @@
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
 		3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3502FF421C450FDC0083F303 /* 画面ID介绍.strings */; };
+		3521FC881C56232700E30D15 /* HDGG02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FC871C56232700E30D15 /* HDGG02Controller.swift */; };
+		3521FC8A1C56233700E30D15 /* HDGG03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FC891C56233700E30D15 /* HDGG03Controller.swift */; };
 		352A41D81C5078E1009D0F9F /* HDHM01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */; };
 		352A42471C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A423B1C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift */; };
 		352A42481C50AACE009D0F9F /* HM01WikiListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A423C1C50AACE009D0F9F /* HM01WikiListEntity.swift */; };
@@ -213,6 +215,8 @@
 		3502FF3A1C44DA620083F303 /* HDHM02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Service.swift; sourceTree = "<group>"; };
 		3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Controller.swift; sourceTree = "<group>"; };
 		3502FF421C450FDC0083F303 /* 画面ID介绍.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "画面ID介绍.strings"; sourceTree = "<group>"; };
+		3521FC871C56232700E30D15 /* HDGG02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG02Controller.swift; sourceTree = "<group>"; };
+		3521FC891C56233700E30D15 /* HDGG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG03Controller.swift; sourceTree = "<group>"; };
 		352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
 		352A423B1C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HM01WikiListEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		352A423C1C50AACE009D0F9F /* HM01WikiListEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HM01WikiListEntity.swift; sourceTree = "<group>"; };
@@ -730,6 +734,8 @@
 				35B7034A1C3F95C70024A329 /* CustomUI */,
 				35F8CF3E1C3B9AFA003B1364 /* GG.xcassets */,
 				356F39731C3A3FEE0056DF44 /* HDGG01Controller.swift */,
+				3521FC871C56232700E30D15 /* HDGG02Controller.swift */,
+				3521FC891C56233700E30D15 /* HDGG03Controller.swift */,
 			);
 			name = GG;
 			sourceTree = "<group>";
@@ -1150,6 +1156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3521FC881C56232700E30D15 /* HDGG02Controller.swift in Sources */,
 				352A42841C50E190009D0F9F /* HDGG01ListEntity+CoreDataProperties.swift in Sources */,
 				352A42931C50E1A2009D0F9F /* HDCG01ListEntity.swift in Sources */,
 				1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */,
@@ -1231,6 +1238,7 @@
 				35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */,
 				1B6B082D1C4B4382004B2CE2 /* HDHM06Model.swift in Sources */,
 				352A42511C50AACE009D0F9F /* HDHM01ResultEntity+CoreDataProperties.swift in Sources */,
+				3521FC8A1C56233700E30D15 /* HDGG03Controller.swift in Sources */,
 				352A42921C50E1A2009D0F9F /* HDCG01ListEntity+CoreDataProperties.swift in Sources */,
 				356F39A91C3A76FE0056DF44 /* Map.swift in Sources */,
 				35321D1A1C4638BE00023637 /* HDHM03Controller.swift in Sources */,

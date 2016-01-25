@@ -17,6 +17,7 @@ class ArrayCount: NSObject {
 class HDCG03Controller: UITableViewController,UISearchBarDelegate {
 
     var dataArray:NSMutableArray!
+    var hisDataArray:NSMutableArray!
     var offset:Int!
     var searchBar:UISearchBar!
     
@@ -36,14 +37,15 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         
         offset = 0
         dataArray  = NSMutableArray()
+        hisDataArray  = NSMutableArray()
         
         let userDefault = NSUserDefaults.standardUserDefaults()
         let array = userDefault.objectForKey(Constants.HDHistory) as? NSArray
         
         if array?.count>0 {
         
-            dataArray.addObjectsFromArray(array! as [AnyObject])
-            dataArray.insertObject("清除历史记录", atIndex: 0)
+            hisDataArray.addObjectsFromArray(array! as [AnyObject])
+            hisDataArray.insertObject("清除历史记录", atIndex: 0)
         }
         
         
@@ -224,7 +226,6 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         userDefault.setObject(NSArray(array: hisArray), forKey: Constants.HDHistory)
         userDefault.synchronize()
         
-        self.dataArray = NSMutableArray()
         
         isShowHis = false
         showHud()
@@ -237,7 +238,14 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     
     override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
-       return self.dataArray.count
+        if isShowHis! {
+        
+            return self.hisDataArray.count
+        }else{
+        
+            return self.dataArray.count
+        }
+        
     }
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
@@ -268,7 +276,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
             }
             
             title?.textColor = Constants.HDMainTextColor
-            let name = dataArray[indexPath.row] as! String
+            let name = hisDataArray[indexPath.row] as! String
             title?.text = name
             return cell
             
@@ -326,13 +334,15 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
                 userDefault.setObject(nil, forKey: Constants.HDHistory)
                 userDefault.synchronize()
                 
-                dataArray = NSMutableArray()
+                hisDataArray = NSMutableArray()
                 self.tableView.reloadData()
                 
             }else{
             
                 isShowHis = false
-                let name = dataArray[indexPath.row] as! String
+                let name = hisDataArray[indexPath.row] as! String
+                hisDataArray = NSMutableArray()
+                self.tableView.reloadData()
                 showHud()
                 searchBar.resignFirstResponder()
                 doGetRequestData(name,limit: 20,offset: self.offset)

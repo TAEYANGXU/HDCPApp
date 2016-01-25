@@ -27,37 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //初始化CoreData
         HDCoreDataManager.shareInstance
         
-        /**
-         *  判断欢迎界面是否已经执行
-         */
-        
-        let userDefault = NSUserDefaults.standardUserDefaults()
-        let appVersion:String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
-        
-        if (userDefault.stringForKey(Constants.HDAppVersion)) == nil {
-        
-            userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
-            userDefault.synchronize()
-            self.window?.rootViewController = WelcomeController()
-            
-        }else{
-        
-            let version:String =  (userDefault.stringForKey(Constants.HDAppVersion))!
-            if ( appVersion == version) {
-                
-                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-                self.window?.rootViewController = MainViewController()
-                
-            }else{
-                
-                
-                userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
-                userDefault.synchronize()
-                self.window?.rootViewController = WelcomeController()
-                
-            }
-            
-        }
+        //欢迎导航页面
+        showWelcome()
         
         return true
     }
@@ -84,6 +55,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         HDCoreDataManager.shareInstance.saveContext()
+    
+    }
+    
+    //  MARK: - 欢迎界面
+    
+    func showWelcome(){
+    
+        /**
+         *  判断欢迎界面是否已经执行
+         */
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let appVersion:String = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        
+        
+        if (userDefault.stringForKey(Constants.HDAppVersion)) == nil {
+            
+            //第一次进入
+            userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
+            userDefault.synchronize()
+            self.window?.rootViewController = WelcomeController()
+            
+        }else{
+            
+            //根据版本号判断是否进入
+            let version:String =  (userDefault.stringForKey(Constants.HDAppVersion))!
+            if ( appVersion == version) {
+                
+                UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
+                self.window?.rootViewController = MainViewController()
+                
+            }else{
+                
+                
+                userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
+                userDefault.synchronize()
+                self.window?.rootViewController = WelcomeController()
+                
+            }
+            
+        }
+        
     }
     
     //  MARK: - UINavigationBar/UITabBar Style

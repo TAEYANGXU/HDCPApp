@@ -127,17 +127,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         if baseView == nil {
             
-            baseView = UIScrollView()
-            
-            self.view.addSubview(baseView)
-            
-            baseView.snp_makeConstraints { (make) -> Void in
-                
-                make.top.equalTo(self.view).offset(0)
-                make.left.equalTo(self.view).offset(0)
-                make.width.equalTo(Constants.HDSCREENWITH)
-                make.bottom.equalTo(self.view).offset(0)
-            }
+            createBaseView()
             
             createHeaderView()
             
@@ -149,6 +139,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             createWikiListView()
             
+            /**
+            *  添加下拉刷新
+            */
             baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
                 
                 self.doGetRequestData()
@@ -157,6 +150,25 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             })
         }
         
+    }
+    
+    /**
+     *  创建容器
+     */
+    func createBaseView(){
+    
+        baseView = UIScrollView()
+        
+        self.view.addSubview(baseView)
+        
+        baseView.snp_makeConstraints { (make) -> Void in
+            
+            make.top.equalTo(self.view).offset(0)
+            make.left.equalTo(self.view).offset(0)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.bottom.equalTo(self.view).offset(0)
+        }
+
     }
     
     /**

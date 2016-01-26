@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HDShareSDKManager.initializeShareSDK()
         
         //初始化CoreData
-        HDCoreDataManager.shareInstance
+        HDCoreDataManager.sharedInstance
         
         //欢迎导航页面
         showWelcome()
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        HDCoreDataManager.shareInstance.saveContext()
+        HDCoreDataManager.sharedInstance.saveContext()
     
     }
     
@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }else{
             
-            //根据版本号判断是否进入
+            //版本升级后，根据版本号来判断是否进入
             let version:String =  (userDefault.stringForKey(Constants.HDAppVersion))!
             if ( appVersion == version) {
                 

@@ -77,7 +77,7 @@ class HDGG01Service: HDRequestManager {
      */
     func addEntity(hdggResponse:HDGG01Response){
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
     
         let result = NSEntityDescription.insertNewObjectForEntityForName("HDGG01ResultEntity", inManagedObjectContext: context) as? HDGG01ResultEntity
         
@@ -99,7 +99,7 @@ class HDGG01Service: HDRequestManager {
         response?.request_id = hdggResponse.request_id
         response?.result = result
         
-        HDCoreDataManager.shareInstance.saveContext()
+        HDCoreDataManager.sharedInstance.saveContext()
         
         
     }
@@ -108,7 +108,7 @@ class HDGG01Service: HDRequestManager {
      */
     func getAllResponseEntity() -> HDGG01Response{
     
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
@@ -183,7 +183,7 @@ class HDGG01Service: HDRequestManager {
     func isExistEntity()->Bool {
         
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
@@ -212,7 +212,7 @@ class HDGG01Service: HDRequestManager {
      */
     func deleteEntity(){
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
@@ -228,7 +228,7 @@ class HDGG01Service: HDRequestManager {
                     
                 }
                 
-                HDCoreDataManager.shareInstance.saveContext()
+                HDCoreDataManager.sharedInstance.saveContext()
                 
             }
             

@@ -57,7 +57,7 @@ class HDHM01Service: HDRequestManager {
      */
     func addEntity(hdHM01Response:HDHM01Response){
     
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         
         let result = NSEntityDescription.insertNewObjectForEntityForName("HDHM01ResultEntity", inManagedObjectContext: context) as? HDHM01ResultEntity
@@ -138,7 +138,7 @@ class HDHM01Service: HDRequestManager {
         /**
         *  保存
         */
-        HDCoreDataManager.shareInstance.saveContext()
+        HDCoreDataManager.sharedInstance.saveContext()
     }
     
     /**
@@ -146,7 +146,7 @@ class HDHM01Service: HDRequestManager {
      */
     func deleteEntity(){
     
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
@@ -162,7 +162,7 @@ class HDHM01Service: HDRequestManager {
                     
                 }
                 
-                HDCoreDataManager.shareInstance.saveContext()
+                HDCoreDataManager.sharedInstance.saveContext()
                 
             }
             
@@ -181,7 +181,7 @@ class HDHM01Service: HDRequestManager {
     func getAllResponseEntity() -> HDHM01Response{
     
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
         //一句SQL查出所有数据
@@ -272,7 +272,7 @@ class HDHM01Service: HDRequestManager {
      */
     func isExistEntity()->Bool {
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
         var ret:Bool = false

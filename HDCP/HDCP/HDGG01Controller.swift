@@ -172,13 +172,17 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let hdHM07VC = HDHM07Controller()
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM07VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
         case 1:
             /**
             *   应用推荐
             */
+            let hdgg02VC = HDGG02Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdgg02VC, animated: true)
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
             
@@ -186,6 +190,10 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             /**
             *   意见反馈
             */
+            let hdgg04VC = HDGG04Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdgg04VC, animated: true)
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
             
@@ -196,7 +204,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let hdHM06VC = HDHM06Controller()
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM06VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
         case 4:
@@ -206,13 +214,18 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let hdHM03VC = HDHM03Controller()
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM03VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
         case 5:
             /**
             *   食材百科
             */
+            let hdcg02VC = HDCG02Controller()
+            hdcg02VC.name = "流行食材"
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdcg02VC, animated: true)
+            self.hidesBottomBarWhenPushed = false
             print("\(btn.currentTitle)")
             break
 
@@ -266,7 +279,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             webVC.url = model.url
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(webVC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            self.hidesBottomBarWhenPushed = false
             
         }else{
         
@@ -276,7 +289,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             hdhm05VC.cid = NSInteger(model.url)
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdhm05VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            self.hidesBottomBarWhenPushed = false
             
             
         }

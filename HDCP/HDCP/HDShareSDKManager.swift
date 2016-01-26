@@ -8,12 +8,12 @@
 
 import Foundation
 
-class HDShareSDKManager {
+public class HDShareSDKManager {
     
     /**
      *  ShareSDK 初始化
      */
-    class func initializeShareSDK(){
+    public class func initializeShareSDK(){
         
         /**
         *  设置ShareSDK的appKey，如果尚未在ShareSDK官网注册过App，请移步到http://mob.com/login 登录后台进行应用注册，
@@ -77,7 +77,7 @@ class HDShareSDKManager {
      * parameter shareCancel:  取消分享
      */
     
-    class func doShareSDK(title:String,context:String,image:UIImage,type:SSDKPlatformType,url:String,shareSuccess:()->Void,shareFail:()->Void,shareCancel:()->Void){
+    public class func doShareSDK(title:String,context:String,image:UIImage,type:SSDKPlatformType,url:String,shareSuccess:()->Void,shareFail:()->Void,shareCancel:()->Void){
         
          // 1.创建分享参数
         let shareParames = NSMutableDictionary()

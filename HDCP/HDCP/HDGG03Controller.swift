@@ -8,28 +8,118 @@
 
 import UIKit
 
-class HDGG03Controller: UIViewController {
+class HDGG03Controller: UITableViewController {
 
+    var dataArray:Array<HDCG01TagModel>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.title = "食材百科"
+        
+        dataArray = HDCG01Service().getTagListByCate("流行食材")
+        
+        setupUI()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
     }
-    */
+    
+    // MARK: - 创建UI视图
+    
+    func setupUI(){
+        
+        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.backgroundColor = Constants.HDBGViewColor
+        self.tableView.tableFooterView = UIView()
+        
+    }
+    
+    // MARK: - events
+    
+    func backAction(){
+        
+        self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    // MARK: - UITableView  delegate/datasource
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        
+        
+        return dataArray.count
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
+        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        
+        
+        /**
+         *  名称
+         */
+        var title:UILabel? = cell.viewWithTag(2000) as? UILabel
+        if title == nil {
+            
+            title = UILabel()
+            title?.tag = 2000
+            title?.textColor = Constants.HDMainTextColor
+            title?.font = UIFont.systemFontOfSize(16)
+            cell.contentView.addSubview(title!)
+            title?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.width.equalTo(200)
+                make.height.equalTo(44)
+                make.left.equalTo(cell.contentView).offset(16)
+                make.top.equalTo(cell.contentView).offset(0)
+            })
+        }
+        
+        /**
+         *  箭头
+         */
+        var arrow:UIImageView? = cell.viewWithTag(3000) as? UIImageView
+        if arrow == nil {
+            
+            arrow = UIImageView()
+            arrow?.tag = 3000
+            cell.contentView.addSubview(arrow!)
+            
+            arrow?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.width.equalTo(20)
+                make.height.equalTo(20)
+                make.right.equalTo(cell.contentView).offset(-20)
+                make.top.equalTo(cell.contentView).offset(12)
+                
+            })
+            
+        }
+        
+        let model = dataArray[indexPath.row]
+        
+        title?.text =   model.name
+        arrow?.image = UIImage(named: "arrowIcon")
+        
+        return cell
+        
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let model = dataArray[indexPath.row]
+        let hdHM04VC = HDHM04Controller()
+        let tmodel = TagListModel()
+        tmodel.id = model.id;
+        tmodel.name = model.name;
+        hdHM04VC.tagModel = tmodel;
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdHM04VC, animated: true)
+    }
 
 }

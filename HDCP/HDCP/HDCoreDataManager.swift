@@ -9,24 +9,27 @@
 import Foundation
 import CoreData
 
-class HDCoreDataManager: NSObject {
+public class HDCoreDataManager: NSObject {
     
     /**
      *  单利模式
      */
-    class var shareInstance: HDCoreDataManager {
     
-        struct Singleton {
-            static var instance: HDCoreDataManager?
-            static var token: dispatch_once_t = 0
-        }
-        
-        dispatch_once(&Singleton.token) {
-            Singleton.instance = HDCoreDataManager()
-        }
-        
-        return Singleton.instance!
-    }
+     public static let sharedInstance = HDCoreDataManager()
+    
+//    class var shareInstance: HDCoreDataManager {
+//    
+//        struct Singleton {
+//            static var instance: HDCoreDataManager?
+//            static var token: dispatch_once_t = 0
+//        }
+//        
+//        dispatch_once(&Singleton.token) {
+//            Singleton.instance = HDCoreDataManager()
+//        }
+//        
+//        return Singleton.instance!
+//    }
     
     /**
      *  应用程序Docment目录的NSURL类型

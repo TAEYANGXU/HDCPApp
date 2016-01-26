@@ -51,7 +51,7 @@ class HDCG01Service: HDRequestManager {
         
         if !isExistEntity() {
             
-            let context = HDCoreDataManager.shareInstance.managedObjectContext
+            let context = HDCoreDataManager.sharedInstance.managedObjectContext
             
             let result = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ResultEntity", inManagedObjectContext: context) as? HDCG01ResultEntity
             
@@ -80,7 +80,7 @@ class HDCG01Service: HDRequestManager {
             response?.request_id = cgResponse.request_id
             response?.result = result
             
-            HDCoreDataManager.shareInstance.saveContext()
+            HDCoreDataManager.sharedInstance.saveContext()
             
             finishBlcok()
             
@@ -94,7 +94,7 @@ class HDCG01Service: HDRequestManager {
     func isExistEntity()->Bool {
     
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDCG01ResponseEntity")
         
@@ -123,7 +123,7 @@ class HDCG01Service: HDRequestManager {
      */
     func getAllTagListEntity()->Array<HDCG01ListModel>{
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDCG01ListEntity")
         
@@ -163,7 +163,7 @@ class HDCG01Service: HDRequestManager {
     
     func getTagListByCate(cate:String) -> Array<HDCG01TagModel>{
     
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         let request = NSFetchRequest(entityName: "HDCG01TagEntity")
         
         //排序
@@ -206,7 +206,7 @@ class HDCG01Service: HDRequestManager {
      */
     func deleteEntity(){
         
-        let context = HDCoreDataManager.shareInstance.managedObjectContext
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         let request = NSFetchRequest(entityName: "HDCG01ResponseEntity")
         
@@ -222,7 +222,7 @@ class HDCG01Service: HDRequestManager {
                     
                 }
                 
-                HDCoreDataManager.shareInstance.saveContext()
+                HDCoreDataManager.sharedInstance.saveContext()
                 
             }
             

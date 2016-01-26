@@ -137,15 +137,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         createWikiListView()
         
-        /**
-        *  添加下拉刷新
-        */
-        baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
-            
-            self.doGetRequestData()
-            
-            
-        })
+        
 
         
         
@@ -170,6 +162,17 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.bottom.equalTo(self.view).offset(0)
             }
+            
+            /**
+            *  添加下拉刷新
+            */
+            baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
+                
+                self.doGetRequestData()
+                
+                
+            })
+            
         }
         
     }
@@ -541,12 +544,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             let model = self.hdHM01Response?.result?.collectList?[i]
             
             var rowView:HDHM01RowView?
-            rowView = collectListView.viewWithTag(i) as? HDHM01RowView
+            rowView = collectListView.viewWithTag(i+100) as? HDHM01RowView
             
             if  rowView == nil {
                 
                 rowView = HDHM01RowView()
-                rowView!.tag = i;
+                rowView!.tag = i+100;
                 collectListView.addSubview(rowView!)
                 
                 let collectGes =  UITapGestureRecognizer(target: self, action: "collectGesAction:")
@@ -676,12 +679,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             let model = self.hdHM01Response?.result?.wikiList?[i]
             
             var rowView:HDHM01RowView?
-            rowView = wikiListView.viewWithTag(i) as? HDHM01RowView
+            rowView = wikiListView.viewWithTag(i+100) as? HDHM01RowView
             
             if  rowView == nil {
                 
                 rowView = HDHM01RowView()
-                rowView!.tag = i;
+                rowView!.tag = i+100;
                 wikiListView.addSubview(rowView!)
                 
                 let wikiGes =  UITapGestureRecognizer(target: self, action: "wikiGesAction:")

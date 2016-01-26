@@ -813,7 +813,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func collectGesAction(ges:UITapGestureRecognizer){
         
         let view = ges.view as! HDHM01RowView
-        let model = self.hdHM01Response?.result?.collectList?[view.tag]
+        let model = self.hdHM01Response?.result?.collectList?[view.tag-100]
         
         let hdhm05VC = HDHM05Controller()
         hdhm05VC.name = model?.title
@@ -833,7 +833,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func wikiGesAction(ges:UITapGestureRecognizer){
         
         let view = ges.view as! HDHM01RowView
-        let model = self.hdHM01Response?.result?.wikiList?[view.tag]
+        let model = self.hdHM01Response?.result?.wikiList?[view.tag-100]
         
         let hdWebVC = HDWebController()
         self.hidesBottomBarWhenPushed = true;

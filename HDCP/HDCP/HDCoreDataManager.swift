@@ -41,7 +41,7 @@ public class HDCoreDataManager: NSObject {
     }()
     
     /**
-     *  被管理的对象模型
+     *  被管理的对象模型 -> 加载数据模型
      */
     lazy var managedObjectModel: NSManagedObjectModel = {
         
@@ -50,7 +50,7 @@ public class HDCoreDataManager: NSObject {
     }()
     
     /**
-     *  持久化存储协调者
+     *  持久化存储协调者 -> 连接数据库
      */
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
@@ -83,7 +83,7 @@ public class HDCoreDataManager: NSObject {
     }()
     
     /**
-     *  被管理的对象上下文
+     *  被管理的对象上下文 -> 对数据进行添、删、改、查等
      */
     lazy var managedObjectContext: NSManagedObjectContext = {
         

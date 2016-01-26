@@ -672,6 +672,7 @@
 				35321D1F1C463FF100023637 /* Common */,
 				356F396E1C3A3F100056DF44 /* Home */,
 				356F39721C3A3F7F0056DF44 /* GG */,
+				356F39711C3A3F790056DF44 /* Center */,
 				356F39701C3A3F640056DF44 /* Category */,
 			);
 			name = Controllers;
@@ -698,7 +699,6 @@
 		356F39701C3A3F640056DF44 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				356F39711C3A3F790056DF44 /* Center */,
 				35F8CF421C3B9B17003B1364 /* Category.xcassets */,
 				356F39771C3A40130056DF44 /* HDCG01Controller.swift */,
 				3566C8FC1C479E5400573D97 /* HDCG02Controller.swift */,

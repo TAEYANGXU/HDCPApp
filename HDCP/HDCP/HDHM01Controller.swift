@@ -125,50 +125,53 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     func setupUI(){
         
-        if baseView == nil {
+        createBaseView()
+        
+        createHeaderView()
+        
+        createMenuView()
+        
+        createTagListView()
+        
+        createCollectListView()
+        
+        createWikiListView()
+        
+        /**
+        *  添加下拉刷新
+        */
+        baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
             
-            createBaseView()
+            self.doGetRequestData()
             
-            createHeaderView()
             
-            createMenuView()
-            
-            createTagListView()
-            
-            createCollectListView()
-            
-            createWikiListView()
-            
-            /**
-            *  添加下拉刷新
-            */
-            baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
-                
-                self.doGetRequestData()
-                
-                
-            })
-        }
+        })
+
+        
         
     }
     
     /**
-     *  创建容器
+     *  创建滚动容器
      */
     func createBaseView(){
     
-        baseView = UIScrollView()
         
-        self.view.addSubview(baseView)
-        
-        baseView.snp_makeConstraints { (make) -> Void in
+        if baseView == nil {
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.width.equalTo(Constants.HDSCREENWITH)
-            make.bottom.equalTo(self.view).offset(0)
+            baseView = UIScrollView()
+            
+            self.view.addSubview(baseView)
+            
+            baseView.snp_makeConstraints { (make) -> Void in
+                
+                make.top.equalTo(self.view).offset(0)
+                make.left.equalTo(self.view).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.bottom.equalTo(self.view).offset(0)
+            }
         }
-
+        
     }
     
     /**

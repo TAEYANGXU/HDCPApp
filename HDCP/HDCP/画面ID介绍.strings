@@ -19,8 +19,8 @@
  
     HDGG01Controller -> 逛逛
     HDGG02Controller -> 应用推荐
-    HDGG02Controller -> 食材百科
- 
+    HDGG03Controller -> 食材百科
+    HDGG04Controller -> 意见反馈
  
  
     HDCG01Controller -> 分类

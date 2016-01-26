@@ -26,6 +26,9 @@ class HDHM01Service: HDRequestManager {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
                
+                /**
+                *  防止卡顿
+                */
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
                     
                     //更新本地数据
@@ -39,9 +42,6 @@ class HDHM01Service: HDRequestManager {
                     })
                     
                 })
-                
-                
-                
                 
             }else{
                 
@@ -184,8 +184,12 @@ class HDHM01Service: HDRequestManager {
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
-        //一句SQL查出所有数据
+        /**
+        
+        一开始查询HDHM01ResponseEntity的时候，并没有一起查询出HDHM01ResultEntity，HM01TagListEntity，HM01WikiListEntity，HM01RecipeListEntity，HM01CollectListEntity，所以在遍历HDHM01ResponseEntity的集合的时候，会逐个去查询，所以产生了大量的查询语句，这无疑是低效的，能一起查出来的东西为什么要分多次呢？，其实很简单，只需要加这么一行：
+        */
         request.relationshipKeyPathsForPrefetching = ["HDHM01ResultEntity","HM01TagListEntity","HM01WikiListEntity","HM01RecipeListEntity","HM01CollectListEntity"]
+        
         
         let hmResponse = HDHM01Response()
         

@@ -137,10 +137,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         createWikiListView()
         
-        
-
-        
-        
+//        self.view.backgroundColor = HDColor(red: 105, green: 249, blue: 0, alpha: 1).color
     }
     
     /**
@@ -183,30 +180,28 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func createHeaderView(){
         
         
+        /**
+        *  创建容器
+        */
         
+        if headView == nil {
+            
+            headView = UIView()
+            baseView.addSubview(headView)
+            
+            headView.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(baseView).offset(0)
+                make.left.equalTo(baseView).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(HeadViewHeight)
+                
+            })
+            
+        }
+        
+
         if self.hdHM01Response?.result?.recipeList?.count > 0 {
-            
-            /**
-            *  创建容器
-            */
-            
-            if headView == nil {
-                
-                headView = UIView()
-                baseView.addSubview(headView)
-                
-                headView.snp_makeConstraints(closure: { (make) -> Void in
-                    
-                    make.top.equalTo(baseView).offset(0)
-                    make.left.equalTo(baseView).offset(0)
-                    make.width.equalTo(Constants.HDSCREENWITH)
-                    make.height.equalTo(HeadViewHeight)
-                    
-                })
-                
-            }
-            
-            
             
             if headerSView == nil {
                 

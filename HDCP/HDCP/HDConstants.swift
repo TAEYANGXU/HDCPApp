@@ -8,6 +8,14 @@
 
 import Foundation
 
+struct HDColor {
+    let color:UIColor
+    init(red:CGFloat,green:CGFloat,blue:CGFloat,alpha:CGFloat){
+        
+        color = UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
+    }
+}
+
 class Constants: NSObject {
 
     
@@ -42,6 +50,7 @@ class Constants: NSObject {
     /**
     *  颜色
     */
+    
     class func HDColor(r:CGFloat,g:CGFloat,b:CGFloat,a:CGFloat)->(UIColor){
         return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a);
     }

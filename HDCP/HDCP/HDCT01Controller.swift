@@ -137,6 +137,25 @@ class HDCT01Controller: UITableViewController {
                 
             })
             
+            if indexPath.section == 2 {
+            
+                if indexPath.row == ct01Array[indexPath.section].count-1 {
+                    
+                    icon?.snp_updateConstraints(closure: { (make) -> Void in
+                        
+                        
+                        make.width.equalTo(14)
+                        make.height.equalTo(14)
+                        make.left.equalTo(cell.contentView).offset(16)
+                        make.top.equalTo(cell.contentView).offset(15)
+
+                        
+                    })
+                    
+                }
+                
+            }
+        
         }
         
         

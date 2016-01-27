@@ -27,7 +27,7 @@ class HDHM04Controller: UITableViewController {
         
         self.title = tagModel?.name
         
-        doGetRequestData(self.tagModel!.id!,limit: 20,offset: self.offset)
+        doGetRequestData(self.tagModel!.id!,limit: 10,offset: self.offset)
         
     }
     
@@ -70,7 +70,7 @@ class HDHM04Controller: UITableViewController {
     
         HDHM04Service().doGetRequest_HDHM04_URL(tagId, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
             
-            self.offset = self.offset+1
+            self.offset = self.offset+10
             
             self.hidenHud()
             

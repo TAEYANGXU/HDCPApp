@@ -26,6 +26,28 @@ class HDHM01Service: HDRequestManager {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
                
+                let recipeModel = RecipeListModel()
+                recipeModel.rid = 63542
+                recipeModel.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
+                recipeModel.title = "土豆炖排骨"
+                recipeModel.userName = "芷萍"
+                
+                let recipeModel2 = RecipeListModel()
+                recipeModel2.rid = 63542
+                recipeModel2.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
+                recipeModel2.title = "土豆炖排骨"
+                recipeModel2.userName = "芷萍"
+                
+                let recipeModel3 = RecipeListModel()
+                recipeModel3.rid = 63542
+                recipeModel3.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
+                recipeModel3.title = "土豆炖排骨"
+                recipeModel3.userName = "芷萍"
+                
+                let array = NSArray(objects: recipeModel,recipeModel2,recipeModel3)
+                
+                hdHM01Response?.result?.recipeList = array as? Array<RecipeListModel>
+                
                 /**
                 *  防止卡顿
                 */
@@ -81,21 +103,31 @@ class HDHM01Service: HDRequestManager {
             collectModel?.result = result
         }
         
-        /// 滚动栏
-        for var i=0;i<hdHM01Response.result?.recipeList?.count;i++ {
+        
+        
+        if !isExistRecipeListEntity() {
             
-            let model = hdHM01Response.result?.recipeList?[i]
+            /// 滚动栏
+            for var i=0;i<hdHM01Response.result?.recipeList?.count;i++ {
+                
+                let model = hdHM01Response.result?.recipeList?[i]
+                
+                let recipeModel = NSEntityDescription.insertNewObjectForEntityForName("HM01RecipeListEntity", inManagedObjectContext: context) as? HM01RecipeListEntity
+                recipeModel!.rid = model!.rid
+                recipeModel!.cover = model!.cover
+                recipeModel!.title = model!.title
+                recipeModel!.userName = model!.userName
+                /**
+                *   设置关联
+                */
+                recipeModel?.result = result
+            }
+
             
-            let recipeModel = NSEntityDescription.insertNewObjectForEntityForName("HM01RecipeListEntity", inManagedObjectContext: context) as? HM01RecipeListEntity
-            recipeModel!.rid = model!.rid
-            recipeModel!.cover = model!.cover
-            recipeModel!.title = model!.title
-            recipeModel!.userName = model!.userName
-            /**
-            *   设置关联
-            */
-            recipeModel?.result = result
         }
+
+        
+        
         
         /// 厨房宝典
         for var i=0;i<hdHM01Response.result?.wikiList?.count;i++ {
@@ -114,6 +146,7 @@ class HDHM01Service: HDRequestManager {
             */
             wikiModel?.result = result
         }
+        
         
         //分类
         for var i=0;i<hdHM01Response.result?.tagList?.count;i++ {
@@ -297,4 +330,27 @@ class HDHM01Service: HDRequestManager {
         return ret
     }
     
+    
+    func isExistRecipeListEntity()->Bool {
+        
+        let context = HDCoreDataManager.sharedInstance.managedObjectContext
+        let request = NSFetchRequest(entityName: "HM01RecipeListEntity")
+        
+        var ret:Bool = false
+        
+        do{
+            let list = try context.executeFetchRequest(request)
+            if list.count>0 {
+                ret = true
+            }
+        }catch{
+            
+            let nserror = error as NSError
+            NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
+            abort()
+            
+        }
+        
+        return ret
+    }
 }

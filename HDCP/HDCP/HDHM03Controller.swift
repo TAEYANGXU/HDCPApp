@@ -74,7 +74,7 @@ class HDHM03Controller: UITableViewController {
         HDHM03Service().doGetRequest_HDHM03_URL(limit, offset: offset, successBlock: { (hdResponse) -> Void in
             
             
-                self.offset = self.offset+1
+                self.offset = self.offset+10
             
                 self.hidenHud()
             

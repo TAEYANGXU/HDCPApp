@@ -32,7 +32,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         setupUI()
         showHud()
         
-        doGetRequestData(cid,limit: 20,offset: self.offset)
+        doGetRequestData(cid,limit: 10,offset: self.offset)
         
         print("\(name)     \(cid!)")
         
@@ -99,7 +99,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
         HDHM05Service().doGetRequest_HDHM05_URL(cid, limit: limit, offset: offset, successBlock: { (hm05Response) -> Void in
             
-            self.offset = self.offset+1
+            self.offset = self.offset+10
             
             self.hidenHud()
             

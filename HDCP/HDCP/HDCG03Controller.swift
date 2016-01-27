@@ -98,7 +98,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
                     if self.tableView?.mj_footer == nil {
                         //当列表滚动到底端 视图自动刷新
                         self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-                            self.offset = self.offset + 1
+                            self.offset = self.offset + 20
                             self.doGetRequestData(self.searchBar.text!,limit: 10,offset: self.offset)
                         })
                         
@@ -226,7 +226,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         userDefault.setObject(NSArray(array: hisArray), forKey: Constants.HDHistory)
         userDefault.synchronize()
         
-        
+        dataArray = NSMutableArray()
         isShowHis = false
         showHud()
         searchBar.resignFirstResponder()

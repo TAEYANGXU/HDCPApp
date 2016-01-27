@@ -21,7 +21,7 @@ class HDHM06Controller: UITableViewController {
         
         setupUI()
         showHud()
-        doGetRequestData(20,offset: self.offset)
+        doGetRequestData(10,offset: self.offset)
         
     }
     
@@ -72,7 +72,7 @@ class HDHM06Controller: UITableViewController {
         
         HDHM06Service().doGetRequest_HDHM06_URL(limit, offset: offset, successBlock: { (hm06Response) -> Void in
             
-            self.offset = self.offset+1
+            self.offset = self.offset+10
             
             self.hidenHud()
             

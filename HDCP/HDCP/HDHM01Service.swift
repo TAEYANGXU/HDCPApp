@@ -27,10 +27,10 @@ class HDHM01Service: HDRequestManager {
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
                
                 let recipeModel = RecipeListModel()
-                recipeModel.rid = 63542
-                recipeModel.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
-                recipeModel.title = "土豆炖排骨"
-                recipeModel.userName = "芷萍"
+                recipeModel.rid = 849284
+                recipeModel.cover = "http://recipe0.hoto.cn/pic/recipe/l/84/f5/849284_37e8d2.jpg"
+                recipeModel.title = "鸡蛋卷饼"
+                recipeModel.userName = "爱涛姐永不变"
                 
                 let recipeModel2 = RecipeListModel()
                 recipeModel2.rid = 63542
@@ -39,12 +39,12 @@ class HDHM01Service: HDRequestManager {
                 recipeModel2.userName = "芷萍"
                 
                 let recipeModel3 = RecipeListModel()
-                recipeModel3.rid = 63542
-                recipeModel3.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
-                recipeModel3.title = "土豆炖排骨"
-                recipeModel3.userName = "芷萍"
+                recipeModel3.rid = 967436
+                recipeModel3.cover = "http://recipe0.hoto.cn/pic/recipe/l/0c/c3/967436_930c51.jpg"
+                recipeModel3.title = "抹茶千层蛋糕"
+                recipeModel3.userName = "Amanda的小厨房"
                 
-                let array = NSArray(objects: recipeModel,recipeModel2,recipeModel3)
+                let array = NSArray(objects: recipeModel3,recipeModel2,recipeModel)
                 
                 hdHM01Response?.result?.recipeList = array as? Array<RecipeListModel>
                 

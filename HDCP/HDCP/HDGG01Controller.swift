@@ -33,10 +33,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             *  读取本地数据
             */
             
-            hdGG01Response =  HDGG01Service().getAllResponseEntity()
+            self.hdGG01Response =  HDGG01Service().getAllResponseEntity()
             self.count = hdGG01Response.array2D!.count
+            self.tableView!.reloadData()
             
-            tableView?.reloadData()
+            self.tableView?.hidden = false
             
             doGetRequestData()
             

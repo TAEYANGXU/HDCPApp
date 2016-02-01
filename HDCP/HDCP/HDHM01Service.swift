@@ -25,28 +25,32 @@ class HDHM01Service: HDRequestManager {
             if response.result.error == nil {
                 
                 let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
-               
-                let recipeModel = RecipeListModel()
-                recipeModel.rid = 849284
-                recipeModel.cover = "http://recipe0.hoto.cn/pic/recipe/l/84/f5/849284_37e8d2.jpg"
-                recipeModel.title = "鸡蛋卷饼"
-                recipeModel.userName = "爱涛姐永不变"
                 
-                let recipeModel2 = RecipeListModel()
-                recipeModel2.rid = 63542
-                recipeModel2.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
-                recipeModel2.title = "土豆炖排骨"
-                recipeModel2.userName = "芷萍"
-                
-                let recipeModel3 = RecipeListModel()
-                recipeModel3.rid = 967436
-                recipeModel3.cover = "http://recipe0.hoto.cn/pic/recipe/l/0c/c3/967436_930c51.jpg"
-                recipeModel3.title = "抹茶千层蛋糕"
-                recipeModel3.userName = "Amanda的小厨房"
-                
-                let array = NSArray(objects: recipeModel3,recipeModel2,recipeModel)
-                
-                hdHM01Response?.result?.recipeList = array as? Array<RecipeListModel>
+                if hdHM01Response?.result?.recipeList?.count == 0 {
+                    
+                    let recipeModel = RecipeListModel()
+                    recipeModel.rid = 849284
+                    recipeModel.cover = "http://recipe0.hoto.cn/pic/recipe/l/84/f5/849284_37e8d2.jpg"
+                    recipeModel.title = "鸡蛋卷饼"
+                    recipeModel.userName = "爱涛姐永不变"
+                    
+                    let recipeModel2 = RecipeListModel()
+                    recipeModel2.rid = 63542
+                    recipeModel2.cover = "http://recipe0.hoto.cn/pic/recipe/g_230/36/f8/63542_69ffac.jpg"
+                    recipeModel2.title = "土豆炖排骨"
+                    recipeModel2.userName = "芷萍"
+                    
+                    let recipeModel3 = RecipeListModel()
+                    recipeModel3.rid = 967436
+                    recipeModel3.cover = "http://recipe0.hoto.cn/pic/recipe/l/0c/c3/967436_930c51.jpg"
+                    recipeModel3.title = "抹茶千层蛋糕"
+                    recipeModel3.userName = "Amanda的小厨房"
+                    
+                    let array = NSArray(objects: recipeModel3,recipeModel2,recipeModel)
+                    
+                    hdHM01Response?.result?.recipeList = array as? Array<RecipeListModel>
+                    
+                }
                 
                 /**
                 *  防止卡顿

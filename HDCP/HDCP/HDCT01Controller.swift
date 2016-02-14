@@ -216,5 +216,24 @@ class HDCT01Controller: UITableViewController {
         return 44
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        
+        if indexPath.section == 2 {
+            
+            if indexPath.row == 1 {
+                
+                let hdct06VC = HDCT06Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct06VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+                
+            }
+            
+        }
+        
+    }
+
 }
 

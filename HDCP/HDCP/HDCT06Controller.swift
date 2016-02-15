@@ -127,7 +127,7 @@ class HDCT06Controller: UITableViewController{
             
         }
         
-        if indexPath.section == 1 {
+        if indexPath.section == 1 || indexPath.section == 3 {
         
             cell.accessoryType = UITableViewCellAccessoryType.None
             

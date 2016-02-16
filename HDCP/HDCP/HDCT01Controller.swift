@@ -83,7 +83,7 @@ class HDCT01Controller: UITableViewController {
         
         loginBtn?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(headerIcon!.snp_bottom).offset(0)
+            make.top.equalTo(headerIcon!.snp_bottom).offset(5)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(40)
             make.left.equalTo(headerView!).offset(0)
@@ -91,7 +91,6 @@ class HDCT01Controller: UITableViewController {
         })
         
         self.tableView.tableHeaderView = headerView;
-        
         self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
@@ -100,7 +99,10 @@ class HDCT01Controller: UITableViewController {
     // MARK: - events
     func loginOrRegistAction(btn:UIButton){
     
-    
+        let hdct02VC = HDCT02Controller()
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdct02VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
     }
     
     // MARK: - UITableView delegate/datasource
@@ -118,6 +120,8 @@ class HDCT01Controller: UITableViewController {
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         /**
          *  图标
@@ -174,7 +178,7 @@ class HDCT01Controller: UITableViewController {
                 
                 make.width.equalTo(200)
                 make.height.equalTo(44)
-                make.left.equalTo((icon?.snp_right)!).offset(16)
+                make.left.equalTo(cell.contentView).offset(46)
                 make.top.equalTo(cell.contentView).offset(0)
             })
         }

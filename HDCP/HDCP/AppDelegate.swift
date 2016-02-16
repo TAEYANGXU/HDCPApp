@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         HDShareSDKManager.initializeShareSDK()
         
         //初始化CoreData
-        HDCoreDataManager.sharedInstance
+//        HDCoreDataManager.sharedInstance
         
         //欢迎导航页面
         showWelcome()

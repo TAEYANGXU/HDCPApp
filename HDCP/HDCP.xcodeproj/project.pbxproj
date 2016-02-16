@@ -124,6 +124,7 @@
 		35776A771C70615200903620 /* HDCT04Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35776A761C70615200903620 /* HDCT04Controller.swift */; };
 		35776A791C70616000903620 /* HDCT05Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35776A781C70616000903620 /* HDCT05Controller.swift */; };
 		35776A7B1C70621600903620 /* HDCT06Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35776A7A1C70621600903620 /* HDCT06Controller.swift */; };
+		35776A7D1C71D71300903620 /* HDHttpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35776A7C1C71D71300903620 /* HDHttpManager.swift */; };
 		358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FB91C4F260500A4EF3E /* HDExtension.swift */; };
 		358C1FBC1C4F56FE00A4EF3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBB1C4F56FE00A4EF3E /* libz.tbd */; };
 		358C1FBE1C4F571500A4EF3E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */; };
@@ -318,6 +319,7 @@
 		35776A761C70615200903620 /* HDCT04Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT04Controller.swift; sourceTree = "<group>"; };
 		35776A781C70616000903620 /* HDCT05Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT05Controller.swift; sourceTree = "<group>"; };
 		35776A7A1C70621600903620 /* HDCT06Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT06Controller.swift; sourceTree = "<group>"; };
+		35776A7C1C71D71300903620 /* HDHttpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHttpManager.swift; sourceTree = "<group>"; };
 		358C1FB91C4F260500A4EF3E /* HDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDExtension.swift; sourceTree = "<group>"; };
 		358C1FBB1C4F56FE00A4EF3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -750,6 +752,7 @@
 				35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */,
 				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
 				358C1FC51C4F58EB00A4EF3E /* HDShareSDKManager.swift */,
+				35776A7C1C71D71300903620 /* HDHttpManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				352A424A1C50AACE009D0F9F /* HM01RecipeListEntity.swift in Sources */,
 				1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */,
 				358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */,
+				35776A7D1C71D71300903620 /* HDHttpManager.swift in Sources */,
 				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
 				35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */,

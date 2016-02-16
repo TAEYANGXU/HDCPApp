@@ -96,6 +96,7 @@ class HDCT03Controller: UITableViewController {
             
             password = UITextField()
             password.placeholder = "请输入手机号码"
+            password.keyboardType = UIKeyboardType.NumberPad;
             password.font = UIFont.systemFontOfSize(16)
             cell.contentView.addSubview(password)
             password.snp_makeConstraints(closure: { (make) -> Void in

@@ -92,7 +92,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
-            shareSubView = HDShareView(frame: CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,shareViewHeight))
+            shareSubView = HDShareView(frame: CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight))
             shareSubView.completeClosuse(shareAction)
             shareView.addSubview(shareSubView)
             
@@ -446,7 +446,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     func hideShareView(){
         
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64,Constants.HDSCREENWITH,shareViewHeight)
+            self.shareSubView.frame = CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight)
             self.shareView.alpha = 0.0
             }, completion: { (ret) -> Void in
                 self.shareView?.hidden = true
@@ -458,7 +458,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         shareView?.hidden = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.shareView.alpha = 1
-            self.shareSubView.frame = CGRectMake(0,Constants.HDSCREENHEIGHT-64-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
+            self.shareSubView.frame = CGRectMake(0,self.view.bounds.size.height-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
         })
     }
     

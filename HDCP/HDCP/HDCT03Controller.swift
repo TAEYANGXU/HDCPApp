@@ -10,7 +10,7 @@ import UIKit
 
 class HDCT03Controller: UITableViewController {
 
-    var password:UITextField!
+    var mobile:UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,16 @@ class HDCT03Controller: UITableViewController {
     
     func nextAction(){
     
+        if CoreUtils.isMobileNumber(mobile.text!) {
+            
+            let hdct04VC = HDCT04Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct04VC, animated: true)
+            
+        }else{
+            //手机号码输入有误
+            CoreUtils.showWarningHUD(self.view, title: "手机号码输入有误")
+        }
         
     }
     
@@ -96,12 +106,12 @@ class HDCT03Controller: UITableViewController {
                 make.top.equalTo(cell.contentView).offset(10)
             })
             
-            password = UITextField()
-            password.placeholder = "请输入手机号码"
-            password.keyboardType = UIKeyboardType.NumberPad;
-            password.font = UIFont.systemFontOfSize(16)
-            cell.contentView.addSubview(password)
-            password.snp_makeConstraints(closure: { (make) -> Void in
+            mobile = UITextField()
+            mobile.placeholder = "请输入手机号码"
+            mobile.keyboardType = UIKeyboardType.NumberPad;
+            mobile.font = UIFont.systemFontOfSize(16)
+            cell.contentView.addSubview(mobile)
+            mobile.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-80)
                 make.height.equalTo(40)

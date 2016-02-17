@@ -219,4 +219,24 @@ class CoreUtils: NSObject {
         
     }
     
+    /**
+    *  手机号码验证
+    *
+    *  @param mobileNum 手机号码
+    *
+    */
+    class func isMobileNumber(number:String)->Bool{
+    
+        let regextestmobile:NSPredicate = NSPredicate(format: "SELF MATCHES %@", "^[1][1,2,3,4,5,6,7,8,9][0-9]{9}$")
+        
+        if regextestmobile.evaluateWithObject(number) == true {
+        
+            return true
+        }else{
+        
+            return false
+        }
+        
+    }
+    
 }

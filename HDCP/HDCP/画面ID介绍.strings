@@ -30,13 +30,11 @@
  
     HDCT01Controller -> 我的
     HDCT02Controller -> 登录
- 
     HDCT03Controller -> 验证
     HDCT04Controller -> 注册
- 
     HDCT05Controller -> 动态
- 
     HDCT06Controller -> 设置
+    HDCT07Controller -> 协议
  
     //共通
     HDWebController -> 展示web页面

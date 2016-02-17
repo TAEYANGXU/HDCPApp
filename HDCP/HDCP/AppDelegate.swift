@@ -24,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //ShareSDK 初始化
         HDShareSDKManager.initializeShareSDK()
         
-        //初始化CoreData
-//        HDCoreDataManager.sharedInstance
-        
         //欢迎导航页面
         showWelcome()
+        
+        //监听网络变化
+        networkMonitoring()
         
         return true
     }
@@ -132,6 +132,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFontOfSize(13)], forState:UIControlState.Selected)
 
+    }
+    
+    /**
+    *  网络监听
+    */
+    
+    func networkMonitoring(){
+        
+        var reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+            
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                selector: "reachabilityChanged:",
+                name: ReachabilityChangedNotification,
+                object: reachability)
+            
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to create Reachability")
+            return
+        }
+        
+    }
+    
+    func reachabilityChanged(note: NSNotification) {
+        
+        let reachability = note.object as! Reachability
+        
+        if reachability.isReachable() {
+            if reachability.isReachableViaWiFi() {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+        } else {
+            print("Not reachable")
+        }
     }
 
 }

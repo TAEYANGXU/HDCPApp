@@ -39,7 +39,11 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             
         }else{
         
-            doGetRequestData()
+            if CoreUtils.networkIsReachable() {
+                
+                doGetRequestData()
+                
+            }
         }
         
         

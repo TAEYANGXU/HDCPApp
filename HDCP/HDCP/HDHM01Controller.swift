@@ -93,8 +93,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
         }else{
         
-            showHud()
-            doGetRequestData()
+            if CoreUtils.networkIsReachable() {
+                
+                showHud()
+                doGetRequestData()
+                
+            }
             
         }
         

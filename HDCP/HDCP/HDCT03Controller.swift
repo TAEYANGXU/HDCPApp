@@ -51,7 +51,9 @@ class HDCT03Controller: UITableViewController {
     
     func protocolAction(){
     
-        print("协议")
+        let hdct07VC = HDCT07Controller()
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdct07VC, animated: true)
         
     }
     

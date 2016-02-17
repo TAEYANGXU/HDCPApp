@@ -123,7 +123,8 @@ class Constants: NSObject {
      /**
      *  我的
      */
-    
+    //协议
+    static let HDCT07_URL = "http://m.haodou.com/about.php?do=privacy"
     /*******************************************END*********************************************/
    
 }

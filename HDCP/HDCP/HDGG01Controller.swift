@@ -43,8 +43,12 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             
         }else{
         
-            showHud()
-            doGetRequestData()
+            if CoreUtils.networkIsReachable() {
+                
+                showHud()
+                doGetRequestData()
+                
+            }
         }
         
     }

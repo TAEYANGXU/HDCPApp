@@ -28,6 +28,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.tableFooterView = UIView()
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -121,6 +122,18 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
                 
             })
             
+            let line = UILabel()
+            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+            cell.contentView.addSubview(line)
+            
+            line.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.width.equalTo(Constants.HDSCREENWITH-16)
+                make.height.equalTo(1)
+                make.left.equalTo(cell.contentView).offset(16)
+                make.top.equalTo(cell.contentView).offset(59)
+                
+            })
             
         }else if indexPath.row == 1 {
             
@@ -147,6 +160,19 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
                 make.height.equalTo(40)
                 make.left.equalTo(title.snp_right).offset(0)
                 make.top.equalTo(cell.contentView).offset(5)
+                
+            })
+            
+            let line = UILabel()
+            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+            cell.contentView.addSubview(line)
+            
+            line.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.width.equalTo(Constants.HDSCREENWITH-16)
+                make.height.equalTo(1)
+                make.left.equalTo(cell.contentView).offset(16)
+                make.top.equalTo(cell.contentView).offset(49)
                 
             })
 

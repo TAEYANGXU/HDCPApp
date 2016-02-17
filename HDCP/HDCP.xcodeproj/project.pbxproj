@@ -143,6 +143,10 @@
 		35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */; };
 		35EF56721C51CBAE00352E7D /* HDCG03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */; };
 		35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56741C51D5D900352E7D /* HDCG03Service.swift */; };
+		35F3FE421C7425C3003B43FC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F3FE411C7425C3003B43FC /* SystemConfiguration.framework */; };
+		35F3FE441C7425D9003B43FC /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F3FE431C7425D9003B43FC /* ImageIO.framework */; };
+		35F3FE471C74261C003B43FC /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3FE461C74261C003B43FC /* Reachability.swift */; };
+		35F3FE4B1C744D8F003B43FC /* HDCT07Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F3FE4A1C744D8F003B43FC /* HDCT07Controller.swift */; };
 		35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */; };
 		35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */; };
@@ -339,6 +343,10 @@
 		35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Controller.swift; sourceTree = "<group>"; };
 		35EF56741C51D5D900352E7D /* HDCG03Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Service.swift; sourceTree = "<group>"; };
 		35EF56761C52176000352E7D /* HDCP1_1_1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDCP1_1_1.xcdatamodel; sourceTree = "<group>"; };
+		35F3FE411C7425C3003B43FC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		35F3FE431C7425D9003B43FC /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		35F3FE461C74261C003B43FC /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		35F3FE4A1C744D8F003B43FC /* HDCT07Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT07Controller.swift; sourceTree = "<group>"; };
 		35F8CF381C3B6974003B1364 /* HDRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRequestManager.swift; sourceTree = "<group>"; };
 		35F8CF3A1C3B7010003B1364 /* HDHM01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Service.swift; sourceTree = "<group>"; };
 		35F8CF3C1C3B8A1D003B1364 /* HDCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCoreDataManager.swift; sourceTree = "<group>"; };
@@ -356,6 +364,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35F3FE441C7425D9003B43FC /* ImageIO.framework in Frameworks */,
+				35F3FE421C7425C3003B43FC /* SystemConfiguration.framework in Frameworks */,
 				358C1FC41C4F573D00A4EF3E /* libsqlite3.tbd in Frameworks */,
 				358C1FC21C4F572A00A4EF3E /* libicucore.tbd in Frameworks */,
 				358C1FC01C4F571D00A4EF3E /* JavaScriptCore.framework in Frameworks */,
@@ -385,6 +395,8 @@
 		0FE20ED4C6ED96A5FFF64458 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				35F3FE431C7425D9003B43FC /* ImageIO.framework */,
+				35F3FE411C7425C3003B43FC /* SystemConfiguration.framework */,
 				358C1FC31C4F573D00A4EF3E /* libsqlite3.tbd */,
 				358C1FC11C4F572A00A4EF3E /* libicucore.tbd */,
 				358C1FBF1C4F571D00A4EF3E /* JavaScriptCore.framework */,
@@ -729,6 +741,7 @@
 				35776A761C70615200903620 /* HDCT04Controller.swift */,
 				35776A781C70616000903620 /* HDCT05Controller.swift */,
 				35776A7A1C70621600903620 /* HDCT06Controller.swift */,
+				35F3FE4A1C744D8F003B43FC /* HDCT07Controller.swift */,
 			);
 			name = Center;
 			sourceTree = "<group>";
@@ -792,6 +805,7 @@
 		356F398C1C3A68830056DF44 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				35F3FE451C74260D003B43FC /* Reachability */,
 				3502FF401C450E4B0083F303 /* MBProgressHUD */,
 				1B0FD0C61C3D5749009E85CD /* MJRefresh */,
 				356F39951C3A76FD0056DF44 /* ObjectMapper */,
@@ -950,6 +964,14 @@
 			children = (
 			);
 			name = CT;
+			sourceTree = "<group>";
+		};
+		35F3FE451C74260D003B43FC /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				35F3FE461C74261C003B43FC /* Reachability.swift */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 		35F8CF481C3BCDC7003B1364 /* CustomUI */ = {
@@ -1194,6 +1216,7 @@
 				352A424F1C50AACE009D0F9F /* HM01TagListEntity+CoreDataProperties.swift in Sources */,
 				358C1FC81C4F69EB00A4EF3E /* HDShareView.swift in Sources */,
 				356F39AF1C3A76FE0056DF44 /* CustomDateFormatTransform.swift in Sources */,
+				35F3FE4B1C744D8F003B43FC /* HDCT07Controller.swift in Sources */,
 				352A42521C50AACE009D0F9F /* HDHM01ResultEntity.swift in Sources */,
 				35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */,
 				35776A791C70616000903620 /* HDCT05Controller.swift in Sources */,
@@ -1217,6 +1240,7 @@
 				3566C8F11C47533B00573D97 /* HDHM04Cell.swift in Sources */,
 				356F39A81C3A76FE0056DF44 /* FromJSON.swift in Sources */,
 				3502FF361C44D6D70083F303 /* HDHM02Model.swift in Sources */,
+				35F3FE471C74261C003B43FC /* Reachability.swift in Sources */,
 				352A42831C50E190009D0F9F /* HDGG01ResultEntity.swift in Sources */,
 				356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */,
 				352A42481C50AACE009D0F9F /* HM01WikiListEntity.swift in Sources */,

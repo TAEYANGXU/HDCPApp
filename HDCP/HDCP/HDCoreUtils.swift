@@ -196,4 +196,27 @@ class CoreUtils: NSObject {
         
     }
     
+    /**
+     *  网络是否可用
+     */
+    class func networkIsReachable()->Bool{
+        
+        let reachability:Reachability
+        var ret:Bool
+        
+        do{
+            reachability = try Reachability(hostname: "www.apple.com")
+            if reachability.isReachable() {
+                ret = true
+            }else{
+                ret = false
+            }
+        }catch{
+            ret = false
+        }
+        
+        return ret
+        
+    }
+    
 }

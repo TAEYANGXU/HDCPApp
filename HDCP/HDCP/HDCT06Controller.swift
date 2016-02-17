@@ -159,17 +159,7 @@ class HDCT06Controller: UITableViewController{
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        
         return 44
-        
-//        if indexPath.section == 3 {
-//        
-//            return 44*2
-//            
-//        }else{
-//        
-//            return 44
-//        }
         
     }
 

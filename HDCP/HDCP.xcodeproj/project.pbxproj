@@ -87,7 +87,6 @@
 		3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9041C48C52500573D97 /* HDHM06Controller.swift */; };
 		3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3566C9061C48C53600573D97 /* HDHM07Controller.swift */; };
 		356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39351C3A23E90056DF44 /* AppDelegate.swift */; };
-		356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356F39371C3A23EA0056DF44 /* ViewController.swift */; };
 		356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 356F39391C3A23EA0056DF44 /* Main.storyboard */; };
 		356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 356F393C1C3A23EA0056DF44 /* HDCP.xcdatamodeld */; };
 		356F39401C3A23EA0056DF44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 356F393F1C3A23EA0056DF44 /* Assets.xcassets */; };
@@ -277,7 +276,6 @@
 		3566C9061C48C53600573D97 /* HDHM07Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Controller.swift; sourceTree = "<group>"; };
 		356F39321C3A23E90056DF44 /* HDCP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HDCP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		356F39351C3A23E90056DF44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		356F39371C3A23EA0056DF44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		356F393A1C3A23EA0056DF44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		356F393D1C3A23EA0056DF44 /* HDCP.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDCP.xcdatamodel; sourceTree = "<group>"; };
 		356F393F1C3A23EA0056DF44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -658,7 +656,6 @@
 				356F397E1C3A43A30056DF44 /* Core */,
 				356F396D1C3A3EEA0056DF44 /* Controllers */,
 				356F39351C3A23E90056DF44 /* AppDelegate.swift */,
-				356F39371C3A23EA0056DF44 /* ViewController.swift */,
 				356F396B1C3A3E900056DF44 /* MainViewController.swift */,
 				356F39391C3A23EA0056DF44 /* Main.storyboard */,
 				356F393F1C3A23EA0056DF44 /* Assets.xcassets */,
@@ -1208,7 +1205,6 @@
 				35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */,
 				352A424B1C50AACE009D0F9F /* HM01CollectListEntity+CoreDataProperties.swift in Sources */,
 				356F39AA1C3A76FE0056DF44 /* Mappable.swift in Sources */,
-				356F39381C3A23EA0056DF44 /* ViewController.swift in Sources */,
 				352A41D81C5078E1009D0F9F /* HDHM01Controller.swift in Sources */,
 				352A42471C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift in Sources */,
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,

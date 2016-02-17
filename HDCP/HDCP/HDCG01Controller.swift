@@ -29,6 +29,9 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
         dataArray = Array<HDCG01ListModel>()
         
+        self.edgesForExtendedLayout = UIRectEdge.None;
+        self.navigationController?.navigationBar.translucent = false
+        
         setupUI()
         
         if HDCG01Service().isExistEntity() {

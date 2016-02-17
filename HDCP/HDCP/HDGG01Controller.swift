@@ -25,6 +25,9 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.edgesForExtendedLayout = UIRectEdge.None;
+        self.navigationController?.navigationBar.translucent = false
+        
         count = 0
         setupUI()
         

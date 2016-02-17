@@ -361,6 +361,42 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         }
     }
 
-
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        
+        if indexPath.row != 0 {
+            return UITableViewCellEditingStyle.Delete
+        }else{
+            return UITableViewCellEditingStyle.None
+        }
+        
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.hisDataArray.removeObjectAtIndex(indexPath.row)
+        
+        let userDefault = NSUserDefaults.standardUserDefaults()
+        let array = userDefault.objectForKey(Constants.HDHistory) as? NSArray
+        let hisArray = NSMutableArray()
+        
+        if array?.count>0 {
+            
+            hisArray.addObjectsFromArray(array! as [AnyObject])
+            hisArray.removeObjectAtIndex(indexPath.row-1)
+            
+        }
+        
+        userDefault.setObject(NSArray(array: hisArray), forKey: Constants.HDHistory)
+        userDefault.synchronize()
+        
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+        if hisArray.count == 0 {
+        
+            self.hisDataArray = NSMutableArray()
+            self.tableView.reloadData()
+        }
+        
+    }
 
 }

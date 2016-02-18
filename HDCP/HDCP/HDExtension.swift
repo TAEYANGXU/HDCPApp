@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 // MARK: -  UIViewController Category
 extension UIViewController{
@@ -38,3 +39,4 @@ extension UIViewController{
     }
     
 }
+

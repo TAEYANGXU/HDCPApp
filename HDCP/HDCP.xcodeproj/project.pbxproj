@@ -225,7 +225,7 @@
 		3502FF421C450FDC0083F303 /* 画面ID介绍.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "画面ID介绍.strings"; sourceTree = "<group>"; };
 		3521FC871C56232700E30D15 /* HDGG02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG02Controller.swift; sourceTree = "<group>"; };
 		3521FC891C56233700E30D15 /* HDGG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG03Controller.swift; sourceTree = "<group>"; };
-		352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
+		352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
 		352A423B1C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HM01WikiListEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		352A423C1C50AACE009D0F9F /* HM01WikiListEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HM01WikiListEntity.swift; sourceTree = "<group>"; };
 		352A423D1C50AACE009D0F9F /* HM01RecipeListEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HM01RecipeListEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };

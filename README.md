@@ -2,12 +2,12 @@
 
 用到的第三方库
 
-    Alamofire : 网络请求库(Swift)
-    SDWebImage : 图片加载库(OC)
-    MJRefresh : 下拉刷新(OC)
-    MBProgressHUD ：提示HUD(OC)
-    SnapKit ：Swift版的Masonry,自动布局
-    ObjectMapper ：对象映射，Json转Model(Swift)
+    Alamofire : 网络请求库
+    SDWebImage : 图片加载库
+    MJRefresh : 下拉刷新
+    MBProgressHUD ：提示HUD
+    SnapKit ：自动布局
+    ObjectMapper ：对象映射，Json转Model
     ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享
     CoreData ：所有Tab主页做了本地存储
 

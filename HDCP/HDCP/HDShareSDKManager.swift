@@ -47,7 +47,7 @@ public class HDShareSDKManager {
                     appInfo.SSDKSetupWeChatByAppId("wxa31fc3ddf49a3a53", appSecret: "36d04f1ddf538e8efeab2791f0caf016")
                     break
                 case SSDKPlatformType.TypeQQ:
-                    //设置腾讯微博应用信息，其中authType设置为只用Web形式授权
+                    //设置腾讯应用信息，其中authType设置为只用Web形式授权
                     appInfo.SSDKSetupQQByAppId("1105128294", appKey: "c46wxXfFpd9VDcn3", authType: SSDKAuthTypeBoth)
                     break
                     default:

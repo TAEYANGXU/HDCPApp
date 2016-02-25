@@ -13,7 +13,7 @@
 
 目录结构分析
 
-    General : 公用类和方法，包括工程内ViewController,UITableViewCell基类(Base)，公用Extension(Category)，公用UI组件(CustomUI)，公用辅助方法(Helper)和宏定义(Marco)。
+    General : 公用类和方法，包括工程内ViewController,UITableViewCell基类(Base)，公用Extension(Category)，公用UI组件(CustomUI)，公用辅助方法和宏定义(Helper)。
     Vendors : 第三方库(有些需要用Pods导入进来)
     Service : 网络请求及业务处理
     Model : 数据模型

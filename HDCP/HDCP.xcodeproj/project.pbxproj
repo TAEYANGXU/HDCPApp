@@ -771,7 +771,6 @@
 			isa = PBXGroup;
 			children = (
 				358C1FB71C4F256500A4EF3E /* Helper */,
-				358C1FB81C4F259300A4EF3E /* Marco */,
 				358C1FB61C4F255400A4EF3E /* CustomUI */,
 				358C1FB51C4F254A00A4EF3E /* Extension */,
 				358C1FB41C4F252B00A4EF3E /* Base */,
@@ -888,17 +887,10 @@
 		358C1FB71C4F256500A4EF3E /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
 				356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */,
 			);
 			name = Helper;
-			sourceTree = "<group>";
-		};
-		358C1FB81C4F259300A4EF3E /* Marco */ = {
-			isa = PBXGroup;
-			children = (
-				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
-			);
-			name = Marco;
 			sourceTree = "<group>";
 		};
 		35B703411C3F81300024A329 /* HM */ = {

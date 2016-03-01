@@ -162,6 +162,13 @@ class HDHM08InfoModel: Mappable {
 /// 评论
 class HDHM08Comment: Mappable {
     
+    var avatar:String!
+    var content:String!
+    var createTime:String!
+    var userId:String!
+    var userName:String!
+    var height:CGFloat!
+    
     init(){}
     
     required init?(_ map: Map) {
@@ -170,6 +177,11 @@ class HDHM08Comment: Mappable {
     
     func mapping(map: Map) {
         
+        avatar <- map["Avatar"]
+        content <- map["Content"]
+        createTime <- map["CreateTime"]
+        userId <- map["UserId"]
+        userName <- map["UserName"]
     }
 
 }
@@ -180,7 +192,7 @@ class HDHM08Result: Mappable {
     var adData:HDHM08AdDataModel?
     var adFlag:Bool?
     var info:HDHM08InfoModel?
-    var comment:HDHM08Comment?
+    var comment:Array<HDHM08Comment>?
     
     init(){}
     

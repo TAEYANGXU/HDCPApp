@@ -70,6 +70,7 @@
 		35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D201C46499F00023637 /* HDRefreshGifFooter.swift */; };
 		35321D231C464CF500023637 /* HDHM04Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D221C464CF500023637 /* HDHM04Controller.swift */; };
 		35321D251C46512E00023637 /* HDWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D241C46512E00023637 /* HDWebController.swift */; };
+		3536E5451C85320F0098877D /* HDHM10Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536E5441C85320F0098877D /* HDHM10Controller.swift */; };
 		3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */; };
 		3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */; };
 		3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */; };
@@ -258,6 +259,7 @@
 		35321D201C46499F00023637 /* HDRefreshGifFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDRefreshGifFooter.swift; sourceTree = "<group>"; };
 		35321D221C464CF500023637 /* HDHM04Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM04Controller.swift; sourceTree = "<group>"; };
 		35321D241C46512E00023637 /* HDWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWebController.swift; sourceTree = "<group>"; };
+		3536E5441C85320F0098877D /* HDHM10Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Controller.swift; sourceTree = "<group>"; };
 		3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Controller.swift; sourceTree = "<group>"; };
 		3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Model.swift; sourceTree = "<group>"; };
@@ -713,6 +715,7 @@
 				3566C9061C48C53600573D97 /* HDHM07Controller.swift */,
 				3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */,
 				35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */,
+				3536E5441C85320F0098877D /* HDHM10Controller.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				35A138501C3CF75E0050F282 /* HDHM01RowView.swift in Sources */,
 				352A424B1C50AACE009D0F9F /* HM01CollectListEntity+CoreDataProperties.swift in Sources */,
 				356F39AA1C3A76FE0056DF44 /* Mappable.swift in Sources */,
+				3536E5451C85320F0098877D /* HDHM10Controller.swift in Sources */,
 				352A41D81C5078E1009D0F9F /* HDHM01Controller.swift in Sources */,
 				352A42471C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift in Sources */,
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,

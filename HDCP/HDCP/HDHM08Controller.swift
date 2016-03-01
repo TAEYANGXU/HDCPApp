@@ -248,11 +248,15 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             
             let commentCount = UILabel()
-            commentCount.textColor = UIColor.lightGrayColor()
+            commentCount.textColor = UIColor.blueColor()
             commentCount.font = UIFont.systemFontOfSize(12)
+            commentCount.userInteractionEnabled = true
             infoView?.addSubview(commentCount)
             
             commentCount.text = String(format: "评论:%d", (hm08Response.result?.info?.commentCount)!)
+            
+            let tapGes = UITapGestureRecognizer(target: self, action: "commentAction")
+            commentCount.addGestureRecognizer(tapGes)
             
             commentCount.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -468,6 +472,17 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         self.navigationController?.popViewControllerAnimated(true)
         
+    }
+    
+    /**
+     *  查看评论
+     */
+    func commentAction(){
+    
+        let hd10VC = HDHM10Controller()
+        hd10VC.response = self.hm08Response
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(hd10VC, animated: true)
     }
     
     func share(){

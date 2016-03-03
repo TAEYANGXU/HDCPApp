@@ -157,10 +157,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         let height:CGFloat = (rect?.CGRectValue.height)!
         
+        print("height =  \(height)")
         
-        UIView.animateWithDuration(0.7) { () -> Void in
+        UIView.animateWithDuration(0.3) { () -> Void in
             
-            self.putView.frame = Constants.HDFrame(0, y: height-50, width: Constants.HDSCREENWITH, height: 50)
+            self.putView.frame = Constants.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
             self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
             
             /// cell滚动到底部

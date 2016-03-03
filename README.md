@@ -8,7 +8,7 @@
     MBProgressHUD ：提示HUD
     SnapKit ：自动布局
     ObjectMapper ：对象映射，Json转Model
-    ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享
+    ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享(真机才能分享)
     CoreData ：所有Tab主页做了本地存储
 
 目录结构分析

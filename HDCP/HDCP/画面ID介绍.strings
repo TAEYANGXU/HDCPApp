@@ -15,7 +15,7 @@
     HDHM07Controller -> 全部宝典
     HDHM08Controller -> 菜谱详情
     HDHM09Controller -> 烹饪步骤
- 
+    HDHM10Controller -> 评论
  
     HDGG01Controller -> 逛逛
     HDGG02Controller -> 应用推荐

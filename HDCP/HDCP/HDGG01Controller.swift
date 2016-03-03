@@ -66,6 +66,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         super.viewDidLayoutSubviews()
     }
 
+    deinit{
+    
+        tableView?.delegate = nil
+        tableView?.dataSource = nil
+    }
     // MARK: - 创建UI视图
    
     func setupUI(){

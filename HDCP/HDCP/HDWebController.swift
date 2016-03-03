@@ -57,6 +57,11 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
     }
     
+    deinit{
+    
+        webView?.delegate = nil
+    }
+    
     // MARK: - events
     
     func backAction(){

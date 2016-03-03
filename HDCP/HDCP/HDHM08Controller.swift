@@ -480,7 +480,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     func commentAction(){
     
         let hd10VC = HDHM10Controller()
-        hd10VC.response = self.hm08Response
+        hd10VC.commentArray = (self.hm08Response.result?.comment)!
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(hd10VC, animated: true)
     }

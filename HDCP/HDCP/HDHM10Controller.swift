@@ -10,11 +10,12 @@ import UIKit
 
 class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
-    var response:HDHM08Response!
     var tableView:UITableView!
     var putView:UIView!
     var textView:UITextField!
     var commitBtn:UIButton!
+    var commentArray:Array<HDHM08Comment> = Array<HDHM08Comment>()
+    
     
     override func viewDidLoad() {
         
@@ -31,7 +32,6 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     func setupUI(){
         
-        
         tableView = UITableView()
         tableView?.delegate = self
         tableView?.dataSource = self
@@ -39,27 +39,32 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         tableView.tableFooterView = UIView()
-        tableView?.snp_makeConstraints(closure: { (make) -> Void in
-            
-            make.top.equalTo(self.view).offset(0)
-            make.width.equalTo(Constants.HDSCREENWITH)
-            make.left.equalTo(self.view).offset(0)
-            make.height.equalTo(Constants.HDSCREENHEIGHT-64-50)
-            
-        })
+        tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+        
+        tableView.userInteractionEnabled = true
+        
+        /**
+        *   添加点击事件收齐键盘
+        */
+        let tapGes = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
+        tableView.addGestureRecognizer(tapGes)
+
         
         putView = UIView()
         putView.backgroundColor = Constants.HDBGViewColor
         self.view.addSubview(putView)
         
-        putView.snp_makeConstraints { (make) -> Void in
-            
-            make.top.equalTo(tableView.snp_bottom).offset(0)
-            make.width.equalTo(Constants.HDSCREENWITH)
-            make.left.equalTo(self.view).offset(0)
-            make.height.equalTo(50)
-            
-        }
+        putView.frame = Constants.HDFrame(0, y: Constants.HDSCREENHEIGHT-50-64, width: Constants.HDSCREENWITH, height: 50)
+        
+        
+        /**
+        *  分割线
+        */
+        
+        let line = UIView()
+        line.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: 1)
+        line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+        putView.addSubview(line)
         
         /**
         *  输入框
@@ -67,9 +72,10 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         textView = UITextField()
         textView.placeholder = "说点什么..."
-        textView.layer.borderWidth = 0.7
+        textView.layer.borderWidth = 0.5
         textView.layer.borderColor = Constants.HDMainTextColor.CGColor
         textView.layer.cornerRadius = 5
+        textView.backgroundColor = UIColor.whiteColor()
         textView.font = UIFont.systemFontOfSize(15)
         textView.layer.masksToBounds = true
         putView.addSubview(textView)
@@ -88,7 +94,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         commitBtn.setTitle("发送", forState: UIControlState.Normal)
         commitBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
         commitBtn.backgroundColor = Constants.HDMainColor
-        commitBtn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+        commitBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        commitBtn.addTarget(self, action: "sendComment", forControlEvents: UIControlEvents.TouchUpInside)
         commitBtn.layer.cornerRadius = 5
         commitBtn.layer.masksToBounds = true
         putView.addSubview(commitBtn)
@@ -102,24 +109,97 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         }
         
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChange:", name: UIKeyboardWillChangeFrameNotification , object: nil)
+        
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        /**
+        *  移除通知
+        */
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
-        self.title = String(format: "评论(%d)", (self.response.result?.comment?.count)!)
+        self.title = String(format: "评论(%d)", commentArray.count)
       
+    }
+    
+    deinit{
+    
+        tableView.delegate = nil
+        tableView.dataSource = nil
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        print("click !")
+        
+    }
+    
+    // MARK: - 键盘变化
+    func keyboardWillShow(note:NSNotification){
+    
+        
+       let rect =  note.userInfo![UIKeyboardFrameEndUserInfoKey]
+        
+        let height:CGFloat = (rect?.CGRectValue.height)!
+        
+        
+        UIView.animateWithDuration(0.7) { () -> Void in
+            
+            self.putView.frame = Constants.HDFrame(0, y: height-50, width: Constants.HDSCREENWITH, height: 50)
+            self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
+            
+            /// cell滚动到底部
+            let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            
+        }
+        
+    }
+    
+    func keyboardWillHide(note:NSNotification){
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            
+            self.putView.frame = Constants.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
+            self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+            
+            /// cell滚动到底部
+            let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
+            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        }
+        
+    }
+    
+    func keyboardWillChange(note:NSNotification){
+        
+       
+
+        
     }
     
     // MARK: - 计算文本高度
     
     func getContentHeight(){
     
-        for (var i=0;i<self.response.result?.comment?.count;i++) {
+        for (var i=0;i<commentArray.count;i++) {
         
-            let rect = CoreUtils.getTextRectSize((self.response.result?.comment![i].content)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
-            self.response.result?.comment![i].height = rect.height
+            let rect = CoreUtils.getTextRectSize((commentArray[i].content)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
+            commentArray[i].height = rect.height
             
         }
         
@@ -133,16 +213,60 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
     }
     
+    /**
+     * 隐藏键盘
+     */
+    func hideKeyBoard(){
+    
+        textView.resignFirstResponder()
+        
+        
+    }
+    
+    /**
+     *  发送评论
+     */
+    func sendComment(){
+    
+        if textView.text?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+        
+            let mutableArray = NSMutableArray(array: commentArray)
+            let model = HDHM08Comment()
+            model.avatar = ""
+            model.content = textView.text
+            model.createTime = "刚刚"
+            model.userName = "小徐"
+            let rect = CoreUtils.getTextRectSize(textView.text!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
+            model.height = rect.height
+            mutableArray.addObject(model)
+            commentArray = NSArray(array: mutableArray) as! Array<HDHM08Comment>
+            
+            tableView.reloadData()
+            
+            let indexPath = NSIndexPath(forRow: commentArray.count-1, inSection: 0)
+            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            
+            textView.text = ""
+            
+            self.title = String(format: "评论(%d)", commentArray.count)
+            
+        }
+        
+        
+    }
+    
     // MARK: - UIScrollView delegate
     func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
-        return (self.response.result?.comment?.count)!
+        return commentArray.count
     }
     
     func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         /**
         *   头像
@@ -246,16 +370,16 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         }
 
         
-        let model = response.result?.comment![indexPath.row]
+        let model = commentArray[indexPath.row]
         
-        icon?.sd_setImageWithURL(NSURL(string: (model?.avatar)!), placeholderImage: UIImage(imageLiteral: "noDataDefaultIcon"))
-        username?.text = model?.userName
-        createTime?.text = model?.createTime
-        content?.text = model?.content
+        icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "noDataDefaultIcon"))
+        username?.text = model.userName
+        createTime?.text = model.createTime
+        content?.text = model.content
         
         content?.snp_updateConstraints(closure: { (make) -> Void in
             
-            make.height.equalTo(model!.height)
+            make.height.equalTo(model.height)
             
         })
         
@@ -265,7 +389,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
     
         
-        let model = response.result?.comment![indexPath.row]
-        return 60 + model!.height
+        let model = commentArray[indexPath.row]
+        return 60 + model.height
     }
 }

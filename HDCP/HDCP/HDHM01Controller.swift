@@ -124,6 +124,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         }
         
     }
+   
+   deinit{
+   
+      baseView.delegate = nil
+      
+   }
     
     // MARK: - 创建UI视图
     

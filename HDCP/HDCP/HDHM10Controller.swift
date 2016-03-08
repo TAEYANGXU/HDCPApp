@@ -384,6 +384,18 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
         })
         
+        /**
+        *  富文本 - 给名称加颜色
+        */
+        if model.content.hasPrefix("@") {
+        
+            let str:String =  model.content.componentsSeparatedByString(":")[0]
+            let attributed = NSMutableAttributedString(string: model.content)
+            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str.characters.count))
+            content?.attributedText =  attributed
+        }
+        
         return cell
     }
     

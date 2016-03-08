@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDHM02Service: HDRequestManager {
+class HDHM02Service {
 
     /**
      排行榜
@@ -18,7 +18,7 @@ class HDHM02Service: HDRequestManager {
      */
     func doGetRequest_HDHM02_URL(successBlock:(hdHM02Response:HDHM02Response)->Void,failBlock:(error:NSError)->Void){
     
-        super.doGetRequest(Constants.HDHM02_URL) { (response) -> Void in
+        HDRequestManager.doGetRequest(Constants.HDHM02_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

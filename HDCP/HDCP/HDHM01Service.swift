@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class HDHM01Service: HDRequestManager {
+class HDHM01Service {
     
     /**
      *  菜谱主页数据
@@ -17,10 +17,11 @@ class HDHM01Service: HDRequestManager {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
+    
     func doGetRequest_HDHM01_URL(successBlock:((hdResponse:HDHM01Response)->Void),failBlock:((error:NSError)->Void)){
     
         
-        super.doGetRequest(Constants.HDHM01_URL) { (response) -> Void in
+        HDRequestManager.doGetRequest(Constants.HDHM01_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

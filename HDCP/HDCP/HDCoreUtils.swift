@@ -21,7 +21,7 @@ class CoreUtils: NSObject {
      self.navigationItem.leftBarButtonItem = Constants.HDBackBarButtonItem("doThing:", taget: self)
      
      */
-    class func HDBackBarButtonItem(sel:Selector,taget:AnyObject)->(UIBarButtonItem){
+    static func HDBackBarButtonItem(sel:Selector,taget:AnyObject)->(UIBarButtonItem){
         
         let button = UIButton(type: UIButtonType.Custom) as UIButton
         button.frame = CGRectMake(0, 0, 10, 20)
@@ -42,7 +42,7 @@ class CoreUtils: NSObject {
      
      *  @ returns: UIColor
      */
-    class func HDfromHexValue(hex:UInt,alpha:CGFloat)->UIColor{
+    static func HDfromHexValue(hex:UInt,alpha:CGFloat)->UIColor{
     
         return UIColor(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,
@@ -58,7 +58,7 @@ class CoreUtils: NSObject {
      
      *  @ parameter view: hud的父视图
      */
-    class func showProgressHUD(view:UIView){
+    static func showProgressHUD(view:UIView){
     
         hidProgressHUD(view)
         
@@ -102,7 +102,7 @@ class CoreUtils: NSObject {
      
      *  @ parameter view: hud的父视图
      */
-    class func hidProgressHUD(view:UIView){
+    static func hidProgressHUD(view:UIView){
     
         MBProgressHUD.hideHUDForView(view, animated: true)
     }
@@ -113,7 +113,7 @@ class CoreUtils: NSObject {
      *  @ parameter view:  hud的父视图
      *  @ parameter title: 显示的文本内容
      */
-    class func  showWarningHUD(view:UIView,title:String){
+    static func  showWarningHUD(view:UIView,title:String){
     
         hidProgressHUD(view)
         
@@ -143,7 +143,7 @@ class CoreUtils: NSObject {
      *  @ parameter view:  hud的父视图
      *  @ parameter title: 显示的文本内容
      */
-    class func  showSuccessHUD(view:UIView,title:String){
+    static func  showSuccessHUD(view:UIView,title:String){
         
         hidProgressHUD(view)
         
@@ -184,7 +184,7 @@ class CoreUtils: NSObject {
      
      */
     
-    class func getTextRectSize(text:NSString,font:UIFont,size:CGSize) -> CGRect {
+    static func getTextRectSize(text:NSString,font:UIFont,size:CGSize) -> CGRect {
         
         let attributes = [NSFontAttributeName: font]
         
@@ -199,7 +199,7 @@ class CoreUtils: NSObject {
     /**
      *  网络是否可用
      */
-    class func networkIsReachable()->Bool{
+    static func networkIsReachable()->Bool{
         
         let reachability:Reachability
         var ret:Bool
@@ -225,7 +225,7 @@ class CoreUtils: NSObject {
     *  @param mobileNum 手机号码
     *
     */
-    class func isMobileNumber(number:String)->Bool{
+    static func isMobileNumber(number:String)->Bool{
     
         let regextestmobile:NSPredicate = NSPredicate(format: "SELF MATCHES %@", "^[1][1,2,3,4,5,6,7,8,9][0-9]{9}$")
         

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class HDGG01Service: HDRequestManager {
+class HDGG01Service {
 
     
     /**
@@ -20,7 +20,7 @@ class HDGG01Service: HDRequestManager {
      */
     func doGetRequest_HDGG01_URL(successBlock:(hdResponse:HDGG01Response)->Void,failBlock:(error:NSError)->Void){
 
-        super.doPostRequest(["limit":"20","offset":"0"], URL: Constants.HDGG01_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":"20","offset":"0"], URL: Constants.HDGG01_URL) { (response) -> Void in
 
             if response.result.error == nil {
                 

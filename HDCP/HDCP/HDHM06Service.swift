@@ -9,7 +9,7 @@
 import Foundation
 
 
-class HDHM06Service: HDRequestManager {
+class HDHM06Service {
     
     /**
      全部菜谱
@@ -19,7 +19,7 @@ class HDHM06Service: HDRequestManager {
      */
     func doGetRequest_HDHM06_URL(limit:Int,offset:Int,successBlock:(hdHM06Response:HDHM06Response)->Void,failBlock:(error:NSError)->Void){
     
-        super.doPostRequest(["limit":limit,"offset":offset], URL: Constants.HDHM06_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":limit,"offset":offset], URL: Constants.HDHM06_URL) { (response) -> Void in
             
             if response.result.error == nil {
             

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDHM03Service: HDRequestManager {
+class HDHM03Service {
 
     
     /**
@@ -21,7 +21,7 @@ class HDHM03Service: HDRequestManager {
         
         print("offset :\(offset)")
         
-        super.doPostRequest(["type":"2","offset":offset,"limit":limit,"tagid":"0"], URL: Constants.HDHM03_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["type":"2","offset":offset,"limit":limit,"tagid":"0"], URL: Constants.HDHM03_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

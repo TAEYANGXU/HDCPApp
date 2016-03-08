@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDHM05Service: HDRequestManager {
+class HDHM05Service {
 
     /**
      菜谱分专辑列表
@@ -19,7 +19,7 @@ class HDHM05Service: HDRequestManager {
     func doGetRequest_HDHM05_URL(cid:Int,limit:Int,offset:Int,successBlock:(hm05Response:HDHM05Response)->Void,failBlock:(error:NSError)->Void){
         
         
-        super.doPostRequest(["cid":cid,"gid":0,"limit":limit,"offset":offset], URL: Constants.HDHM05_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["cid":cid,"gid":0,"limit":limit,"offset":offset], URL: Constants.HDHM05_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

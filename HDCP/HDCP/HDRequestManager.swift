@@ -17,7 +17,7 @@ public class HDRequestManager: NSObject {
      * parameter url:    URL地址
      * parameter block:  返回结果集
      */
-    public func doGetRequest(URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
+    static func doGetRequest(URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
         print("Get URL:  \(URL)")
         
@@ -57,7 +57,7 @@ public class HDRequestManager: NSObject {
      * parameter url:    URL地址
      * parameter block:  返回结果集
      */
-    public func doPostRequest(param:[String : AnyObject],URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
+    static func doPostRequest(param:[String : AnyObject],URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
         print("Post URL:  \(URL)")
         

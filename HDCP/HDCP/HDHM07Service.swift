@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDHM07Service: HDRequestManager {
+class HDHM07Service {
  
     /**
     全部宝典
@@ -18,7 +18,7 @@ class HDHM07Service: HDRequestManager {
     */
     func doGetRequest_HDHM07_URL(limit:Int,offset:Int,successBlock:(hdHM07Response:HDHM07Response)->Void,failBlock:(error:NSError)->Void){
     
-        super.doPostRequest(["type":1,"tagid":0,"limit":limit,"offset":offset], URL: Constants.HDHM07_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["type":1,"tagid":0,"limit":limit,"offset":offset], URL: Constants.HDHM07_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

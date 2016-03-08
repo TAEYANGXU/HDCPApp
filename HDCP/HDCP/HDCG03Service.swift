@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDCG03Service: HDRequestManager {
+class HDCG03Service {
     
     /**
      菜谱搜索
@@ -19,7 +19,7 @@ class HDCG03Service: HDRequestManager {
     func doGetRequest_HDCG03_URL(keyword:String,limit:Int,offset:Int,successBlock:(hm04Response:HDHM04Response)->Void,failBlock:(error:NSError)->Void){
         
         
-        super.doPostRequest(["tagid":"","keyword":keyword,"limit":limit,"offset":offset], URL: Constants.HDCG03_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["tagid":"","keyword":keyword,"limit":limit,"offset":offset], URL: Constants.HDCG03_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
  
-class HDCG01Service: HDRequestManager {
+class HDCG01Service {
 
     /**
      分类
@@ -20,7 +20,7 @@ class HDCG01Service: HDRequestManager {
     func doGetRequest_HDCG02_URL(successBlock:(HDCG01Response:HDCG01Response)->Void,failBlock:(error:NSError)->Void){
         
         
-        super.doGetRequest(Constants.HDCG01_URL) { (response) -> Void in
+        HDRequestManager.doGetRequest(Constants.HDCG01_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

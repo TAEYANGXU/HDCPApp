@@ -120,13 +120,6 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         super.viewWillAppear(animated)
         
-        /**
-        *  移除通知
-        */
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -141,6 +134,13 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
         tableView.delegate = nil
         tableView.dataSource = nil
+        
+        /**
+        *  移除通知
+        */
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -385,7 +385,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         })
         
         /**
-        *  富文本 - 给名称加颜色
+        *  富文本 - 给名称添加颜色
         */
         if model.content.hasPrefix("@") {
         

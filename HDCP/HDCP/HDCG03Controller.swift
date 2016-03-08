@@ -60,6 +60,12 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     override func viewWillDisappear(animated: Bool) {
         
         super.viewWillDisappear(animated)
+        
+        
+    }
+    
+    deinit{
+    
         objCont.removeObserver(self, forKeyPath: "count")
         
     }

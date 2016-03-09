@@ -1,16 +1,5 @@
                                                             微菜谱
 
-用到的第三方库
-
-    Alamofire : 网络请求库
-    SDWebImage : 图片加载库
-    MJRefresh : 下拉刷新
-    MBProgressHUD ：提示HUD
-    SnapKit ：自动布局
-    ObjectMapper ：对象映射，Json转Model
-    ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享(真机才能分享)
-    CoreData ：所有Tab主页做了本地存储
-
 目录结构分析
 
     General : 公用类和方法，包括工程内ViewController,UITableViewCell基类(Base)，公用Extension(Category)，公用UI组件(CustomUI)，公用辅助方法和宏定义(Helper)。
@@ -22,6 +11,17 @@
     Center : 我的
     Category : 分类
     Home : 菜谱
+
+用到的第三方库
+
+    Alamofire : 网络请求库
+    SDWebImage : 图片加载库
+    MJRefresh : 下拉刷新
+    MBProgressHUD ：提示HUD
+    SnapKit ：自动布局
+    ObjectMapper ：对象映射，Json转Model
+    ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享(真机才能分享)
+    CoreData ：所有Tab主页做了本地存储
 
 后续工作
 

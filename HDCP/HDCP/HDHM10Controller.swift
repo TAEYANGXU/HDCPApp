@@ -229,7 +229,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
      */
     func sendComment(){
     
-        if textView.text?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+        if textView.text?.characters.count > 0 {
         
             let mutableArray = NSMutableArray(array: commentArray)
             let model = HDHM08Comment()

@@ -112,7 +112,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     
     func onClickAction(){
     
-        if textView!.text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+        if textView!.text.characters.count == 0 {
             
             CoreUtils.showWarningHUD(self.view, title: "请说点什么")
         }else{
@@ -126,7 +126,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     // MARK: - UITextView delegate
     func textViewDidChange(textView: UITextView){
     
-        if textView.text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+        if textView.text.characters.count == 0 {
         
             placeholder?.text = "说点什么"
         }else{

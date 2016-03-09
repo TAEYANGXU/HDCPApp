@@ -39,7 +39,7 @@
 项目运行
 
   > ######运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
-  > ######[打开CoreData的SQL语句输出开关](http://blog.csdn.net/likendsl/article/details/16160677)<br/> 
+  > ######打开[CoreData](http://blog.csdn.net/likendsl/article/details/16160677)的SQL语句输出开关<br/> 
 
 项目效果图
 

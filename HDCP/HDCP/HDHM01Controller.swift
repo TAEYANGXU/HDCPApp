@@ -410,7 +410,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             for var j=0;j<4;j++ {
                 
                 let model:TagListModel = (self.hdHM01Response?.result?.tagList![index])!
-                
+               
                 var btn:UIButton?
                 
                 btn = tagListView.viewWithTag(index) as? UIButton
@@ -420,7 +420,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     btn = UIButton()
                     btn!.backgroundColor = UIColor.whiteColor()
                     btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                    btn!.tag = index;
+                    btn!.tag = index+1000;
                     btn!.titleLabel?.font = UIFont.systemFontOfSize(16)
                     btn!.setTitle(model.name, forState: UIControlState.Normal)
                     btn!.layer.borderWidth = 0.5
@@ -956,7 +956,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func tagBtnOnclick(btn:UIButton){
         
         
-        let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag])!
+        let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag-1000])!
         let hdHM04VC = HDHM04Controller()
         hdHM04VC.tagModel = model;
         self.hidesBottomBarWhenPushed = true;

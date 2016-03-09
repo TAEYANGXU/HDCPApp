@@ -23,7 +23,9 @@ class HDCG03Service {
             
             if response.result.error == nil {
                 
+                /// JSON 转换成对象
                 let response = Mapper<HDHM04Response>().map(response.result.value)
+                /// 回调
                 successBlock(hm04Response: response!)
                 
             }else{

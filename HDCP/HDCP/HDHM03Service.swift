@@ -25,8 +25,9 @@ class HDHM03Service {
             
             if response.result.error == nil {
                 
+                /// JSON 转换成对象
                 let hdggResponse = Mapper<HDHM03Response>().map(response.result.value)
-                
+                /// 回调
                 successBlock(hdResponse: hdggResponse!)
                 
             }else{

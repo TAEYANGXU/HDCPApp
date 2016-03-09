@@ -24,11 +24,13 @@ class HDCG01Service {
             
             if response.result.error == nil {
                 
+                /// JSON 转换成对象
                 let response = Mapper<HDCG01Response>().map(response.result.value)
                 
                 
                 self.addEntity(response!, finishBlcok: { () -> Void in
                     
+                    /// 回调
                     successBlock(HDCG01Response: response!)
                     
                 })

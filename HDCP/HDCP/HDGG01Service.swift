@@ -24,6 +24,7 @@ class HDGG01Service {
 
             if response.result.error == nil {
                 
+                /// JSON 转换成对象
                 let hdggResponse = Mapper<HDGG01Response>().map(response.result.value)
                 
                 let array2D = NSMutableArray()
@@ -54,6 +55,7 @@ class HDGG01Service {
                     
                     dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                         
+                        /// 回调
                         successBlock(hdResponse: hdggResponse!)
                         
                     })

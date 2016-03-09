@@ -22,7 +22,9 @@ class HDHM07Service {
             
             if response.result.error == nil {
                 
+                /// JSON 转换成对象
                 let hdResponse:HDHM07Response = Mapper<HDHM07Response>().map(response.result.value)!
+                /// 回调
                 successBlock(hdHM07Response: hdResponse)
                 
             }else{

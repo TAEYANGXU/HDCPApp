@@ -30,13 +30,13 @@
 
 备注
 
-    App有些功能还没有实现,会抽空在后续更新,敬请期待。
+    App有些功能还没有实现,会抽空在后续更新。
     要求:IOS8.0以上,Xcode 7.0 以上。
     如果哪里写得不好可以相互交流,本人QQ:498193471 非诚勿扰 谢谢 
 
 APP运行
 
-    运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html "CocoaPods安装和使用")，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。
+    运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。
     打开CoreData的SQL语句输出开关;1.打开Product，点击EditScheme...;2.点击Arguments，在ArgumentsPassed On Launch中添加2项(-com.apple.CoreData.SQLDebug和1）
 
 效果图

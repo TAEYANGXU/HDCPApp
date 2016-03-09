@@ -72,6 +72,14 @@ class Constants: NSObject {
     static let HDAppVersion:String = "Version"
     static let HDHistory:String = "History"
     
+    /**
+     *   通知
+     **/
+     
+    static let HDREFRESHHDHM01 = "kHDREFRESHHDHM01"
+    static let HDREFRESHHDGG01 = "kHDREFRESHHDGG01"
+    
+    
     /*******************************************URL*********************************************/
      
      /**

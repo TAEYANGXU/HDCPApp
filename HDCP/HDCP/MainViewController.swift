@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UITabBarController {
+class MainViewController: UITabBarController,UITabBarControllerDelegate {
 
     var hdhm01vc:HDHM01Controller!
     var hdcg01vc:HDCG01Controller!
@@ -18,7 +18,7 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.delegate = self
         setupTabBarView()
     }
     
@@ -93,6 +93,31 @@ class MainViewController: UITabBarController {
     }
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        
+        /**
+        *  双击TabItem添加下拉刷新事件
+        */
+        let taSelectViewController = tabBarController.selectedViewController
+        if taSelectViewController!.isEqual(viewController) {
+        
+            if viewController.isKindOfClass(HDHM01Controller.classForCoder()){
+                
+                /**
+                *  刷新菜谱主页
+                */
+                
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDHM01, object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDHM01])
+                
+            }else if viewController.isKindOfClass(HDGG01Controller.classForCoder()) {
+            
+                /**
+                *  刷新逛逛主页
+                */
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDGG01, object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDGG01])
+            }
+            
+        }
+        
         return true
     }
     

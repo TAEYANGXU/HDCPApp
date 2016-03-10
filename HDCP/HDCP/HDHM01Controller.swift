@@ -76,11 +76,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     var rightImageView:UIImageView?
     
     override func viewDidLoad() {
-        
+      
         super.viewDidLoad()
         
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
+      
+        //双击TabItem通知
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hm01Notification:", name: Constants.HDREFRESHHDHM01, object: nil)
         
         if HDHM01Service().isExistEntity() {
         
@@ -722,6 +725,23 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         
     }
+    // MARK: - 通知事件
+   
+   func hm01Notification(noti:NSNotification){
+   
+      let flag = noti.userInfo!["FLAG"] as? String
+      
+      if flag == Constants.HDREFRESHHDHM01 {
+      
+         /**
+         *  开始刷新 获取最新数据
+         */
+         self.baseView.mj_header.beginRefreshing()
+         
+      }
+      
+      
+   }
     
     // MARK: - 图片循环滚动
     func loadImage(){

@@ -28,6 +28,9 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
         
+        //双击TabItem通知
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gg01Notification:", name: Constants.HDREFRESHHDGG01, object: nil)
+        
         count = 0
         setupUI()
         
@@ -171,7 +174,25 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         CoreUtils.hidProgressHUD(self.view)
     }
     
-    // MARK: - events 
+    // MARK: - 通知事件
+    
+    func gg01Notification(noti:NSNotification){
+        
+        let flag = noti.userInfo!["FLAG"] as? String
+        
+        if flag == Constants.HDREFRESHHDGG01 {
+            
+            /**
+            *  开始刷新 获取最新数据
+            */
+            self.tableView?.mj_header.beginRefreshing()
+            
+        }
+        
+        
+    }
+    
+    // MARK: - onclik events
     
     func menuBtnOnclick(btn:UIButton){
     

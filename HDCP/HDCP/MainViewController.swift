@@ -95,12 +95,16 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         
         /**
-        *  双击TabItem添加下拉刷新事件
+        *  双击TabItem添加自动下拉刷新
         */
         let taSelectViewController = tabBarController.selectedViewController
+        
         if taSelectViewController!.isEqual(viewController) {
         
-            if viewController.isKindOfClass(HDHM01Controller.classForCoder()){
+            let navViewController = viewController as! UINavigationController
+            let rootViewController = navViewController.viewControllers[0]
+            
+            if rootViewController.isKindOfClass(HDHM01Controller.classForCoder()){
                 
                 /**
                 *  刷新菜谱主页
@@ -108,7 +112,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
                 
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDHM01, object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDHM01])
                 
-            }else if viewController.isKindOfClass(HDGG01Controller.classForCoder()) {
+            }else if rootViewController.isKindOfClass(HDGG01Controller.classForCoder()) {
             
                 /**
                 *  刷新逛逛主页

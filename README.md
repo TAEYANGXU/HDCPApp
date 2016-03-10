@@ -44,7 +44,7 @@ Swiift2.0学习
   > ######[Swift.org](https://swift.org/)<br/> 
   > ######[Swift开放源码](https://github.com/apple/swift)<br/> 
 
-项目效果图
+项目效果图 
 
    ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/CP.gif)  ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/GG.gif)   ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/FL.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/PHB.gif)  ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/FXCP.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/PL.gif) 
 

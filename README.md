@@ -34,6 +34,7 @@
 项目运行
 
   > ######运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
+  > ######想下载就运行的朋友可以去我的CSDN([鞋子特大号007](http://download.csdn.net/detail/xuyanzhang2015/9456260))上下载,下载完成即可运行。<br/>
   > ######打开[CoreData](http://blog.csdn.net/likendsl/article/details/16160677)的SQL语句输出开关<br/> 
 
 Swiift2.0学习

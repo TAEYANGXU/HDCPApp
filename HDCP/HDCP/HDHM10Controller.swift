@@ -166,7 +166,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
             /// cell滚动到底部
             let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            
+            if self.commentArray.count>0 {
+            
+                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
             
         }
         
@@ -181,7 +185,12 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
             /// cell滚动到底部
             let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
-            self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            
+            if self.commentArray.count>0 {
+            
+                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
+            
         }
         
     }

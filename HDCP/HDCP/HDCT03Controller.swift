@@ -45,17 +45,18 @@ class HDCT03Controller: UITableViewController {
     }
     
     func nextAction(){
-    
-        if CoreUtils.isMobileNumber(mobile.text!) {
+        
+        
+        guard CoreUtils.isMobileNumber(mobile.text!) else {
             
-            let hdct04VC = HDCT04Controller()
-            self.hidesBottomBarWhenPushed = true;
-            self.navigationController?.pushViewController(hdct04VC, animated: true)
-            
-        }else{
             //手机号码输入有误
             CoreUtils.showWarningHUD(self.view, title: "手机号码输入有误")
+            return
         }
+    
+        let hdct04VC = HDCT04Controller()
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hdct04VC, animated: true)
         
     }
     

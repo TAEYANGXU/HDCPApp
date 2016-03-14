@@ -8,12 +8,10 @@
 
 import UIKit
 
-private let ct01Array = [[["title":"我的菜谱","image":"WDCPIcon"],
-    ["title":"我的收藏","image":"SCIcon"]],
-    [["title":"扫一扫","image":"SYSCIcon"],
-        ["title":"晒一晒","image":"SYSIcon"]],
-    [["title":"动态","image":"DTIcon"],
-        ["title":"设置","image":"SZIcon"]]]
+private let ct01Array = [[["title":"豆友","image":"DYIcon"],
+    ["title":"动态","image":"DTIcon"],["title":"话题","image":"HTIcon"],
+    ["title":"消息","image":"msgIcon"]],
+    [["title":"设置","image":"SZIcon"]]]
 
 class HDCT01Controller: UITableViewController {
 
@@ -114,7 +112,7 @@ class HDCT01Controller: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
-        return 3
+        return ct01Array.count
     }
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
@@ -140,25 +138,6 @@ class HDCT01Controller: UITableViewController {
                 make.top.equalTo(cell.contentView).offset(12)
                 
             })
-            
-            if indexPath.section == 2 {
-            
-                if indexPath.row == ct01Array[indexPath.section].count-1 {
-                    
-                    icon?.snp_updateConstraints(closure: { (make) -> Void in
-                        
-                        
-                        make.width.equalTo(14)
-                        make.height.equalTo(14)
-                        make.left.equalTo(cell.contentView).offset(16)
-                        make.top.equalTo(cell.contentView).offset(15)
-
-                        
-                    })
-                    
-                }
-                
-            }
         
         }
         
@@ -222,12 +201,48 @@ class HDCT01Controller: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        if indexPath.section == 0 {
         
-        
-        if indexPath.section == 2 {
             
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
                 
+                //豆友
+                let hdct08VC = HDCT08Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct08VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+                
+            }else if indexPath.row == 1 {
+            
+                //动态
+                let hdct09VC = HDCT09Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct09VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+                
+            }else if indexPath.row == 2 {
+            
+                //话题
+                let hdct10VC = HDCT10Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct10VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }else{
+            
+                //消息
+                let hdct11VC = HDCT11Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct11VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }
+            
+        }
+        
+        if indexPath.section == 1 {
+            
+            if indexPath.row == 0 {
+                
+                //设置
                 let hdct06VC = HDCT06Controller()
                 self.hidesBottomBarWhenPushed = true;
                 self.navigationController?.pushViewController(hdct06VC, animated: true)

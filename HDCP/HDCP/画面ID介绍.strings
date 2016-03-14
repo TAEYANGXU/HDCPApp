@@ -35,6 +35,11 @@
     HDCT05Controller -> 动态
     HDCT06Controller -> 设置
     HDCT07Controller -> 协议
+    HDCT08Controller -> 豆友
+    HDCT09Controller -> 动态
+    HDCT10Controller -> 话题
+    HDCT11Controller -> 消息
+    
  
     //共通
     HDWebController -> 展示web页面

@@ -162,11 +162,12 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             self.putView.frame = Constants.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
             self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
             
-            /// cell滚动到底部
-            let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
+            
             
             if self.commentArray.count>0 {
-            
+                
+                /// cell滚动到底部
+                let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
                 self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             }
             
@@ -181,11 +182,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             self.putView.frame = Constants.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
             self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
             
-            /// cell滚动到底部
-            let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
             
             if self.commentArray.count>0 {
-            
+                
+                /// cell滚动到底部
+                let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
                 self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             }
             

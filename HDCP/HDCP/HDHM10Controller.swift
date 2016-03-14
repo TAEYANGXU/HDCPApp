@@ -157,8 +157,6 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         let height:CGFloat = (rect?.CGRectValue.height)!
         
-        print("height =  \(height)")
-        
         UIView.animateWithDuration(0.3) { () -> Void in
             
             self.putView.frame = Constants.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)

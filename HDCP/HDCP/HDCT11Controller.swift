@@ -31,5 +31,4 @@ class HDCT11Controller: BaseViewController {
         
     }
 
-
 }

@@ -8,12 +8,12 @@
 
 import UIKit
 import CoreData
+import SDWebImage
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //监听网络变化
         networkMonitoring()
+        
+        //缓存参数设置
+        setCache()
         
         return true
     }
@@ -171,6 +174,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Not reachable")
         }
     }
-
+    
+    /**
+     *  缓存参数设置
+     */
+    func setCache(){
+        
+        //是否将图片缓存到内存
+        SDImageCache.sharedImageCache().shouldCacheImagesInMemory = true
+        //缓存将保留5天
+        SDImageCache.sharedImageCache().maxCacheAge = 5*24*60*60
+        //缓存最大占有内存100MB
+        SDImageCache.sharedImageCache().maxCacheSize = 1024*1024*100
+        
+    }
 }
 

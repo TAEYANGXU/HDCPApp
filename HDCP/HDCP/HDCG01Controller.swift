@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let cateArray = [["title":"口味","image":"KWIcon"],
     ["title":"菜系","image":"CXIcon"],
@@ -201,9 +202,18 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
         
         let model = dataArray[indexPath.row] as HDCG01ListModel
-        icon?.sd_setImageWithURL(NSURL(string: model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        title?.text =   model.cate!
         
+        let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model.imgUrl!)
+        if let _ = image {
+            icon?.image = image
+        }else{
+            icon?.sd_setImageWithURL(NSURL(string: (model.imgUrl!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                //保存图片，并保存到物理存储上  
+                SDImageCache.sharedImageCache().storeImage(image, forKey: model.imgUrl!, toDisk: true)
+            })
+        }
+        
+        title?.text =   model.cate!
         
         arrow?.image = UIImage(named: "arrowIcon")
         

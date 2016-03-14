@@ -578,9 +578,17 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 
             }
-            
-            rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            
+         
+            let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model!.cover!)
+            if let _ = image {
+               rowView!.imageView.image = image
+            }else{
+               rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                  //保存图片，并保存到物理存储上
+                  SDImageCache.sharedImageCache().storeImage(image, forKey: model!.cover!, toDisk: true)
+               })
+            }
+         
         }
         
     }
@@ -717,9 +725,16 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 
             }
-            
-            rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            
+         
+            let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model!.cover!)
+            if let _ = image {
+               rowView!.imageView.image = image
+            }else{
+               rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                  //保存图片，并保存到物理存储上
+                  SDImageCache.sharedImageCache().storeImage(image, forKey: model!.cover!, toDisk: true)
+               })
+            }
             
         }
         
@@ -773,13 +788,41 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         *  更新菜谱名称
         */
         headerTitle.text = cmodel!.title
-        
-        centerImageView!.sd_setImageWithURL(NSURL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+      
+        let Cimage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(cmodel?.cover!)
+        if let _ = Cimage {
+            centerImageView!.image = Cimage
+        }else{
+            centerImageView!.sd_setImageWithURL(NSURL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+               //保存图片，并保存到物理存储上
+               SDImageCache.sharedImageCache().storeImage(image, forKey: cmodel!.cover!, toDisk: true)
+            })
+        }
+      
         let lmodel = self.hdHM01Response?.result?.recipeList![((index-1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
-        leftImageView!.sd_setImageWithURL(NSURL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+      
+        let Limage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(lmodel?.cover!)
+        if let _ = Limage {
+            leftImageView!.image = Limage
+        }else{
+            leftImageView!.sd_setImageWithURL(NSURL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+               //保存图片，并保存到物理存储上
+               SDImageCache.sharedImageCache().storeImage(image, forKey: lmodel!.cover!, toDisk: true)
+            })
+        }
+      
         let rmodel = self.hdHM01Response?.result?.recipeList![((index+1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
-        rightImageView!.sd_setImageWithURL(NSURL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        
+      
+        let Rimage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(rmodel?.cover!)
+        if let _ = Rimage {
+            rightImageView!.image = Rimage
+        }else{
+            rightImageView!.sd_setImageWithURL(NSURL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+               //保存图片，并保存到物理存储上
+               SDImageCache.sharedImageCache().storeImage(image, forKey: rmodel!.cover!, toDisk: true)
+            })
+        }
+      
         
         
     }

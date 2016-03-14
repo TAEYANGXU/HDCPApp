@@ -43,7 +43,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
             
             make.top.equalTo(self.view).offset(0)
             make.left.equalTo(self.view).offset(0)
-            make.height.equalTo(200)
+            make.height.equalTo(120)
             make.width.equalTo(Constants.HDSCREENWITH)
         })
         
@@ -79,7 +79,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         
         placeholder?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(self.view).offset(71)
+            make.top.equalTo(self.view).offset(7)
             make.left.equalTo(self.view).offset(8)
             make.height.equalTo(20)
             make.width.equalTo(100)

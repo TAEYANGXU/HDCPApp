@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 private let gg01Array = [["title":"厨房宝典","image":"CFBDIcon"],
     ["title":"应用推荐","image":"YYTJIcon"],
     ["title":"意见反馈","image":"YJFKIcon"],
@@ -424,22 +424,50 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             
             let array2d = self.hdGG01Response.array2D![indexPath.row]
             
-            let leftModel:HDGG01ListModel = array2d[0] as! HDGG01ListModel
-            leftImageView!.imageView.sd_setImageWithURL(NSURL(string: leftModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            let leftModel = array2d[0] as! HDGG01ListModel
+            
+            let leftImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(leftModel.image!)
+            if let _ = leftImage {
+                leftImageView!.imageView.image = leftImage
+            }else{
+                leftImageView!.imageView.sd_setImageWithURL(NSURL(string: (leftModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                    //保存图片，并保存到物理存储上
+                    SDImageCache.sharedImageCache().storeImage(image, forKey: leftModel.image!, toDisk: true)
+                })
+            }
+            
             leftImageView?.title.text = leftModel.title
             leftImageView?.delegate = self
             leftImageView?.indexPath = indexPath
             leftImageView!.index = 0
             
             let topModel = array2d[1] as! HDGG01ListModel
-            topImageView!.imageView.sd_setImageWithURL(NSURL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            let topImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(topModel.image!)
+            if let _ = topImage {
+                topImageView!.imageView.image = topImage
+            }else{
+                topImageView!.imageView.sd_setImageWithURL(NSURL(string: (topModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                    //保存图片，并保存到物理存储上
+                    SDImageCache.sharedImageCache().storeImage(image, forKey: topModel.image!, toDisk: true)
+                })
+            }
+            
             topImageView?.title.text = topModel.title
             topImageView?.delegate = self
             topImageView?.indexPath = indexPath
             topImageView!.index = 1
             
             let bottomModel = array2d[2] as! HDGG01ListModel
-            bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            let bottomImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(bottomModel.image!)
+            if let _ = bottomImage {
+                bottomImageView!.imageView.image = bottomImage
+            }else{
+                bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: (bottomModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
+                    //保存图片，并保存到物理存储上
+                    SDImageCache.sharedImageCache().storeImage(image, forKey: bottomModel.image!, toDisk: true)
+                })
+            }
+            
             bottomImageView?.title.text = bottomModel.title
             bottomImageView?.delegate = self
             bottomImageView?.indexPath = indexPath

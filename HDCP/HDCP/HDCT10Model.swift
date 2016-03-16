@@ -27,6 +27,7 @@ class HDCT10Response:Mappable {
 
 class HDCT10Result: Mappable {
     
+    var list:Array<HDCT10ListModel>?
     
     required init?(_ map: Map){
         mapping(map)
@@ -34,7 +35,25 @@ class HDCT10Result: Mappable {
     
     func mapping(map: Map) {
         
+        list <- map["list"]
         
+    }
+    
+}
+
+class HDCT10ListModel: Mappable {
+    
+    var data:Array<HDCT10DataModel>?
+    var userInfo:Array<HDCT10UserInfoModel>?
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        data <- map["data"]
+        userInfo <- map["userInfo"]
         
     }
     

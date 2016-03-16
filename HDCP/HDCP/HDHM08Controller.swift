@@ -226,7 +226,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 make.height.equalTo(50)
             })
             
-            headIcon.sd_setImageWithURL(NSURL(string: (hm08Response.result?.info?.avatar)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            headIcon.sd_setImageWithURL(NSURL(string: (hm08Response.result?.info?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
             
             
             

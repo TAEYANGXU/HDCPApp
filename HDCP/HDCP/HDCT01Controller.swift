@@ -57,7 +57,7 @@ class HDCT01Controller: UITableViewController {
         headerIcon = UIImageView()
         headerIcon?.layer.cornerRadius = 40;
         headerIcon?.layer.masksToBounds = true
-        headerIcon?.image = UIImage(named: "noDataDefaultIcon")
+        headerIcon?.image = UIImage(named: "defaultIcon")
         headerIcon?.backgroundColor = UIColor.redColor()
         headerView?.addSubview(headerIcon!)
         

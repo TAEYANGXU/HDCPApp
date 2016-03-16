@@ -381,7 +381,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         let model = commentArray[indexPath.row]
         
-        icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "noDataDefaultIcon"))
+        icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "defaultIcon"))
         username?.text = model.userName
         createTime?.text = model.createTime
         content?.text = model.content

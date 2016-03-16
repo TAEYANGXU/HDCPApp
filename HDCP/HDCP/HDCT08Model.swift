@@ -27,7 +27,7 @@ class HDCT08Response:Mappable {
 
 class HDCT08Result: Mappable {
     
-    var ct08List:Array<HDCT08ListModel>?
+    var list:Array<HDCT08ListModel>?
     
     required init?(_ map: Map){
         mapping(map)
@@ -35,7 +35,7 @@ class HDCT08Result: Mappable {
     
     func mapping(map: Map) {
         
-        ct08List <- map["list"]
+        list <- map["list"]
         
     }
     

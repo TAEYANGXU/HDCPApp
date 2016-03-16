@@ -129,6 +129,14 @@
 		358970651C969E54003E10D2 /* HDCT09Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970641C969E54003E10D2 /* HDCT09Controller.swift */; };
 		358970671C969E6B003E10D2 /* HDCT10Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970661C969E6B003E10D2 /* HDCT10Controller.swift */; };
 		358970691C969F92003E10D2 /* HDCT11Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970681C969F92003E10D2 /* HDCT11Controller.swift */; };
+		3589706B1C97ABD1003E10D2 /* HDCT08Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3589706A1C97ABD1003E10D2 /* HDCT08Service.swift */; };
+		3589706D1C97ABE2003E10D2 /* HDCT09Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3589706C1C97ABE2003E10D2 /* HDCT09Service.swift */; };
+		3589706F1C97ABED003E10D2 /* HDCT10Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3589706E1C97ABED003E10D2 /* HDCT10Service.swift */; };
+		358970711C97ABF9003E10D2 /* HDCT11Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970701C97ABF9003E10D2 /* HDCT11Service.swift */; };
+		358970731C97ACCE003E10D2 /* HDCT08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970721C97ACCE003E10D2 /* HDCT08Model.swift */; };
+		358970751C97ACDF003E10D2 /* HDCT09Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970741C97ACDF003E10D2 /* HDCT09Model.swift */; };
+		358970771C97ACEC003E10D2 /* HDCT10Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970761C97ACEC003E10D2 /* HDCT10Model.swift */; };
+		358970791C97ACFB003E10D2 /* HDCT11Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970781C97ACFB003E10D2 /* HDCT11Model.swift */; };
 		358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FB91C4F260500A4EF3E /* HDExtension.swift */; };
 		358C1FBC1C4F56FE00A4EF3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBB1C4F56FE00A4EF3E /* libz.tbd */; };
 		358C1FBE1C4F571500A4EF3E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */; };
@@ -332,6 +340,14 @@
 		358970641C969E54003E10D2 /* HDCT09Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT09Controller.swift; sourceTree = "<group>"; };
 		358970661C969E6B003E10D2 /* HDCT10Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT10Controller.swift; sourceTree = "<group>"; };
 		358970681C969F92003E10D2 /* HDCT11Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT11Controller.swift; sourceTree = "<group>"; };
+		3589706A1C97ABD1003E10D2 /* HDCT08Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT08Service.swift; sourceTree = "<group>"; };
+		3589706C1C97ABE2003E10D2 /* HDCT09Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT09Service.swift; sourceTree = "<group>"; };
+		3589706E1C97ABED003E10D2 /* HDCT10Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT10Service.swift; sourceTree = "<group>"; };
+		358970701C97ABF9003E10D2 /* HDCT11Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT11Service.swift; sourceTree = "<group>"; };
+		358970721C97ACCE003E10D2 /* HDCT08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT08Model.swift; sourceTree = "<group>"; };
+		358970741C97ACDF003E10D2 /* HDCT09Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT09Model.swift; sourceTree = "<group>"; };
+		358970761C97ACEC003E10D2 /* HDCT10Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT10Model.swift; sourceTree = "<group>"; };
+		358970781C97ACFB003E10D2 /* HDCT11Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT11Model.swift; sourceTree = "<group>"; };
 		358C1FB91C4F260500A4EF3E /* HDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDExtension.swift; sourceTree = "<group>"; };
 		358C1FBB1C4F56FE00A4EF3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -542,6 +558,10 @@
 		352A41EE1C50A535009D0F9F /* CT */ = {
 			isa = PBXGroup;
 			children = (
+				358970721C97ACCE003E10D2 /* HDCT08Model.swift */,
+				358970741C97ACDF003E10D2 /* HDCT09Model.swift */,
+				358970761C97ACEC003E10D2 /* HDCT10Model.swift */,
+				358970781C97ACFB003E10D2 /* HDCT11Model.swift */,
 			);
 			name = CT;
 			sourceTree = "<group>";
@@ -966,6 +986,10 @@
 		35EF56731C51D26000352E7D /* CT */ = {
 			isa = PBXGroup;
 			children = (
+				3589706A1C97ABD1003E10D2 /* HDCT08Service.swift */,
+				3589706C1C97ABE2003E10D2 /* HDCT09Service.swift */,
+				3589706E1C97ABED003E10D2 /* HDCT10Service.swift */,
+				358970701C97ABF9003E10D2 /* HDCT11Service.swift */,
 			);
 			name = CT;
 			sourceTree = "<group>";
@@ -1220,6 +1244,7 @@
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,
 				352A424E1C50AACE009D0F9F /* HDHM01ResponseEntity.swift in Sources */,
 				352A424F1C50AACE009D0F9F /* HM01TagListEntity+CoreDataProperties.swift in Sources */,
+				3589706D1C97ABE2003E10D2 /* HDCT09Service.swift in Sources */,
 				358C1FC81C4F69EB00A4EF3E /* HDShareView.swift in Sources */,
 				356F39AF1C3A76FE0056DF44 /* CustomDateFormatTransform.swift in Sources */,
 				35F3FE4B1C744D8F003B43FC /* HDCT07Controller.swift in Sources */,
@@ -1239,6 +1264,7 @@
 				356F39B31C3A76FE0056DF44 /* ISO8601DateTransform.swift in Sources */,
 				3566C8EF1C474BCA00573D97 /* HDHM04Service.swift in Sources */,
 				356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */,
+				358970731C97ACCE003E10D2 /* HDCT08Model.swift in Sources */,
 				3566C8FD1C479E5400573D97 /* HDCG02Controller.swift in Sources */,
 				35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */,
 				356F39901C3A68DB0056DF44 /* SwiftyJSON.swift in Sources */,
@@ -1264,10 +1290,12 @@
 				35776A7B1C70621600903620 /* HDCT06Controller.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,
 				3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */,
+				358970751C97ACDF003E10D2 /* HDCT09Model.swift in Sources */,
 				1B6B08351C4B564E004B2CE2 /* HDHM07Cell.swift in Sources */,
 				3566C9031C479EA000573D97 /* HDCG01Service.swift in Sources */,
 				352A42941C50E1A2009D0F9F /* HDCG01ResponseEntity+CoreDataProperties.swift in Sources */,
 				3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */,
+				358970771C97ACEC003E10D2 /* HDCT10Model.swift in Sources */,
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
 				356F39B61C3A76FE0056DF44 /* URLTransform.swift in Sources */,
 				1B6B082F1C4B4395004B2CE2 /* HDHM07Model.swift in Sources */,
@@ -1275,6 +1303,8 @@
 				356F39801C3A43EE0056DF44 /* HDConstants.swift in Sources */,
 				1B0FD0FC1C3D5749009E85CD /* MJRefreshBackNormalFooter.m in Sources */,
 				3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */,
+				358970791C97ACFB003E10D2 /* HDCT11Model.swift in Sources */,
+				3589706B1C97ABD1003E10D2 /* HDCT08Service.swift in Sources */,
 				352A42501C50AACE009D0F9F /* HM01TagListEntity.swift in Sources */,
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
@@ -1308,6 +1338,7 @@
 				352A42951C50E1A2009D0F9F /* HDCG01ResponseEntity.swift in Sources */,
 				356F39B41C3A76FE0056DF44 /* TransformOf.swift in Sources */,
 				35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */,
+				3589706F1C97ABED003E10D2 /* HDCT10Service.swift in Sources */,
 				1B0FD1041C3D5749009E85CD /* UIScrollView+MJRefresh.m in Sources */,
 				1B0FD0F71C3D5749009E85CD /* MJRefreshHeader.m in Sources */,
 				35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */,
@@ -1318,6 +1349,7 @@
 				3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */,
 				354DCAC61C574643006112A3 /* HDGG04Controller.swift in Sources */,
 				3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */,
+				358970711C97ABF9003E10D2 /* HDCT11Service.swift in Sources */,
 				3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */,
 				1B6B08331C4B4418004B2CE2 /* HDHM07Service.swift in Sources */,
 				356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */,

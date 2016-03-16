@@ -14,6 +14,7 @@ class HDCT10Controller: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        doGetRequestData(0, offset: 0)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -31,5 +32,17 @@ class HDCT10Controller: BaseViewController {
         
     }
 
+    // MARK: - 数据加载
+    func doGetRequestData(limit:Int,offset:Int){
+        
+        
+        HDCT10Service().doGetRequest_HDCT10_URL(0, offset: 0, successBlock: { (hdResponse) -> Void in
+            
+            }) { (error) -> Void in
+                
+                
+        }
+        
+    }
 
 }

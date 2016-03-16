@@ -14,6 +14,8 @@ class HDCT09Controller: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        doGetRequestData(0, offset: 0)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -28,6 +30,19 @@ class HDCT09Controller: BaseViewController {
     func backAction(){
         
         self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    // MARK: - 数据加载
+    func doGetRequestData(limit:Int,offset:Int){
+        
+        
+        HDCT09Service().doGetRequest_HDCT09_URL(0, offset: 0, successBlock: { (hdResponse) -> Void in
+            
+            }) { (error) -> Void in
+                
+                
+        }
         
     }
 

@@ -33,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //缓存参数设置
         setCache()
         
+        //用户数据初始化
+        loadUserInfo()
+        
         return true
     }
 
@@ -186,6 +189,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.sharedImageCache().maxCacheAge = 5*24*60*60
         //缓存最大占有内存100MB
         SDImageCache.sharedImageCache().maxCacheSize = 1024*1024*100
+        
+    }
+    
+    /**
+     *  初始化当前登录用户数据
+     */
+    func loadUserInfo(){
+    
+        //判断用户是否已登录
+        
         
     }
 }

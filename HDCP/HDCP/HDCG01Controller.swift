@@ -137,7 +137,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         /**
          *  图标
          */
@@ -215,7 +215,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
         title?.text =   model.cate!
         
-        arrow?.image = UIImage(named: "arrowIcon")
+//        arrow?.image = UIImage(named: "arrowIcon")
         
         return cell
     }

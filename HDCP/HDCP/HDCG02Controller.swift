@@ -59,7 +59,7 @@ class HDCG02Controller: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
     
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         /**
          *  名称
@@ -105,7 +105,7 @@ class HDCG02Controller: UITableViewController {
         let model = dataArray[indexPath.row]
         
         title?.text =   model.name
-        arrow?.image = UIImage(named: "arrowIcon")
+//        arrow?.image = UIImage(named: "arrowIcon")
         
         return cell
         

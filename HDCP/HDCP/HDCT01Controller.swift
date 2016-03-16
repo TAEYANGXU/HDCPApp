@@ -23,9 +23,22 @@ class HDCT01Controller: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.navigationController?.navigationBarHidden = true
+        self.edgesForExtendedLayout = UIRectEdge.None;
+        self.extendedLayoutIncludesOpaqueBars = false;
+        self.modalPresentationCapturesStatusBarAppearance = false;
+        self.automaticallyAdjustsScrollViewInsets = true;
         
         setupUI()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     // MARK: - 创建UI视图
@@ -33,7 +46,7 @@ class HDCT01Controller: UITableViewController {
     func setupUI(){
     
         
-        headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,160))
+        headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,200))
         headerView?.backgroundColor = UIColor.clearColor()
         
         /**
@@ -41,13 +54,13 @@ class HDCT01Controller: UITableViewController {
         */
         headerBg = UIImageView()
         headerBg?.backgroundColor = UIColor.whiteColor()
-        headerBg?.image = UIImage(named: "userBGIcon")
+        headerBg?.image = UIImage(named: "bg02Icon")
         headerView?.addSubview(headerBg!)
         
         headerBg?.snp_makeConstraints(closure: { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
-            make.height.equalTo(160)
+            make.height.equalTo(200)
             make.top.equalTo(headerView!).offset(0)
             make.left.equalTo(headerView!).offset(0)
             
@@ -68,14 +81,14 @@ class HDCT01Controller: UITableViewController {
             make.width.equalTo(80)
             make.height.equalTo(80)
             make.left.equalTo(headerView!).offset(Constants.HDSCREENWITH/2-40)
-            make.top.equalTo(headerView!).offset(30)
+            make.top.equalTo(headerView!).offset(50)
         })
         
         /**
         *   登录或注册
         */
         loginBtn = UIButton()
-        loginBtn?.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        loginBtn?.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
         loginBtn?.setTitle("登录/注册", forState: UIControlState.Normal)
         loginBtn?.titleLabel?.font = UIFont.systemFontOfSize(16)
         loginBtn?.addTarget(self, action: "loginOrRegistAction:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -120,7 +133,7 @@ class HDCT01Controller: UITableViewController {
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         /**

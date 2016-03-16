@@ -195,7 +195,7 @@ class HDCT08Controller: UITableViewController {
             favoriteList = UILabel()
             favoriteList?.tag = 5000
             favoriteList?.textColor = Constants.HDMainTextColor
-            favoriteList?.font = UIFont.systemFontOfSize(14)
+            favoriteList?.font = UIFont.systemFontOfSize(13)
             cell.contentView.addSubview(favoriteList!)
             
             favoriteList?.snp_makeConstraints(closure: { (make) -> Void in
@@ -216,8 +216,8 @@ class HDCT08Controller: UITableViewController {
             
             address = UILabel()
             address?.tag = 6000
-            address?.textColor = Constants.HDMainTextColor
-            address?.font = UIFont.systemFontOfSize(14)
+            address?.textColor = UIColor.lightGrayColor()
+            address?.font = UIFont.systemFontOfSize(12)
             cell.contentView.addSubview(address!)
             
             address?.snp_makeConstraints(closure: { (make) -> Void in

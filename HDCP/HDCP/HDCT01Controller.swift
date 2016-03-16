@@ -23,6 +23,8 @@ class HDCT01Controller: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.navigationController?.navigationBarHidden = true
+        
         setupUI()
     }
 

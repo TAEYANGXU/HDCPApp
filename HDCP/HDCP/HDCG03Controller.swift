@@ -48,7 +48,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
             hisDataArray.insertObject("清除历史记录", atIndex: 0)
         }
         
-        
+        // 对历史记录数进行监听 从而判断是否添加下拉自动刷新
         objCont.addObserver(self, forKeyPath: "count", options: NSKeyValueObservingOptions.New, context: nil)
         
         setupUI()

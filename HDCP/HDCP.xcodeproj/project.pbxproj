@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B093E321C99B2E800038DC0 /* HDUserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B093E311C99B2E800038DC0 /* HDUserInfoManager.swift */; };
 		1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FD0C91C3D5749009E85CD /* MJRefreshAutoFooter.m */; };
 		1B0FD0F41C3D5749009E85CD /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FD0CB1C3D5749009E85CD /* MJRefreshBackFooter.m */; };
 		1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FD0CD1C3D5749009E85CD /* MJRefreshComponent.m */; };
@@ -188,6 +189,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B093E311C99B2E800038DC0 /* HDUserInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDUserInfoManager.swift; sourceTree = "<group>"; };
 		1B0FD0C81C3D5749009E85CD /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		1B0FD0C91C3D5749009E85CD /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		1B0FD0CA1C3D5749009E85CD /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -798,6 +800,7 @@
 				35F8CF381C3B6974003B1364 /* HDRequestManager.swift */,
 				358C1FC51C4F58EB00A4EF3E /* HDShareSDKManager.swift */,
 				35776A7C1C71D71300903620 /* HDHttpManager.swift */,
+				1B093E311C99B2E800038DC0 /* HDUserInfoManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -1250,6 +1253,7 @@
 				35F3FE4B1C744D8F003B43FC /* HDCT07Controller.swift in Sources */,
 				352A42521C50AACE009D0F9F /* HDHM01ResultEntity.swift in Sources */,
 				35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */,
+				1B093E321C99B2E800038DC0 /* HDUserInfoManager.swift in Sources */,
 				35776A791C70616000903620 /* HDCT05Controller.swift in Sources */,
 				352A42901C50E1A2009D0F9F /* HDCG01ResultEntity+CoreDataProperties.swift in Sources */,
 				358970691C969F92003E10D2 /* HDCT11Controller.swift in Sources */,

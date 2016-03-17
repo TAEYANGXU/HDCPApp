@@ -138,6 +138,8 @@
 		358970751C97ACDF003E10D2 /* HDCT09Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970741C97ACDF003E10D2 /* HDCT09Model.swift */; };
 		358970771C97ACEC003E10D2 /* HDCT10Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970761C97ACEC003E10D2 /* HDCT10Model.swift */; };
 		358970791C97ACFB003E10D2 /* HDCT11Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970781C97ACFB003E10D2 /* HDCT11Model.swift */; };
+		358970881C9A8928003E10D2 /* HDCT02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970871C9A8928003E10D2 /* HDCT02Service.swift */; };
+		3589708A1C9A968C003E10D2 /* HDCT02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358970891C9A968C003E10D2 /* HDCT02Model.swift */; };
 		358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358C1FB91C4F260500A4EF3E /* HDExtension.swift */; };
 		358C1FBC1C4F56FE00A4EF3E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBB1C4F56FE00A4EF3E /* libz.tbd */; };
 		358C1FBE1C4F571500A4EF3E /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */; };
@@ -350,6 +352,8 @@
 		358970741C97ACDF003E10D2 /* HDCT09Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT09Model.swift; sourceTree = "<group>"; };
 		358970761C97ACEC003E10D2 /* HDCT10Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT10Model.swift; sourceTree = "<group>"; };
 		358970781C97ACFB003E10D2 /* HDCT11Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT11Model.swift; sourceTree = "<group>"; };
+		358970871C9A8928003E10D2 /* HDCT02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT02Service.swift; sourceTree = "<group>"; };
+		358970891C9A968C003E10D2 /* HDCT02Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT02Model.swift; sourceTree = "<group>"; };
 		358C1FB91C4F260500A4EF3E /* HDExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDExtension.swift; sourceTree = "<group>"; };
 		358C1FBB1C4F56FE00A4EF3E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		358C1FBD1C4F571500A4EF3E /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -560,6 +564,7 @@
 		352A41EE1C50A535009D0F9F /* CT */ = {
 			isa = PBXGroup;
 			children = (
+				358970891C9A968C003E10D2 /* HDCT02Model.swift */,
 				358970721C97ACCE003E10D2 /* HDCT08Model.swift */,
 				358970741C97ACDF003E10D2 /* HDCT09Model.swift */,
 				358970761C97ACEC003E10D2 /* HDCT10Model.swift */,
@@ -989,6 +994,7 @@
 		35EF56731C51D26000352E7D /* CT */ = {
 			isa = PBXGroup;
 			children = (
+				358970871C9A8928003E10D2 /* HDCT02Service.swift */,
 				3589706A1C97ABD1003E10D2 /* HDCT08Service.swift */,
 				3589706C1C97ABE2003E10D2 /* HDCT09Service.swift */,
 				3589706E1C97ABED003E10D2 /* HDCT10Service.swift */,
@@ -1222,6 +1228,7 @@
 				1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */,
 				1B0FD1001C3D5749009E85CD /* MJRefreshStateHeader.m in Sources */,
 				3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */,
+				3589708A1C9A968C003E10D2 /* HDCT02Model.swift in Sources */,
 				358970671C969E6B003E10D2 /* HDCT10Controller.swift in Sources */,
 				356F39781C3A40130056DF44 /* HDCG01Controller.swift in Sources */,
 				1B0FD0FF1C3D5749009E85CD /* MJRefreshNormalHeader.m in Sources */,
@@ -1292,6 +1299,7 @@
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
 				35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */,
 				35776A7B1C70621600903620 /* HDCT06Controller.swift in Sources */,
+				358970881C9A8928003E10D2 /* HDCT02Service.swift in Sources */,
 				1B0FD1021C3D5749009E85CD /* MJRefreshConst.m in Sources */,
 				3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */,
 				358970751C97ACDF003E10D2 /* HDCT09Model.swift in Sources */,

@@ -73,7 +73,15 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             return
         }
         
+        //登录
+        
+        HDCT02Service().doGetRequest_HDCT02_01_URL("8752979", successBlock: { (hdResponse) -> Void in
+            
+            }) { (error) -> Void in
+                
+        }
     }
+    
     /**
      *  忘记密码
      */
@@ -122,6 +130,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             username = UITextField()
+            username.text = "15221472030"
             username.placeholder = "请输入邮箱账号或手机号码"
             username.font = UIFont.systemFontOfSize(16)
             cell.contentView.addSubview(username)
@@ -164,7 +173,9 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             
             password = UITextField()
             password.placeholder = "密码不少于6位，限字母和数字"
+            password.text = "12345678"
             password.font = UIFont.systemFontOfSize(16)
+            password.secureTextEntry = true
             cell.contentView.addSubview(password)
             password.snp_makeConstraints(closure: { (make) -> Void in
                 

@@ -103,7 +103,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     btn.tag = index+400
                     btn.setImage(UIImage(named: gg01Array[index]["image"]!), forState: UIControlState.Normal)
                     btn.setTitle(gg01Array[index]["title"]!, forState: UIControlState.Normal)
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(16)
+                    btn.titleLabel?.font = UIFont.systemFontOfSize(15)
                     btn.backgroundColor = UIColor.whiteColor()
                     btn.titleLabel?.textAlignment = NSTextAlignment.Center
                     btn.layer.borderWidth = 0.5

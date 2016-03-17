@@ -60,6 +60,38 @@ class HDCT08FavoriteModel:Mappable {
     
 }
 
+class HDCT08CommonInfoModel:Mappable {
+    
+    var commonId:Int?
+    var desc:String?
+    var img:String?
+    var tagId:Int?
+    var hasVideo:Int?
+    var tagName:String?
+    var tagUrl:String?
+    var title:String?
+    var url:String?
+    
+    required init?(_ map: Map) {
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        commonId <- map["CommonId"]
+        desc <- map["Desc"]
+        img <- map["Img"]
+        hasVideo <- map["HasVideo"]
+        url <- map["Url"]
+        tagName <- map["TagName"]
+        tagUrl <- map["TagUrl"]
+        title <- map["Title"]
+        url <- map["Url"]
+        
+    }
+    
+}
+
 class HDCT08ListModel:Mappable {
     
     var address:String!
@@ -76,6 +108,7 @@ class HDCT08ListModel:Mappable {
     var vip:Int!
     var entityType:Int!
     var favoriteList:Array<HDCT08FavoriteModel>?
+    var commonInfo:HDCT08CommonInfoModel?
     
     required init?(_ map: Map) {
         mapping(map)
@@ -97,6 +130,7 @@ class HDCT08ListModel:Mappable {
         vip <- map["Vip"]
         entityType <- map["entityType"]
         favoriteList <- map["FavoriteList"]
+        commonInfo <- map["CommonInfo"]
         
     }
     

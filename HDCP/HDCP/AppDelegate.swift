@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
-        
+//        UINavigationBar.appearance().barTintColor = Constants.HDColor(245, g: 161, b: 0, a: 1)
         /**
         *  状态栏字体设置白色
         */

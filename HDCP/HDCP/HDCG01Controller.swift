@@ -168,7 +168,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFontOfSize(15)
             cell.contentView.addSubview(title!)
             title?.snp_makeConstraints(closure: { (make) -> Void in
                 

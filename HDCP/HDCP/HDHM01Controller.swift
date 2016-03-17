@@ -424,7 +424,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     btn!.backgroundColor = UIColor.whiteColor()
                     btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
                     btn!.tag = index+1000;
-                    btn!.titleLabel?.font = UIFont.systemFontOfSize(16)
+                    btn!.titleLabel?.font = UIFont.systemFontOfSize(15)
                     btn!.setTitle(model.name, forState: UIControlState.Normal)
                     btn!.layer.borderWidth = 0.5
                     btn!.layer.borderColor = Constants.HDBGViewColor.CGColor

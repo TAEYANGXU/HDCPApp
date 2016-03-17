@@ -14,8 +14,31 @@ class HDUserInfoManager: NSObject {
     private var loaded:Bool = false
     
     
-    //用户信息
+    /**
+     *  用户个人信息
+     */
+    
+    //昵称
     var userName:String?
+    //密码
+    var passWord:String?
+    //用户ID
+    var userId:Int?
+    //手机码号
+    var mobile:String?
+    //关注数
+    var allFollowCnt:Int?
+    //粉丝数
+    var fansCount:Int?
+    //好友数
+    var friendCnt:Int?
+    //客服电话
+    var consumerMobile:String?
+    //出生年月
+    var birthday:String?
+    //用户头像
+    var avatar:String?
+    
     
     //单例模式
     static var shareInstance: HDUserInfoManager {
@@ -86,7 +109,7 @@ class HDUserInfoManager: NSObject {
     /**
      *  删除用户数据 切换用户或者退出登录
      */
-    func deleteUserInfo(){
+    func deleteUserdeInfo(){
     
         let defaults = NSUserDefaults.standardUserDefaults()
         

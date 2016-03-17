@@ -135,16 +135,22 @@ class Constants: NSObject {
      /**
      *  我的
      */
-     //豆友
      
+     //登录
+     static let HDCT02_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=f3a04547cbd2f6fa17a2eb523c3ed892&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=&method=Passport.login&nonce=1453797111&sessionid=1453787888&signmethod=md5&timestamp=1453797111&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=45&vn=v6.0.1"
+    
+     //个人信息
+     static let HDCT02_01_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=b09b40f855d159f234054f608ff7a2c9&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=9428764&method=RecipeUser.getMe&nonce=1453797912&sessionid=1453787888&signmethod=md5&timestamp=1453797912&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=45&vn=v6.0.1"
+    
+     //豆友
      static let HDCT08_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=bcf2e0dba529ceeb27fa9c79c41210f6&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Topic.indexPeople&nonce=1457967130&sessionid=1457966932&signmethod=md5&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
     
      //动态
-    
      static let HDCT09_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=753396be0dc7f7d989347d55aa4a13ef&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=UserFeed.getFollowUserFeed&nonce=1457967177&sessionid=1457966932&signmethod=md5&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
     
      //话题
      static let HDCT10_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=a76e39e5d361690850a458ae04f01c6c&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Topic.indexTopic&nonce=1457966947&sessionid=1457966932&signmethod=md5&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
+    
     //协议
     static let HDCT07_URL = "http://m.haodou.com/about.php?do=privacy"
     /*******************************************END*********************************************/

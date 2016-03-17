@@ -10,15 +10,17 @@ import UIKit
 
 private let ct01Array = [[["title":"豆友","image":"DYIcon"],
     ["title":"动态","image":"DTIcon"],["title":"话题","image":"HTIcon"],
-    ["title":"消息","image":"msgIcon"]],
-    [["title":"设置","image":"SZIcon"]]]
+    ["title":"消息","image":"msgIcon"],["title":"设置","image":"SZIcon"]]]
 
-class HDCT01Controller: UITableViewController {
+private let kHeadViewHeight:CGFloat = 240
 
-    var headerView:UIView?
+class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
+
+    var tableView:UITableView!
     var headerBg:UIImageView?
     var headerIcon:UIImageView?
-    var loginBtn:UIButton?
+    var userName:UILabel?
+    var sLine:UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,28 +46,16 @@ class HDCT01Controller: UITableViewController {
     // MARK: - 创建UI视图
     
     func setupUI(){
-    
         
-        headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,200))
-        headerView?.backgroundColor = UIColor.clearColor()
         
         /**
         *   背景图
         */
-        headerBg = UIImageView()
+        headerBg = UIImageView(frame: CGRectMake(0,-kHeadViewHeight,Constants.HDSCREENWITH,kHeadViewHeight))
         headerBg?.backgroundColor = UIColor.whiteColor()
         headerBg?.image = UIImage(named: "bg02Icon")
-        headerView?.addSubview(headerBg!)
-        
-        headerBg?.snp_makeConstraints(closure: { (make) -> Void in
-            
-            make.width.equalTo(Constants.HDSCREENWITH)
-            make.height.equalTo(200)
-            make.top.equalTo(headerView!).offset(0)
-            make.left.equalTo(headerView!).offset(0)
-            
-        })
-        
+        headerBg?.userInteractionEnabled = true
+     
         /**
         *   头像
         */
@@ -74,43 +64,66 @@ class HDCT01Controller: UITableViewController {
         headerIcon?.layer.masksToBounds = true
         headerIcon?.image = UIImage(named: "defaultIcon")
         headerIcon?.backgroundColor = UIColor.redColor()
-        headerView?.addSubview(headerIcon!)
+        headerBg?.addSubview(headerIcon!)
+        
+        let tapGes = UITapGestureRecognizer(target: self, action: "loginOrRegistAction")
+        headerIcon?.userInteractionEnabled = true
+        headerIcon?.addGestureRecognizer(tapGes)
         
         headerIcon?.snp_makeConstraints(closure: { (make) -> Void in
             
             make.width.equalTo(80)
             make.height.equalTo(80)
-            make.left.equalTo(headerView!).offset(Constants.HDSCREENWITH/2-40)
-            make.top.equalTo(headerView!).offset(50)
+            make.left.equalTo(headerBg!).offset(Constants.HDSCREENWITH/2-40)
+            make.top.equalTo(headerBg!).offset(80)
         })
         
         /**
         *   登录或注册
         */
-        loginBtn = UIButton()
-        loginBtn?.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
-        loginBtn?.setTitle("登录/注册", forState: UIControlState.Normal)
-        loginBtn?.titleLabel?.font = UIFont.systemFontOfSize(16)
-        loginBtn?.addTarget(self, action: "loginOrRegistAction:", forControlEvents: UIControlEvents.TouchUpInside)
-        headerView?.addSubview(loginBtn!)
+        userName = UILabel()
+        userName?.textColor = Constants.HDColor(245, g: 161, b: 0, a: 1)
+        userName?.font = UIFont.systemFontOfSize(16)
+        headerBg?.addSubview(userName!)
         
-        loginBtn?.snp_makeConstraints(closure: { (make) -> Void in
+        userName?.snp_makeConstraints(closure: { (make) -> Void in
             
             make.top.equalTo(headerIcon!.snp_bottom).offset(5)
             make.width.equalTo(Constants.HDSCREENWITH)
-            make.height.equalTo(40)
-            make.left.equalTo(headerView!).offset(0)
+            make.height.equalTo(30)
+            make.left.equalTo(headerBg!).offset(0)
             
         })
         
-        self.tableView.tableHeaderView = headerView;
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        //分割条
+        sLine = UILabel()
+        
+        sLine?.backgroundColor = Constants.HDBGViewColor
+        headerBg?.addSubview(sLine!)
+        
+        sLine?.snp_makeConstraints(closure: { (make) -> Void in
+            
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.height.equalTo(Constants.HDSpace)
+            make.left.equalTo(0)
+            make.bottom.equalTo(headerBg!.snp_bottom).offset(0)
+            
+        })
+        
+        
+        self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.contentInset = UIEdgeInsetsMake(kHeadViewHeight, 0, 0, 0)
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
+        self.tableView.addSubview(headerBg!)
+        self.view.addSubview(self.tableView)
     }
     
     // MARK: - events
-    func loginOrRegistAction(btn:UIButton){
+    func loginOrRegistAction(){
     
         let hdct02VC = HDCT02Controller()
         self.hidesBottomBarWhenPushed = true;
@@ -120,17 +133,17 @@ class HDCT01Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return ct01Array[section].count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return ct01Array.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
         let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
@@ -166,7 +179,7 @@ class HDCT01Controller: UITableViewController {
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFontOfSize(15)
             cell.contentView.addSubview(title!)
             title?.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -206,15 +219,15 @@ class HDCT01Controller: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(Constants.HDSpace)
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 44
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
         
@@ -264,6 +277,49 @@ class HDCT01Controller: UITableViewController {
                 self.hidesBottomBarWhenPushed = false;
                 
             }
+            
+        }
+        
+    }
+    
+    // MARK: - UIScrollView Delegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        
+        /**
+        *  通过滚动视图获取到滚动偏移量从而去改变图片的变化
+        */
+        
+        let yOffset = scrollView.contentOffset.y
+        let xOffset = (yOffset + kHeadViewHeight)/2
+        
+        if yOffset < -kHeadViewHeight {
+        
+            var rect = headerBg?.frame
+            rect?.origin.y = yOffset
+            rect?.size.height = -yOffset
+            rect?.origin.x = xOffset
+            rect?.size.width = Constants.HDSCREENWITH + fabs(xOffset)*2
+            headerBg?.frame = rect!
+            
+            headerIcon?.snp_updateConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(((rect?.width)! - 80)/2)
+                
+            })
+            
+            userName?.snp_updateConstraints(closure: { (make) -> Void in
+                
+                
+                make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
+            })
+            
+            sLine?.snp_updateConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
+                make.bottom.equalTo(headerBg!.snp_bottom).offset(0)
+                
+            })
             
         }
         

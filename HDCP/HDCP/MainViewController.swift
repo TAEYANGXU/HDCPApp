@@ -79,7 +79,6 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
             hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdct01vc.title = "我的"
             navc = UINavigationController(rootViewController: hdct01vc)
-            navc.navigationBar.barTintColor = Constants.HDMainColor
             self.addChildViewController(navc)
             
         }

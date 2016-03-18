@@ -36,6 +36,7 @@
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
 		3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3502FF421C450FDC0083F303 /* 画面ID介绍.strings */; };
+		351794051C9BD55500E69D75 /* HDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 351794041C9BD55500E69D75 /* HDLog.swift */; };
 		3521FC881C56232700E30D15 /* HDGG02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FC871C56232700E30D15 /* HDGG02Controller.swift */; };
 		3521FC8A1C56233700E30D15 /* HDGG03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3521FC891C56233700E30D15 /* HDGG03Controller.swift */; };
 		352A41D81C5078E1009D0F9F /* HDHM01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */; };
@@ -240,6 +241,7 @@
 		3502FF3A1C44DA620083F303 /* HDHM02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Service.swift; sourceTree = "<group>"; };
 		3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Controller.swift; sourceTree = "<group>"; };
 		3502FF421C450FDC0083F303 /* 画面ID介绍.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = "画面ID介绍.strings"; sourceTree = "<group>"; };
+		351794041C9BD55500E69D75 /* HDLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDLog.swift; sourceTree = "<group>"; };
 		3521FC871C56232700E30D15 /* HDGG02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG02Controller.swift; sourceTree = "<group>"; };
 		3521FC891C56233700E30D15 /* HDGG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG03Controller.swift; sourceTree = "<group>"; };
 		352A41D71C5078E1009D0F9F /* HDHM01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = HDHM01Controller.swift; sourceTree = "<group>"; };
@@ -932,6 +934,7 @@
 			children = (
 				356F397F1C3A43EE0056DF44 /* HDConstants.swift */,
 				356F39BC1C3A81870056DF44 /* HDCoreUtils.swift */,
+				351794041C9BD55500E69D75 /* HDLog.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 				352A42481C50AACE009D0F9F /* HM01WikiListEntity.swift in Sources */,
 				3566C9011C479E8B00573D97 /* HDCG01Model.swift in Sources */,
 				356F39B01C3A76FE0056DF44 /* DateFormatterTransform.swift in Sources */,
+				351794051C9BD55500E69D75 /* HDLog.swift in Sources */,
 				352A424A1C50AACE009D0F9F /* HM01RecipeListEntity.swift in Sources */,
 				1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */,
 				358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */,

@@ -21,6 +21,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     var headerIcon:UIImageView?
     var userName:UILabel?
     var sLine:UILabel?
+    var cntView:UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.extendedLayoutIncludesOpaqueBars = false;
         self.modalPresentationCapturesStatusBarAppearance = false;
         self.automaticallyAdjustsScrollViewInsets = true;
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "ct01Notification:", name: Constants.HDREFRESHHDCT01, object: nil)
         
         setupUI()
     }
@@ -43,11 +46,23 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
-    // MARK: - 创建UI视图
+    deinit{
     
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.HDREFRESHHDCT01, object: nil)
+        
+    }
+    
+    // MARK: - 创建UI视图
     func setupUI(){
         
-        
+        createHeaderView()
+        createtableView()
+    
+    }
+    
+    
+    func createHeaderView(){
+    
         /**
         *   背景图
         */
@@ -55,7 +70,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         headerBg?.backgroundColor = UIColor.whiteColor()
         headerBg?.image = UIImage(named: "bg02Icon")
         headerBg?.userInteractionEnabled = true
-     
+        
         /**
         *   头像
         */
@@ -110,7 +125,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
         })
         
-        
+    }
+    
+    func createtableView(){
+    
         self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -120,6 +138,53 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.tableView.tableFooterView = UIView()
         self.tableView.addSubview(headerBg!)
         self.view.addSubview(self.tableView)
+        
+    }
+    
+    func refreshUI(){
+    
+        
+        //判断用户是否已登录
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let sign = defaults.objectForKey(Constants.HDSign)
+        
+        if let _ = sign {
+            
+            
+            
+            
+        }else{
+        
+            
+            
+        }
+        
+    }
+    
+    // MARK: - 通知事件
+    func ct01Notification(note:NSNotification){
+    
+        
+        let flag = note.userInfo!["FLAG"] as? String
+        
+        if flag == "LOGIN" {
+        
+            /**
+            *  用户登录
+            */
+            
+            
+        }
+        
+        if flag == "LOGOUT" {
+        
+            /**
+            *   用户退出登录
+            */
+            
+            
+        }
+        
     }
     
     // MARK: - events
@@ -229,55 +294,44 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if indexPath.section == 0 {
         
+        if indexPath.row == 0 {
             
-            if indexPath.row == 0 {
-                
-                //豆友
-                let hdct08VC = HDCT08Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct08VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-                
-            }else if indexPath.row == 1 {
+            //豆友
+            let hdct08VC = HDCT08Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct08VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             
-                //动态
-                let hdct09VC = HDCT09Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct09VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-                
-            }else if indexPath.row == 2 {
+        }else if indexPath.row == 1 {
             
-                //话题
-                let hdct10VC = HDCT10Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct10VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-            }else{
+            //动态
+            let hdct09VC = HDCT09Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct09VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
             
-                //消息
-                let hdct11VC = HDCT11Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct11VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-            }
+        }else if indexPath.row == 2 {
             
-        }
+            //话题
+            let hdct10VC = HDCT10Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct10VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+        }else if indexPath.row == 3 {
+            
+            //消息
+            let hdct11VC = HDCT11Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct11VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+        }else{
         
-        if indexPath.section == 1 {
-            
-            if indexPath.row == 0 {
-                
-                //设置
-                let hdct06VC = HDCT06Controller()
-                self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct06VC, animated: true)
-                self.hidesBottomBarWhenPushed = false;
-                
-            }
-            
+            //设置
+            let hdct06VC = HDCT06Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hdct06VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
         }
         
     }

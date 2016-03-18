@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HDUserInfoManager: NSObject {
+class HDUserInfoManager {
     
     // 是否已经加载
     private var loaded:Bool = false
@@ -27,7 +27,7 @@ class HDUserInfoManager: NSObject {
     //手机码号
     var mobile:String?
     //关注数
-    var allFollowCnt:Int?
+    var followCnt:Int?
     //粉丝数
     var fansCount:Int?
     //好友数
@@ -38,7 +38,12 @@ class HDUserInfoManager: NSObject {
     var birthday:String?
     //用户头像
     var avatar:String?
-    
+    //登录标示
+    var sign:String?
+    //会员
+    var vip:Int?
+    //性别
+    var gender:Int?
     
     //单例模式
     static var shareInstance: HDUserInfoManager {
@@ -55,7 +60,9 @@ class HDUserInfoManager: NSObject {
         return Singleton.instance!
     }
     
-    //加载用户数据
+    /**
+    *  加载用户数据
+    */
     func load(){
     
         if !loaded {
@@ -67,22 +74,104 @@ class HDUserInfoManager: NSObject {
     
     }
     
-    //保存用户数据
+    /**
+    *  保存用户数据.
+    */
     func save(){
     
         saveUserInfo()
     }
     
     /**
+     *  删除用户数据 切换用户或者退出登录
+     */
+    func clear(){
+    
+        deleteUserdeInfo()
+    }
+    
+    /**
      *  初始化用户数据
      */
-    func loadUserInfo(){
+    private func loadUserInfo(){
     
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        if (defaults.objectForKey("HD_CLIENT_LAST_USERNAME") != nil) {
+        if (defaults.objectForKey("HD_CLIENT_USERNAME") != nil) {
             
-            userName = defaults.objectForKey("HD_CLIENT_LAST_USERNAME") as? String
+            userName = defaults.objectForKey("HD_CLIENT_USERNAME") as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_PASSWORD") != nil) {
+            
+            passWord = defaults.objectForKey("HD_CLIENT_PASSWORD") as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_USERID") != nil) {
+            
+            userId = defaults.objectForKey("HD_CLIENT_USERID") as? Int
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_MOBILE") != nil) {
+            
+            mobile = defaults.objectForKey("HD_CLIENT_MOBILE") as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_FOLLOWCNT") != nil) {
+            
+            followCnt = defaults.objectForKey("HD_CLIENT_FOLLOWCNT") as? Int
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_FANSCNT") != nil) {
+            
+            fansCount = defaults.objectForKey("HD_CLIENT_FANSCNT") as? Int
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_FRIENDCNT") != nil) {
+            
+            friendCnt = defaults.objectForKey("HD_CLIENT_FRIENDCNT") as? Int
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_CONSUMERMOBILE") != nil) {
+            
+            consumerMobile = defaults.objectForKey("HD_CLIENT_CONSUMERMOBILE") as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_BIRTHDAY") != nil) {
+            
+            birthday = defaults.objectForKey("HD_CLIENT_BIRTHDAY") as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_AVATAR") != nil) {
+            
+            avatar = defaults.objectForKey("HD_CLIENT_AVATAR") as? String
+            
+        }
+        
+        if (defaults.objectForKey(Constants.HDSign) != nil) {
+            
+            sign = defaults.objectForKey(Constants.HDSign) as? String
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_GENDER") != nil) {
+            
+            gender = defaults.objectForKey("HD_CLIENT_GENDER") as? Int
+            
+        }
+        
+        if (defaults.objectForKey("HD_CLIENT_VIP") != nil) {
+            
+            vip = defaults.objectForKey("HD_CLIENT_VIP") as? Int
             
         }
         
@@ -91,14 +180,74 @@ class HDUserInfoManager: NSObject {
     /**
      *  保存或更新用户数据
      */
-    func saveUserInfo(){
+    private func saveUserInfo(){
     
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if let _ = userName {
             
-            defaults .setObject(userName, forKey: "HD_CLIENT_LAST_USERNAME")
+            defaults .setValue(userName, forKey: "HD_CLIENT_USERNAME")
             
+        }
+        
+        if let _ = passWord {
+        
+            defaults .setValue(userName, forKey: "HD_CLIENT_PASSWORD")
+        }
+        
+        if let _ = userId {
+            
+            defaults .setValue(userId, forKey: "HD_CLIENT_USERID")
+        }
+        
+        if let _ = mobile {
+            
+            defaults .setValue(mobile, forKey: "HD_CLIENT_MOBILE")
+        }
+        
+        if let _ = followCnt {
+            
+            defaults .setValue(followCnt, forKey: "HD_CLIENT_FOLLOWCNT")
+        }
+        
+        if let _ = fansCount {
+            
+            defaults .setValue(fansCount, forKey: "HD_CLIENT_FANSCNT")
+        }
+        
+        if let _ = friendCnt {
+            
+            defaults .setValue(friendCnt, forKey: "HD_CLIENT_FRIENDCNT")
+        }
+        
+        if let _ = consumerMobile {
+            
+            defaults .setValue(consumerMobile, forKey: "HD_CLIENT_CONSUMERMOBILE")
+        }
+        
+        if let _ = birthday {
+            
+            defaults .setValue(birthday, forKey: "HD_CLIENT_BIRTHDAY")
+        }
+        
+        if let _ = avatar {
+            
+            defaults .setValue(avatar, forKey: "HD_CLIENT_AVATAR")
+        }
+        
+        if let _ = sign {
+            
+            defaults .setValue(sign, forKey: Constants.HDSign)
+        }
+        
+        if let _ = gender {
+            
+            defaults .setValue(gender, forKey: "HD_CLIENT_GENDER")
+        }
+        
+        if let _ = vip {
+            
+            defaults .setValue(sign, forKey: "HD_CLIENT_VIP")
         }
         
         
@@ -109,12 +258,50 @@ class HDUserInfoManager: NSObject {
     /**
      *  删除用户数据 切换用户或者退出登录
      */
-    func deleteUserdeInfo(){
+    private func deleteUserdeInfo(){
     
         let defaults = NSUserDefaults.standardUserDefaults()
         
         userName = nil
-        defaults.removeObjectForKey("HD_CLIENT_LAST_USERNAME")
+        defaults.removeObjectForKey("HD_CLIENT_USERNAME")
+        
+        passWord = nil
+        defaults.removeObjectForKey("HD_CLIENT_PASSWORD")
+        
+        userId = nil
+        defaults.removeObjectForKey("HD_CLIENT_USERID")
+        
+        mobile = nil
+        defaults.removeObjectForKey("HD_CLIENT_MOBILE")
+        
+        followCnt = nil
+        defaults.removeObjectForKey("HD_CLIENT_FOLLOWCNT")
+        
+        fansCount = nil
+        defaults.removeObjectForKey("HD_CLIENT_FANSCNT")
+        
+        friendCnt = nil
+        defaults.removeObjectForKey("HD_CLIENT_FRIENDCNT")
+        
+        consumerMobile = nil
+        defaults.removeObjectForKey("HD_CLIENT_CONSUMERMOBILE")
+        
+        birthday = nil
+        defaults.removeObjectForKey("HD_CLIENT_BIRTHDAY")
+        
+        avatar = nil
+        defaults.removeObjectForKey("HD_CLIENT_AVATAR")
     
+        sign = nil
+        defaults.removeObjectForKey(Constants.HDSign)
+        
+        gender = nil
+        defaults.removeObjectForKey("HD_CLIENT_GENDER")
+        
+        vip = nil
+        defaults.removeObjectForKey("HD_CLIENT_VIP")
+        
+        defaults.removeObjectForKey(Constants.HDHistory)
+        
     }
 }

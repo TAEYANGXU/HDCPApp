@@ -19,7 +19,7 @@ public class HDRequestManager: NSObject {
      */
     static func doGetRequest(URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
-        print("Get URL:  \(URL)")
+        HDLog.LogOut("PostURL", obj: URL)
         
         Alamofire.request(.GET, URL)
             .responseJSON { response in
@@ -30,7 +30,7 @@ public class HDRequestManager: NSObject {
                      *  请求成功
                      */
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
-                    print("Data:   \(text)")
+                    HDLog.LogOut("Data", obj: text)
                     
                     
                 }else{
@@ -40,7 +40,7 @@ public class HDRequestManager: NSObject {
                     
                     - print: 错误信息
                     */
-                    print("error:   \(response.result.error?.description)")
+                    HDLog.LogOut("error", obj: (response.result.error?.description)!)
                     
                 }
                 
@@ -59,7 +59,7 @@ public class HDRequestManager: NSObject {
      */
     static func doPostRequest(param:[String : AnyObject],URL:String,completeBlock:((response:Response<AnyObject, NSError>)->Void)){
         
-        print("Post URL:  \(URL)")
+        HDLog.LogOut("PostURL", obj: URL)
         
         Alamofire.request(.POST, URL,parameters: param)
             .responseJSON { response in
@@ -70,7 +70,7 @@ public class HDRequestManager: NSObject {
                      *  请求成功
                      */
                     let text:String = NSString(data: response.data!, encoding: NSUTF8StringEncoding)! as String
-                    print("Data:   \(text)")
+                    HDLog.LogOut("Data", obj: text)
                     
                 }else{
                     
@@ -79,8 +79,7 @@ public class HDRequestManager: NSObject {
                     
                     - print: 错误信息
                     */
-                    print("error:   \(response.result.error?.description)")
-                    
+                    HDLog.LogOut("error", obj: (response.result.error?.description)!)
                 }
         
                 completeBlock(response: response)

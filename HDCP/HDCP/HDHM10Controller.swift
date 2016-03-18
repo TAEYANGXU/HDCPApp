@@ -16,6 +16,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     var commitBtn:UIButton!
     var commentArray:Array<HDHM08Comment> = Array<HDHM08Comment>()
     
+    //rid=%@&type=0&offset=0&limit=20
     
     override func viewDidLoad() {
         
@@ -402,6 +403,9 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
             attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str.characters.count))
             content?.attributedText =  attributed
+        }else{
+        
+            content?.textColor = Constants.HDMainTextColor
         }
         
         return cell

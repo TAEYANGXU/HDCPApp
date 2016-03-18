@@ -8,21 +8,40 @@
 
 import UIKit
 
-private let ct06Array = [[["title":"社交绑定"],
+private let ct06ArrayLogin = [[["title":"社交绑定"],
     ["title":"消息设置"],["title":"隐私设置"],["title":"账号安全"]],
     [["title":"夜间模式"],
         ["title":"2G/3G/4G下展示图片"],["title":"开启摇一摇震动"],["title":"清理缓存"]],
     [["title":"关于"],
         ["title":"意见反馈"],["title":"给我们评星"]],[["title":"退出登录"]],[]]
 
-private let titleArray = ["个人","通用","支持","",""]
+private let titleArrayLogin = ["个人","通用","支持","",""]
 
 class HDCT06Controller: UITableViewController{
+    
+    var ct06Array = [[["title":"社交绑定"],
+        ["title":"消息设置"],["title":"隐私设置"],["title":"账号安全"]],
+        [["title":"夜间模式"],
+            ["title":"2G/3G/4G下展示图片"],["title":"开启摇一摇震动"],["title":"清理缓存"]],
+        [["title":"关于"],
+            ["title":"意见反馈"],["title":"给我们评星"]],[]]
+    var titleArray = ["个人","通用","支持",""]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = "设置"
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let sign = defaults.objectForKey(Constants.HDSign)
+        
+        if let _ = sign {
+        
+            self.ct06Array = ct06ArrayLogin
+            self.titleArray = titleArrayLogin
+            
+        }
+        
         setupUI()
         
     }
@@ -162,5 +181,25 @@ class HDCT06Controller: UITableViewController{
         return 44
         
     }
-
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+        if indexPath.section == 3 {
+        
+            print("退出登录")
+            
+            HDUserInfoManager.shareInstance.clear()
+            NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGOUT"])
+            
+            for vc in (self.navigationController?.viewControllers)! {
+            
+                if vc.isMemberOfClass(MainViewController.classForCoder()){
+                
+                    self.navigationController?.popToViewController(vc, animated: true)
+                    break
+                }
+                
+            }
+        }
+    }
 }

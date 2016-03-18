@@ -30,9 +30,13 @@ class Constants: NSObject {
     static let HDSCREENHEIGHT = UIScreen.mainScreen().bounds.height
     
     /**
+     *   日志开关 true:开 false:关
+     **/
+    static let HDLOG:Bool = false
+    
+    /**
      *   提示消息
      **/
-     
     static let HD_NO_NET_MSG = "网络好像不给力"
     
     /**
@@ -71,14 +75,15 @@ class Constants: NSObject {
      **/
     static let HDAppVersion:String = "Version"
     static let HDHistory:String = "History"
+    static let HDSign:String = "HD_CLIENT_SIGN"
     
     /**
-     *   通知
+     *   通知名称
      **/
      
     static let HDREFRESHHDHM01 = "kHDREFRESHHDHM01"
     static let HDREFRESHHDGG01 = "kHDREFRESHHDGG01"
-    
+    static let HDREFRESHHDCT01 = "KHDREFRESHHDCT01"
     
     /*******************************************URL*********************************************/
      
@@ -110,7 +115,6 @@ class Constants: NSObject {
     static let HDHM08_URL = "http://api.hoto.cn/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&format=json&sessionid=1404474143&vc=25&vn=v3.5.2&loguid=&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7CFFDD5AB8-D715-4007-9E15-DF103EB9DD01%7C825300FA-E7F0-4E82-9181-E914E3EBEEA0&channel=appstore&uuid=8332A3FB-D4DF-416D-AA3D-443277ECAD26&method=Info.getInfoV3"
     
     //查看评论
-    //rid=%@&type=0&offset=0&limit=20
     static let HDHM10_URL = "http://api.hoto.cn/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&format=json&sessionid=1405150082&vc=25&vn=v3.5.2&loguid=&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7CFFDD5AB8-D715-4007-9E15-DF103EB9DD01%7C825300FA-E7F0-4E82-9181-E914E3EBEEA0&channel=appstore&uuid=8332A3FB-D4DF-416D-AA3D-443277ECAD26&method=Comment.getList"
     
      /**

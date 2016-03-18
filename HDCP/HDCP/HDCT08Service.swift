@@ -18,7 +18,7 @@ class HDCT08Service {
      */
     func doGetRequest_HDCT08_URL(limit:Int,offset:Int,successBlock:(hdResponse:HDCT08Response)->Void,failBlock:(error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDCT08_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970),"sign":"4864f65f7e5827e7ea50a48bb70f7a2a"], URL: Constants.HDCT08_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

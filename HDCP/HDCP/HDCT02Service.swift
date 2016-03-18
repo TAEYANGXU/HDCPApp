@@ -23,7 +23,7 @@ class HDCT02Service {
             
             if response.result.error == nil {
                 
-                //使用SwiftyJSON解析
+                //使用SwiftyJSON解析data
                 let json = JSON(data: response.data!)
                 
                 if json["status"] == 201 {
@@ -63,6 +63,22 @@ class HDCT02Service {
                 
                 // JSON 转换成对象
                 let response = Mapper<HDCT02Response>().map(response.result.value)
+                
+                //保存用户个人信息
+                HDUserInfoManager.shareInstance.sign = "4864f65f7e5827e7ea50a48bb70f7a2a"
+                HDUserInfoManager.shareInstance.userName = response?.result?.userName
+                HDUserInfoManager.shareInstance.userId = response?.result?.userId
+                HDUserInfoManager.shareInstance.mobile = response?.result?.mobile
+                HDUserInfoManager.shareInstance.followCnt = response?.result?.allFollowCnt
+                HDUserInfoManager.shareInstance.fansCount = response?.result?.fansCount
+                HDUserInfoManager.shareInstance.friendCnt = response?.result?.friendCnt
+                HDUserInfoManager.shareInstance.consumerMobile = response?.result?.consumerMobile
+                HDUserInfoManager.shareInstance.birthday = response?.result?.birthday
+                HDUserInfoManager.shareInstance.avatar = response?.result?.avatar
+                HDUserInfoManager.shareInstance.vip = response?.result?.vip
+                HDUserInfoManager.shareInstance.gender = response?.result?.gender
+                HDUserInfoManager.shareInstance.save()
+                
                 // 回调
                 successBlock(hdResponse: response!)
                 

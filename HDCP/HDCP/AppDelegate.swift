@@ -157,7 +157,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             try reachability.startNotifier()
         } catch {
-            print("Unable to create Reachability")
+            
+            HDLog.LogOut("Unable to create Reachability")
             return
         }
         
@@ -169,12 +170,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if reachability.isReachable() {
             if reachability.isReachableViaWiFi() {
-                print("Reachable via WiFi")
+                
+                HDLog.LogOut("Reachable via WiFi")
             } else {
-                print("Reachable via Cellular")
+                
+                HDLog.LogOut("Reachable via Cellular")
             }
         } else {
-            print("Not reachable")
+            
+            HDLog.LogOut("Not reachable")
         }
     }
     
@@ -198,7 +202,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func loadUserInfo(){
     
         //判断用户是否已登录
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let sign = defaults.objectForKey(Constants.HDSign)
         
+        if let _ = sign {
+            
+            HDUserInfoManager.shareInstance.load()
+        }
         
     }
 }

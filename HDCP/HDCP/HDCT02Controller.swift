@@ -45,6 +45,19 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         
     }
     
+    // MARK: - 提示动画显示和隐藏
+    func showHud(){
+        
+        CoreUtils.showProgressHUD(self.view)
+        
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
+    }
+    
+    
     /**
      *  用户注册
      */
@@ -74,11 +87,17 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         }
         
         //登录
-        
+        showHud()
         HDCT02Service().doGetRequest_HDCT02_01_URL("8752979", successBlock: { (hdResponse) -> Void in
+            
+                self.hidenHud()
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGIN"])
+                self.navigationController?.popToRootViewControllerAnimated(true)
             
             }) { (error) -> Void in
                 
+                self.hidenHud()
+                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
         }
     }
     

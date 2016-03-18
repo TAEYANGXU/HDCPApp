@@ -197,6 +197,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             cntView?.hidden = false
             userName?.hidden = false
+            headerIcon?.userInteractionEnabled = false
             
             //关注 粉丝 好友
             
@@ -219,6 +220,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             headerIcon?.image = UIImage(named: "defaultIcon")
             cntView?.hidden = true
             userName?.hidden = true
+            headerIcon?.userInteractionEnabled = true
         }
         
     }

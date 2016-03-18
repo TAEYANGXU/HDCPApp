@@ -185,15 +185,15 @@ class HDCT06Controller: UITableViewController{
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
         if indexPath.section == 3 {
-        
-            print("退出登录")
+            
+            HDLog.LogOut("退出登录")
             
             HDUserInfoManager.shareInstance.clear()
             NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGOUT"])
             
             for vc in (self.navigationController?.viewControllers)! {
             
-                if vc.isMemberOfClass(MainViewController.classForCoder()){
+                if vc.isMemberOfClass(HDCT01Controller.classForCoder()){
                 
                     self.navigationController?.popToViewController(vc, animated: true)
                     break

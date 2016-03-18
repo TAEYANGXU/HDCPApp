@@ -12,10 +12,16 @@ private let ct01Array = [[["title":"豆友","image":"DYIcon"],
     ["title":"动态","image":"DTIcon"],["title":"话题","image":"HTIcon"],
     ["title":"消息","image":"msgIcon"],["title":"设置","image":"SZIcon"]]]
 
-private let kHeadViewHeight:CGFloat = 240
+private let cntArray = ["关注","粉丝","好友"]
+
+private let kHeadViewHeight:CGFloat = 260
 
 class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
 
+    enum BTNTag: Int {
+        case GZ = 1000 , FS, HY
+    }
+    
     var tableView:UITableView!
     var headerBg:UIImageView?
     var headerIcon:UIImageView?
@@ -77,6 +83,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         headerIcon = UIImageView()
         headerIcon?.layer.cornerRadius = 40;
         headerIcon?.layer.masksToBounds = true
+        headerIcon?.layer.borderColor = UIColor.whiteColor().CGColor
+        headerIcon?.layer.borderWidth = 1.5
         headerIcon?.image = UIImage(named: "defaultIcon")
         headerIcon?.backgroundColor = UIColor.redColor()
         headerBg?.addSubview(headerIcon!)
@@ -97,7 +105,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         *   登录或注册
         */
         userName = UILabel()
-        userName?.textColor = Constants.HDColor(245, g: 161, b: 0, a: 1)
+        userName?.textColor = UIColor.whiteColor()
+        userName?.textAlignment = NSTextAlignment.Center
         userName?.font = UIFont.systemFontOfSize(16)
         headerBg?.addSubview(userName!)
         
@@ -125,6 +134,42 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
         })
         
+        //显示关注 粉丝 好友 数量
+        cntView = UIView()
+        cntView?.backgroundColor = Constants.HDColor(0, g: 0, b: 0, a: 0.4)
+        cntView?.hidden = true
+        headerBg?.addSubview(cntView!)
+        
+        cntView?.snp_makeConstraints(closure: { (make) -> Void in
+            
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.height.equalTo(40)
+            make.bottom.equalTo(headerBg!.snp_bottom).offset(-10)
+            
+        })
+        
+        let space = Constants.HDSCREENWITH/3
+        for var i=0;i<cntArray.count;i++ {
+        
+            let btn = UIButton(type: UIButtonType.Custom)
+            btn.tag = 1000 + i
+            btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            btn.addTarget(self, action: "cntAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            btn.titleLabel?.font = UIFont.systemFontOfSize(14)
+            cntView?.addSubview(btn)
+            btn.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(cntView!).offset(CGFloat(i)*space)
+                make.top.equalTo(0)
+                make.width.equalTo(space)
+                make.height.equalTo(40)
+                
+            })
+            
+        }
+        
+        refreshUI()
+        
     }
     
     func createtableView(){
@@ -150,13 +195,30 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         if let _ = sign {
             
+            cntView?.hidden = false
+            userName?.hidden = false
             
+            //关注 粉丝 好友
             
+            let gzBtn = cntView?.viewWithTag(1000) as! UIButton
+            gzBtn.setTitle(String(format: "关注: %d", HDUserInfoManager.shareInstance.followCnt!), forState: UIControlState.Normal)
+            
+            let fsBtn = cntView?.viewWithTag(1001) as! UIButton
+            fsBtn.setTitle(String(format: "粉丝: %d", HDUserInfoManager.shareInstance.fansCount!), forState: UIControlState.Normal)
+            
+            let hyBtn = cntView?.viewWithTag(1002) as! UIButton
+            hyBtn.setTitle(String(format: "好友: %d", HDUserInfoManager.shareInstance.friendCnt!), forState: UIControlState.Normal)
+            
+            HDLog.LogOut(HDUserInfoManager.shareInstance.avatar!)
+            
+            userName?.text = HDUserInfoManager.shareInstance.userName
+            headerIcon?.sd_setImageWithURL(NSURL(string: HDUserInfoManager.shareInstance.avatar!), placeholderImage: UIImage(named: "defaultIcon"))
             
         }else{
         
-            
-            
+            headerIcon?.image = UIImage(named: "defaultIcon")
+            cntView?.hidden = true
+            userName?.hidden = true
         }
         
     }
@@ -172,7 +234,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             /**
             *  用户登录
             */
-            
+            refreshUI()
             
         }
         
@@ -181,7 +243,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             /**
             *   用户退出登录
             */
-            
+            refreshUI()
             
         }
         
@@ -194,6 +256,24 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(hdct02VC, animated: true)
         self.hidesBottomBarWhenPushed = false;
+    }
+    
+    func cntAction(btn:UIButton){
+    
+        switch(btn.tag) {
+        
+        case 1000:
+            HDLog.LogOut("关注")
+            break
+        case 1001:
+            HDLog.LogOut("粉丝")
+            break
+        case 1002:
+            HDLog.LogOut("好友")
+            break
+        default:
+            ""
+        }
     }
     
     // MARK: - UITableView delegate/datasource
@@ -294,37 +374,84 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        //判断用户是否已登录
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let sign = defaults.objectForKey(Constants.HDSign)
+        
+        
         
         if indexPath.row == 0 {
             
-            //豆友
-            let hdct08VC = HDCT08Controller()
-            self.hidesBottomBarWhenPushed = true;
-            self.navigationController?.pushViewController(hdct08VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            if let _ = sign {
+            
+                //豆友
+                let hdct08VC = HDCT08Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct08VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }else{
+            
+                let hdct02VC = HDCT02Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct02VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }
+            
             
         }else if indexPath.row == 1 {
             
-            //动态
-            let hdct09VC = HDCT09Controller()
-            self.hidesBottomBarWhenPushed = true;
-            self.navigationController?.pushViewController(hdct09VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            
+            if let _ = sign {
+                
+                //动态
+                let hdct09VC = HDCT09Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct09VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }else{
+                
+                let hdct02VC = HDCT02Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct02VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }
+
             
         }else if indexPath.row == 2 {
             
-            //话题
-            let hdct10VC = HDCT10Controller()
-            self.hidesBottomBarWhenPushed = true;
-            self.navigationController?.pushViewController(hdct10VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            if let _ = sign {
+                
+                //话题
+                let hdct10VC = HDCT10Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct10VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }else{
+                
+                let hdct02VC = HDCT02Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct02VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }
+            
         }else if indexPath.row == 3 {
             
-            //消息
-            let hdct11VC = HDCT11Controller()
-            self.hidesBottomBarWhenPushed = true;
-            self.navigationController?.pushViewController(hdct11VC, animated: true)
-            self.hidesBottomBarWhenPushed = false;
+            if let _ = sign {
+                
+                //消息
+                let hdct11VC = HDCT11Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct11VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }else{
+                
+                let hdct02VC = HDCT02Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdct02VC, animated: true)
+                self.hidesBottomBarWhenPushed = false;
+            }
+
+            
         }else{
         
             //设置
@@ -372,6 +499,13 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
                 make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
                 make.bottom.equalTo(headerBg!.snp_bottom).offset(0)
+                
+            })
+            
+            cntView?.snp_updateConstraints(closure: { (make) -> Void in
+                
+                make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
+                make.bottom.equalTo(headerBg!.snp_bottom).offset(-10)
                 
             })
             

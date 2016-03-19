@@ -101,7 +101,9 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         HDCG01Service().doGetRequest_HDCG02_URL({ (HDCG01Response) -> Void in
             
             self.hidenHud()
-            self.dataArray = HDCG01Response.result?.list!
+            if HDCG01Response.result?.list!.count>0 {
+                self.dataArray = HDCG01Response.result?.list!
+            }
             self.tableView!.reloadData()
             
             }) { (error) -> Void in

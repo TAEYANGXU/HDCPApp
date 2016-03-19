@@ -48,3 +48,34 @@ class HDCT09Controller: BaseViewController {
 
 
 }
+
+/***
+
+详情
+http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=1ed196fa15f1b896a26de72f61fb2735&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Info.getInfo&nonce=1458377486&sessionid=1458376760&signmethod=md5&timestamp=1458377486&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3
+
+rid=1046273&sign=4864f65f7e5827e7ea50a48bb70f7a2a&uid=8752979&uuid=7408f5dd81db1165cd1896e8175a75e4
+
+
+评论
+http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=eba7c612222dde2f1c8c1f98fe48ff78&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Comment.getList&nonce=1458377630&sessionid=1458376760&signmethod=md5&timestamp=1458377630&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3
+
+limit=10&offset=0&rid=1046273&sign=4864f65f7e5827e7ea50a48bb70f7a2a&type=0&uid=8752979&uuid=7408f5dd81db1165cd1896e8175a75e4
+
+
+视频地址分析
+
+1.
+http://recipe1.hoto.cn/pic/recipe/l/01/f7/1046273_5d6aa3.jpg
+http://v.hoto.cn/01/f7/1046273.mp4
+2.
+http://recipe0.hoto.cn/pic/recipe/l/aa/e6/1042090_ce3b8f.jpg
+http://v.hoto.cn/aa/e6/1042090.mp4
+
+3.
+http://recipe1.hoto.cn/pic/recipe/l/8f/d8/1038479_e5266c.jpg
+http://v.hoto.cn/8f/d8/1038479.mp4
+
+HasVideo = 1 为视频
+
+**/

@@ -239,4 +239,22 @@ class CoreUtils: NSObject {
         
     }
     
+    /**
+    *  对图片尺寸进行压缩
+    *
+    *  @param image   UIImage
+    *  @param newSize CGSize
+    *
+    *  @return UIImage
+    */
+    static func imageScaledToSize(image:UIImage,newSize:CGSize)->UIImage{
+    
+        UIGraphicsBeginImageContext(newSize)
+        image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+        
+    }
+    
 }

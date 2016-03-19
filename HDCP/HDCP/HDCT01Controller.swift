@@ -14,7 +14,7 @@ private let ct01Array = [[["title":"豆友","image":"DYIcon"],
 
 private let cntArray = ["关注","粉丝","好友"]
 
-private let kHeadViewHeight:CGFloat = 260
+private let kHeadViewHeight:CGFloat = 280
 
 class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
 
@@ -28,6 +28,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     var userName:UILabel?
     var sLine:UILabel?
     var cntView:UIView?
+    
+    var navView:UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +65,39 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         createHeaderView()
         createtableView()
+        createNavBar()
+    
+    }
+    
+    func createNavBar(){
+    
+        navView = UIView()
+        navView?.backgroundColor = Constants.HDMainColor
+        navView?.alpha = 0
+        self.view.addSubview(navView!)
+        
+        navView?.snp_makeConstraints(closure: { (make) -> Void in
+            
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.height.equalTo(64)
+            make.top.equalTo(0)
+            
+        })
+        
+        let title = UILabel()
+        title.font = UIFont.systemFontOfSize(18)
+        title.textColor = UIColor.whiteColor()
+        title.text = "我的"
+        title.textAlignment = NSTextAlignment.Center
+        navView?.addSubview(title)
+        
+        title.snp_makeConstraints { (make) -> Void in
+            
+            make.top.equalTo(navView!).offset(20)
+            make.height.equalTo(44)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            
+        }
     
     }
     
@@ -81,7 +116,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         *   头像
         */
         headerIcon = UIImageView()
-        headerIcon?.layer.cornerRadius = 40;
+        headerIcon?.layer.cornerRadius = Constants.HDSCREENWITH/8;
         headerIcon?.layer.masksToBounds = true
         headerIcon?.layer.borderColor = UIColor.whiteColor().CGColor
         headerIcon?.layer.borderWidth = 1.5
@@ -95,9 +130,9 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         headerIcon?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.width.equalTo(80)
-            make.height.equalTo(80)
-            make.left.equalTo(headerBg!).offset(Constants.HDSCREENWITH/2-40)
+            make.width.equalTo(Constants.HDSCREENWITH/4)
+            make.height.equalTo(Constants.HDSCREENWITH/4)
+            make.left.equalTo(headerBg!).offset(Constants.HDSCREENWITH/2-Constants.HDSCREENWITH/8)
             make.top.equalTo(headerBg!).offset(80)
         })
         
@@ -475,6 +510,23 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         let yOffset = scrollView.contentOffset.y
         let xOffset = (yOffset + kHeadViewHeight)/2
+        
+        if yOffset > -kHeadViewHeight {
+            //上拉
+            
+            var ap = 1 - fabs(yOffset+150)/CGFloat(180)
+            
+            if ap > 1 {
+            
+                ap = 1
+            }
+            
+            navView?.alpha = ap
+            
+        }else{
+        
+            navView?.alpha = 0
+        }
         
         if yOffset < -kHeadViewHeight {
         

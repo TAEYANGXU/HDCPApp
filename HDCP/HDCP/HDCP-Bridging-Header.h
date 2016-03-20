@@ -4,6 +4,8 @@
 
 //指示视图
 #import "MBProgressHUD.h"
+//视频播放
+#import "HDVideoPlayerController.h"
 //下拉刷新
 #import "MJRefresh.h"
 //社会分享
@@ -14,3 +16,4 @@
 //腾讯开放平台（对应QQ和QQ空间）SDK头文件
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
+

@@ -10,12 +10,42 @@ import UIKit
 
 class HDCT09Controller: BaseViewController {
 
+    var videoPlayerController:HDVideoPlayerController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
+        videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,64,Constants.HDSCREENWITH,180))
+        videoPlayerController?.contentURL = NSURL(string: "http://v.hoto.cn/01/f7/1046273.mp4")
+        self.view.addSubview((videoPlayerController?.view)!)
+        videoPlayerController?.movieBackgroundView.sd_setImageWithURL(NSURL(string: "http://img1.hoto.cn/pic/recipe/g_230/01/f7/1046273_5d6aa3.jpg"), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        videoPlayerController?.fullScreenBlock = fullScreenBlock
+        videoPlayerController?.shrinkScreenBlock = shrinkScreenBlock
         doGetRequestData(0, offset: 0)
+        
+    }
+    
+    func fullScreenBlock(){
+    
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        HDLog.LogOut("----fullScreenBlock----")
+        
+    }
+    
+    func shrinkScreenBlock(){
+        
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        HDLog.LogOut("----shrinkScreenBlock----")
+        
+    }
+    
+    deinit{
+        
+        videoPlayerController = nil
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -29,6 +59,7 @@ class HDCT09Controller: BaseViewController {
     // MARK: - events
     func backAction(){
         
+        videoPlayerController?.close()
         self.navigationController?.popViewControllerAnimated(true)
         
     }

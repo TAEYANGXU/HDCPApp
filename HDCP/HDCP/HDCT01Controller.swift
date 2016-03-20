@@ -514,12 +514,14 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         if yOffset > -kHeadViewHeight {
             //上拉
             
-            var ap = 1 - fabs(yOffset+150)/CGFloat(180)
+            var ap = 1 - fabs(yOffset+100)/CGFloat(180)
             
             if ap > 1 {
             
                 ap = 1
             }
+            
+            HDLog.LogOut("ap", obj: ap)
             
             navView?.alpha = ap
             

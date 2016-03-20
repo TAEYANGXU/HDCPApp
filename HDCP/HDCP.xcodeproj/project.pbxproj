@@ -32,6 +32,9 @@
 		1B6B08311C4B440C004B2CE2 /* HDHM06Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */; };
 		1B6B08331C4B4418004B2CE2 /* HDHM07Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */; };
 		1B6B08351C4B564E004B2CE2 /* HDHM07Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08341C4B564E004B2CE2 /* HDHM07Cell.swift */; };
+		1BB0CF181C9E73C200D4D738 /* HDVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */; };
+		1BB0CF1B1C9E74F800D4D738 /* HDVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1A1C9E74F800D4D738 /* HDVideoPlayerController.m */; };
+		1BB0CF1D1C9E7A7B00D4D738 /* HDVideo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1C1C9E7A7B00D4D738 /* HDVideo.xcassets */; };
 		3502FF361C44D6D70083F303 /* HDHM02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF351C44D6D70083F303 /* HDHM02Model.swift */; };
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
@@ -236,6 +239,11 @@
 		1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM06Service.swift; sourceTree = "<group>"; };
 		1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Service.swift; sourceTree = "<group>"; };
 		1B6B08341C4B564E004B2CE2 /* HDHM07Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Cell.swift; sourceTree = "<group>"; };
+		1BB0CF161C9E73C200D4D738 /* HDVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDVideoPlayerView.h; sourceTree = "<group>"; };
+		1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDVideoPlayerView.m; sourceTree = "<group>"; };
+		1BB0CF191C9E74F800D4D738 /* HDVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDVideoPlayerController.h; sourceTree = "<group>"; };
+		1BB0CF1A1C9E74F800D4D738 /* HDVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDVideoPlayerController.m; sourceTree = "<group>"; };
+		1BB0CF1C1C9E7A7B00D4D738 /* HDVideo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HDVideo.xcassets; sourceTree = "<group>"; };
 		2789385C83961CA042F3D0FE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3502FF351C44D6D70083F303 /* HDHM02Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Model.swift; sourceTree = "<group>"; };
 		3502FF3A1C44DA620083F303 /* HDHM02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM02Service.swift; sourceTree = "<group>"; };
@@ -530,6 +538,18 @@
 				1B0FD0E81C3D5749009E85CD /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		1BB0CF121C9E732F00D4D738 /* HDVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				1BB0CF161C9E73C200D4D738 /* HDVideoPlayerView.h */,
+				1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */,
+				1BB0CF191C9E74F800D4D738 /* HDVideoPlayerController.h */,
+				1BB0CF1A1C9E74F800D4D738 /* HDVideoPlayerController.m */,
+				1BB0CF1C1C9E7A7B00D4D738 /* HDVideo.xcassets */,
+			);
+			name = HDVideoPlayer;
 			sourceTree = "<group>";
 		};
 		3502FF401C450E4B0083F303 /* MBProgressHUD */ = {
@@ -846,6 +866,7 @@
 		356F398C1C3A68830056DF44 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1BB0CF121C9E732F00D4D738 /* HDVideoPlayer */,
 				35F3FE451C74260D003B43FC /* Reachability */,
 				3502FF401C450E4B0083F303 /* MBProgressHUD */,
 				1B0FD0C61C3D5749009E85CD /* MJRefresh */,
@@ -1153,6 +1174,7 @@
 				356F393B1C3A23EA0056DF44 /* Main.storyboard in Resources */,
 				1B0FD1011C3D5749009E85CD /* MJRefresh.bundle in Resources */,
 				35F8CF471C3B9B2F003B1364 /* Home.xcassets in Resources */,
+				1BB0CF1D1C9E7A7B00D4D738 /* HDVideo.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1321,7 +1343,9 @@
 				3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */,
 				358970791C97ACFB003E10D2 /* HDCT11Model.swift in Sources */,
 				3589706B1C97ABD1003E10D2 /* HDCT08Service.swift in Sources */,
+				1BB0CF1B1C9E74F800D4D738 /* HDVideoPlayerController.m in Sources */,
 				352A42501C50AACE009D0F9F /* HM01TagListEntity.swift in Sources */,
+				1BB0CF181C9E73C200D4D738 /* HDVideoPlayerView.m in Sources */,
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
 				35776A751C70614300903620 /* HDCT03Controller.swift in Sources */,

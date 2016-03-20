@@ -302,8 +302,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
         print("\(indexPath.row)    \(index) ")
         
-        let array2d = self.hdGG01Response.array2D![indexPath.row]
-        let model:HDGG01ListModel = array2d[index] as! HDGG01ListModel
+        let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
+        let model:HDGG01ListModel = array2d[index]
         
         if model.url.hasPrefix("http") {
         
@@ -422,9 +422,9 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 })
             }
             
-            let array2d = self.hdGG01Response.array2D![indexPath.row]
+            let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
             
-            let leftModel = array2d[0] as! HDGG01ListModel
+            let leftModel = array2d[0]
             
             let leftImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(leftModel.image!)
             if let _ = leftImage {
@@ -441,7 +441,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             leftImageView?.indexPath = indexPath
             leftImageView!.index = 0
             
-            let topModel = array2d[1] as! HDGG01ListModel
+            let topModel = array2d[1]
             let topImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(topModel.image!)
             if let _ = topImage {
                 topImageView!.imageView.image = topImage
@@ -457,7 +457,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             topImageView?.indexPath = indexPath
             topImageView!.index = 1
             
-            let bottomModel = array2d[2] as! HDGG01ListModel
+            let bottomModel = array2d[2]
             let bottomImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(bottomModel.image!)
             if let _ = bottomImage {
                 bottomImageView!.imageView.image = bottomImage
@@ -557,23 +557,23 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 })
             }
             
-            let array2d = self.hdGG01Response.array2D![indexPath.row]
+            let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
             
-            let rightModel:HDGG01ListModel = array2d[0] as! HDGG01ListModel
+            let rightModel:HDGG01ListModel = array2d[0]
             rightImageView!.imageView.sd_setImageWithURL(NSURL(string: rightModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             rightImageView?.title.text = rightModel.title
             rightImageView?.delegate = self
             rightImageView?.indexPath = indexPath
             rightImageView!.index = 0
             
-            let topModel = array2d[1] as! HDGG01ListModel
+            let topModel = array2d[1]
             topImageView!.imageView.sd_setImageWithURL(NSURL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             topImageView?.title.text = topModel.title
             topImageView?.delegate = self
             topImageView?.indexPath = indexPath
             topImageView!.index = 1
             
-            let bottomModel = array2d[2] as! HDGG01ListModel
+            let bottomModel = array2d[2] 
             bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
             bottomImageView?.delegate = self

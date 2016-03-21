@@ -17,7 +17,22 @@ class HDCT09Controller: BaseViewController {
 
         // Do any additional setup after loading the view.
         
-        videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,64,Constants.HDSCREENWITH,180))
+        if Constants.HDSCREENWITH > 375.0 {
+        
+            //适配6P
+            videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,64,Constants.HDSCREENWITH,220))
+
+        }else if Constants.HDSCREENWITH == 375.0{
+        
+            //适配6
+            videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,64,Constants.HDSCREENWITH,200))
+
+        }else{
+        
+            //适配4,5
+            videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,64,Constants.HDSCREENWITH,180))
+        }
+        
         videoPlayerController?.contentURL = NSURL(string: "http://v.hoto.cn/01/f7/1046273.mp4")
         self.view.addSubview((videoPlayerController?.view)!)
         videoPlayerController?.movieBackgroundView.sd_setImageWithURL(NSURL(string: "http://img1.hoto.cn/pic/recipe/g_230/01/f7/1046273_5d6aa3.jpg"), placeholderImage: UIImage(named: "noDataDefaultIcon"))

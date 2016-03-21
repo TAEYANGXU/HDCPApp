@@ -207,6 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let _ = sign {
             
+            //初始化用户数据
             HDUserInfoManager.shareInstance.load()
         }
         

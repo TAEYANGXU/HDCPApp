@@ -30,6 +30,7 @@
     self = [super init];
     if (self) {
         self.view.frame = frame;
+        self.scalingMode = MPMovieScalingModeAspectFill;
         self.view.backgroundColor = [UIColor lightGrayColor];
         self.controlStyle = MPMovieControlStyleNone;
         [self.view addSubview:self.movieBackgroundView];

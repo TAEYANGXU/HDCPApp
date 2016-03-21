@@ -9,8 +9,6 @@
 #import "HDVideoPlayerController.h"
 #import "HDVideoPlayerView.h"
 
-static const CGFloat kVideoPlayerControllerAnimationTimeInterval = 0.3f;
-
 @interface HDVideoPlayerController ()
 
 @property (nonatomic, strong) HDVideoPlayerView *videoControl;

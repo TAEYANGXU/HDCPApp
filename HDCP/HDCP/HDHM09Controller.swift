@@ -195,7 +195,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         let str2:String =  str.componentsSeparatedByString("/")[0]
         let attributed = NSMutableAttributedString(string: str)
         attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(26), range: NSMakeRange(0, str2.characters.count))
-        attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSForegroundColorAttributeName, value: CoreUtils.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str2.characters.count))
         pageFlag?.attributedText =  attributed
         
         centerImageView!.sd_setImageWithURL(NSURL(string: cmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))

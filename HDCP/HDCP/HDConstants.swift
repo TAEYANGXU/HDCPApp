@@ -52,25 +52,6 @@ class Constants: NSObject {
     static let HDBGViewColor = UIColor(red: 241/255.0, green: 241/255.0, blue: 241/255.0, alpha: 1.0);
     
     /**
-    *  颜色
-    */
-    
-    static func HDColor(r:CGFloat,g:CGFloat,b:CGFloat,a:CGFloat)->(UIColor){
-        return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a);
-    }
-    static func HDHEXRGBA(hex:UInt)->(UIColor){
-        return CoreUtils.HDfromHexValue(hex, alpha: 1.0)
-    }
-    
-    /**
-     *  frame
-     */
-     
-    static func HDFrame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)->CGRect{
-        return CGRectMake(x, y, width, height)
-    }
-    
-    /**
      *   key
      **/
     static let HDAppVersion:String = "Version"

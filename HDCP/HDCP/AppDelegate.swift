@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         */
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
-//        UINavigationBar.appearance().barTintColor = Constants.HDColor(245, g: 161, b: 0, a: 1)
+//        UINavigationBar.appearance().barTintColor = CoreUtils.HDColor(245, g: 161, b: 0, a: 1)
         /**
         *  状态栏字体设置白色
         */
@@ -124,9 +124,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         *  底部TabBar的颜色
         */
         UITabBar.appearance().shadowImage = UIImage()
-        UITabBar.appearance().tintColor = Constants.HDHEXRGBA(0xFFFFFF)
-        UITabBar.appearance().backgroundColor = Constants.HDHEXRGBA(0xFFFFFF)
-        UITabBar.appearance().barTintColor = Constants.HDHEXRGBA(0xFFFFFF)
+        UITabBar.appearance().tintColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
+        UITabBar.appearance().backgroundColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
+        UITabBar.appearance().barTintColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
 //        UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
         
         /**

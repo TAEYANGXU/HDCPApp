@@ -163,7 +163,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         if title == nil {
             
             title = UILabel()
-            title?.backgroundColor = Constants.HDColor(105, g: 149, b: 0, a: 0.5)
+            title?.backgroundColor = CoreUtils.HDColor(105, g: 149, b: 0, a: 0.5)
             title?.textColor = UIColor.whiteColor()
             title?.font = UIFont.systemFontOfSize(15)
             title?.textAlignment = NSTextAlignment.Center

@@ -40,7 +40,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         tableView.tableFooterView = UIView()
-        tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+        tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
         
         tableView.userInteractionEnabled = true
         
@@ -55,7 +55,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         putView.backgroundColor = Constants.HDBGViewColor
         self.view.addSubview(putView)
         
-        putView.frame = Constants.HDFrame(0, y: Constants.HDSCREENHEIGHT-50-64, width: Constants.HDSCREENWITH, height: 50)
+        putView.frame = CoreUtils.HDFrame(0, y: Constants.HDSCREENHEIGHT-50-64, width: Constants.HDSCREENWITH, height: 50)
         
         
         /**
@@ -63,8 +63,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         */
         
         let line = UIView()
-        line.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: 1)
-        line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+        line.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: 1)
+        line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
         putView.addSubview(line)
         
         /**
@@ -160,8 +160,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            self.putView.frame = Constants.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
-            self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
+            self.putView.frame = CoreUtils.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
+            self.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
             
             
             
@@ -180,8 +180,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            self.putView.frame = Constants.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
-            self.tableView.frame = Constants.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+            self.putView.frame = CoreUtils.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
+            self.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
             
             
             if self.commentArray.count>0 {
@@ -401,7 +401,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             let str:String =  model.content.componentsSeparatedByString(":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
             attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSForegroundColorAttributeName, value: CoreUtils.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str.characters.count))
             content?.attributedText =  attributed
         }else{
         

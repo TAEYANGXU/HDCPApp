@@ -166,7 +166,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             let line = UILabel()
-            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+            line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
             cell.contentView.addSubview(line)
             
             line.snp_makeConstraints(closure: { (make) -> Void in
@@ -207,7 +207,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             let line = UILabel()
-            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+            line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
             cell.contentView.addSubview(line)
             
             line.snp_makeConstraints(closure: { (make) -> Void in
@@ -248,7 +248,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             let line = UILabel()
-            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1)
+            line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
             cell.contentView.addSubview(line)
             
             line.snp_makeConstraints(closure: { (make) -> Void in

@@ -56,7 +56,7 @@ class HDGG01RowView: UIView {
             title = UILabel()
             title.font = UIFont.boldSystemFontOfSize(15)
             title.textColor = UIColor.whiteColor()
-            title.backgroundColor = Constants.HDColor(105, g: 149, b: 0, a: 0.5)
+            title.backgroundColor = CoreUtils.HDColor(105, g: 149, b: 0, a: 0.5)
             title.textAlignment = NSTextAlignment.Center
             self.addSubview(title)
             

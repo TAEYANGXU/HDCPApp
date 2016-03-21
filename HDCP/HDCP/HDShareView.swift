@@ -119,7 +119,7 @@ class HDShareView: UIView {
         }
         
         let line = UILabel()
-        line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1.0)
+        line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1.0)
         self.addSubview(line)
         line.snp_makeConstraints { (make) -> Void in
             

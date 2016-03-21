@@ -76,7 +76,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             shareView = UIView()
             shareView.hidden = true
-            shareView.backgroundColor = Constants.HDColor(0, g: 0, b: 0, a: 0.2)
+            shareView.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.2)
             shareView.alpha = 0.0
             self.view.addSubview(shareView!)
             let tapGes = UITapGestureRecognizer(target: self, action: "hideShareView")
@@ -770,7 +770,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         }else{
             
             let line = UILabel(frame: CGRectMake(15,0,Constants.HDSCREENWITH,1))
-            line.backgroundColor = Constants.HDColor(227, g: 227, b: 229, a: 1.0)
+            line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1.0)
             view.addSubview(line)
             
             let title = UILabel(frame: CGRectMake(15,15,Constants.HDSCREENWITH-15,20))

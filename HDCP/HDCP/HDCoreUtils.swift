@@ -12,6 +12,28 @@ class CoreUtils: NSObject {
 
     
     /**
+     设置控件frame
+     
+     *  @ parameter x:  x轴
+     *  @ parameter y:  y轴
+     
+     *  @ returns: CGRect
+     */
+    
+    static func HDFrame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)->CGRect{
+        return CGRectMake(x, y, width, height)
+    }
+    
+    
+    /**
+     *  颜色
+     */
+    
+    static func HDColor(r:CGFloat,g:CGFloat,b:CGFloat,a:CGFloat)->(UIColor){
+        return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a);
+    }
+    
+    /**
      返回按钮
      
      *  @ parameter sel: 事件
@@ -120,7 +142,7 @@ class CoreUtils: NSObject {
         let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.color = HDfromHexValue(0x000000, alpha: 0.6)
         hud.margin = 10
-        hud.labelColor = Constants.HDColor(255, g: 255, b: 255, a: 1.0)
+        hud.labelColor = HDColor(255, g: 255, b: 255, a: 1.0)
         hud.labelFont = UIFont.systemFontOfSize(15)
         
         hud.mode = MBProgressHUDMode.CustomView;
@@ -150,7 +172,7 @@ class CoreUtils: NSObject {
         let hud:MBProgressHUD = MBProgressHUD.showHUDAddedTo(view, animated: true)
         hud.color = HDfromHexValue(0x000000, alpha: 0.6)
         hud.margin = 10
-        hud.labelColor = Constants.HDColor(255, g: 255, b: 255, a: 1.0)
+        hud.labelColor = HDColor(255, g: 255, b: 255, a: 1.0)
         hud.labelFont = UIFont.systemFontOfSize(15)
         
         hud.mode = MBProgressHUDMode.CustomView;

@@ -171,7 +171,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         //显示关注 粉丝 好友 数量
         cntView = UIView()
-        cntView?.backgroundColor = Constants.HDColor(0, g: 0, b: 0, a: 0.4)
+        cntView?.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.4)
         cntView?.hidden = true
         headerBg?.addSubview(cntView!)
         
@@ -521,7 +521,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 ap = 1
             }
             
-            HDLog.LogOut("ap", obj: ap)
+//            HDLog.LogOut("ap", obj: ap)
             
             navView?.alpha = ap
             

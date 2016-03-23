@@ -36,8 +36,8 @@
     HDCT06Controller -> 设置
     HDCT07Controller -> 协议
     HDCT08Controller -> 豆友
-    HDCT09Controller -> 动态
-    HDCT10Controller -> 话题
+    HDCT09Controller -> 话题
+    HDCT10Controller -> 动态
     HDCT11Controller -> 消息
     
  

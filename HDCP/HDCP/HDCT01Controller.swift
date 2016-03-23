@@ -440,10 +440,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             if let _ = sign {
                 
-                //动态
-                let hdct09VC = HDCT09Controller()
+                //话题
+                let hdct10VC = HDCT10Controller()
                 self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct09VC, animated: true)
+                self.navigationController?.pushViewController(hdct10VC, animated: true)
                 self.hidesBottomBarWhenPushed = false;
             }else{
                 
@@ -458,10 +458,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             if let _ = sign {
                 
-                //话题
-                let hdct10VC = HDCT10Controller()
+                //动态
+                let hdct09VC = HDCT09Controller()
                 self.hidesBottomBarWhenPushed = true;
-                self.navigationController?.pushViewController(hdct10VC, animated: true)
+                self.navigationController?.pushViewController(hdct09VC, animated: true)
                 self.hidesBottomBarWhenPushed = false;
             }else{
                 

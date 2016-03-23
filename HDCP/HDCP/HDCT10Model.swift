@@ -111,6 +111,14 @@ class HDCT10DataModel: Mappable {
     var isDigg:Int?
     var topicTags:Array<HDCT10TopicTagsModel>?
     var url:String?
+    var hasVideo:Int?
+    var title:String?
+    var tagId:Int?
+    var tagName:String?
+    var tagUrl:String?
+    var img:String?
+    var content:String?
+    var commentList:Array<HDCT10CommentListModel>?
     
     required init?(_ map: Map){
         mapping(map)
@@ -137,7 +145,40 @@ class HDCT10DataModel: Mappable {
         isDigg <- map["IsDigg"]
         topicTags <- map["TopicTags"]
         url <- map["Url"]
+        hasVideo <- map["HasVideo"]
+        title <- map["Title"]
+        tagId <- map["TagId"]
+        tagName <- map["TagName"]
+        tagUrl <- map["TagUrl"]
+        img <- map["Img"]
+        content <- map["Content"]
+        commentList <- map["CommentList"]
         
+    }
+    
+}
+
+class HDCT10CommentListModel: Mappable {
+    
+    var cid:Int?
+    var userId:Int?
+    var userName:String?
+    var content:String?
+    var isAuthor:Int?
+    var isVip:Int?
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        cid <- map["Cid"]
+        userId <- map["UserId"]
+        userName <- map["UserName"]
+        content <- map["Content"]
+        isAuthor <- map["IsAuthor"]
+        isVip <- map["IsVip"]
     }
     
 }

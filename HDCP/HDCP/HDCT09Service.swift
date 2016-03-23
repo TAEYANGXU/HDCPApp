@@ -11,14 +11,14 @@ import Foundation
 class HDCT09Service {
     
     /**
-     *  动态
+     *  话题
      *
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
     func doGetRequest_HDCT09_URL(limit:Int,offset:Int,successBlock:(hdResponse:HDCT09Response)->Void,failBlock:(error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["sign":"4864f65f7e5827e7ea50a48bb70f7a2a","limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDCT09_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDCT10_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

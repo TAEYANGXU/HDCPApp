@@ -43,8 +43,12 @@ class HDCT10Result: Mappable {
 
 class HDCT10ListModel: Mappable {
     
-    var data:Array<HDCT10DataModel>?
-    var userInfo:Array<HDCT10UserInfoModel>?
+    var data:HDCT10DataModel?
+    var userInfo:HDCT10UserInfoModel?
+    
+    var rowHeight:CGFloat?
+    var contentHeight:CGFloat?
+    var fcommentRow:Int?
     
     required init?(_ map: Map){
         mapping(map)

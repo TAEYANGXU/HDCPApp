@@ -41,7 +41,7 @@ class WelcomeController: UIViewController {
         })
         
         
-        for var i=1;i<=5;i++ {
+        for i in 1...5 {
         
             let imageView = UIImageView()
             imageView.image = UIImage(named: String(format: "guide_step0%d",i))
@@ -66,7 +66,7 @@ class WelcomeController: UIViewController {
                 btn.layer.borderWidth = 1
                 welcomeView?.addSubview(btn)
                 
-                btn.addTarget(self, action: "toMain", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(toMain), forControlEvents: UIControlEvents.TouchUpInside)
                 
                 btn.snp_makeConstraints(closure: { (make) -> Void in
                     

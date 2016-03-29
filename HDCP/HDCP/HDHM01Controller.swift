@@ -83,7 +83,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.navigationController?.navigationBar.translucent = false
       
         //双击TabItem通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hm01Notification:", name: Constants.HDREFRESHHDHM01, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(hm01Notification(_:)), name: Constants.HDREFRESHHDHM01, object: nil)
         
         if HDHM01Service().isExistEntity() {
         
@@ -246,7 +246,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             centerImageView!.contentMode = UIViewContentMode.ScaleToFill;
             centerImageView?.userInteractionEnabled = true
             headerSView?.addSubview(centerImageView!)
-            let ctapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            let ctapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(ctapGes)
             
             
@@ -254,14 +254,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
             leftImageView?.userInteractionEnabled = true
             headerSView?.addSubview(leftImageView!)
-            let ltapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            let ltapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(ltapGes)
             
             rightImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH*2,0,Constants.HDSCREENWITH,HeadViewHeight))
             rightImageView!.contentMode = UIViewContentMode.ScaleToFill;
             rightImageView?.userInteractionEnabled = true
             headerSView?.addSubview(rightImageView!)
-            let rtapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "headGesAction:")
+            let rtapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(rtapGes)
             
             
@@ -272,7 +272,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             if pageControl == nil {
                 
                 pageControl = UIPageControl()
-                pageControl?.addTarget(self, action: "pageAction:", forControlEvents: UIControlEvents.TouchUpInside)
+                pageControl?.addTarget(self, action: #selector(pageAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 pageControl?.numberOfPages = 3;
                 pageControl?.currentPage = 0;
                 pageControl?.pageIndicatorTintColor = Constants.HDMainColor
@@ -346,8 +346,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         }
         
         
-        for  var i=0;i<resourceArray.count;i++ {
-            
+        for  i in 0 ..< resourceArray.count {
             
             var btn:HDHM01Button?
             
@@ -362,7 +361,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 btn!.titleLabel?.font = UIFont.systemFontOfSize(15)
                 btn!.titleLabel?.textAlignment = NSTextAlignment.Center
                 btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                btn!.addTarget(self, action: "menuBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn!.addTarget(self, action: #selector(menuBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 menuView.addSubview(btn!)
                 
                 btn!.snp_makeConstraints { (make) -> Void in
@@ -408,9 +407,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
          */
         
         var index = 0
-        for var i=0;i<(self.hdHM01Response?.result?.tagList?.count)!/4;i++ {
+        for i in 0 ..< (self.hdHM01Response?.result?.tagList?.count)!/4 {
             
-            for var j=0;j<4;j++ {
+            for j in 0 ..< 4 {
                 
                 let model:TagListModel = (self.hdHM01Response?.result?.tagList![index])!
                
@@ -428,7 +427,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     btn!.setTitle(model.name, forState: UIControlState.Normal)
                     btn!.layer.borderWidth = 0.5
                     btn!.layer.borderColor = Constants.HDBGViewColor.CGColor
-                    btn!.addTarget(self, action: "tagBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+                    btn!.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     tagListView.addSubview(btn!)
                     
                     btn!.snp_makeConstraints(closure: { (make) -> Void in
@@ -442,7 +441,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     
                 }
                 
-                index++;
+                index += 1;
             }
             
         }
@@ -533,7 +532,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             onclickBtn.tag = 10000
             onclickBtn.backgroundColor = UIColor.clearColor()
             collectListView.addSubview(onclickBtn)
-            onclickBtn.addTarget(self, action: "moreAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -547,7 +546,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
         }
         
-        for var i=0;i<self.hdHM01Response?.result?.collectList?.count;i++ {
+        for i in 0 ..< (self.hdHM01Response?.result?.collectList?.count)! {
             
             let model = self.hdHM01Response?.result?.collectList?[i]
             
@@ -555,12 +554,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             rowView = collectListView.viewWithTag(i+100) as? HDHM01RowView
             
             if  rowView == nil {
-                
+               
                 rowView = HDHM01RowView()
                 rowView!.tag = i+100;
                 collectListView.addSubview(rowView!)
                 
-                let collectGes =  UITapGestureRecognizer(target: self, action: "collectGesAction:")
+                let collectGes =  UITapGestureRecognizer(target: self, action: #selector(collectGesAction(_:)))
                 rowView!.addGestureRecognizer(collectGes)
                 
                 rowView!.title.text = model?.title
@@ -676,7 +675,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             onclickBtn.tag = 20000
             onclickBtn.backgroundColor = UIColor.clearColor()
             wikiListView.addSubview(onclickBtn)
-            onclickBtn.addTarget(self, action: "moreAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
                 
@@ -690,10 +689,10 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         }
         
         
-        for var i=0;i<self.hdHM01Response?.result?.wikiList?.count;i++ {
+        for i in 0 ..< (self.hdHM01Response?.result?.wikiList?.count)! {
             
             let model = self.hdHM01Response?.result?.wikiList?[i]
-            
+         
             var rowView:HDHM01RowView?
             rowView = wikiListView.viewWithTag(i+100) as? HDHM01RowView
             
@@ -703,7 +702,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.tag = i+100;
                 wikiListView.addSubview(rowView!)
                 
-                let wikiGes =  UITapGestureRecognizer(target: self, action: "wikiGesAction:")
+                let wikiGes =  UITapGestureRecognizer(target: self, action: #selector(wikiGesAction(_:)))
                 rowView!.addGestureRecognizer(wikiGes)
                 
                 rowView!.title.text = model?.title

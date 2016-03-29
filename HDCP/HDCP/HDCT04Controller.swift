@@ -38,14 +38,14 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
     }
     
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         timer.fire()
         
     }
@@ -77,7 +77,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             
             secondBtn.enabled = false
             secondBtn.setTitle(String(format: "重新获取(%d)",second), forState: UIControlState.Normal)
-            second--
+            second -= 1
         }
         
     }
@@ -89,8 +89,14 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
     
         timer = nil
         second = 59
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         timer.fire()
+    }
+    
+    func completeAction(){
+        
+        
+        
     }
     
     // MARK: - UITableView delegate/datasource
@@ -152,7 +158,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             secondBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
             secondBtn.layer.borderColor = Constants.HDMainColor.CGColor
             secondBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
-            secondBtn.addTarget(self, action: "againAction", forControlEvents: UIControlEvents.TouchUpInside)
+            secondBtn.addTarget(self, action: #selector(againAction), forControlEvents: UIControlEvents.TouchUpInside)
             secondBtn.backgroundColor = UIColor.whiteColor()
             cell.contentView.addSubview(secondBtn)
             
@@ -265,7 +271,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
             let completeBtn = UIButton(type: UIButtonType.Custom)
             completeBtn.setTitle("完成", forState: UIControlState.Normal)
             completeBtn.backgroundColor = Constants.HDMainColor
-            completeBtn.addTarget(self, action: "completeAction", forControlEvents: UIControlEvents.TouchUpInside)
+            completeBtn.addTarget(self, action: #selector(completeAction), forControlEvents: UIControlEvents.TouchUpInside)
             completeBtn.layer.cornerRadius = 5
             completeBtn.layer.masksToBounds = true
             completeBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)

@@ -24,7 +24,7 @@ class HDRefreshGifHeader: MJRefreshGifHeader {
         super.prepare()
         
         let idleImages = NSMutableArray()
-        for var i=1;i<3;i++ {
+        for i in 1 ..< 3 {
         
             let name:String = String(format: "Refresh%ld",i )
             let image = UIImage(named: name)
@@ -38,7 +38,7 @@ class HDRefreshGifHeader: MJRefreshGifHeader {
         self.setImages(idleImages as [AnyObject], forState: MJRefreshState.Idle)
         
         let refreshingImages = NSMutableArray()
-        for var i=1;i<10;i++ {
+        for i in 1 ..< 10 {
             
             let name:String = String(format: "Refresh%ld",i )
             let image = UIImage(named: name)

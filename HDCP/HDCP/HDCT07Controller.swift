@@ -50,7 +50,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
     // MARK: - events
@@ -77,7 +77,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        self.performSelector("hidenHud", withObject: self, afterDelay: 0.5)
+        self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 0.5)
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {

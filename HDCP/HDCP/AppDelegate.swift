@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import SDWebImage
+import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -151,7 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             reachability = try Reachability.reachabilityForInternetConnection()
             
             NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "reachabilityChanged:",
+                selector: #selector(AppDelegate.reachabilityChanged(_:)),
                 name: ReachabilityChangedNotification,
                 object: reachability)
             

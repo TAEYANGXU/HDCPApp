@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ObjectMapper
 
 class HDCT09Response:Mappable {
     

@@ -34,7 +34,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
     }
     
@@ -223,7 +223,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             let forgetBtn = UIButton(type: UIButtonType.Custom)
             forgetBtn.setTitle("忘记密码?", forState: UIControlState.Normal)
             forgetBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
-            forgetBtn.addTarget(self, action: "forgetAction", forControlEvents: UIControlEvents.TouchUpInside)
+            forgetBtn.addTarget(self, action: #selector(forgetAction), forControlEvents: UIControlEvents.TouchUpInside)
             forgetBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
             cell.contentView.addSubview(forgetBtn)
             
@@ -240,7 +240,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             let registBtn = UIButton(type: UIButtonType.Custom)
             registBtn.setTitle("注册", forState: UIControlState.Normal)
             registBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
-            registBtn.addTarget(self, action: "registAction", forControlEvents: UIControlEvents.TouchUpInside)
+            registBtn.addTarget(self, action: #selector(registAction), forControlEvents: UIControlEvents.TouchUpInside)
             registBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
             cell.contentView.addSubview(registBtn)
             
@@ -257,7 +257,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             let loginBtn = UIButton(type: UIButtonType.Custom)
             loginBtn.setTitle("登录", forState: UIControlState.Normal)
             loginBtn.backgroundColor = Constants.HDMainColor
-            loginBtn.addTarget(self, action: "loginAction", forControlEvents: UIControlEvents.TouchUpInside)
+            loginBtn.addTarget(self, action: #selector(loginAction), forControlEvents: UIControlEvents.TouchUpInside)
             loginBtn.layer.cornerRadius = 5
             loginBtn.layer.masksToBounds = true
             loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)

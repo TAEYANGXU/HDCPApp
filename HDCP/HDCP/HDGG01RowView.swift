@@ -71,7 +71,7 @@ class HDGG01RowView: UIView {
             
         }
         
-        let tapGes = UITapGestureRecognizer(target: self, action: "onClickAction")
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(onClickAction))
         self.addGestureRecognizer(tapGes)
         
     }

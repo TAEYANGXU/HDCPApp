@@ -39,7 +39,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.modalPresentationCapturesStatusBarAppearance = false;
         self.automaticallyAdjustsScrollViewInsets = true;
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "ct01Notification:", name: Constants.HDREFRESHHDCT01, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ct01Notification(_:)), name: Constants.HDREFRESHHDCT01, object: nil)
         
         setupUI()
     }
@@ -124,7 +124,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         headerIcon?.backgroundColor = UIColor.redColor()
         headerBg?.addSubview(headerIcon!)
         
-        let tapGes = UITapGestureRecognizer(target: self, action: "loginOrRegistAction")
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(loginOrRegistAction))
         headerIcon?.userInteractionEnabled = true
         headerIcon?.addGestureRecognizer(tapGes)
         
@@ -184,12 +184,12 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         })
         
         let space = Constants.HDSCREENWITH/3
-        for var i=0;i<cntArray.count;i++ {
+        for i in 0 ..< cntArray.count {
         
             let btn = UIButton(type: UIButtonType.Custom)
             btn.tag = 1000 + i
             btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            btn.addTarget(self, action: "cntAction:", forControlEvents: UIControlEvents.TouchUpInside)
+            btn.addTarget(self, action: #selector(cntAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             btn.titleLabel?.font = UIFont.systemFontOfSize(14)
             cntView?.addSubview(btn)
             btn.snp_makeConstraints(closure: { (make) -> Void in

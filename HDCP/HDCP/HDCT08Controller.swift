@@ -29,7 +29,7 @@ class HDCT08Controller: UITableViewController {
         
         super.viewWillAppear(animated)
         self.title = "豆友"
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
     }
     
@@ -293,7 +293,7 @@ class HDCT08Controller: UITableViewController {
         
         if model.favoriteList!.count > 0 {
         
-            for var i=0;i<model.favoriteList?.count;i++ {
+            for i in 0 ..< (model.favoriteList?.count)! {
                 
                 let favorite = model.favoriteList![i]
                 

@@ -29,7 +29,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         self.navigationController?.navigationBar.translucent = false
         
         //双击TabItem通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gg01Notification:", name: Constants.HDREFRESHHDGG01, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(gg01Notification(_:)), name: Constants.HDREFRESHHDGG01, object: nil)
         
         count = 0
         setupUI()
@@ -95,9 +95,9 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             
             var index = 0
             
-            for var i=0;i<2;i++ {
+            for i in 0 ..< 2 {
                 
-                for var j=0;j<3;j++ {
+                for j in 0 ..< 3 {
                 
                     let btn = HDGG01Button()
                     btn.tag = index+400
@@ -109,7 +109,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     btn.layer.borderWidth = 0.5
                     btn.layer.borderColor = Constants.HDBGViewColor.CGColor
                     btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                    btn.addTarget(self, action: "menuBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+                    btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     headerView!.addSubview(btn)
 
                     btn.snp_makeConstraints(closure: { (make) -> Void in
@@ -120,7 +120,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                         make.height.equalTo(Constants.HDSCREENWITH/3)
                         
                     })
-                    index++
+                    index += 1
                 }
                 
             }

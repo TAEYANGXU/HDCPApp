@@ -30,7 +30,7 @@ class HDHM02Controller: UITableViewController {
         
         super.viewWillAppear(animated)
         self.title = "排行榜"
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
     
@@ -209,7 +209,7 @@ class HDHM02Controller: UITableViewController {
         }
         
         headerView.tag = section+100
-        let tapGes = UITapGestureRecognizer(target: self, action: "didHeaderView:")
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(didHeaderView(_:)))
         headerView.gestureRecognizers = [tapGes]
         
         

@@ -96,7 +96,7 @@ class HDCT10Controller: UITableViewController {
         if dataArray.count > 0 {
         
             
-            for var i=0;i<dataArray.count;i++ {
+            for i in 0 ..< dataArray.count {
             
                 let model = dataArray[i] as! HDCT10ListModel
                 
@@ -167,7 +167,7 @@ class HDCT10Controller: UITableViewController {
         
         super.viewWillAppear(animated)
         self.title = "动态"
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(HDCT10Controller.backAction), taget: self)
         
     }
     
@@ -610,7 +610,7 @@ class HDCT10Controller: UITableViewController {
         })
 
         commentView?.index = indexPath.row
-        let tapGes = UITapGestureRecognizer(target: self, action: "commentAction:")
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(HDCT10Controller.commentAction(_:)))
         commentView?.addGestureRecognizer(tapGes)
         
         

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ObjectMapper
 
 class HDGG01Service {
 
@@ -30,7 +31,7 @@ class HDGG01Service {
                 let array2D = NSMutableArray()
                 var array:NSMutableArray?
                 
-                for var i=0;i<hdggResponse?.result?.gg01List?.count;i++ {
+                for (i,_) in (hdggResponse?.result?.gg01List?.enumerate())! {
                 
                     if i%3 == 0 {
                         array = nil
@@ -83,7 +84,7 @@ class HDGG01Service {
     
         let result = NSEntityDescription.insertNewObjectForEntityForName("HDGG01ResultEntity", inManagedObjectContext: context) as? HDGG01ResultEntity
         
-        for var i=0;i<hdggResponse.result?.gg01List?.count;i++ {
+        for (i,_) in (hdggResponse.result?.gg01List?.enumerate())! {
         
             let model = hdggResponse.result?.gg01List![i]
             
@@ -147,7 +148,7 @@ class HDGG01Service {
                 let array2D = NSMutableArray()
                 var array:NSMutableArray?
                 
-                for var i=0;i<gg01List.count;i++ {
+                for i in 0 ..< gg01List.count {
                     
                     if i%3 == 0 {
                         array = nil

@@ -47,7 +47,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         /**
         *   添加点击事件收齐键盘
         */
-        let tapGes = UITapGestureRecognizer(target: self, action: "hideKeyBoard")
+        let tapGes = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         tableView.addGestureRecognizer(tapGes)
 
         
@@ -96,7 +96,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         commitBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
         commitBtn.backgroundColor = Constants.HDMainColor
         commitBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        commitBtn.addTarget(self, action: "sendComment", forControlEvents: UIControlEvents.TouchUpInside)
+        commitBtn.addTarget(self, action: #selector(sendComment), forControlEvents: UIControlEvents.TouchUpInside)
         commitBtn.layer.cornerRadius = 5
         commitBtn.layer.masksToBounds = true
         putView.addSubview(commitBtn)
@@ -110,9 +110,9 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         }
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChange:", name: UIKeyboardWillChangeFrameNotification , object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification , object: nil)
         
         
     }
@@ -126,7 +126,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         self.title = String(format: "评论(%d)", commentArray.count)
       
     }
@@ -206,7 +206,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     func getContentHeight(){
     
-        for (var i=0;i<commentArray.count;i++) {
+        for i in 0 ..< commentArray.count {
         
             let rect = CoreUtils.getTextRectSize((commentArray[i].content)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
             commentArray[i].height = rect.height

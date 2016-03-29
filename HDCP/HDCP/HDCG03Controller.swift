@@ -80,7 +80,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         button.frame = CGRectMake(0, 0, 40, 30)
         button.titleLabel?.font = UIFont.systemFontOfSize(16)
         button.setTitle("取消", forState: UIControlState.Normal)
-        button.addTarget(self, action: "cancel", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(cancel), forControlEvents: UIControlEvents.TouchUpInside)
         button.contentMode = UIViewContentMode.ScaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
@@ -298,7 +298,8 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
             cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
             
             var stuffStr = String()
-            for var i=0;i<model.stuff?.count;i++ {
+            
+            for (i,_) in (model.stuff?.enumerate())! {
                 
                 let stuff = model.stuff![i]
                 

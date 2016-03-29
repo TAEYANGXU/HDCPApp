@@ -11,9 +11,9 @@
 //社会分享
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
-//微信SDK头文件
+//微信
 #import "WXApi.h"
-//腾讯开放平台（对应QQ和QQ空间）SDK头文件
+//腾讯开放平台(对应QQ和QQ空间)
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 

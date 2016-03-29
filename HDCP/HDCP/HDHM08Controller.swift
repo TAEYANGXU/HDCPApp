@@ -35,13 +35,13 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
         let button = UIButton(type: UIButtonType.Custom) as UIButton
         button.frame = CGRectMake(0, 0, 40, 30)
         button.titleLabel?.font = UIFont.systemFontOfSize(15)
         button.setTitle("分享", forState: UIControlState.Normal)
-        button.addTarget(self, action: "share", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(share), forControlEvents: UIControlEvents.TouchUpInside)
         button.contentMode = UIViewContentMode.ScaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
@@ -79,7 +79,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             shareView.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.2)
             shareView.alpha = 0.0
             self.view.addSubview(shareView!)
-            let tapGes = UITapGestureRecognizer(target: self, action: "hideShareView")
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(hideShareView))
             shareView.addGestureRecognizer(tapGes)
             
             shareView?.snp_makeConstraints(closure: { (make) -> Void in
@@ -255,7 +255,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             commentCount.text = String(format: "评论:%d", (hm08Response.result?.info?.commentCount)!)
             
-            let tapGes = UITapGestureRecognizer(target: self, action: "commentAction")
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(commentAction))
             commentCount.addGestureRecognizer(tapGes)
             
             commentCount.snp_makeConstraints(closure: { (make) -> Void in
@@ -746,7 +746,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             })
             
             /// 添加点击事件 由于scrollview滚动后会拦截cell默认的点击事件
-            let tapGes = UITapGestureRecognizer(target: self, action: "selectRowAction:")
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(selectRowAction(_:)))
             cell.contentView.tag = indexPath.row
             cell.contentView.addGestureRecognizer(tapGes)
             

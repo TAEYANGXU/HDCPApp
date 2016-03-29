@@ -52,7 +52,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             cancelBtn?.layer.masksToBounds = true
             cancelBtn?.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
             cancelBtn?.layer.borderWidth = 0.5
-            cancelBtn?.addTarget(self, action: "backAction", forControlEvents: UIControlEvents.TouchUpInside)
+            cancelBtn?.addTarget(self, action: #selector(backAction), forControlEvents: UIControlEvents.TouchUpInside)
             cancelBtn?.layer.borderColor = Constants.HDMainColor.CGColor
             self.view.addSubview(cancelBtn!)
             

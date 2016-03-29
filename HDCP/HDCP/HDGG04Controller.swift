@@ -25,7 +25,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
     // MARK: - 创建UI视图
@@ -56,7 +56,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         btn?.layer.borderWidth = 1
         btn?.layer.cornerRadius = 5
         btn?.layer.masksToBounds = true
-        btn?.addTarget(self, action: "onClickAction", forControlEvents: UIControlEvents.TouchUpInside)
+        btn?.addTarget(self, action: #selector(onClickAction), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(btn!)
         
         btn?.snp_makeConstraints(closure: { (make) -> Void in
@@ -118,7 +118,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         }else{
         
             showHud()
-            self.performSelector("hidenHud", withObject: self, afterDelay: 1.5)
+            self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 1.5)
         }
         
     }

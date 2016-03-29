@@ -20,7 +20,7 @@ class HDCT11Controller: BaseViewController {
         
         super.viewWillAppear(animated)
         self.title = "消息"
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
     }
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ObjectMapper
 
 class HDHM01Service {
     
@@ -67,7 +68,7 @@ class HDHM01Service {
         
         /// 菜谱专辑
         
-        for var i=0;i<hdHM01Response.result?.collectList?.count;i++ {
+        for (i,_) in (hdHM01Response.result?.collectList?.enumerate())! {
             
             let model = hdHM01Response.result?.collectList![i]
             
@@ -89,7 +90,7 @@ class HDHM01Service {
         if !isExistRecipeListEntity() {
             
             /// 滚动栏
-            for var i=0;i<hdHM01Response.result?.recipeList?.count;i++ {
+            for (i,_) in (hdHM01Response.result?.recipeList?.enumerate())! {
                 
                 let model = hdHM01Response.result?.recipeList?[i]
                 
@@ -111,7 +112,7 @@ class HDHM01Service {
         
         
         /// 厨房宝典
-        for var i=0;i<hdHM01Response.result?.wikiList?.count;i++ {
+        for (i,_) in (hdHM01Response.result?.wikiList?.enumerate())! {
             
             let model = hdHM01Response.result?.wikiList?[i]
             
@@ -130,7 +131,7 @@ class HDHM01Service {
         
         
         //分类
-        for var i=0;i<hdHM01Response.result?.tagList?.count;i++ {
+        for (i,_) in (hdHM01Response.result?.tagList?.enumerate())! {
             
             let model = hdHM01Response.result?.tagList?[i]
             

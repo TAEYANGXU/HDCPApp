@@ -33,7 +33,7 @@ class HDCT03Controller: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
     // MARK: - events
@@ -141,7 +141,7 @@ class HDCT03Controller: UITableViewController {
             let nextBtn = UIButton(type: UIButtonType.Custom)
             nextBtn.setTitle("下一步", forState: UIControlState.Normal)
             nextBtn.backgroundColor = UIColor.whiteColor()
-            nextBtn.addTarget(self, action: "nextAction", forControlEvents: UIControlEvents.TouchUpInside)
+            nextBtn.addTarget(self, action: #selector(nextAction), forControlEvents: UIControlEvents.TouchUpInside)
             nextBtn.layer.cornerRadius = 5
             nextBtn.layer.masksToBounds = true
             nextBtn.layer.borderWidth = 1
@@ -174,7 +174,7 @@ class HDCT03Controller: UITableViewController {
             *  添加点击事件
             */
             
-            let tapGes = UITapGestureRecognizer(target: self, action: "protocolAction")
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(protocolAction))
             protocolT.addGestureRecognizer(tapGes)
             
             
@@ -190,7 +190,7 @@ class HDCT03Controller: UITableViewController {
             let loginBtn = UIButton(type: UIButtonType.Custom)
             loginBtn.setTitle("已有账号，点击登录", forState: UIControlState.Normal)
             loginBtn.backgroundColor = UIColor.clearColor()
-            loginBtn.addTarget(self, action: "backAction", forControlEvents: UIControlEvents.TouchUpInside)
+            loginBtn.addTarget(self, action: #selector(backAction), forControlEvents: UIControlEvents.TouchUpInside)
             loginBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
             cell.contentView.addSubview(loginBtn)
             

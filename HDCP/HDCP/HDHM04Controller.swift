@@ -35,7 +35,7 @@ class HDHM04Controller: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
     // MARK: - 创建UI视图
@@ -115,9 +115,10 @@ class HDHM04Controller: UITableViewController {
         cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
         
         var stuffStr = String()
-        for var i=0;i<model.stuff?.count;i++ {
         
-            let stuff = model.stuff![i] 
+        for (i,_) in (model.stuff?.enumerate())! {
+            
+            let stuff = model.stuff![i]
             
             if i == (model.stuff?.count)!-1 {
                 stuffStr.appendContentsOf(stuff.name!)

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import ObjectMapper
  
 class HDCG01Service {
 
@@ -57,7 +58,7 @@ class HDCG01Service {
             
             let result = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ResultEntity", inManagedObjectContext: context) as? HDCG01ResultEntity
             
-            for var i=0;i<cgResponse.result?.list!.count;i++ {
+            for (i,_) in (cgResponse.result?.list?.enumerate())! {
                 
                 let model = cgResponse.result?.list![i]
                 
@@ -77,6 +78,7 @@ class HDCG01Service {
                 }
                 
             }
+            
             
             let response = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ResponseEntity", inManagedObjectContext: context) as? HDCG01ResponseEntity
             response?.request_id = cgResponse.request_id

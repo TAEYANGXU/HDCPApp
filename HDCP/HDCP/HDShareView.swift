@@ -31,7 +31,7 @@ class HDShareView: UIView {
     
     func createSubviews() {
         
-        for var i=0;i<resourceArray.count;i++ {
+        for i in 0 ..< resourceArray.count {
             
             if i == 3 {
             
@@ -43,7 +43,7 @@ class HDShareView: UIView {
                 btn.titleLabel?.font = UIFont.systemFontOfSize(14)
                 btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
                 btn.setImage(UIImage(named:resourceArray[i]["image"]!), forState: UIControlState.Normal)
-                btn.addTarget(self, action: "tagBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-180)/6
@@ -77,7 +77,7 @@ class HDShareView: UIView {
                 btn.titleLabel?.font = UIFont.systemFontOfSize(14)
                 btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
                 btn.setImage(UIImage(named:resourceArray[i]["image"]!), forState: UIControlState.Normal)
-                btn.addTarget(self, action: "tagBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-CGFloat(3*HDShareButtonHeight))/6
@@ -136,7 +136,7 @@ class HDShareView: UIView {
         cancelBtn.setTitle("取消", forState: UIControlState.Normal)
         cancelBtn.tag = 4;
         cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
-        cancelBtn.addTarget(self, action: "tagBtnOnclick:", forControlEvents: UIControlEvents.TouchUpInside)
+        cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(cancelBtn)
         
         cancelBtn.snp_makeConstraints { (make) -> Void in

@@ -29,7 +29,7 @@ class HDHM06Controller: UITableViewController {
         
         super.viewWillAppear(animated)
         self.title = "菜谱专辑"
-        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem("backAction", taget: self)
+        self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
 
     // MARK: - 创建UI视图

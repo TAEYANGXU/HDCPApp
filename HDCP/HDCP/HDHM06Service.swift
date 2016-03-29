@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import ObjectMapper
 
 class HDHM06Service {
     

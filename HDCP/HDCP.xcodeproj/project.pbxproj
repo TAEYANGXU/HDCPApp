@@ -77,6 +77,12 @@
 		35321D251C46512E00023637 /* HDWebController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35321D241C46512E00023637 /* HDWebController.swift */; };
 		3536E5451C85320F0098877D /* HDHM10Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3536E5441C85320F0098877D /* HDHM10Controller.swift */; };
 		3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */; };
+		353DA4611CAB998700DFD15C /* DY.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 353DA4601CAB998700DFD15C /* DY.xcassets */; };
+		353DA4631CAB99BF00DFD15C /* HDDY01Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4621CAB99BF00DFD15C /* HDDY01Controller.swift */; };
+		353DA4671CAB9A2000DFD15C /* HDDY01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4661CAB9A2000DFD15C /* HDDY01Model.swift */; };
+		353DA4691CAB9ABD00DFD15C /* HDDY01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */; };
+		353DA46B1CAB9EE800DFD15C /* HDHM10Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA46A1CAB9EE800DFD15C /* HDHM10Service.swift */; };
+		353DA46D1CABA35000DFD15C /* HDHM10Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA46C1CABA35000DFD15C /* HDHM10Model.swift */; };
 		3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */; };
 		3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */; };
 		3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */; };
@@ -272,6 +278,12 @@
 		35321D241C46512E00023637 /* HDWebController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDWebController.swift; sourceTree = "<group>"; };
 		3536E5441C85320F0098877D /* HDHM10Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Controller.swift; sourceTree = "<group>"; };
 		3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		353DA4601CAB998700DFD15C /* DY.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DY.xcassets; sourceTree = "<group>"; };
+		353DA4621CAB99BF00DFD15C /* HDDY01Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01Controller.swift; sourceTree = "<group>"; };
+		353DA4661CAB9A2000DFD15C /* HDDY01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01Model.swift; sourceTree = "<group>"; };
+		353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01Service.swift; sourceTree = "<group>"; };
+		353DA46A1CAB9EE800DFD15C /* HDHM10Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Service.swift; sourceTree = "<group>"; };
+		353DA46C1CABA35000DFD15C /* HDHM10Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Model.swift; sourceTree = "<group>"; };
 		3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Controller.swift; sourceTree = "<group>"; };
 		3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Model.swift; sourceTree = "<group>"; };
 		3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Service.swift; sourceTree = "<group>"; };
@@ -547,6 +559,7 @@
 				35B703471C3F83870024A329 /* HM */,
 				3566C8FF1C479E6300573D97 /* CG */,
 				35B703481C3F838D0024A329 /* GG */,
+				353DA4651CAB99F500DFD15C /* DY */,
 				352A41EE1C50A535009D0F9F /* CT */,
 			);
 			name = ViewModel;
@@ -621,8 +634,8 @@
 		35321D1F1C463FF100023637 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				35321D241C46512E00023637 /* HDWebController.swift */,
 				358C1FC91C4F7E0A00A4EF3E /* Common.xcassets */,
+				35321D241C46512E00023637 /* HDWebController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -633,6 +646,31 @@
 				3538902C1C4E1E21006C9CE6 /* WelcomeController.swift */,
 			);
 			name = Welcome;
+			sourceTree = "<group>";
+		};
+		353DA45F1CAB995700DFD15C /* DY */ = {
+			isa = PBXGroup;
+			children = (
+				353DA4601CAB998700DFD15C /* DY.xcassets */,
+				353DA4621CAB99BF00DFD15C /* HDDY01Controller.swift */,
+			);
+			name = DY;
+			sourceTree = "<group>";
+		};
+		353DA4641CAB99CE00DFD15C /* DY */ = {
+			isa = PBXGroup;
+			children = (
+				353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */,
+			);
+			name = DY;
+			sourceTree = "<group>";
+		};
+		353DA4651CAB99F500DFD15C /* DY */ = {
+			isa = PBXGroup;
+			children = (
+				353DA4661CAB9A2000DFD15C /* HDDY01Model.swift */,
+			);
+			name = DY;
 			sourceTree = "<group>";
 		};
 		3566C8FE1C479E5C00573D97 /* CG */ = {
@@ -721,8 +759,9 @@
 				35321D1F1C463FF100023637 /* Common */,
 				356F396E1C3A3F100056DF44 /* Home */,
 				356F39721C3A3F7F0056DF44 /* GG */,
-				356F39711C3A3F790056DF44 /* Center */,
 				356F39701C3A3F640056DF44 /* Category */,
+				353DA45F1CAB995700DFD15C /* DY */,
+				356F39711C3A3F790056DF44 /* Center */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -818,6 +857,7 @@
 				35B703411C3F81300024A329 /* HM */,
 				3566C8FE1C479E5C00573D97 /* CG */,
 				35B703421C3F81370024A329 /* GG */,
+				353DA4641CAB99CE00DFD15C /* DY */,
 				35EF56731C51D26000352E7D /* CT */,
 			);
 			name = Service;
@@ -900,6 +940,7 @@
 				1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */,
 				1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */,
 				3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */,
+				353DA46A1CAB9EE800DFD15C /* HDHM10Service.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -923,6 +964,7 @@
 				1B6B082C1C4B4382004B2CE2 /* HDHM06Model.swift */,
 				1B6B082E1C4B4395004B2CE2 /* HDHM07Model.swift */,
 				3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */,
+				353DA46C1CABA35000DFD15C /* HDHM10Model.swift */,
 			);
 			name = HM;
 			sourceTree = "<group>";
@@ -1092,6 +1134,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353DA4611CAB998700DFD15C /* DY.xcassets in Resources */,
 				35F8CF431C3B9B17003B1364 /* Category.xcassets in Resources */,
 				3502FF431C450FDC0083F303 /* 画面ID介绍.strings in Resources */,
 				356F39431C3A23EA0056DF44 /* LaunchScreen.storyboard in Resources */,
@@ -1179,6 +1222,7 @@
 				352A42841C50E190009D0F9F /* HDGG01ListEntity+CoreDataProperties.swift in Sources */,
 				352A42931C50E1A2009D0F9F /* HDCG01ListEntity.swift in Sources */,
 				1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */,
+				353DA46D1CABA35000DFD15C /* HDHM10Model.swift in Sources */,
 				1B0FD1001C3D5749009E85CD /* MJRefreshStateHeader.m in Sources */,
 				3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */,
 				3589708A1C9A968C003E10D2 /* HDCT02Model.swift in Sources */,
@@ -1192,6 +1236,7 @@
 				352A42871C50E190009D0F9F /* HDGG01ResponseEntity.swift in Sources */,
 				35EF56721C51CBAE00352E7D /* HDCG03Controller.swift in Sources */,
 				35321D1E1C463AC000023637 /* HDHM03Service.swift in Sources */,
+				353DA46B1CAB9EE800DFD15C /* HDHM10Service.swift in Sources */,
 				1B0FD1031C3D5749009E85CD /* UIScrollView+MJExtension.m in Sources */,
 				3566C8ED1C47499A00573D97 /* HDHM04Model.swift in Sources */,
 				352A42961C50E1A2009D0F9F /* HDCG01TagEntity+CoreDataProperties.swift in Sources */,
@@ -1203,6 +1248,7 @@
 				3536E5451C85320F0098877D /* HDHM10Controller.swift in Sources */,
 				352A41D81C5078E1009D0F9F /* HDHM01Controller.swift in Sources */,
 				352A42471C50AACE009D0F9F /* HM01WikiListEntity+CoreDataProperties.swift in Sources */,
+				353DA4691CAB9ABD00DFD15C /* HDDY01Service.swift in Sources */,
 				35F8CF3B1C3B7010003B1364 /* HDHM01Service.swift in Sources */,
 				352A424E1C50AACE009D0F9F /* HDHM01ResponseEntity.swift in Sources */,
 				352A424F1C50AACE009D0F9F /* HM01TagListEntity+CoreDataProperties.swift in Sources */,
@@ -1216,6 +1262,7 @@
 				352A42901C50E1A2009D0F9F /* HDCG01ResultEntity+CoreDataProperties.swift in Sources */,
 				358970691C969F92003E10D2 /* HDCT11Controller.swift in Sources */,
 				1B0FD0F81C3D5749009E85CD /* MJRefreshAutoGifFooter.m in Sources */,
+				353DA4671CAB9A2000DFD15C /* HDDY01Model.swift in Sources */,
 				352A42851C50E190009D0F9F /* HDGG01ListEntity.swift in Sources */,
 				352A42491C50AACE009D0F9F /* HM01RecipeListEntity+CoreDataProperties.swift in Sources */,
 				35776A731C70612400903620 /* HDCT02Controller.swift in Sources */,
@@ -1292,6 +1339,7 @@
 				35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */,
 				352A42951C50E1A2009D0F9F /* HDCG01ResponseEntity.swift in Sources */,
 				35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */,
+				353DA4631CAB99BF00DFD15C /* HDDY01Controller.swift in Sources */,
 				3589706F1C97ABED003E10D2 /* HDCT10Service.swift in Sources */,
 				1B0FD1041C3D5749009E85CD /* UIScrollView+MJRefresh.m in Sources */,
 				1B0FD0F71C3D5749009E85CD /* MJRefreshHeader.m in Sources */,

@@ -14,7 +14,9 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     var putView:UIView!
     var textView:UITextField!
     var commitBtn:UIButton!
-    var commentArray:Array<HDHM08Comment> = Array<HDHM08Comment>()
+    var commentArray = Array<HDHM10Comment>()
+    var offset:Int!
+    var rid:Int!
     
     //rid=%@&type=0&offset=0&limit=20
     
@@ -24,14 +26,18 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         self.view.backgroundColor = UIColor.whiteColor()
         
-        getContentHeight()
+        offset = 0
         
         setupUI()
+        showHud()
+        doGetRequestData(50,offset: self.offset)
     }
     
     // MARK: - 创建UI视图
     
     func setupUI(){
+        
+        unowned let WS = self
         
         tableView = UITableView()
         tableView?.delegate = self
@@ -83,8 +89,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         textView.snp_makeConstraints { (make) -> Void in
             
-            make.top.equalTo(putView.snp_top).offset(5)
-            make.left.equalTo(putView).offset(15)
+            make.top.equalTo(WS.putView.snp_top).offset(5)
+            make.left.equalTo(WS.putView).offset(15)
             make.width.equalTo(Constants.HDSCREENWITH-15-80)
             make.height.equalTo(40)
             
@@ -103,8 +109,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         commitBtn.snp_makeConstraints { (make) -> Void in
             
-            make.left.equalTo(textView.snp_right).offset(10)
-            make.top.equalTo(putView.snp_top).offset(5)
+            make.left.equalTo(WS.textView.snp_right).offset(10)
+            make.top.equalTo(WS.putView.snp_top).offset(5)
             make.width.equalTo(60)
             make.height.equalTo(40)
         }
@@ -127,7 +133,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
-        self.title = String(format: "评论(%d)", commentArray.count)
+        
       
     }
     
@@ -142,6 +148,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
+        
+        HDLog.LogClassDestory("HDHM10Controller")
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -158,18 +166,19 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         let height:CGFloat = (rect?.CGRectValue.height)!
         
+        unowned let WS = self
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            self.putView.frame = CoreUtils.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
-            self.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
+            WS.putView.frame = CoreUtils.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
+            WS.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
             
             
             
-            if self.commentArray.count>0 {
+            if WS.commentArray.count>0 {
                 
                 /// cell滚动到底部
-                let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                let indexPath = NSIndexPath(forRow: WS.commentArray.count-1, inSection: 0)
+                WS.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             }
             
         }
@@ -178,17 +187,18 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     func keyboardWillHide(note:NSNotification){
         
+        unowned let WS = self
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            self.putView.frame = CoreUtils.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
-            self.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+            WS.putView.frame = CoreUtils.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
+            WS.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
             
             
-            if self.commentArray.count>0 {
+            if WS.commentArray.count>0 {
                 
                 /// cell滚动到底部
-                let indexPath = NSIndexPath(forRow: self.commentArray.count-1, inSection: 0)
-                self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                let indexPath = NSIndexPath(forRow: WS.commentArray.count-1, inSection: 0)
+                WS.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             }
             
         }
@@ -202,6 +212,18 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
     }
     
+    // MARK: - 提示动画显示和隐藏
+    func showHud(){
+        
+        CoreUtils.showProgressHUD(self.view)
+        
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
+    }
+    
     // MARK: - 计算文本高度
     
     func getContentHeight(){
@@ -211,6 +233,34 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             let rect = CoreUtils.getTextRectSize((commentArray[i].content)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
             commentArray[i].height = rect.height
             
+        }
+        
+    }
+    
+    
+    // MARK: - 数据加载
+    func doGetRequestData(limit:Int,offset:Int){
+        
+        unowned let WS = self
+        
+        HDHM10Service().doGetRequest_HDHM10_URL(limit, offset: offset,rid: rid, successBlock: { (hm10Response) -> Void in
+            
+            WS.offset = WS.offset+10
+            
+            WS.hidenHud()
+            
+            WS.commentArray = (hm10Response.result?.list)!
+            
+            WS.getContentHeight()
+            
+            WS.title = String(format: "评论(%d)", WS.commentArray.count)
+            
+            WS.tableView.reloadData()
+            
+        }) { (error) -> Void in
+            
+            WS.tableView.mj_footer.endRefreshing()
+            CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }
@@ -241,7 +291,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         if textView.text?.characters.count > 0 {
         
             let mutableArray = NSMutableArray(array: commentArray)
-            let model = HDHM08Comment()
+            let model = HDHM10Comment()
             model.avatar = ""
             model.content = textView.text
             model.createTime = "刚刚"
@@ -249,7 +299,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             let rect = CoreUtils.getTextRectSize(textView.text!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
             model.height = rect.height
             mutableArray.addObject(model)
-            commentArray = NSArray(array: mutableArray) as! Array<HDHM08Comment>
+            commentArray = NSArray(array: mutableArray) as! Array<HDHM10Comment>
             
             tableView.reloadData()
             

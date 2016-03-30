@@ -33,7 +33,12 @@ class HDHM02Controller: UITableViewController {
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
-    
+    deinit{
+        
+        
+        HDLog.LogClassDestory("HDHM02Controller")
+        
+    }
     
     // MARK: - 创建UI视图
     
@@ -93,21 +98,20 @@ class HDHM02Controller: UITableViewController {
     // MARK: - 数据加载
     func doGetRequestData(){
         
-        
+        unowned let WS = self;
         showHud()
-        
         HDHM02Service().doGetRequest_HDHM02_URL({ (hdHM02Response) -> Void in
             
-            self.hidenHud()
-            self.dataArray = hdHM02Response.result?.recipeList!
-            self.hdHM02Response = hdHM02Response
-            self.tableView!.reloadData()
+            WS.hidenHud()
+            WS.dataArray = hdHM02Response.result?.recipeList!
+            WS.hdHM02Response = hdHM02Response
+            WS.tableView!.reloadData()
             
             
             }) { (error) -> Void in
                 
-                self.tableView?.mj_header.endRefreshing()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                WS.tableView?.mj_header.endRefreshing()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
                 
         }
         

@@ -33,4 +33,9 @@ class HDLog {
         
     }
     
+    static func LogClassDestory(className:AnyObject){
+    
+        print("\(className) destory")
+    }
+    
 }

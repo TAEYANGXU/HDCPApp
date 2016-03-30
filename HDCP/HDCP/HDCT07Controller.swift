@@ -34,11 +34,13 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
         webView?.backgroundColor = Constants.HDBGViewColor
         webView?.loadRequest(request)
         self.view.addSubview(webView!)
+        
+        unowned let WS = self
         webView?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.bottom.equalTo(self.view).offset(0)
+            make.top.equalTo(WS.view).offset(0)
+            make.left.equalTo(WS.view).offset(0)
+            make.bottom.equalTo(WS.view).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
             
         })
@@ -51,6 +53,11 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
+    }
+    
+    deinit{
+        
+        HDLog.LogClassDestory("HDCT07Controller")
     }
     
     // MARK: - events

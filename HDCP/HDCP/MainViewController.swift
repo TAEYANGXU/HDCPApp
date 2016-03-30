@@ -13,6 +13,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
     var hdhm01vc:HDHM01Controller!
     var hdcg01vc:HDCG01Controller!
     var hdgg01vc:HDGG01Controller!
+    var hddy01vc:HDDY01Controller!
     var hdct01vc:HDCT01Controller!
     
     override func viewDidLoad() {
@@ -66,6 +67,20 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
             hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
             hdcg01vc.title = "分类"
             navc = UINavigationController(rootViewController: hdcg01vc)
+            self.addChildViewController(navc)
+            
+        }
+        
+        /**
+         *  动态
+         */
+        
+        if hddy01vc == nil {
+            
+            hddy01vc = HDDY01Controller()
+            hddy01vc.tabBarItem = UITabBarItem(title: "动态", image: UIImage(named: "tab_icon_off_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hddy01vc.title = "动态"
+            navc = UINavigationController(rootViewController: hddy01vc)
             self.addChildViewController(navc)
             
         }

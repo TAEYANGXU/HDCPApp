@@ -38,18 +38,19 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         webView?.backgroundColor = Constants.HDBGViewColor
         webView?.loadRequest(request)
         self.view.addSubview(webView!)
+        
+        unowned let WS = self;
         webView?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.bottom.equalTo(self.view).offset(0)
+            make.top.equalTo(WS.view).offset(0)
+            make.left.equalTo(WS.view).offset(0)
+            make.bottom.equalTo(WS.view).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
             
         })
 
         
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -60,6 +61,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
     deinit{
     
         webView?.delegate = nil
+        HDLog.LogClassDestory("HDWebController")
     }
     
     // MARK: - events

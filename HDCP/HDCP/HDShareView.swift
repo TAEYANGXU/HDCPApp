@@ -38,7 +38,7 @@ class HDShareView: UIView {
                 let btn = HDShareButton()
                 btn.backgroundColor = UIColor.whiteColor()
                 btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                btn.tag = i;
+                btn.tag = i + 1000;
                 btn.titleLabel?.textAlignment = NSTextAlignment.Center
                 btn.titleLabel?.font = UIFont.systemFontOfSize(14)
                 btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
@@ -72,7 +72,7 @@ class HDShareView: UIView {
                 let btn = HDShareButton()
                 btn.backgroundColor = UIColor.whiteColor()
                 btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                btn.tag = i;
+                btn.tag = i + 1000;
                 btn.titleLabel?.textAlignment = NSTextAlignment.Center
                 btn.titleLabel?.font = UIFont.systemFontOfSize(14)
                 btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
@@ -134,7 +134,7 @@ class HDShareView: UIView {
         cancelBtn.backgroundColor = UIColor.whiteColor()
         cancelBtn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
         cancelBtn.setTitle("取消", forState: UIControlState.Normal)
-        cancelBtn.tag = 4;
+        cancelBtn.tag = 4 + 1000;
         cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
         cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(cancelBtn)
@@ -163,7 +163,7 @@ class HDShareView: UIView {
     
     func tagBtnOnclick(btn:UIButton){
         
-        shareClosuse!(tag: btn.tag)
+        shareClosuse!(tag: btn.tag - 1000)
         
     }
 

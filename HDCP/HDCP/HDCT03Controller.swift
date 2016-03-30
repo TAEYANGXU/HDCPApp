@@ -36,6 +36,11 @@ class HDCT03Controller: UITableViewController {
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
+    deinit{
+        
+        HDLog.LogClassDestory("HDCT03Controller")
+    }
+    
     // MARK: - events
     
     func backAction(){

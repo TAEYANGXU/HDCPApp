@@ -29,6 +29,12 @@ class HDGG03Controller: UITableViewController {
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
+    deinit{
+    
+        HDLog.LogClassDestory("HDGG03Controller")
+        
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){

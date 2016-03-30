@@ -67,7 +67,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     deinit{
     
         objCont.removeObserver(self, forKeyPath: "count")
-        
+        HDLog.LogClassDestory("HDCG03Controller")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -138,22 +138,6 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
         self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()
         
-//        searchController = UISearchController(searchResultsController: nil)
-//        searchController?.dimsBackgroundDuringPresentation =  false
-//        searchController?.searchBar.placeholder = "搜索菜谱"
-//        searchController?.delegate = self
-//        searchController?.searchBar.delegate = self
-//        searchController?.searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
-//        searchController?.searchBar.sizeToFit()
-//        searchController?.searchBar.barTintColor = Constants.HDBGViewColor
-//        searchController?.searchBar.layer.borderWidth = 1;
-//        searchController?.searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
-//        searchController?.searchBar.showsCancelButton = false
-//        self.tableView.tableHeaderView = searchController?.searchBar
-//        
-//        searchController?.becomeFirstResponder()
-//        searchController!.active = true
-//        searchController?.becomeFirstResponder()
     }
     
     // MARK: - 提示动画显示和隐藏
@@ -177,27 +161,27 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
     // MARK: - 数据加载
     func doGetRequestData(keyWord:String,limit:Int,offset:Int){
         
-        
+        unowned let WS = self
         HDCG03Service().doGetRequest_HDCG03_URL(keyWord, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
-            self.offset = self.offset+1
+            WS.offset = WS.offset+1
             
-            self.hidenHud()
+            WS.hidenHud()
             
-            self.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
+            WS.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
             
-            self.objCont.setValue(NSNumber(integer: self.dataArray.count), forKey: "count")
+            WS.objCont.setValue(NSNumber(integer: WS.dataArray.count), forKey: "count")
             
-            if (self.tableView.mj_footer  != nil){
+            if (WS.tableView.mj_footer  != nil){
             
-                self.tableView.mj_footer.endRefreshing()
+                WS.tableView.mj_footer.endRefreshing()
             }
             
-            self.tableView.reloadData()
+            WS.tableView.reloadData()
             
             }) { (error) -> Void in
                 
-                self.tableView.mj_footer.endRefreshing()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                WS.tableView.mj_footer.endRefreshing()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

@@ -19,6 +19,11 @@ class WelcomeController: UIViewController {
      
         setupUI()
     }
+    
+    deinit{
+    
+        HDLog.LogClassDestory("WelcomeController")
+    }
 
     // MARK: - 创建UI视图
     func setupUI(){
@@ -31,11 +36,12 @@ class WelcomeController: UIViewController {
         welcomeView?.showsVerticalScrollIndicator = false
         self.view.addSubview(welcomeView!)
         
+        unowned let WS = self;
         welcomeView?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
-            make.bottom.equalTo(self.view).offset(0)
+            make.top.equalTo(WS.view).offset(0)
+            make.left.equalTo(WS.view).offset(0)
+            make.bottom.equalTo(WS.view).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
             
         })

@@ -38,6 +38,11 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         
     }
     
+    deinit{
+    
+        HDLog.LogClassDestory("HDCT02Controller")
+    }
+    
     // MARK: - events
     func backAction(){
         
@@ -88,16 +93,17 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         
         //登录
         showHud()
+        unowned let WS = self
         HDCT02Service().doGetRequest_HDCT02_01_URL("8752979", successBlock: { (hdResponse) -> Void in
             
-                self.hidenHud()
+                WS.hidenHud()
                 NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGIN"])
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                WS.navigationController?.popToRootViewControllerAnimated(true)
             
             }) { (error) -> Void in
                 
-                self.hidenHud()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                WS.hidenHud()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
     }
     

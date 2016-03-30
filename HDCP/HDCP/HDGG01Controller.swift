@@ -73,6 +73,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
         tableView?.delegate = nil
         tableView?.dataSource = nil
+        
+        HDLog.LogClassDestory("HDGG01Controller")
     }
     // MARK: - 创建UI视图
    
@@ -80,8 +82,6 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
         createTableView()
         createHeaderView()
-        
-        
         
     }
     
@@ -112,10 +112,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                     btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     headerView!.addSubview(btn)
 
+                    unowned let WS = self
                     btn.snp_makeConstraints(closure: { (make) -> Void in
                         
-                        make.top.equalTo(headerView!).offset(CGFloat(i)*Constants.HDSCREENWITH/3+10)
-                        make.left.equalTo(headerView!).offset(CGFloat(j)*Constants.HDSCREENWITH/3)
+                        make.top.equalTo(WS.headerView!).offset(CGFloat(i)*Constants.HDSCREENWITH/3+10)
+                        make.left.equalTo(WS.headerView!).offset(CGFloat(j)*Constants.HDSCREENWITH/3)
                         make.width.equalTo(Constants.HDSCREENWITH/3)
                         make.height.equalTo(Constants.HDSCREENWITH/3)
                         
@@ -143,18 +144,19 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.view.addSubview(self.tableView!)
             tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
             tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell2")
+            unowned let WS = self
             tableView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(0)
-                make.left.equalTo(self.view).offset(0)
-                make.bottom.equalTo(self.view).offset(0)
+                make.top.equalTo(WS.view).offset(0)
+                make.left.equalTo(WS.view).offset(0)
+                make.bottom.equalTo(WS.view).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 
             })
             
             tableView?.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
                 
-                self.doGetRequestData()
+                WS.doGetRequestData()
                 
             })
 
@@ -275,22 +277,22 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
      */
     func doGetRequestData(){
     
-        
+        unowned let WS = self
         HDGG01Service().doGetRequest_HDGG01_URL({ (hdResponse) -> Void in
             
-            self.hidenHud()
-            self.count = hdResponse.array2D!.count
-            self.hdGG01Response = hdResponse
-            self.tableView!.reloadData()
+            WS.hidenHud()
+            WS.count = hdResponse.array2D!.count
+            WS.hdGG01Response = hdResponse
+            WS.tableView!.reloadData()
             
-            self.tableView?.hidden = false
+            WS.tableView?.hidden = false
             
-            self.tableView?.mj_header.endRefreshing()
+            WS.tableView?.mj_header.endRefreshing()
             
             }) { (error) -> Void in
                 
-                self.tableView?.mj_header.endRefreshing()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                WS.tableView?.mj_header.endRefreshing()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
                 
         }
 

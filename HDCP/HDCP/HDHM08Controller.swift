@@ -24,6 +24,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     var tipsView:UIView?
     var shareView:UIView!
     var shareSubView:HDShareView!
+    var titleLb:UILabel!
+    var createTime:UILabel!
+    var headIcon:UIImageView!
+    var viewCount:UILabel!
+    var commentCount:UILabel!
+    var userName:UILabel!
     
     override func viewDidLoad() {
         
@@ -53,6 +59,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     }
 
 
+    deinit{
+        
+        
+        HDLog.LogClassDestory("HDHM08Controller")
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){
@@ -82,11 +94,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             let tapGes = UITapGestureRecognizer(target: self, action: #selector(hideShareView))
             shareView.addGestureRecognizer(tapGes)
             
+            unowned let WS = self
             shareView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(0)
-                make.left.equalTo(self.view).offset(0)
-                make.bottom.equalTo(self.view).offset(0)
+                make.top.equalTo(WS.view).offset(0)
+                make.left.equalTo(WS.view).offset(0)
+                make.bottom.equalTo(WS.view).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 
                 
@@ -113,11 +126,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             baseView?.backgroundColor = UIColor.whiteColor()
             self.view.addSubview(baseView!)
             
+            unowned let WS = self
             baseView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(0)
-                make.left.equalTo(self.view).offset(0)
-                make.bottom.equalTo(self.view).offset(0)
+                make.top.equalTo(WS.view).offset(0)
+                make.left.equalTo(WS.view).offset(0)
+                make.bottom.equalTo(WS.view).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 
             })
@@ -145,10 +159,11 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             headImageView = UIImageView()
             baseView?.addSubview(headImageView!)
             
+            unowned let WS = self
             headImageView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(baseView!).offset(0)
-                make.left.equalTo(baseView!).offset(0)
+                make.top.equalTo(WS.baseView!).offset(0)
+                make.left.equalTo(WS.baseView!).offset(0)
                 make.height.equalTo(200)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 
@@ -165,39 +180,41 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
      */
     func createInfoView(){
     
-        if infoView == nil {
+        unowned let WS = self
         
+        if infoView == nil {
             
             infoView = UIView()
             baseView?.addSubview(infoView!)
             
+            
             infoView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.headImageView!.snp_bottom).offset(Constants.HDSpace*2)
-                make.left.equalTo(baseView!).offset(0)
+                make.top.equalTo(WS.headImageView!.snp_bottom).offset(Constants.HDSpace*2)
+                make.left.equalTo(WS.baseView!).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(110)
                 
             })
             
             
-            let title = UILabel()
-            title.textColor = Constants.HDMainTextColor
-            title.font = UIFont.systemFontOfSize(20)
-            infoView?.addSubview(title)
+            titleLb = UILabel()
+            titleLb.textColor = Constants.HDMainTextColor
+            titleLb.font = UIFont.systemFontOfSize(20)
+            infoView?.addSubview(titleLb)
             
-            title.text = hm08Response.result?.info?.title
+            titleLb.text = hm08Response.result?.info?.title
             
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            titleLb.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(infoView!).offset(0)
-                make.left.equalTo(infoView!).offset(15)
+                make.top.equalTo(WS.infoView!).offset(0)
+                make.left.equalTo(WS.infoView!).offset(15)
                 make.height.equalTo(25)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 
             })
             
-            let createTime = UILabel()
+            createTime = UILabel()
             createTime.textColor = UIColor.lightGrayColor()
             createTime.font = UIFont.systemFontOfSize(12)
             infoView?.addSubview(createTime)
@@ -206,22 +223,22 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             createTime.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(title.snp_bottom).offset(5)
-                make.left.equalTo(infoView!).offset(15)
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(15)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/2-30)
                 
             })
             
-            let headIcon = UIImageView()
+            headIcon = UIImageView()
             headIcon.layer.cornerRadius = 25
             headIcon.layer.masksToBounds = true
             infoView?.addSubview(headIcon)
             
             headIcon.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(createTime.snp_bottom).offset(5)
-                make.left.equalTo(infoView!).offset(15)
+                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(15)
                 make.width.equalTo(50)
                 make.height.equalTo(50)
             })
@@ -230,7 +247,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             
             
-            let viewCount = UILabel()
+            viewCount = UILabel()
             viewCount.textColor = UIColor.lightGrayColor()
             viewCount.font = UIFont.systemFontOfSize(12)
             infoView?.addSubview(viewCount)
@@ -239,15 +256,15 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             viewCount.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(title.snp_bottom).offset(5)
-                make.left.equalTo(infoView!).offset(Constants.HDSCREENWITH/2+20)
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(Constants.HDSCREENWITH/2+20)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/4-10)
                 
             })
             
             
-            let commentCount = UILabel()
+            commentCount = UILabel()
             commentCount.textColor = UIColor.blueColor()
             commentCount.font = UIFont.systemFontOfSize(12)
             commentCount.userInteractionEnabled = true
@@ -260,8 +277,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             commentCount.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(title.snp_bottom).offset(5)
-                make.left.equalTo(viewCount.snp_right).offset(10)
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.viewCount.snp_right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/4-20)
                 
@@ -269,7 +286,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
 
             
             
-            let userName = UILabel()
+            userName = UILabel()
             userName.textColor = UIColor.lightGrayColor()
             userName.font = UIFont.systemFontOfSize(16)
             infoView?.addSubview(userName)
@@ -278,8 +295,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             userName.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(createTime.snp_bottom).offset(5)
-                make.left.equalTo(headIcon.snp_right).offset(10)
+                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.left.equalTo(WS.headIcon.snp_right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 
@@ -309,8 +326,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             tags.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(userName.snp_bottom).offset(5)
-                make.left.equalTo(headIcon.snp_right).offset(10)
+                make.top.equalTo(WS.userName.snp_bottom).offset(5)
+                make.left.equalTo(WS.headIcon.snp_right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 
@@ -327,6 +344,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
      */
     func createIntroView(){
     
+        unowned let WS = self
+        
         if introView == nil {
             
             let size = CoreUtils.getTextRectSize((hm08Response.result?.info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
@@ -341,8 +360,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             introView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(infoView!.snp_bottom).offset(5)
-                make.left.equalTo(baseView!).offset(15)
+                make.top.equalTo(WS.infoView!.snp_bottom).offset(5)
+                make.left.equalTo(WS.baseView!).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(size.size.height+10)
                 
@@ -369,10 +388,11 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         let stepHeight = (hm08Response.result?.info?.steps?.count)!*80+30
         let stuffHeight = ((hm08Response.result?.info?.stuff?.count)!+1)*44+40
         
+        unowned let WS = self
         tableView?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(introView!.snp_bottom).offset(10)
-            make.left.equalTo(baseView!).offset(0)
+            make.top.equalTo(WS.introView!.snp_bottom).offset(10)
+            make.left.equalTo(WS.baseView!).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(stepHeight+stuffHeight)
         })
@@ -385,16 +405,18 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
 
     func createTipsView(){
     
+        unowned let WS = self
         if tipsView == nil {
             
             let tipsSize = CoreUtils.getTextRectSize((hm08Response.result?.info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
         
             tipsView = UIView()
             baseView?.addSubview(tipsView!)
+            
             tipsView?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(tableView!.snp_bottom).offset(0)
-                make.left.equalTo(baseView!).offset(0)
+                make.top.equalTo(WS.tableView!.snp_bottom).offset(0)
+                make.left.equalTo(WS.baseView!).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(60+tipsSize.size.height+5)
             })
@@ -407,8 +429,8 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             title.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(tipsView!).offset(20)
-                make.left.equalTo(tipsView!).offset(15)
+                make.top.equalTo(WS.tipsView!).offset(20)
+                make.left.equalTo(WS.tipsView!).offset(15)
                 make.width.equalTo(150)
                 make.height.equalTo(20)
             })
@@ -423,7 +445,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             tips.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.top.equalTo(title.snp_bottom).offset(20)
-                make.left.equalTo(tipsView!).offset(15)
+                make.left.equalTo(WS.tipsView!).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(tipsSize.size.height+5)
             })
@@ -449,20 +471,22 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     // MARK: - 分享视图显示和隐藏
     func hideShareView(){
         
+        unowned let WS = self
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.shareSubView.frame = CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight)
-            self.shareView.alpha = 0.0
+            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight)
+            WS.shareView.alpha = 0.0
             }, completion: { (ret) -> Void in
-                self.shareView?.hidden = true
+                WS.shareView?.hidden = true
         })
         
     }
     func showShareView(){
         
         shareView?.hidden = false
+        unowned let WS = self
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.shareView.alpha = 1
-            self.shareSubView.frame = CGRectMake(0,self.view.bounds.size.height-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
+            WS.shareView.alpha = 1
+            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
         })
     }
     
@@ -480,7 +504,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     func commentAction(){
     
         let hd10VC = HDHM10Controller()
-        hd10VC.commentArray = (self.hm08Response.result?.comment)!
+        hd10VC.rid = self.rid
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(hd10VC, animated: true)
     }
@@ -603,11 +627,13 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         hdHM09VC.index = touchView?.tag
         hdHM09VC.steps = hm08Response.result?.info?.steps
         self.hidesBottomBarWhenPushed = true;
+        
+        unowned let WS = self
         self.presentViewController(hdHM09VC, animated: true, completion: { () -> Void in
             /**
             *  取消cell选择状态
             */
-            self.tableView?.deselectRowAtIndexPath(self.tableView!.indexPathForSelectedRow!, animated: true)
+            WS.tableView?.deselectRowAtIndexPath(WS.tableView!.indexPathForSelectedRow!, animated: true)
         })
         
     }
@@ -615,16 +641,17 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     // MARK: - 数据加载
     func doGetRequestData(){
         
+        unowned let WS = self
         HDHM08Service().doGetRequest_HDHM08_URL(rid!, successBlock: { (hm08Response) -> Void in
             
-                self.hidenHud()
-                self.hm08Response = hm08Response
-                self.setupUI()
+                WS.hidenHud()
+                WS.hm08Response = hm08Response
+                WS.setupUI()
             
             }) { (error) -> Void in
                 
                 
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

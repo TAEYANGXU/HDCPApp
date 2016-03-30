@@ -131,7 +131,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
    deinit{
    
       baseView.delegate = nil
-      
+      HDLog.LogClassDestory("HDHM01Controller")
    }
     
     // MARK: - 创建UI视图
@@ -176,9 +176,10 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             /**
             *  添加下拉刷新
             */
+            unowned let WS = self;
             baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
                 
-                self.doGetRequestData()
+                WS.doGetRequestData()
                 
                 
             })
@@ -841,36 +842,37 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     // MARK: - 数据加载
     
     func doGetRequestData(){
-        
-        HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
+      
+         unowned let WS = self;
+         HDHM01Service().doGetRequest_HDHM01_URL({ (hdResponse) -> Void in
             
-            self.hidenHud()
+            WS.hidenHud()
             
-            self.hdHM01Response = hdResponse
+            WS.hdHM01Response = hdResponse
             
             /**
             *  刷新UI
             */
-            self.setupUI()
+            WS.setupUI()
             
             /**
             *  结束刷新
             */
-            self.baseView.mj_header.endRefreshing()
+            WS.baseView.mj_header.endRefreshing()
             
             }) { (error) -> Void in
                 
                 /**
                 *  结束刷新
                 */
-                if  (self.baseView != nil) {
+                if  (WS.baseView != nil) {
                     
-                    self.baseView.mj_header.endRefreshing()
+                    WS.baseView.mj_header.endRefreshing()
                     
                 }
                 
                 
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
         
@@ -1047,23 +1049,3 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     }
     
 }
-
-
-/**
-*  原生态 自动布局
-
-
-menuView.translatesAutoresizingMaskIntoConstraints = false;
-let leftConstraint = NSLayoutConstraint(item: menuView,attribute: .Left,relatedBy: .Equal,toItem: baseView,attribute: .Left,multiplier: 1.0,constant: 0.0);
-baseView.addConstraint(leftConstraint)
-let rightConstraint = NSLayoutConstraint(item: menuView,attribute: .Width,relatedBy: .Equal,toItem: baseView,attribute: .Width,multiplier: 1.0,constant: Constants.HDSCREENWITH);
-baseView.addConstraint(rightConstraint)
-let topConstraint = NSLayoutConstraint(item: menuView,attribute: .Top,relatedBy: .Equal,toItem: headView,attribute: .Bottom,multiplier: 1.0,constant: 0.0);
-baseView.addConstraint(topConstraint)
-let heightConstraint = NSLayoutConstraint(item: menuView,attribute: .Height,relatedBy: .Equal,toItem: baseView,attribute: .Height,multiplier: 0.0,constant: 100.0);
-baseView.addConstraint(heightConstraint)
-
-*/
-
-
-

@@ -45,6 +45,12 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
+    deinit{
+    
+        HDLog.LogClassDestory("HDHM05Controller")
+        
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){
@@ -60,12 +66,14 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         collectionView?.dataSource = self
         self.view.addSubview(collectionView!)
         
+        unowned let WS = self;
+        
         collectionView?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(self.view).offset(0)
-            make.left.equalTo(self.view).offset(0)
+            make.top.equalTo(WS.view).offset(0)
+            make.left.equalTo(WS.view).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
-            make.bottom.equalTo(self.view).offset(0)
+            make.bottom.equalTo(WS.view).offset(0)
             
         })
         
@@ -77,7 +85,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
         //当列表滚动到底端 视图自动刷新
         self.collectionView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-            self.doGetRequestData(self.cid,limit: 10,offset: self.offset)
+            WS.doGetRequestData(WS.cid,limit: 10,offset: WS.offset)
         })
         
     }
@@ -97,22 +105,23 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     // MARK: - 数据加载
     func doGetRequestData(cid:Int,limit:Int,offset:Int){
         
+        unowned let WS = self;
         HDHM05Service().doGetRequest_HDHM05_URL(cid, limit: limit, offset: offset, successBlock: { (hm05Response) -> Void in
             
-            self.offset = self.offset+10
+            WS.offset = WS.offset+10
             
-            self.hidenHud()
+            WS.hidenHud()
             
-            self.dataArray.addObjectsFromArray((hm05Response.result?.list)!)
+            WS.dataArray.addObjectsFromArray((hm05Response.result?.list)!)
             
-            self.collectionView!.mj_footer.endRefreshing()
+            WS.collectionView!.mj_footer.endRefreshing()
             
-            self.collectionView!.reloadData()
+            WS.collectionView!.reloadData()
             
             }) { (error) -> Void in
                 
-                self.collectionView!.mj_footer.endRefreshing()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                WS.collectionView!.mj_footer.endRefreshing()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

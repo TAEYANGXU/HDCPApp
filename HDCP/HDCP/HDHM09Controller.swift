@@ -32,6 +32,11 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         setupUI()
     }
 
+    deinit{
+    
+        HDLog.LogClassDestory("HDHM09Controller")
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){
@@ -56,10 +61,11 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             cancelBtn?.layer.borderColor = Constants.HDMainColor.CGColor
             self.view.addSubview(cancelBtn!)
             
+            unowned let WS = self
             cancelBtn?.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(50)
-                make.right.equalTo(self.view.snp_right).offset(-30)
+                make.top.equalTo(WS.view).offset(50)
+                make.right.equalTo(WS.view.snp_right).offset(-30)
                 make.width.equalTo(30)
                 make.height.equalTo(30)
                 
@@ -81,10 +87,11 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             imageScrollView!.showsHorizontalScrollIndicator = false
             self.view.addSubview(imageScrollView!)
             
+            unowned let WS = self
             imageScrollView!.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(Constants.HDSCREENHEIGHT/2-100)
-                make.left.equalTo(self.view).offset(0)
+                make.top.equalTo(WS.view).offset(Constants.HDSCREENHEIGHT/2-100)
+                make.left.equalTo(WS.view).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(200)
                 
@@ -125,12 +132,13 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             pageFlag?.font = UIFont.systemFontOfSize(26)
             self.view.addSubview(pageFlag!)
             
+            unowned let WS = self
             pageFlag?.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
                 make.height.equalTo(30)
-                make.bottom.equalTo(imageScrollView!.snp_top).offset(-5)
-                make.left.equalTo(self.view).offset(30)
+                make.bottom.equalTo(WS.imageScrollView!.snp_top).offset(-5)
+                make.left.equalTo(WS.view).offset(30)
                 
             })
             
@@ -144,12 +152,13 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             context?.font = UIFont.systemFontOfSize(18)
             self.view.addSubview(context!)
             
+            unowned let WS = self
             context?.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
                 make.height.equalTo(0)
-                make.top.equalTo(imageScrollView!.snp_bottom).offset(20)
-                make.left.equalTo(self.view).offset(30)
+                make.top.equalTo(WS.imageScrollView!.snp_bottom).offset(20)
+                make.left.equalTo(WS.view).offset(30)
                 
             })
 

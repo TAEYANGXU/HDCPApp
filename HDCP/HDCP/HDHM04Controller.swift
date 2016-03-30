@@ -38,6 +38,11 @@ class HDHM04Controller: UITableViewController {
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
+    deinit{
+    
+        HDLog.LogClassDestory("HDHM04Controller")
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){
@@ -47,8 +52,9 @@ class HDHM04Controller: UITableViewController {
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
+        unowned let WS = self;
         self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-            self.doGetRequestData(self.tagModel!.id!,limit: 10,offset: self.offset)
+            WS.doGetRequestData(WS.tagModel!.id!,limit: 10,offset: WS.offset)
         })
         
     }
@@ -68,22 +74,23 @@ class HDHM04Controller: UITableViewController {
     // MARK: - 数据加载
     func doGetRequestData(tagId:Int,limit:Int,offset:Int){
     
+        unowned let WS = self;
         HDHM04Service().doGetRequest_HDHM04_URL(tagId, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
             
-            self.offset = self.offset+10
+            WS.offset = WS.offset+10
             
-            self.hidenHud()
+            WS.hidenHud()
             
-            self.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
+            WS.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
             
-            self.tableView.mj_footer.endRefreshing()
+            WS.tableView.mj_footer.endRefreshing()
             
-            self.tableView.reloadData()
+            WS.tableView.reloadData()
             
             }) { (error) -> Void in
                 
                 self.tableView.mj_footer.endRefreshing()
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         
     }

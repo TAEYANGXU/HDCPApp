@@ -30,6 +30,12 @@ class HDCG02Controller: UITableViewController {
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
     
+    deinit{
+        
+        HDLog.LogClassDestory("HDCG02Controller")
+        
+    }
+    
     // MARK: - 创建UI视图
     
     func setupUI(){

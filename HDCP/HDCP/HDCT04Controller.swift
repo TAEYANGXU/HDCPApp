@@ -50,6 +50,15 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
         
     }
     
+    deinit{
+    
+        timer.invalidate()
+        timer = nil
+        
+        HDLog.LogClassDestory("HDCT04Controller")
+        
+    }
+    
     // MARK: - events
     func backAction(){
         

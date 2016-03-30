@@ -58,6 +58,13 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         hidenHud()
     }
     
+    
+    deinit{
+        
+        HDLog.LogClassDestory("HDCG01Controller")
+        
+    }
+    
     // MARK: - 提示动画显示和隐藏
     func showHud(){
         
@@ -97,18 +104,18 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
         
         showHud()
-        
+        unowned let WS = self
         HDCG01Service().doGetRequest_HDCG02_URL({ (HDCG01Response) -> Void in
             
-            self.hidenHud()
+            WS.hidenHud()
             if HDCG01Response.result?.list!.count>0 {
-                self.dataArray = HDCG01Response.result?.list!
+                WS.dataArray = HDCG01Response.result?.list!
             }
-            self.tableView!.reloadData()
+            WS.tableView!.reloadData()
             
             }) { (error) -> Void in
                 
-                CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
                 
         }
         

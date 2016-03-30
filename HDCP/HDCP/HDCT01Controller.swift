@@ -57,7 +57,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     deinit{
     
         NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.HDREFRESHHDCT01, object: nil)
-        
+        HDLog.LogClassDestory("HDCT01Controller")
     }
     
     // MARK: - 创建UI视图
@@ -91,9 +91,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         title.textAlignment = NSTextAlignment.Center
         navView?.addSubview(title)
         
+        unowned let WS = self
         title.snp_makeConstraints { (make) -> Void in
             
-            make.top.equalTo(navView!).offset(20)
+            make.top.equalTo(WS.navView!).offset(20)
             make.height.equalTo(44)
             make.width.equalTo(Constants.HDSCREENWITH)
             
@@ -104,6 +105,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     func createHeaderView(){
     
+        unowned let WS = self
+        
         /**
         *   背景图
         */
@@ -132,8 +135,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             make.width.equalTo(Constants.HDSCREENWITH/4)
             make.height.equalTo(Constants.HDSCREENWITH/4)
-            make.left.equalTo(headerBg!).offset(Constants.HDSCREENWITH/2-Constants.HDSCREENWITH/8)
-            make.top.equalTo(headerBg!).offset(80)
+            make.left.equalTo(WS.headerBg!).offset(Constants.HDSCREENWITH/2-Constants.HDSCREENWITH/8)
+            make.top.equalTo(WS.headerBg!).offset(80)
         })
         
         /**
@@ -147,10 +150,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
         userName?.snp_makeConstraints(closure: { (make) -> Void in
             
-            make.top.equalTo(headerIcon!.snp_bottom).offset(5)
+            make.top.equalTo(WS.headerIcon!.snp_bottom).offset(5)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(30)
-            make.left.equalTo(headerBg!).offset(0)
+            make.left.equalTo(WS.headerBg!).offset(0)
             
         })
         
@@ -165,7 +168,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace)
             make.left.equalTo(0)
-            make.bottom.equalTo(headerBg!.snp_bottom).offset(0)
+            make.bottom.equalTo(WS.headerBg!.snp_bottom).offset(0)
             
         })
         
@@ -179,7 +182,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(40)
-            make.bottom.equalTo(headerBg!.snp_bottom).offset(-10)
+            make.bottom.equalTo(WS.headerBg!.snp_bottom).offset(-10)
             
         })
         
@@ -194,7 +197,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             cntView?.addSubview(btn)
             btn.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.left.equalTo(cntView!).offset(CGFloat(i)*space)
+                make.left.equalTo(WS.cntView!).offset(CGFloat(i)*space)
                 make.top.equalTo(0)
                 make.width.equalTo(space)
                 make.height.equalTo(40)

@@ -26,6 +26,11 @@ class HDCT09Controller: BaseViewController {
         
     }
     
+    deinit{
+    
+        HDLog.LogClassDestory("HDCT09Controller")
+    }
+    
     // MARK: - events
     func backAction(){
         

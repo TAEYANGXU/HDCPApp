@@ -895,8 +895,6 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         self.navigationController?.pushViewController(hdhm05VC, animated: true)
         self.hidesBottomBarWhenPushed = false;
         
-        print("collect")
-        
     }
     
     
@@ -914,7 +912,6 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         hdWebVC.url = model!.url
         self.navigationController?.pushViewController(hdWebVC, animated: true)
         self.hidesBottomBarWhenPushed = false;
-        print("rowView")
         
     }
     
@@ -947,7 +944,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM02VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            print("排行榜")
+            HDLog.LogOut("排行榜")
             break
         case 1:
             /**
@@ -958,7 +955,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM03VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            print("营养餐桌")
+            HDLog.LogOut("营养餐桌")
             break
             
         case 2:
@@ -971,15 +968,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdcg02VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            
-            print("热门分类")
+            HDLog.LogOut("热门分类")
             break
             
         case 3:
             /**
             *   晒一晒
             */
-            print("晒一晒")
+            HDLog.LogOut("晒一晒")
             break
         default:
             "default"
@@ -1000,7 +996,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM06VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            print("全部菜谱")
+            HDLog.LogOut("全部菜谱")
             break
         case 20000:
             
@@ -1008,7 +1004,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM07VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            print("全部宝典")
+            HDLog.LogOut("全部宝典")
             break
         default:
             "default"
@@ -1019,15 +1015,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     //分类
     func tagBtnOnclick(btn:UIButton){
         
-        
         let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag-1000])!
         let hdHM04VC = HDHM04Controller()
         hdHM04VC.tagModel = model;
         self.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(hdHM04VC, animated: true)
         self.hidesBottomBarWhenPushed = false;
-        
-        print("点击了 \(model.name)")
         
     }
     

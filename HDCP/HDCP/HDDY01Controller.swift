@@ -367,11 +367,92 @@ class HDDY01Controller: UITableViewController {
                 
                 make.top.equalTo(imageView!.snp_bottom).offset(10)
                 make.left.equalTo(icon!.snp_right).offset(10)
-                make.width.equalTo(Constants.HDSCREENWITH - 100)
+                make.width.equalTo(Constants.HDSCREENWITH - 220)
                 make.height.equalTo(20);
                 
             })
             
+        }
+        
+        
+        //赞
+        var digIcon = cell.contentView.viewWithTag(16000) as? UIImageView
+        
+        if digIcon == nil {
+            
+            digIcon = UIImageView()
+            digIcon?.tag = 16000
+            digIcon?.image = UIImage(named: "zanIcon")
+            cell.contentView.addSubview(digIcon!)
+            
+            digIcon?.snp_makeConstraints(closure: { (make) in
+                
+                make.top.equalTo(imageView!.snp_bottom).offset(12.5)
+                make.left.equalTo(time!.snp_right).offset(0)
+                make.width.equalTo(20)
+                make.height.equalTo(20)
+                
+            })
+            
+        }
+        
+        var digCount = cell.contentView.viewWithTag(17000) as? UILabel
+        
+        if digCount == nil {
+            
+            digCount = UILabel()
+            digCount?.tag = 17000
+            digCount?.font = UIFont.systemFontOfSize(13)
+            digCount?.textColor = Constants.HDMainTextColor
+            cell.contentView.addSubview(digCount!)
+            digCount?.snp_makeConstraints(closure: { (make) in
+                
+                make.top.equalTo(imageView!.snp_bottom).offset(12.5)
+                make.left.equalTo(digIcon!.snp_right).offset(5)
+                make.width.equalTo(35)
+                make.height.equalTo(20)
+                
+            })
+        }
+        
+        //评论
+        var commentIcon = cell.contentView.viewWithTag(18000) as? UIImageView
+        
+        if commentIcon == nil {
+            
+            commentIcon = UIImageView()
+            commentIcon?.tag = 18000
+            commentIcon?.image = UIImage(named: "commIcon")
+            cell.contentView.addSubview(commentIcon!)
+            
+            commentIcon?.snp_makeConstraints(closure: { (make) in
+                
+                make.top.equalTo(imageView!.snp_bottom).offset(12.5)
+                make.left.equalTo(digCount!.snp_right).offset(0)
+                make.width.equalTo(20)
+                make.height.equalTo(20)
+                
+            })
+            
+        }
+        
+        var commentCount = cell.contentView.viewWithTag(19000) as? UILabel
+        
+        if commentCount == nil {
+            
+            commentCount = UILabel()
+            commentCount?.tag = 19000
+            commentCount?.font = UIFont.systemFontOfSize(13)
+            commentCount?.textColor = Constants.HDMainTextColor
+            cell.contentView.addSubview(commentCount!)
+            commentCount?.snp_makeConstraints(closure: { (make) in
+                
+                make.top.equalTo(imageView!.snp_bottom).offset(12.5)
+                make.left.equalTo(commentIcon!.snp_right).offset(5)
+                make.width.equalTo(40)
+                make.height.equalTo(20)
+                
+            })
         }
         
         //评论视图
@@ -481,6 +562,8 @@ class HDDY01Controller: UITableViewController {
         
         time?.text = model.data?.createTime
         
+        digCount?.text = String(format: "%d", (model.data?.diggCnt)!)
+        commentCount?.text = String(format: "%d", (model.data?.commentCnt)!)
         
         if model.data!.commentList?.count>0 {
             
@@ -583,8 +666,13 @@ class HDDY01Controller: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
-        
-        
+        HDLog.LogOut(indexPath.row);
+        let model = dataArray[indexPath.row] as! HDDY01ListModel
+        let hddy02VC = HDDY02Controller()
+        hddy02VC.listModel = model
+        self.hidesBottomBarWhenPushed = true;
+        self.navigationController?.pushViewController(hddy02VC, animated: true)
+        self.hidesBottomBarWhenPushed = false;
         
     }
     

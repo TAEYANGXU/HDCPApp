@@ -101,15 +101,15 @@ public class HDShareSDKManager {
                 switch state{
                     
                 case SSDKResponseState.Success:
-                    print("分享成功")
+                    HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
                 case SSDKResponseState.Fail:
-                    print("分享失败,错误描述:\(error)")
+                    HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
                 case SSDKResponseState.Cancel:
-                    print("分享取消")
+                    HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
@@ -126,15 +126,15 @@ public class HDShareSDKManager {
                 switch state{
                     
                 case SSDKResponseState.Success:
-                    print("分享成功")
+                    HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
                 case SSDKResponseState.Fail:
-                    print("分享失败,错误描述:\(error)")
+                    HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
                 case SSDKResponseState.Cancel:
-                    print("分享取消")
+                    HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
@@ -151,15 +151,15 @@ public class HDShareSDKManager {
                 switch state{
                     
                 case SSDKResponseState.Success:
-                    print("分享成功")
+                    HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
                 case SSDKResponseState.Fail:
-                    print("分享失败,错误描述:\(error)")
+                    HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
                 case SSDKResponseState.Cancel:
-                    print("分享取消")
+                    HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
@@ -176,15 +176,15 @@ public class HDShareSDKManager {
                 switch state{
                     
                 case SSDKResponseState.Success:
-                    print("分享成功")
+                    HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
                 case SSDKResponseState.Fail:
-                    print("分享失败,错误描述:\(error)")
+                    HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
                 case SSDKResponseState.Cancel:
-                    print("分享取消")
+                    HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:

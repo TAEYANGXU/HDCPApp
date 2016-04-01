@@ -20,8 +20,6 @@ class HDHM03Service {
      */
     func doGetRequest_HDHM03_URL(limit:Int,offset:Int,successBlock:(hdResponse:HDHM03Response)->Void,failBlock:(error:NSError)->Void){
         
-        print("offset :\(offset)")
-        
         HDRequestManager.doPostRequest(["type":"2","offset":offset,"limit":limit,"tagid":"0"], URL: Constants.HDHM03_URL) { (response) -> Void in
             
             if response.result.error == nil {

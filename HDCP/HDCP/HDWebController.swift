@@ -25,7 +25,7 @@ class HDWebController: BaseViewController ,UIWebViewDelegate{
         
         showHud()
         
-        print("\(url)")
+        HDLog.LogOut(url)
         
     }
     

@@ -541,12 +541,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                print("成功")
+                HDLog.LogOut("成功")
                 }, shareFail: { () -> Void in
-                    print("失败")
+                    HDLog.LogOut("失败")
                     CoreUtils.showWarningHUD(self.view, title: "分享失败")
                 }, shareCancel: { () -> Void in
-                    print("取消")
+                    HDLog.LogOut("取消")
             })
 
             break
@@ -557,12 +557,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                print("成功")
+                HDLog.LogOut("成功")
                 }, shareFail: { () -> Void in
-                    print("失败")
+                    HDLog.LogOut("失败")
                     CoreUtils.showWarningHUD(self.view, title: "分享失败")
                 }, shareCancel: { () -> Void in
-                    print("取消")
+                    HDLog.LogOut("取消")
             })
 
 
@@ -575,12 +575,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                print("成功")
+                HDLog.LogOut("成功")
                 }, shareFail: { () -> Void in
-                    print("失败")
+                    HDLog.LogOut("失败")
                     CoreUtils.showWarningHUD(self.view, title: "分享失败")
                 }, shareCancel: { () -> Void in
-                    print("取消")
+                    HDLog.LogOut("取消")
             })
 
 
@@ -592,12 +592,12 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                print("成功")
+                HDLog.LogOut("成功")
                 }, shareFail: { () -> Void in
-                    print("失败")
+                    HDLog.LogOut("失败")
                     CoreUtils.showWarningHUD(self.view, title: "分享失败")
                 }, shareCancel: { () -> Void in
-                    print("取消")
+                    HDLog.LogOut("取消")
             })
 
             break
@@ -610,7 +610,6 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             ""
             
         }
-        print("tag = \(tag)")
         
     }
     
@@ -650,7 +649,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             }) { (error) -> Void in
                 
-                
+                WS.hidenHud()
                 CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         

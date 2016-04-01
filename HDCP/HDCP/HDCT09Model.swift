@@ -12,7 +12,7 @@ import ObjectMapper
 class HDCT09Response:Mappable {
     
     var request_id:String?
-    var result:HDCT08Result?
+    var result:HDCT09Result?
     
     required init?(_ map: Map){
         mapping(map)
@@ -31,12 +31,14 @@ class HDCT09Result: Mappable {
     var ct09GroupList:Array<HDCT09GroupModel>?
     var ct09HotList:Array<HDCT09HotModel>?
     var ct09ADList:Array<HDCT09ADModel>?
+    var todayStar:Array<HDCT09TodayStarModel>?
     
-    var groupTitle:String!
-    var groupUrl:String!
-    var hotTitle:String!
-    var hotUrl:String!
-    
+    var groupTitle:String?
+    var groupUrl:String?
+    var hotTitle:String?
+    var hotUrl:String?
+    var todayStarTitle:String?
+    var todayStarUrl:String?
     
     required init?(_ map: Map){
         mapping(map)
@@ -47,11 +49,36 @@ class HDCT09Result: Mappable {
         ct09GroupList <- map["group"]
         ct09HotList <- map["hot"]
         ct09ADList <- map["ad"]
+        todayStar <- map["todayStar"]
         
         groupTitle <- map["groupTitle"]
         groupUrl <- map["groupUrl"]
         hotTitle <- map["hotTitle"]
         hotUrl <- map["hotUrl"]
+        todayStarTitle <- map["todayStarTitle"]
+        todayStarUrl <- map["todayStarUrl"]
+        
+    }
+    
+}
+
+class HDCT09TodayStarModel: Mappable {
+    
+    var userId:Int!
+    var userName:String!
+    var avatar:String!
+    var url:String!
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        userId <- map["UserId"]
+        url <- map["Url"]
+        avatar <- map["Avatar"]
+        userName <- map["UserName"]
         
     }
     

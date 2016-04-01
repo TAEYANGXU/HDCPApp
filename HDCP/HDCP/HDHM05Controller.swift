@@ -34,7 +34,6 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
         doGetRequestData(cid,limit: 10,offset: self.offset)
         
-        print("\(name)     \(cid!)")
         
     }
     

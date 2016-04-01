@@ -152,12 +152,6 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         HDLog.LogClassDestory("HDHM10Controller")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        print("click !")
-        
-    }
-    
     // MARK: - 键盘变化
     func keyboardWillShow(note:NSNotification){
     
@@ -249,7 +243,10 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
             WS.hidenHud()
             
-            WS.commentArray = (hm10Response.result?.list)!
+            if hm10Response.result?.list?.count > 0 {
+            
+                WS.commentArray = (hm10Response.result?.list)!
+            }
             
             WS.getContentHeight()
             

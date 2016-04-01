@@ -30,7 +30,8 @@ class HDCT02Service {
                 if json["status"] == 201 {
                 
                     //登录失败
-                    print("errormsg = \(json["result"]["errormsg"])")
+                    let str = json["result"]["errormsg"]
+                    HDLog.LogOut("errormsg = ", obj: str.string!)
                     
                 }else{
                     // JSON 转换成对象

@@ -209,7 +209,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM07VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
         case 1:
             /**
@@ -219,7 +219,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdgg02VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
             
         case 2:
@@ -230,7 +230,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdgg04VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
             
         case 3:
@@ -241,7 +241,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM06VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
         case 4:
             /**
@@ -251,7 +251,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM03VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
         case 5:
             /**
@@ -262,7 +262,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdcg02VC, animated: true)
             self.hidesBottomBarWhenPushed = false
-            print("\(btn.currentTitle)")
+            HDLog.LogOut(btn.currentTitle!)
             break
 
         default:
@@ -301,8 +301,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
     // MARK: - HDGG01RowView delegate
     func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void{
-    
-        print("\(indexPath.row)    \(index) ")
+        
         
         let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
         let model:HDGG01ListModel = array2d[index]

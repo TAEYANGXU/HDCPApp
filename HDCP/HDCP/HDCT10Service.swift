@@ -19,7 +19,7 @@ class HDCT10Service {
      */
     func doGetRequest_HDCT10_URL(limit:Int,offset:Int,successBlock:(hdResponse:HDCT10Response)->Void,failBlock:(error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["sign":"4864f65f7e5827e7ea50a48bb70f7a2a","limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDCT09_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["sign":"4864f65f7e5827e7ea50a48bb70f7a2a","limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDDY01_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 

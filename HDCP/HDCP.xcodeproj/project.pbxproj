@@ -83,6 +83,9 @@
 		353DA4691CAB9ABD00DFD15C /* HDDY01Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */; };
 		353DA46B1CAB9EE800DFD15C /* HDHM10Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA46A1CAB9EE800DFD15C /* HDHM10Service.swift */; };
 		353DA46D1CABA35000DFD15C /* HDHM10Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA46C1CABA35000DFD15C /* HDHM10Model.swift */; };
+		353DA4F51CAE50BD00DFD15C /* HDDY02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4F41CAE50BD00DFD15C /* HDDY02Controller.swift */; };
+		353DA4F71CAE512200DFD15C /* HDDY02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4F61CAE512200DFD15C /* HDDY02Service.swift */; };
+		353DA4F91CAE513800DFD15C /* HDDY02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 353DA4F81CAE513800DFD15C /* HDDY02Model.swift */; };
 		3542D2D21C4C8B34008677D9 /* HDHM08Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */; };
 		3542D2D41C4C8FA7008677D9 /* HDHM08Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */; };
 		3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */; };
@@ -284,6 +287,9 @@
 		353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01Service.swift; sourceTree = "<group>"; };
 		353DA46A1CAB9EE800DFD15C /* HDHM10Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Service.swift; sourceTree = "<group>"; };
 		353DA46C1CABA35000DFD15C /* HDHM10Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM10Model.swift; sourceTree = "<group>"; };
+		353DA4F41CAE50BD00DFD15C /* HDDY02Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY02Controller.swift; sourceTree = "<group>"; };
+		353DA4F61CAE512200DFD15C /* HDDY02Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY02Service.swift; sourceTree = "<group>"; };
+		353DA4F81CAE513800DFD15C /* HDDY02Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY02Model.swift; sourceTree = "<group>"; };
 		3542D2D11C4C8B34008677D9 /* HDHM08Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Controller.swift; sourceTree = "<group>"; };
 		3542D2D31C4C8FA7008677D9 /* HDHM08Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Model.swift; sourceTree = "<group>"; };
 		3542D2D51C4C8FB5008677D9 /* HDHM08Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM08Service.swift; sourceTree = "<group>"; };
@@ -653,6 +659,7 @@
 			children = (
 				353DA4601CAB998700DFD15C /* DY.xcassets */,
 				353DA4621CAB99BF00DFD15C /* HDDY01Controller.swift */,
+				353DA4F41CAE50BD00DFD15C /* HDDY02Controller.swift */,
 			);
 			name = DY;
 			sourceTree = "<group>";
@@ -661,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				353DA4681CAB9ABD00DFD15C /* HDDY01Service.swift */,
+				353DA4F61CAE512200DFD15C /* HDDY02Service.swift */,
 			);
 			name = DY;
 			sourceTree = "<group>";
@@ -669,6 +677,7 @@
 			isa = PBXGroup;
 			children = (
 				353DA4661CAB9A2000DFD15C /* HDDY01Model.swift */,
+				353DA4F81CAE513800DFD15C /* HDDY02Model.swift */,
 			);
 			name = DY;
 			sourceTree = "<group>";
@@ -1218,6 +1227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				353DA4F91CAE513800DFD15C /* HDDY02Model.swift in Sources */,
 				3521FC881C56232700E30D15 /* HDGG02Controller.swift in Sources */,
 				352A42841C50E190009D0F9F /* HDGG01ListEntity+CoreDataProperties.swift in Sources */,
 				352A42931C50E1A2009D0F9F /* HDCG01ListEntity.swift in Sources */,
@@ -1239,6 +1249,7 @@
 				353DA46B1CAB9EE800DFD15C /* HDHM10Service.swift in Sources */,
 				1B0FD1031C3D5749009E85CD /* UIScrollView+MJExtension.m in Sources */,
 				3566C8ED1C47499A00573D97 /* HDHM04Model.swift in Sources */,
+				353DA4F71CAE512200DFD15C /* HDDY02Service.swift in Sources */,
 				352A42961C50E1A2009D0F9F /* HDCG01TagEntity+CoreDataProperties.swift in Sources */,
 				1B0FD0FA1C3D5749009E85CD /* MJRefreshAutoStateFooter.m in Sources */,
 				358970651C969E54003E10D2 /* HDCT09Controller.swift in Sources */,
@@ -1346,6 +1357,7 @@
 				35B703441C3F81570024A329 /* HDGG01Service.swift in Sources */,
 				356F396C1C3A3E900056DF44 /* MainViewController.swift in Sources */,
 				356F39BD1C3A81870056DF44 /* HDCoreUtils.swift in Sources */,
+				353DA4F51CAE50BD00DFD15C /* HDDY02Controller.swift in Sources */,
 				1B0FD0FB1C3D5749009E85CD /* MJRefreshBackGifFooter.m in Sources */,
 				3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */,
 				3538902D1C4E1E21006C9CE6 /* WelcomeController.swift in Sources */,

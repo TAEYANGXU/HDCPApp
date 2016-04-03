@@ -462,7 +462,7 @@ class HDCT09Controller: UITableViewController {
                 ViewDesc = UILabel()
                 ViewDesc?.tag = 3000
                 ViewDesc?.textAlignment = NSTextAlignment.Right
-                ViewDesc?.font = UIFont.systemFontOfSize(14)
+                ViewDesc?.font = UIFont.systemFontOfSize(12)
                 ViewDesc?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(ViewDesc!)
                 

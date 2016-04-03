@@ -666,7 +666,6 @@ class HDDY01Controller: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
-        HDLog.LogOut(indexPath.row);
         let model = dataArray[indexPath.row] as! HDDY01ListModel
         let hddy02VC = HDDY02Controller()
         hddy02VC.listModel = model

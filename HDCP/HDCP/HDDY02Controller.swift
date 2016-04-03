@@ -44,9 +44,6 @@ class HDDY02Controller: UIViewController {
     func doGetRequestData(){
         
         unowned let WS = self
-        
-        HDLog.LogOut("rid = ", obj: (listModel?.data?.id)!)
-        
         HDDY02Service().doGetRequest_HDDY02_URL((listModel?.data?.id)!, successBlock: { (hdResponse) -> Void in
             
             

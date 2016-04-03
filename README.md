@@ -13,6 +13,7 @@
     Center : 我的
     Category : 分类
     Home : 菜谱
+    DY : 动态
 
 第三方库
 

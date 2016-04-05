@@ -299,7 +299,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
     }
     
-    // MARK: - HDGG01RowView delegate
+    // MARK: - HDGG01RowViewProtocol
     func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void{
         
         

@@ -146,8 +146,9 @@
         return;
     }
     
-    if (self.fullScreenBlock) {
-        self.fullScreenBlock();
+    if ([self.delegate respondsToSelector:@selector(didFullScreen)]) {
+        
+        [self.delegate didFullScreen];
     }
     
     self.originFrame = self.view.frame;
@@ -173,9 +174,9 @@
         return;
     }
     
-    if (self.shrinkScreenBlock) {
+    if ([self.delegate respondsToSelector:@selector(didshrinkScreen)]) {
         
-        self.shrinkScreenBlock();
+        [self.delegate didshrinkScreen];
     }
     
     [UIView animateWithDuration:0.3f animations:^{

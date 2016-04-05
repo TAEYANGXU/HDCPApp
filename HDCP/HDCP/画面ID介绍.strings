@@ -39,7 +39,10 @@
     HDCT09Controller -> 话题
     HDCT10Controller -> 动态
     HDCT11Controller -> 消息
-    
+ 
+ 
+    HDDY01Controller -> 动态
+    HDDY02Controller -> 动态详情
  
     //共通
     HDWebController -> 展示web页面

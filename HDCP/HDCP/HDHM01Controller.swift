@@ -158,7 +158,8 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
      */
     func createBaseView(){
     
-        
+        unowned let WS = self;
+      
         if baseView == nil {
             
             baseView = UIScrollView()
@@ -167,16 +168,16 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             baseView.snp_makeConstraints { (make) -> Void in
                 
-                make.top.equalTo(self.view).offset(0)
-                make.left.equalTo(self.view).offset(0)
+                make.top.equalTo(WS.view).offset(0)
+                make.left.equalTo(WS.view).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
-                make.bottom.equalTo(self.view).offset(0)
+                make.bottom.equalTo(WS.view).offset(0)
             }
             
             /**
             *  添加下拉刷新
             */
-            unowned let WS = self;
+         
             baseView.mj_header = HDRefreshGifHeader(refreshingBlock: { () -> Void in
                 
                 WS.doGetRequestData()

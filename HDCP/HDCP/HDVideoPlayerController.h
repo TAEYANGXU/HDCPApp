@@ -8,15 +8,20 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 
+@protocol HDVideoPlayerDelegate <NSObject>
+
+//全屏回调
+-(void) didFullScreen;
+//缩放回调
+-(void) didshrinkScreen;
+
+@end
+
 @interface HDVideoPlayerController : MPMoviePlayerController
 
 @property (nonatomic, strong) UIImageView *movieBackgroundView;
 
-//全屏回调
-@property (nonatomic,copy) void(^fullScreenBlock)(void);
-//缩放回调
-@property (nonatomic,copy) void(^shrinkScreenBlock)(void);
-
+@property (nonatomic,weak) id<HDVideoPlayerDelegate> delegate;
 
 @property (nonatomic, assign) CGRect frame;
 

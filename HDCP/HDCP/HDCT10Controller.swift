@@ -549,7 +549,7 @@ class HDCT10Controller: UITableViewController {
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
             attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: CoreUtils.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(4, str.characters.count))
+            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
             commentCnt?.attributedText =  attributed
         
         }else{
@@ -664,7 +664,12 @@ http://v.hoto.cn/aa/e6/1042090.mp4
 3.
 http://recipe1.hoto.cn/pic/recipe/l/8f/d8/1038479_e5266c.jpg
 http://v.hoto.cn/8f/d8/1038479.mp4
-
+ 
+4.
+http://recipe1.hoto.cn/pic/recipe/l/8b/11/1053067_5717c8.jpg
+http://v.hoto.cn/8b/11/1053067.mp4
+ 
+ 
 HasVideo = 1 为视频
 
 **/

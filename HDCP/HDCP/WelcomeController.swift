@@ -67,7 +67,7 @@ class WelcomeController: UIViewController {
                 btn.setTitle("立即体验", forState: UIControlState.Normal)
                 btn.layer.cornerRadius = 5;
                 btn.layer.masksToBounds = true
-                btn.setTitleColor(CoreUtils.HDColor(245, g: 161, b: 0, a: 1), forState: UIControlState.Normal)
+                btn.setTitleColor(Constants.HDYellowColor, forState: UIControlState.Normal)
                 btn.layer.borderColor = Constants.HDMainColor.CGColor
                 btn.layer.borderWidth = 1
                 welcomeView?.addSubview(btn)

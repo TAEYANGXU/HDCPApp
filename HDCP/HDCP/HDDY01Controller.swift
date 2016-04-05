@@ -585,7 +585,7 @@ class HDDY01Controller: UITableViewController {
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
             attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: CoreUtils.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(4, str.characters.count))
+            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
             commentCnt?.attributedText =  attributed
             
         }else{
@@ -667,11 +667,15 @@ class HDDY01Controller: UITableViewController {
         
         
         let model = dataArray[indexPath.row] as! HDDY01ListModel
-        let hddy02VC = HDDY02Controller()
-        hddy02VC.listModel = model
-        self.hidesBottomBarWhenPushed = true;
-        self.navigationController?.pushViewController(hddy02VC, animated: true)
-        self.hidesBottomBarWhenPushed = false;
+        
+        if model.data?.hasVideo == 1 {
+            let hddy02VC = HDDY02Controller()
+            hddy02VC.listModel = model
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(hddy02VC, animated: true)
+            self.hidesBottomBarWhenPushed = false;
+        }
+        
         
     }
     

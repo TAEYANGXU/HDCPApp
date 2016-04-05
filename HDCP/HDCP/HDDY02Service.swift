@@ -17,14 +17,14 @@ class HDDY02Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDDY02_URL(rid:Int,successBlock:(hdResponse:HDDY01Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDDY02_URL(rid:Int,successBlock:(hdResponse:HDDY02Response)->Void,failBlock:(error:NSError)->Void){
         
         HDRequestManager.doPostRequest(["rid":rid,"sign":"4864f65f7e5827e7ea50a48bb70f7a2a","uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDDY02_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let response = Mapper<HDDY01Response>().map(response.result.value)
+                let response = Mapper<HDDY02Response>().map(response.result.value)
                 /// 回调
                 successBlock(hdResponse: response!)
                 

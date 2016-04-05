@@ -31,9 +31,9 @@ public class HDShareSDKManager {
                 
                 switch platform{
                     
-                case SSDKPlatformType.TypeWechat:
+                case .TypeWechat:
                     ShareSDKConnector.connectWeChat(WXApi.classForCoder())
-                case SSDKPlatformType.TypeQQ:
+                case .TypeQQ:
                     ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
                 default:
                     break
@@ -42,11 +42,11 @@ public class HDShareSDKManager {
             onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
                 switch platform {
                 
-                case SSDKPlatformType.TypeWechat:
+                case .TypeWechat:
                     //设置微信应用信息
                     appInfo.SSDKSetupWeChatByAppId("wxa31fc3ddf49a3a53", appSecret: "36d04f1ddf538e8efeab2791f0caf016")
                     break
-                case SSDKPlatformType.TypeQQ:
+                case .TypeQQ:
                     //设置腾讯应用信息，其中authType设置为只用Web形式授权
                     appInfo.SSDKSetupQQByAppId("1105128294", appKey: "c46wxXfFpd9VDcn3", authType: SSDKAuthTypeBoth)
                     break
@@ -100,15 +100,15 @@ public class HDShareSDKManager {
                 
                 switch state{
                     
-                case SSDKResponseState.Success:
+                case .Success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case SSDKResponseState.Fail:
+                case .Fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case SSDKResponseState.Cancel:
+                case .Cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
@@ -125,15 +125,15 @@ public class HDShareSDKManager {
                 
                 switch state{
                     
-                case SSDKResponseState.Success:
+                case .Success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case SSDKResponseState.Fail:
+                case .Fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case SSDKResponseState.Cancel:
+                case .Cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
@@ -150,15 +150,15 @@ public class HDShareSDKManager {
                 
                 switch state{
                     
-                case SSDKResponseState.Success:
+                case .Success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case SSDKResponseState.Fail:
+                case .Fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case SSDKResponseState.Cancel:
+                case .Cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
@@ -175,15 +175,15 @@ public class HDShareSDKManager {
                 
                 switch state{
                     
-                case SSDKResponseState.Success:
+                case .Success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case SSDKResponseState.Fail:
+                case .Fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case SSDKResponseState.Cancel:
+                case .Cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break

@@ -448,7 +448,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             let str:String =  model.content.componentsSeparatedByString(":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
             attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: CoreUtils.HDColor(245, g: 161, b: 0, a: 1), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
             content?.attributedText =  attributed
         }else{
         

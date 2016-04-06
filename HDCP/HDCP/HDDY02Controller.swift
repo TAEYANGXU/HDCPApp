@@ -8,21 +8,60 @@
 
 import UIKit
 
+private let shareViewHeight = CGFloat(255)
 private let titleArray = ["详情","步骤","评论"]
-
 private let lineWith:CGFloat = 40
 private let lineSpace:CGFloat = Constants.HDSCREENWITH/6 - lineWith/2
 
 
-class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
+class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource {
     
     var listModel:HDDY01ListModel?
     var dy02Info:HDDY02InfoModel?
     var vedioHeight:CGFloat?
     
+    //视频播放视图
     var videoPlayerController:HDVideoPlayerController?
+    //滚动条
     var menuView:UIView?
     var menuLineView:UIView?
+    
+    var scrollView:UIScrollView?
+    
+    //详情
+    var detailView:UIScrollView?
+    //步骤
+    var stepsView:UIScrollView?
+    //评论
+    var commentView:UIScrollView?
+    
+    //个人信息视图
+    var infoView:UIView?
+    var titleLb:UILabel!
+    var createTime:UILabel!
+    var headIcon:UIImageView!
+    var viewCount:UILabel!
+    var commentCount:UILabel!
+    var userName:UILabel!
+    var tags:UILabel!
+    
+    //简介
+    var introView:UILabel?
+    //食材
+    var stuffTableView:UITableView?
+    //小贴士
+    var tipsView:UIView?
+    var tips:UILabel!
+    
+    //步骤
+    var stepsTableView:UITableView?
+    
+    //评论
+    var commentTableView:UITableView?
+    
+    //分享
+    var shareView:UIView!
+    var shareSubView:HDShareView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +77,16 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
         self.title = listModel?.data?.title
         self.view.backgroundColor = UIColor.whiteColor()
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
-        
+     
+        let button = UIButton(type: UIButtonType.Custom) as UIButton
+        button.frame = CGRectMake(0, 0, 30, 30)
+        button.titleLabel?.font = UIFont.systemFontOfSize(15)
+        button.setBackgroundImage(UIImage(named: "shareIcon"), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(share), forControlEvents: UIControlEvents.TouchUpInside)
+        button.contentMode = UIViewContentMode.ScaleToFill
+        let rightItem = UIBarButtonItem(customView: button)
+        self.navigationItem.rightBarButtonItem = rightItem
+
     }
     
     deinit{
@@ -52,6 +100,10 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
     
         createHDVedioPlayerView()
         createMenuView()
+        createScrollView()
+        createInfoView()
+        createIntroView()
+        createShareView()
     }
     
     /**
@@ -153,6 +205,428 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
         
     }
     
+    /**
+     *  底部滚动视图
+     */
+    func createScrollView() {
+        
+        
+        if scrollView == nil {
+            
+            scrollView = UIScrollView()
+            scrollView?.delegate = self
+            scrollView?.contentSize = CGSizeMake(3*Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            scrollView?.pagingEnabled = true
+            self.view.addSubview(scrollView!)
+            unowned let WS = self
+            scrollView?.snp_makeConstraints(closure: { (make) in
+                
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+                make.top.equalTo(WS.menuView!.snp_bottom).offset(0)
+                make.left.equalTo(0)
+                
+            })
+            
+            
+            detailView = UIScrollView()
+            scrollView?.addSubview(detailView!)
+            detailView!.snp_makeConstraints(closure: { (make) in
+                
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.top.equalTo(0)
+                make.left.equalTo(0)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+                
+            })
+            
+            
+            stepsView = UIScrollView()
+            stepsView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            scrollView?.addSubview(stepsView!)
+            stepsView!.snp_makeConstraints(closure: { (make) in
+                
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.top.equalTo(0)
+                make.left.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+                
+            })
+            
+            commentView = UIScrollView()
+            scrollView?.addSubview(commentView!)
+            commentView!.snp_makeConstraints(closure: { (make) in
+                
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.top.equalTo(0)
+                make.left.equalTo(CGFloat(2)*Constants.HDSCREENWITH)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+                
+            })
+            
+        }
+        
+    }
+    
+    /**
+     *  个人信息
+     */
+    func createInfoView(){
+        
+        unowned let WS = self
+        
+        if infoView == nil {
+            
+            infoView = UIView()
+            detailView?.addSubview(infoView!)
+            
+            
+            infoView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(Constants.HDSpace)
+                make.left.equalTo(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(110)
+                
+            })
+            
+            
+            titleLb = UILabel()
+            titleLb.textColor = Constants.HDMainTextColor
+            titleLb.font = UIFont.systemFontOfSize(20)
+            infoView?.addSubview(titleLb)
+            
+            
+            titleLb.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.infoView!).offset(0)
+                make.left.equalTo(WS.infoView!).offset(15)
+                make.height.equalTo(25)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                
+            })
+            
+            createTime = UILabel()
+            createTime.textColor = UIColor.lightGrayColor()
+            createTime.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(createTime)
+            
+            
+            createTime.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(15)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/2-30)
+                
+            })
+            
+            headIcon = UIImageView()
+            headIcon.layer.cornerRadius = 25
+            headIcon.layer.masksToBounds = true
+            infoView?.addSubview(headIcon)
+            
+            headIcon.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(15)
+                make.width.equalTo(50)
+                make.height.equalTo(50)
+            })
+            
+            
+            viewCount = UILabel()
+            viewCount.textColor = UIColor.lightGrayColor()
+            viewCount.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(viewCount)
+            
+            
+            viewCount.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.infoView!).offset(Constants.HDSCREENWITH/2+20)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/4-10)
+                
+            })
+            
+            commentCount = UILabel()
+            commentCount.textColor = UIColor.lightGrayColor()
+            commentCount.font = UIFont.systemFontOfSize(12)
+            commentCount.userInteractionEnabled = true
+            infoView?.addSubview(commentCount)
+            
+            commentCount.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.left.equalTo(WS.viewCount.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH/4-20)
+                
+            })
+            
+            
+            userName = UILabel()
+            userName.textColor = Constants.HDMainTextColor
+            userName.font = UIFont.systemFontOfSize(16)
+            infoView?.addSubview(userName)
+            
+            userName.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.left.equalTo(WS.headIcon.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                
+            })
+            
+            let tags = UILabel()
+            tags.textColor = UIColor.lightGrayColor()
+            tags.font = UIFont.systemFontOfSize(12)
+            infoView?.addSubview(tags)
+            
+            tags.text = "美食明星、生活联盟"
+            tags.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.userName.snp_bottom).offset(5)
+                make.left.equalTo(WS.headIcon.snp_right).offset(10)
+                make.height.equalTo(20)
+                make.width.equalTo(Constants.HDSCREENWITH-100)
+                
+            })
+            
+            
+        }
+        
+    }
+    
+    /**
+     *  菜谱介绍
+     */
+    func createIntroView(){
+        
+        unowned let WS = self
+        
+        if introView == nil {
+            
+            introView = UILabel()
+            introView?.textColor = Constants.HDMainTextColor
+            introView?.font = UIFont.systemFontOfSize(15)
+            introView?.numberOfLines = 0
+            detailView?.addSubview(introView!)
+            
+            
+            
+            introView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.infoView!.snp_bottom).offset(5)
+                make.left.equalTo(WS.detailView!).offset(15)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                make.height.equalTo(0)
+                
+            })
+            
+            
+        }
+        
+    }
+    
+    /**
+     *  食材
+     */
+    func createStuffTableView(){
+        
+        if stuffTableView == nil {
+            
+            stuffTableView = UITableView()
+            stuffTableView?.delegate = self
+            stuffTableView?.dataSource = self
+            stuffTableView?.scrollEnabled = false
+            detailView?.addSubview(stuffTableView!)
+            
+            stuffTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+            
+            unowned let WS = self
+            stuffTableView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.introView!.snp_bottom).offset(10)
+                make.left.equalTo(WS.detailView!).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(0)
+            })
+
+        }
+        
+    }
+    
+    /**
+     *  小贴士
+     */
+    
+    func createTipsView(){
+        
+        unowned let WS = self
+        if tipsView == nil {
+            
+            
+            
+            tipsView = UIView()
+            detailView?.addSubview(tipsView!)
+            
+            tipsView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.stuffTableView!.snp_bottom).offset(0)
+                make.left.equalTo(WS.detailView!).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                
+            })
+            
+            let title = UILabel()
+            title.font = UIFont.systemFontOfSize(18)
+            title.text = "小贴士"
+            title.textColor = UIColor.lightGrayColor()
+            tipsView?.addSubview(title)
+            
+            title.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.tipsView!).offset(20)
+                make.left.equalTo(WS.tipsView!).offset(15)
+                make.width.equalTo(150)
+                make.height.equalTo(20)
+            })
+            
+            tips = UILabel()
+            tips.font = UIFont.systemFontOfSize(14)
+            tips.textColor = Constants.HDMainTextColor
+            tips.numberOfLines = 0
+            tipsView?.addSubview(tips)
+            
+            
+            tips.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(title.snp_bottom).offset(20)
+                make.left.equalTo(WS.tipsView!).offset(15)
+                make.width.equalTo(Constants.HDSCREENWITH-30)
+                
+            })
+            
+            
+        }
+        
+    }
+    
+    /**
+     *  步骤
+     */
+    func createStepsTableView(){
+        
+        if stepsTableView == nil {
+            
+            stepsTableView = UITableView()
+            stepsTableView?.delegate = self
+            stepsTableView?.dataSource = self
+            stepsView?.addSubview(stepsTableView!)
+            
+            stepsTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "stepsCell")
+            
+            stepsTableView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(0)
+                make.left.equalTo(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            })
+            
+        }
+        
+    }
+    
+    /**
+     *  步骤
+     */
+    func createCommentTableView(){
+        
+        if commentTableView == nil {
+            
+            commentTableView = UITableView()
+            commentTableView?.delegate = self
+            commentTableView?.dataSource = self
+            commentTableView?.scrollEnabled = false
+            commentView?.addSubview(commentTableView!)
+            
+            commentTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+            
+            commentTableView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(0)
+                make.left.equalTo(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(0)
+            })
+            
+        }
+        
+    }
+
+    /**
+     *  分享视图
+     */
+    func createShareView(){
+        
+        
+        if shareView == nil {
+            
+            shareView = UIView()
+            shareView.hidden = true
+            shareView.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.2)
+            shareView.alpha = 0.0
+            self.view.addSubview(shareView!)
+            let tapGes = UITapGestureRecognizer(target: self, action: #selector(hideShareView))
+            shareView.addGestureRecognizer(tapGes)
+            
+            unowned let WS = self
+            shareView?.snp_makeConstraints(closure: { (make) -> Void in
+                
+                make.top.equalTo(WS.view).offset(0)
+                make.left.equalTo(WS.view).offset(0)
+                make.bottom.equalTo(WS.view).offset(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                
+                
+            })
+            
+            shareSubView = HDShareView(frame: CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight))
+            shareSubView.completeClosuse(shareAction)
+            shareView.addSubview(shareSubView)
+            
+            
+        }
+        
+    }
+    
+    // MARK: - 分享视图显示和隐藏
+    func hideShareView(){
+        
+        unowned let WS = self
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight)
+            WS.shareView.alpha = 0.0
+            }, completion: { (ret) -> Void in
+                WS.shareView?.hidden = true
+        })
+        
+    }
+    func showShareView(){
+        
+        shareView?.hidden = false
+        unowned let WS = self
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            WS.shareView.alpha = 1
+            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
+        })
+    }
+
+    
     // MARK: - 获取视频地址
     func getVedioUrl(str:String) -> String {
         
@@ -168,6 +642,96 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
         return vedioUrl
     }
     
+    /**
+     *  菜谱分享
+     */
+    func shareAction(tag:Int){
+        
+        hideShareView()
+        
+        let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", (listModel?.data?.id!)!)
+        
+        switch tag {
+            
+        case 0:
+            /**
+             *  微信好友
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 1:
+            /**
+             *  微信朋友圈
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 2:
+            /**
+             *  QQ
+             */
+            
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 3:
+            /**
+             *  QQ空间
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 4:
+            /**
+             *   取消
+             */
+            break
+        default:
+            ""
+            
+        }
+        
+    }
+    
     // MARK: - 滚动下滑条
     func scrollLine(index:Int)  {
         
@@ -176,6 +740,13 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
             WS.menuLineView?.frame = CGRectMake(CGFloat(index)*(40+2*lineSpace)+lineSpace,40-3,lineWith,3)
         }
         
+    }
+    
+    // MARK: - 滚动视图
+    func scrollViewToScroll(index:Int) {
+        
+        //滚动时有动画
+        scrollView?.setContentOffset(CGPointMake(CGFloat(index) * Constants.HDSCREENWITH, 0), animated: true)
         
     }
     
@@ -199,6 +770,32 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
         
     }
     
+    /**
+     *  查看评论
+     */
+    func commentAction(){
+        
+        let hd10VC = HDHM10Controller()
+        hd10VC.rid =  listModel!.data?.id
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(hd10VC, animated: true)
+    }
+    
+    //显示/隐藏分享视图
+    func share(){
+        
+        if (shareView.hidden) {
+            
+            showShareView()
+            
+        }else{
+            
+            hideShareView()
+            
+        }
+        
+    }
+    
     func menuAction(btn:UIButton) {
         
         for view in (menuView?.subviews)! {
@@ -219,23 +816,62 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
              *  详情
              */
             scrollLine(0)
+            scrollViewToScroll(0)
             break
         case 2017:
             /**
              *  步骤
              */
             scrollLine(1)
+            scrollViewToScroll(1)
             break
         case 2018:
             /**
              *  评论
              */
             scrollLine(2)
+            scrollViewToScroll(2)
             break
         default:
             ""
         }
         
+    }
+    
+    // MARK: - 加载数据 刷新UI
+    func refreshUI() {
+        
+        userName.text = dy02Info?.userInfo?.userName
+        commentCount.text = String(format: "评论:%d", (listModel?.data?.commentCnt)!)
+        viewCount.text = String(format: "浏览:%ld", (dy02Info?.viewCount)!)
+        headIcon.sd_setImageWithURL(NSURL(string: (dy02Info?.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+        titleLb.text = dy02Info?.title
+        createTime.text = String(format: "创建日期:%@", (dy02Info?.reviewTime)!)
+        
+        let size = CoreUtils.getTextRectSize((dy02Info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+        introView?.text = dy02Info?.intro!
+        introView?.snp_updateConstraints(closure: { (make) in
+            
+            make.height.equalTo(size.size.height + 10)
+        })
+        
+        let stuffHeight = (dy02Info?.stuff?.count)!*44+30+44
+        stuffTableView?.snp_updateConstraints(closure: { (make) in
+            
+            make.height.equalTo(stuffHeight)
+        })
+        
+        let tipsSize = CoreUtils.getTextRectSize((dy02Info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+        tips.text = dy02Info?.tips!
+        
+        tipsView?.snp_updateConstraints(closure: { (make) in
+            make.height.equalTo(60+tipsSize.size.height+5)
+        })
+        tips.snp_updateConstraints { (make) in
+            make.height.equalTo(tipsSize.size.height+5)
+        }
+        
+        detailView!.contentSize = CGSizeMake(Constants.HDSCREENWITH, 110 + size.size.height + 40 + CGFloat(stuffHeight)+60.0+tipsSize.size.height+5)
     }
     
     // MARK: - 数据加载
@@ -260,6 +896,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
             }
             
             
+            WS.createStuffTableView()
+            WS.createTipsView()
+            WS.createStepsTableView()
+            WS.refreshUI()
+            
         }) { (error) -> Void in
             
             WS.hidenHud()
@@ -271,6 +912,8 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
     // MARK: - HDVideoPlayerController delegate
     func didFullScreen() {
         
+        scrollView?.hidden = true
+        menuView?.hidden = true
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -278,8 +921,221 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate {
     
     func didshrinkScreen() {
         
+        scrollView?.hidden = false
+        menuView?.hidden = false
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    // MARK: - UIScrollView delegate
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    
+        if scrollView == self.scrollView {
+            let index = Int(scrollView.contentOffset.x/Constants.HDSCREENWITH)
+            scrollLine(index)
+        }
+        
+        
+    }
+    
+    // MARK: - UITableView delegate/datasource
+    
+    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    {
+        if stuffTableView == tableView {
+            
+            return (dy02Info?.stuff?.count)!+1
+        }else if stepsTableView == tableView {
+            
+            return (dy02Info?.steps?.count)!
+        }else{
+        
+            return 0
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
+        return 1
+    }
+    
+    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    {
+        
+        
+        
+        if stuffTableView == tableView {
+            
+            let cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+            
+            /**
+             *   食材
+             */
+            
+            
+            if indexPath.row == (dy02Info?.stuff?.count)! {
+                let title = UILabel()
+                title.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(title)
+                
+                title.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH-30)
+                })
+                
+                title.textColor = Constants.HDMainTextColor
+                title.text = String(format: "制作时间:%@ ", (dy02Info?.readyTime)!)
+            }else{
+                
+                
+                let title = UILabel()
+                title.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(title)
+                
+                title.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH/2-15)
+                })
+                
+                let weight = UILabel()
+                weight.textColor = UIColor.lightGrayColor()
+                weight.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(weight)
+                
+                weight.snp_makeConstraints(closure: { (make) -> Void in
+                    make.top.equalTo(cell.contentView).offset(0)
+                    make.left.equalTo(title.snp_right).offset(30)
+                    make.height.equalTo(44)
+                    make.width.equalTo(Constants.HDSCREENWITH/2-30)
+                })
+                
+                
+                title.textColor = UIColor.lightGrayColor()
+                let model = dy02Info!.stuff![indexPath.row]
+                title.text = model.name
+                weight.text = model.weight
+            }
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            return cell
+            
+        }else if  stepsTableView == tableView {
+            /**
+             *   步骤
+             */
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("stepsCell", forIndexPath: indexPath)
+            
+            let model = dy02Info?.steps![indexPath.row]
+            
+            var index = cell.contentView.viewWithTag(1000) as? UILabel
+            if index == nil {
+                
+                index = UILabel()
+                index?.tag = 1000
+                index?.textColor = Constants.HDYellowColor
+                index?.textAlignment = NSTextAlignment.Center
+                index?.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(index!)
+                
+                index?.snp_makeConstraints(closure: { (make) in
+                    
+                    make.left.equalTo(15)
+                    make.top.equalTo(15)
+                    make.width.equalTo(20)
+                    make.height.equalTo(30)
+                    
+                })
+                
+            }
+            
+            var stuff = cell.contentView.viewWithTag(2000) as? UILabel
+            
+            if stuff == nil {
+                
+                stuff = UILabel()
+                stuff?.tag = 2000
+                stuff?.numberOfLines = 2
+                stuff?.textColor = Constants.HDMainTextColor
+                stuff?.font = UIFont.systemFontOfSize(14)
+                cell.contentView.addSubview(stuff!)
+                
+                stuff?.snp_makeConstraints(closure: { (make) in
+                    
+                    make.left.equalTo(index!.snp_right).offset(5)
+                    make.top.equalTo(10)
+                    make.width.equalTo(Constants.HDSCREENWITH - 60)
+                    make.height.equalTo(40)
+                    
+                })
+                
+            }
+            
+            
+            stuff?.text = model!.intro
+            index?.text = String(format: "%d", indexPath.row+1)
+            
+//            let introSize = CoreUtils.getTextRectSize(String(format: "%d.%@",indexPath.row+1, model!.intro!), font: UIFont.systemFontOfSize(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
+            
+          
+            
+            return cell
+        }else{
+            
+            /**
+             *   评论
+             */
+            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+            return cell
+        }
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,30))
+        
+        if stuffTableView == tableView {
+            
+            let title = UILabel(frame: CGRectMake(15,0,Constants.HDSCREENWITH-15,30))
+            title.textColor = UIColor.lightGrayColor()
+            title.font = UIFont.systemFontOfSize(15)
+            view.addSubview(title)
+            
+            title.text = "食材"
+        }
+        
+        return view
+    }
+   
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        if tableView == stuffTableView {
+            return CGFloat(Constants.HDSpace*3)
+        }
+        return 0
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        if stuffTableView == tableView {
+            
+            return 44
+        }else if stepsTableView == tableView {
+            
+            return 60
+        }else{
+        
+            return 60
+        }
+        
     }
 
 }

@@ -44,9 +44,9 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
         
         let button = UIButton(type: UIButtonType.Custom) as UIButton
-        button.frame = CGRectMake(0, 0, 40, 30)
+        button.frame = CGRectMake(0, 0, 30, 30)
         button.titleLabel?.font = UIFont.systemFontOfSize(15)
-        button.setTitle("分享", forState: UIControlState.Normal)
+        button.setBackgroundImage(UIImage(named: "shareIcon"), forState: UIControlState.Normal)
         button.addTarget(self, action: #selector(share), forControlEvents: UIControlEvents.TouchUpInside)
         button.contentMode = UIViewContentMode.ScaleToFill
         let rightItem = UIBarButtonItem(customView: button)
@@ -287,7 +287,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             
             userName = UILabel()
-            userName.textColor = UIColor.lightGrayColor()
+            userName.textColor = Constants.HDMainTextColor
             userName.font = UIFont.systemFontOfSize(16)
             infoView?.addSubview(userName)
             

@@ -153,6 +153,18 @@
 		35B703461C3F83130024A329 /* HDGG01Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B703451C3F83130024A329 /* HDGG01Model.swift */; };
 		35B7034C1C3F95E20024A329 /* HDGG01Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034B1C3F95E20024A329 /* HDGG01Button.swift */; };
 		35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */; };
+		35C4F2D11CB65977004487ED /* HDDY01ResponseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2C51CB65977004487ED /* HDDY01ResponseEntity+CoreDataProperties.swift */; };
+		35C4F2D21CB65978004487ED /* HDDY01ResponseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2C61CB65977004487ED /* HDDY01ResponseEntity.swift */; };
+		35C4F2D31CB65978004487ED /* HDDY01ResultEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2C71CB65977004487ED /* HDDY01ResultEntity+CoreDataProperties.swift */; };
+		35C4F2D41CB65978004487ED /* HDDY01ResultEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2C81CB65977004487ED /* HDDY01ResultEntity.swift */; };
+		35C4F2D51CB65978004487ED /* HDDY01ListEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2C91CB65977004487ED /* HDDY01ListEntity+CoreDataProperties.swift */; };
+		35C4F2D61CB65978004487ED /* HDDY01ListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CA1CB65977004487ED /* HDDY01ListEntity.swift */; };
+		35C4F2D71CB65978004487ED /* HDDY01UserInfoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CB1CB65977004487ED /* HDDY01UserInfoEntity+CoreDataProperties.swift */; };
+		35C4F2D81CB65978004487ED /* HDDY01UserInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CC1CB65977004487ED /* HDDY01UserInfoEntity.swift */; };
+		35C4F2D91CB65978004487ED /* HDDY01DataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CD1CB65977004487ED /* HDDY01DataEntity+CoreDataProperties.swift */; };
+		35C4F2DA1CB65978004487ED /* HDDY01DataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CE1CB65977004487ED /* HDDY01DataEntity.swift */; };
+		35C4F2DB1CB65978004487ED /* HDDY01CommentListEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2CF1CB65977004487ED /* HDDY01CommentListEntity+CoreDataProperties.swift */; };
+		35C4F2DC1CB65978004487ED /* HDDY01CommentListEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C4F2D01CB65977004487ED /* HDDY01CommentListEntity.swift */; };
 		35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */; };
 		35EF56721C51CBAE00352E7D /* HDCG03Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */; };
 		35EF56751C51D5D900352E7D /* HDCG03Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35EF56741C51D5D900352E7D /* HDCG03Service.swift */; };
@@ -366,6 +378,19 @@
 		35B703451C3F83130024A329 /* HDGG01Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Model.swift; sourceTree = "<group>"; };
 		35B7034B1C3F95E20024A329 /* HDGG01Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01Button.swift; sourceTree = "<group>"; };
 		35B7034D1C3F9B4B0024A329 /* HDGG01RowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDGG01RowView.swift; sourceTree = "<group>"; };
+		35C4F2C41CB64ED2004487ED /* HDCP20160408.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HDCP20160408.xcdatamodel; sourceTree = "<group>"; };
+		35C4F2C51CB65977004487ED /* HDDY01ResponseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01ResponseEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2C61CB65977004487ED /* HDDY01ResponseEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01ResponseEntity.swift; sourceTree = "<group>"; };
+		35C4F2C71CB65977004487ED /* HDDY01ResultEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01ResultEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2C81CB65977004487ED /* HDDY01ResultEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01ResultEntity.swift; sourceTree = "<group>"; };
+		35C4F2C91CB65977004487ED /* HDDY01ListEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01ListEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2CA1CB65977004487ED /* HDDY01ListEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01ListEntity.swift; sourceTree = "<group>"; };
+		35C4F2CB1CB65977004487ED /* HDDY01UserInfoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01UserInfoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2CC1CB65977004487ED /* HDDY01UserInfoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01UserInfoEntity.swift; sourceTree = "<group>"; };
+		35C4F2CD1CB65977004487ED /* HDDY01DataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01DataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2CE1CB65977004487ED /* HDDY01DataEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01DataEntity.swift; sourceTree = "<group>"; };
+		35C4F2CF1CB65977004487ED /* HDDY01CommentListEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HDDY01CommentListEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		35C4F2D01CB65977004487ED /* HDDY01CommentListEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDDY01CommentListEntity.swift; sourceTree = "<group>"; };
 		35D5B4861C4CE84500028E47 /* HDHM09Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM09Controller.swift; sourceTree = "<group>"; };
 		35EF56711C51CBAE00352E7D /* HDCG03Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Controller.swift; sourceTree = "<group>"; };
 		35EF56741C51D5D900352E7D /* HDCG03Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCG03Service.swift; sourceTree = "<group>"; };
@@ -551,6 +576,7 @@
 		352A41EC1C50A506009D0F9F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				35C4F2C31CB64C0E004487ED /* DY */,
 				352A41EF1C50A544009D0F9F /* HM */,
 				352A41F11C50A556009D0F9F /* CG */,
 				352A41F01C50A550009D0F9F /* GG */,
@@ -995,6 +1021,25 @@
 			name = CustomUI;
 			sourceTree = "<group>";
 		};
+		35C4F2C31CB64C0E004487ED /* DY */ = {
+			isa = PBXGroup;
+			children = (
+				35C4F2C51CB65977004487ED /* HDDY01ResponseEntity+CoreDataProperties.swift */,
+				35C4F2C61CB65977004487ED /* HDDY01ResponseEntity.swift */,
+				35C4F2C71CB65977004487ED /* HDDY01ResultEntity+CoreDataProperties.swift */,
+				35C4F2C81CB65977004487ED /* HDDY01ResultEntity.swift */,
+				35C4F2C91CB65977004487ED /* HDDY01ListEntity+CoreDataProperties.swift */,
+				35C4F2CA1CB65977004487ED /* HDDY01ListEntity.swift */,
+				35C4F2CB1CB65977004487ED /* HDDY01UserInfoEntity+CoreDataProperties.swift */,
+				35C4F2CC1CB65977004487ED /* HDDY01UserInfoEntity.swift */,
+				35C4F2CD1CB65977004487ED /* HDDY01DataEntity+CoreDataProperties.swift */,
+				35C4F2CE1CB65977004487ED /* HDDY01DataEntity.swift */,
+				35C4F2CF1CB65977004487ED /* HDDY01CommentListEntity+CoreDataProperties.swift */,
+				35C4F2D01CB65977004487ED /* HDDY01CommentListEntity.swift */,
+			);
+			name = DY;
+			sourceTree = "<group>";
+		};
 		35EF56731C51D26000352E7D /* CT */ = {
 			isa = PBXGroup;
 			children = (
@@ -1234,6 +1279,7 @@
 				1B0FD0F51C3D5749009E85CD /* MJRefreshComponent.m in Sources */,
 				353DA46D1CABA35000DFD15C /* HDHM10Model.swift in Sources */,
 				1B0FD1001C3D5749009E85CD /* MJRefreshStateHeader.m in Sources */,
+				35C4F2D31CB65978004487ED /* HDDY01ResultEntity+CoreDataProperties.swift in Sources */,
 				3542D2D61C4C8FB5008677D9 /* HDHM08Service.swift in Sources */,
 				3589708A1C9A968C003E10D2 /* HDCT02Model.swift in Sources */,
 				358970671C969E6B003E10D2 /* HDCT10Controller.swift in Sources */,
@@ -1265,8 +1311,10 @@
 				352A424F1C50AACE009D0F9F /* HM01TagListEntity+CoreDataProperties.swift in Sources */,
 				3589706D1C97ABE2003E10D2 /* HDCT09Service.swift in Sources */,
 				358C1FC81C4F69EB00A4EF3E /* HDShareView.swift in Sources */,
+				35C4F2D71CB65978004487ED /* HDDY01UserInfoEntity+CoreDataProperties.swift in Sources */,
 				35F3FE4B1C744D8F003B43FC /* HDCT07Controller.swift in Sources */,
 				352A42521C50AACE009D0F9F /* HDHM01ResultEntity.swift in Sources */,
+				35C4F2D41CB65978004487ED /* HDDY01ResultEntity.swift in Sources */,
 				35B7034E1C3F9B4B0024A329 /* HDGG01RowView.swift in Sources */,
 				1B093E321C99B2E800038DC0 /* HDUserInfoManager.swift in Sources */,
 				35776A791C70616000903620 /* HDCT05Controller.swift in Sources */,
@@ -1280,6 +1328,7 @@
 				1B0FD0F41C3D5749009E85CD /* MJRefreshBackFooter.m in Sources */,
 				356F39831C3A4AB80056DF44 /* HDBaseViewController.swift in Sources */,
 				35F8CF391C3B6974003B1364 /* HDRequestManager.swift in Sources */,
+				35C4F2D21CB65978004487ED /* HDDY01ResponseEntity.swift in Sources */,
 				3566C8F51C477DA200573D97 /* HDHM05Model.swift in Sources */,
 				3566C8EF1C474BCA00573D97 /* HDHM04Service.swift in Sources */,
 				356F39B81C3A774A0056DF44 /* HDHM01Model.swift in Sources */,
@@ -1294,6 +1343,7 @@
 				35F3FE471C74261C003B43FC /* Reachability.swift in Sources */,
 				352A42831C50E190009D0F9F /* HDGG01ResultEntity.swift in Sources */,
 				356F39761C3A3FFF0056DF44 /* HDCT01Controller.swift in Sources */,
+				35C4F2D61CB65978004487ED /* HDDY01ListEntity.swift in Sources */,
 				352A42481C50AACE009D0F9F /* HM01WikiListEntity.swift in Sources */,
 				3566C9011C479E8B00573D97 /* HDCG01Model.swift in Sources */,
 				351794051C9BD55500E69D75 /* HDLog.swift in Sources */,
@@ -1301,6 +1351,7 @@
 				1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */,
 				358C1FBA1C4F260500A4EF3E /* HDExtension.swift in Sources */,
 				358970631C969E37003E10D2 /* HDCT08Controller.swift in Sources */,
+				35C4F2D81CB65978004487ED /* HDDY01UserInfoEntity.swift in Sources */,
 				35776A7D1C71D71300903620 /* HDHttpManager.swift in Sources */,
 				35F8CF3D1C3B8A1D003B1364 /* HDCoreDataManager.swift in Sources */,
 				3566C8F91C4783E300573D97 /* HDHM05Controller.swift in Sources */,
@@ -1318,6 +1369,7 @@
 				356F39361C3A23E90056DF44 /* AppDelegate.swift in Sources */,
 				1B6B082F1C4B4395004B2CE2 /* HDHM07Model.swift in Sources */,
 				352A42971C50E1A2009D0F9F /* HDCG01TagEntity.swift in Sources */,
+				35C4F2D51CB65978004487ED /* HDDY01ListEntity+CoreDataProperties.swift in Sources */,
 				356F39801C3A43EE0056DF44 /* HDConstants.swift in Sources */,
 				1B0FD0FC1C3D5749009E85CD /* MJRefreshBackNormalFooter.m in Sources */,
 				3566C9071C48C53600573D97 /* HDHM07Controller.swift in Sources */,
@@ -1329,6 +1381,8 @@
 				1B0FD0FE1C3D5749009E85CD /* MJRefreshGifHeader.m in Sources */,
 				1B0FD0FD1C3D5749009E85CD /* MJRefreshBackStateFooter.m in Sources */,
 				35776A751C70614300903620 /* HDCT03Controller.swift in Sources */,
+				35C4F2D91CB65978004487ED /* HDDY01DataEntity+CoreDataProperties.swift in Sources */,
+				35C4F2DC1CB65978004487ED /* HDDY01CommentListEntity.swift in Sources */,
 				356F393E1C3A23EA0056DF44 /* HDCP.xcdatamodeld in Sources */,
 				35D5B4871C4CE84500028E47 /* HDHM09Controller.swift in Sources */,
 				1B6B082D1C4B4382004B2CE2 /* HDHM06Model.swift in Sources */,
@@ -1351,6 +1405,7 @@
 				352A42951C50E1A2009D0F9F /* HDCG01ResponseEntity.swift in Sources */,
 				35A138551C3F7A700050F282 /* HDRefreshGifHeader.swift in Sources */,
 				353DA4631CAB99BF00DFD15C /* HDDY01Controller.swift in Sources */,
+				35C4F2D11CB65977004487ED /* HDDY01ResponseEntity+CoreDataProperties.swift in Sources */,
 				3589706F1C97ABED003E10D2 /* HDCT10Service.swift in Sources */,
 				1B0FD1041C3D5749009E85CD /* UIScrollView+MJRefresh.m in Sources */,
 				1B0FD0F71C3D5749009E85CD /* MJRefreshHeader.m in Sources */,
@@ -1364,9 +1419,11 @@
 				354DCAC61C574643006112A3 /* HDGG04Controller.swift in Sources */,
 				3566C9051C48C52500573D97 /* HDHM06Controller.swift in Sources */,
 				358970711C97ABF9003E10D2 /* HDCT11Service.swift in Sources */,
+				35C4F2DA1CB65978004487ED /* HDDY01DataEntity.swift in Sources */,
 				3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */,
 				1B6B08331C4B4418004B2CE2 /* HDHM07Service.swift in Sources */,
 				356F39BB1C3A81580056DF44 /* MBProgressHUD.m in Sources */,
+				35C4F2DB1CB65978004487ED /* HDDY01CommentListEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1634,10 +1691,11 @@
 		356F393C1C3A23EA0056DF44 /* HDCP.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				35C4F2C41CB64ED2004487ED /* HDCP20160408.xcdatamodel */,
 				35EF56761C52176000352E7D /* HDCP1_1_1.xcdatamodel */,
 				356F393D1C3A23EA0056DF44 /* HDCP.xcdatamodel */,
 			);
-			currentVersion = 356F393D1C3A23EA0056DF44 /* HDCP.xcdatamodel */;
+			currentVersion = 35C4F2C41CB64ED2004487ED /* HDCP20160408.xcdatamodel */;
 			path = HDCP.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

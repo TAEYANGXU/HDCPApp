@@ -9,10 +9,12 @@
 import Foundation
 import ObjectMapper
 
-class HDDY01Response:Mappable {
+class HDDY01Response: Mappable {
     
     var request_id:String?
     var result:HDDY01Result?
+    
+    init(){}
     
     required init?(_ map: Map){
         mapping(map)
@@ -29,6 +31,8 @@ class HDDY01Response:Mappable {
 class HDDY01Result: Mappable {
     
     var list:Array<HDDY01ListModel>?
+    
+    init(){}
     
     required init?(_ map: Map){
         mapping(map)
@@ -50,6 +54,8 @@ class HDDY01ListModel: Mappable {
     var rowHeight:CGFloat?
     var contentHeight:CGFloat?
     var fcommentRow:Int?
+    
+    init(){}
     
     required init?(_ map: Map){
         mapping(map)
@@ -75,6 +81,7 @@ class HDDY01UserInfoModel: Mappable {
     var userName:String?
     var vip:Int?
     
+    init(){}
     
     required init?(_ map: Map){
         mapping(map)
@@ -125,6 +132,8 @@ class HDDY01DataModel: Mappable {
     var content:String?
     var commentList:Array<HDDY01CommentListModel>?
     
+    init(){}
+    
     required init?(_ map: Map){
         mapping(map)
     }
@@ -171,6 +180,8 @@ class HDDY01CommentListModel: Mappable {
     var content:String?
     var isAuthor:Int?
     var isVip:Int?
+    
+    init(){}
     
     required init?(_ map: Map){
         mapping(map)

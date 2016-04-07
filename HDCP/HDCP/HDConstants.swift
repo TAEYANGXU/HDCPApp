@@ -69,7 +69,7 @@ class Constants: NSObject {
     /*******************************************URL*********************************************/
     
     /**
-     *  一般在开发中会有开发环境，测试环境，生成环境 这个三个环境对应的URL也是不同的，为了方便切换，我们要采用灵活的写法。
+     *  一般在开发中会有开发环境，测试环境，生产环境 这个三个环境对应的URL也是不同的，为了方便切换，我们要采用灵活的写法。
      **/
     
     static let ServerHost_DEVELOP = "http://api.hoto.cn/index.php"
@@ -144,8 +144,11 @@ class Constants: NSObject {
      static let HDDY01_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=e746a91c3454fce7470904efc64a06c3&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=UserFeed.getFollowUserFeed&nonce=1458377095&sessionid=1458376760&signmethod=md5&timestamp=1458377095&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
     
      //动态详情
-     static let HDDY02_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=1ed196fa15f1b896a26de72f61fb2735&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Info.getInfo&nonce=1458377486&sessionid=1458376760&signmethod=md5&timestamp=1458377486&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
-     //话题
+     static let HDDY0201_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=1ed196fa15f1b896a26de72f61fb2735&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Info.getInfo&nonce=1458377486&sessionid=1458376760&signmethod=md5&timestamp=1458377486&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
+    
+    //动态详情评论
+    static let HDDY0202_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=eba7c612222dde2f1c8c1f98fe48ff78&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Comment.getList&nonce=1458377630&sessionid=1458376760&signmethod=md5&timestamp=1458377630&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
+    //话题
      static let HDCT10_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=a76e39e5d361690850a458ae04f01c6c&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Topic.indexTopic&nonce=1457966947&sessionid=1457966932&signmethod=md5&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
     
     //协议

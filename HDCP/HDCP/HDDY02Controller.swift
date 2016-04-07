@@ -14,11 +14,12 @@ private let lineWith:CGFloat = 40
 private let lineSpace:CGFloat = Constants.HDSCREENWITH/6 - lineWith/2
 
 
-class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource {
+class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,HDShareViewDelegate {
     
     var listModel:HDDY01ListModel?
     var dy02Info:HDDY02InfoModel?
     var vedioHeight:CGFloat?
+    var commentList = Array<HDDY0202ListModel>()
     
     //视频播放视图
     var videoPlayerController:HDVideoPlayerController?
@@ -58,6 +59,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     
     //评论
     var commentTableView:UITableView?
+    var activityIndicatorView:UIActivityIndicatorView?
+    var isCommentLoadIng = false
+    var noComment:UILabel?
     
     //分享
     var shareView:UIView!
@@ -103,7 +107,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         createScrollView()
         createInfoView()
         createIntroView()
+        createActivityIndicatorView()
         createShareView()
+        
     }
     
     /**
@@ -254,6 +260,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             commentView = UIScrollView()
+            commentView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
             scrollView?.addSubview(commentView!)
             commentView!.snp_makeConstraints(closure: { (make) in
                 
@@ -380,12 +387,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
             })
             
-            let tags = UILabel()
+            tags = UILabel()
             tags.textColor = UIColor.lightGrayColor()
             tags.font = UIFont.systemFontOfSize(12)
             infoView?.addSubview(tags)
             
-            tags.text = "美食明星、生活联盟"
             tags.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.top.equalTo(WS.userName.snp_bottom).offset(5)
@@ -432,7 +438,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     /**
-     *  食材
+     *  食材列表
      */
     func createStuffTableView(){
         
@@ -516,7 +522,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     /**
-     *  步骤
+     *  步骤列表
      */
     func createStepsTableView(){
         
@@ -525,6 +531,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             stepsTableView = UITableView()
             stepsTableView?.delegate = self
             stepsTableView?.dataSource = self
+            stepsTableView?.tableFooterView = UIView()
             stepsView?.addSubview(stepsTableView!)
             
             stepsTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "stepsCell")
@@ -542,7 +549,24 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     /**
-     *  步骤
+     *  转菊花
+     */
+    func createActivityIndicatorView() {
+        
+        if activityIndicatorView == nil {
+            
+            activityIndicatorView = UIActivityIndicatorView()
+            activityIndicatorView?.startAnimating()
+            activityIndicatorView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            activityIndicatorView?.center = CGPointMake(Constants.HDSCREENWITH/2, CGFloat(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)/2)
+            commentView?.addSubview(activityIndicatorView!)
+            
+        }
+        
+    }
+    
+    /**
+     *  评论列表
      */
     func createCommentTableView(){
         
@@ -551,22 +575,48 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             commentTableView = UITableView()
             commentTableView?.delegate = self
             commentTableView?.dataSource = self
-            commentTableView?.scrollEnabled = false
+            commentTableView?.tableFooterView = UIView()
             commentView?.addSubview(commentTableView!)
-            
-            commentTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+            commentTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "commentCell")
             
             commentTableView?.snp_makeConstraints(closure: { (make) -> Void in
                 
                 make.top.equalTo(0)
                 make.left.equalTo(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
-                make.height.equalTo(0)
+                make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
             })
             
         }
         
     }
+    
+    /**
+     *  暂无评论
+     */
+    
+    func createNoComment() {
+        
+        if noComment == nil {
+        
+            noComment = UILabel()
+            noComment?.textColor = Constants.HDMainTextColor
+            noComment?.font = UIFont.systemFontOfSize(15)
+            noComment?.textAlignment = NSTextAlignment.Center
+            noComment?.text = "暂无评论"
+            commentView?.addSubview(noComment!)
+            noComment?.snp_makeConstraints(closure: { (make) in
+                
+                make.top.equalTo(20)
+                make.left.equalTo(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(30)
+            })
+            
+        }
+        
+    }
+    
 
     /**
      *  分享视图
@@ -596,7 +646,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             shareSubView = HDShareView(frame: CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight))
-            shareSubView.completeClosuse(shareAction)
+            shareSubView.delegate = self
             shareView.addSubview(shareSubView)
             
             
@@ -642,6 +692,38 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         return vedioUrl
     }
     
+    // MARK: - 计算cell的高度
+    func getRowHeight(){
+    
+        if commentList.count > 0 {
+            
+            for i in 0..<commentList.count {
+                
+                let model = commentList[i]
+                
+                let contentRect = CoreUtils.getTextRectSize(model.content!, font: UIFont.systemFontOfSize(14), size: CGSizeMake(Constants.HDSCREENWITH-80, 9999))
+                model.contentHeight = contentRect.size.height + 3.0;
+                
+                
+                if model.atUserId > 0 {
+                    
+                    let atContentRect = CoreUtils.getTextRectSize(model.atContent!, font: UIFont.systemFontOfSize(13), size: CGSizeMake(Constants.HDSCREENWITH-110, 9999))
+                    model.atContentHeight = atContentRect.size.height + 3.0
+                    
+                    model.rowHeight = 95.0 + model.contentHeight! + model.atContentHeight!
+                    
+                }else{
+                
+                    model.rowHeight = 55.0 + model.contentHeight!
+                }
+
+                
+            }
+            
+            
+        }
+        
+    }
     /**
      *  菜谱分享
      */
@@ -735,6 +817,34 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     // MARK: - 滚动下滑条
     func scrollLine(index:Int)  {
         
+        
+        for view in (menuView?.subviews)! {
+            
+            if view.isMemberOfClass(UIButton.classForCoder()) {
+                
+                let btn = view as! UIButton
+                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                
+            }
+            
+        }
+        
+        var btn:UIButton?
+        
+        if index == 0 {
+            
+            btn = menuView?.viewWithTag(2016) as? UIButton
+            
+        }else if index == 1{
+        
+            btn = menuView?.viewWithTag(2017) as? UIButton
+        }else if index == 2 {
+        
+            btn = menuView?.viewWithTag(2018) as? UIButton
+        }
+        
+        btn!.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+        
         unowned let WS = self
         UIView.animateWithDuration(0.3) { 
             WS.menuLineView?.frame = CGRectMake(CGFloat(index)*(40+2*lineSpace)+lineSpace,40-3,lineWith,3)
@@ -798,18 +908,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     
     func menuAction(btn:UIButton) {
         
-        for view in (menuView?.subviews)! {
-            
-            if view.isMemberOfClass(UIButton.classForCoder()) {
-                
-                let btn = view as! UIButton
-                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                
-            }
-            
-        }
         
-        btn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
         switch btn.tag {
         case 2016:
             /**
@@ -831,6 +930,10 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              */
             scrollLine(2)
             scrollViewToScroll(2)
+            if !isCommentLoadIng {
+                isCommentLoadIng = true
+                doGetCommentList()
+            }
             break
         default:
             ""
@@ -841,6 +944,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     // MARK: - 加载数据 刷新UI
     func refreshUI() {
         
+        tags.text = "美食明星、生活联盟"
         userName.text = dy02Info?.userInfo?.userName
         commentCount.text = String(format: "评论:%d", (listModel?.data?.commentCnt)!)
         viewCount.text = String(format: "浏览:%ld", (dy02Info?.viewCount)!)
@@ -878,7 +982,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     func doGetRequestData(){
         
         unowned let WS = self
-        HDDY02Service().doGetRequest_HDDY02_URL((listModel?.data?.id)!, successBlock: { (hdResponse) -> Void in
+        HDDY02Service().doGetRequest_HDDY0201_URL((listModel?.data?.id)!, successBlock: { (hdResponse) -> Void in
             
             WS.hidenHud()
             WS.dy02Info = hdResponse.result?.info
@@ -901,10 +1005,125 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             WS.createStepsTableView()
             WS.refreshUI()
             
+            
         }) { (error) -> Void in
             
             WS.hidenHud()
             CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
+        }
+        
+    }
+    
+    func doGetCommentList() {
+        
+        unowned let WS = self
+        HDDY02Service().doGetRequest_HDDY0202_URL(30, offset: 0, rid: (listModel?.data?.id)!, successBlock: { (hdResponse) in
+            
+            
+            if hdResponse.result?.list?.count > 0{
+                
+                WS.commentList = (hdResponse.result?.list)!
+                WS.getRowHeight()
+                WS.activityIndicatorView?.stopAnimating()
+                WS.createCommentTableView()
+                
+            }else{
+            
+                WS.activityIndicatorView?.stopAnimating()
+                WS.createNoComment()
+            }
+            
+            }) { (error) in
+                WS.activityIndicatorView?.stopAnimating()
+                CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
+        }
+        
+    }
+    
+    // MARK: - HDShareViewDelegate delegate
+    func didShareWithType(type:Int){
+    
+        hideShareView()
+        
+        let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", (listModel?.data?.id!)!)
+        
+        switch type {
+            
+        case 0:
+            /**
+             *  微信好友
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 1:
+            /**
+             *  微信朋友圈
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 2:
+            /**
+             *  QQ
+             */
+            
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 3:
+            /**
+             *  QQ空间
+             */
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 4:
+            /**
+             *   取消
+             */
+            break
+        default:
+            ""
+            
         }
         
     }
@@ -933,6 +1152,12 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         if scrollView == self.scrollView {
             let index = Int(scrollView.contentOffset.x/Constants.HDSCREENWITH)
             scrollLine(index)
+            if index == 2 {
+                if !isCommentLoadIng {
+                    isCommentLoadIng = true
+                    doGetCommentList()
+                }
+            }
         }
         
         
@@ -950,7 +1175,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             return (dy02Info?.steps?.count)!
         }else{
         
-            return 0
+            return commentList.count
         }
     }
     
@@ -1089,8 +1314,208 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *   评论
              */
-            let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
         
+            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            
+            let model = commentList[indexPath.row]
+            
+            /**
+             *   头像
+             */
+            
+            var icon = cell.contentView.viewWithTag(1000) as? UIImageView
+            
+            if icon == nil {
+                
+                icon = UIImageView()
+                icon?.tag = 1000
+                icon?.layer.cornerRadius = 12.5
+                icon?.layer.masksToBounds = true
+                cell.contentView.addSubview(icon!)
+                
+                icon?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(cell.contentView).offset(10)
+                    make.left.equalTo(cell.contentView).offset(15)
+                    make.width.equalTo(25)
+                    make.height.equalTo(25)
+                    
+                    
+                })
+                
+            }
+            
+            /**
+             *   昵称
+             */
+            
+            var username = cell.contentView.viewWithTag(2000) as? UILabel
+            
+            if username == nil {
+                
+                username = UILabel()
+                username?.tag = 2000
+                username?.font = UIFont.systemFontOfSize(13)
+                username?.textColor = Constants.HDMainTextColor
+                cell.contentView.addSubview(username!)
+                
+                username?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(cell.contentView).offset(10)
+                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.width.equalTo(200)
+                    make.height.equalTo(15)
+                })
+                
+            }
+            
+            
+            /**
+             *   发表时间
+             */
+            
+            var createTime = cell.contentView.viewWithTag(3000) as? UILabel
+            
+            if createTime == nil {
+                
+                createTime = UILabel()
+                createTime?.tag = 3000
+                createTime?.font = UIFont.systemFontOfSize(10)
+                createTime?.textColor = UIColor.lightGrayColor()
+                cell.contentView.addSubview(createTime!)
+                
+                createTime?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(username!.snp_bottom).offset(0)
+                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.width.equalTo(200)
+                    make.height.equalTo(15)
+                })
+                
+            }
+            
+            /**
+             *   内容
+             */
+            
+            var content = cell.contentView.viewWithTag(4000) as? UILabel
+            
+            if content == nil {
+                
+                content = UILabel()
+                content?.tag = 4000
+                content?.font = UIFont.systemFontOfSize(14)
+                content?.textColor = CoreUtils.HDColor(130, g: 130, b: 130, a: 1)
+                content?.numberOfLines = 0
+                cell.contentView.addSubview(content!)
+                
+                content?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(icon!.snp_bottom).offset(5)
+                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.width.equalTo(Constants.HDSCREENWITH-80)
+                    make.height.equalTo(0)
+                })
+                
+            }
+
+            //评论视图
+            var commentView = cell.contentView.viewWithTag(5000)
+            
+            if commentView == nil {
+                
+                commentView = UIView()
+                commentView?.tag = 5000
+                commentView?.layer.cornerRadius = 5
+                commentView?.layer.masksToBounds = true
+                commentView?.backgroundColor = CoreUtils.HDColor(249, g: 249, b: 249, a: 1)
+                cell.contentView.addSubview(commentView!)
+                
+                commentView?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(content!.snp_bottom).offset(5)
+                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.width.equalTo(Constants.HDSCREENWITH - 60)
+                    make.height.equalTo(0);
+                    
+                })
+                
+            }
+            
+            //回复对象
+            var atUsername = commentView!.viewWithTag(6000) as? UILabel
+            
+            if atUsername == nil {
+                
+                atUsername = UILabel()
+                atUsername?.tag = 6000
+                atUsername?.font = UIFont.systemFontOfSize(13)
+                atUsername?.textColor = Constants.HDMainTextColor
+                commentView!.addSubview(atUsername!)
+                
+                atUsername?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(10)
+                    make.left.equalTo(10)
+                    make.width.equalTo(Constants.HDSCREENWITH - 100.0)
+                    make.height.equalTo(15)
+                })
+
+            }
+            
+            //回复内容
+            var atContent = commentView!.viewWithTag(7000) as? UILabel
+
+            if atContent == nil {
+                
+                atContent = UILabel()
+                atContent?.tag = 7000
+                atContent?.font = UIFont.systemFontOfSize(13)
+                atContent?.textColor = CoreUtils.HDColor(130, g: 130, b: 130, a: 1)
+                atContent?.numberOfLines = 0
+                commentView!.addSubview(atContent!)
+                
+                atContent?.snp_makeConstraints(closure: { (make) -> Void in
+                    
+                    make.top.equalTo(atUsername!.snp_bottom).offset(0)
+                    make.left.equalTo(10)
+                    make.width.equalTo(Constants.HDSCREENWITH-110)
+                    make.height.equalTo(0)
+                })
+                
+            }
+
+            
+            content?.snp_updateConstraints(closure: { (make) in
+                make.height.equalTo(model.contentHeight!)
+            })
+            
+            if model.atUserId > 0 {
+                
+                atUsername?.text = String(format: "回复：%@",model.atUserName!)
+                atContent?.text = model.atContent
+                
+                commentView?.hidden = false
+                
+                commentView?.snp_updateConstraints(closure: { (make) in
+                    make.height.equalTo(35.0 + model.atContentHeight!);
+                })
+                atContent?.snp_updateConstraints(closure: { (make) in
+                    
+                    make.height.equalTo(model.atContentHeight!)
+                })
+                
+            }else{
+            
+                commentView?.hidden = true
+            }
+            
+            icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "defaultIcon"))
+            username?.text = model.userName
+            createTime?.text = model.createTime
+            content?.text = model.content
+            
             return cell
         }
         
@@ -1133,7 +1558,8 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             return 60
         }else{
         
-            return 60
+            let model = commentList[indexPath.row]
+            return model.rowHeight!
         }
         
     }

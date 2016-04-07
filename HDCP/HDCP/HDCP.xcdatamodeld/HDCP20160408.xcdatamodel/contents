@@ -19,6 +19,67 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="HDDY01CommentListEntity" representedClassName=".HDDY01CommentListEntity" syncable="YES">
+        <attribute name="cid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isAuthor" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isVip" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDDY01DataEntity" inverseName="commentList" inverseEntity="HDDY01DataEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDDY01DataEntity" representedClassName=".HDDY01DataEntity" syncable="YES">
+        <attribute name="actionType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="commentCnt" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="commentCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="commentUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diggCnt" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="diggCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="diggId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="diggType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="entityType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="feedId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="formatTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasVideo" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="img" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDigg" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tagId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tagName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tagUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="commentList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HDDY01CommentListEntity" inverseName="data" inverseEntity="HDDY01CommentListEntity" syncable="YES"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDDY01ListEntity" inverseName="data" inverseEntity="HDDY01ListEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDDY01ListEntity" representedClassName=".HDDY01ListEntity" syncable="YES">
+        <relationship name="data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDDY01DataEntity" inverseName="list" inverseEntity="HDDY01DataEntity" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDDY01ResultEntity" inverseName="list" inverseEntity="HDDY01ResultEntity" syncable="YES"/>
+        <relationship name="userInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDDY01UserInfoEntity" inverseName="list" inverseEntity="HDDY01UserInfoEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDDY01ResponseEntity" representedClassName=".HDDY01ResponseEntity" syncable="YES">
+        <attribute name="request_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="HDDY01ResultEntity" inverseName="response" inverseEntity="HDDY01ResultEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDDY01ResultEntity" representedClassName=".HDDY01ResultEntity" syncable="YES">
+        <relationship name="list" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HDDY01ListEntity" inverseName="result" inverseEntity="HDDY01ListEntity" syncable="YES"/>
+        <relationship name="response" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDDY01ResponseEntity" inverseName="result" inverseEntity="HDDY01ResponseEntity" syncable="YES"/>
+    </entity>
+    <entity name="HDDY01UserInfoEntity" representedClassName=".HDDY01UserInfoEntity" syncable="YES">
+        <attribute name="avatar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relation" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vip" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HDDY01ListEntity" inverseName="userInfo" inverseEntity="HDDY01ListEntity" syncable="YES"/>
+    </entity>
     <entity name="HDGG01ListEntity" representedClassName=".HDGG01ListEntity" syncable="YES">
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -87,5 +148,11 @@
         <element name="HM01RecipeListEntity" positionX="90" positionY="126" width="128" height="58"/>
         <element name="HM01TagListEntity" positionX="-495" positionY="108" width="128" height="30"/>
         <element name="HM01WikiListEntity" positionX="-135" positionY="405" width="128" height="133"/>
+        <element name="HDDY01ResponseEntity" positionX="-297" positionY="252" width="128" height="75"/>
+        <element name="HDDY01ResultEntity" positionX="-288" positionY="261" width="128" height="75"/>
+        <element name="HDDY01ListEntity" positionX="-279" positionY="270" width="128" height="90"/>
+        <element name="HDDY01UserInfoEntity" positionX="-270" positionY="279" width="128" height="180"/>
+        <element name="HDDY01DataEntity" positionX="-261" positionY="288" width="128" height="435"/>
+        <element name="HDDY01CommentListEntity" positionX="-252" positionY="297" width="128" height="150"/>
     </elements>
 </model>

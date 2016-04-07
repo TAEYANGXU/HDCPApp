@@ -10,7 +10,7 @@ import UIKit
 
 private let shareViewHeight = CGFloat(255)
 
-class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource {
+class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource,HDShareViewDelegate {
 
     var rid:Int?
     var name:String?
@@ -106,7 +106,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             })
             
             shareSubView = HDShareView(frame: CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight))
-            shareSubView.completeClosuse(shareAction)
+            shareSubView.delegate = self
             shareView.addSubview(shareSubView)
             
             
@@ -523,95 +523,6 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-    /**
-     *  菜谱分享
-     */
-    func shareAction(tag:Int){
-    
-        hideShareView()
-        
-        let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", rid!)
-        
-        switch tag {
-        
-        case 0:
-            /**
-            *  微信好友
-            */
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
-                
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-                }, shareFail: { () -> Void in
-                    HDLog.LogOut("失败")
-                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
-                }, shareCancel: { () -> Void in
-                    HDLog.LogOut("取消")
-            })
-
-            break
-        case 1:
-            /**
-            *  微信朋友圈
-            */
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
-                
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-                }, shareFail: { () -> Void in
-                    HDLog.LogOut("失败")
-                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
-                }, shareCancel: { () -> Void in
-                    HDLog.LogOut("取消")
-            })
-
-
-            break
-        case 2:
-            /**
-            *  QQ
-            */
-            
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
-                
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-                }, shareFail: { () -> Void in
-                    HDLog.LogOut("失败")
-                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
-                }, shareCancel: { () -> Void in
-                    HDLog.LogOut("取消")
-            })
-
-
-            break
-        case 3:
-            /**
-            *  QQ空间
-            */
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
-                
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-                }, shareFail: { () -> Void in
-                    HDLog.LogOut("失败")
-                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
-                }, shareCancel: { () -> Void in
-                    HDLog.LogOut("取消")
-            })
-
-            break
-        case 4:
-            /**
-            *   取消
-            */
-            break
-        default:
-            ""
-            
-        }
-        
-    }
     
     /**
      *  选中cell 进入烹饪步骤页面
@@ -655,6 +566,93 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+    // MARK: - HDShareViewDelegate delegate
+    func didShareWithType(type:Int){
+        
+        hideShareView()
+        
+        let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", rid!)
+        
+        switch type {
+            
+        case 0:
+            /**
+             *  微信好友
+             */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 1:
+            /**
+             *  微信朋友圈
+             */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 2:
+            /**
+             *  QQ
+             */
+            
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            
+            break
+        case 3:
+            /**
+             *  QQ空间
+             */
+            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+                
+                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+                HDLog.LogOut("成功")
+                }, shareFail: { () -> Void in
+                    HDLog.LogOut("失败")
+                    CoreUtils.showWarningHUD(self.view, title: "分享失败")
+                }, shareCancel: { () -> Void in
+                    HDLog.LogOut("取消")
+            })
+            
+            break
+        case 4:
+            /**
+             *   取消
+             */
+            break
+        default:
+            ""
+            
+        }
+        
+    }
     
     // MARK: - UITableView delegate/datasource
     

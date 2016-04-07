@@ -15,11 +15,13 @@ private let resourceArray = [["title":"微信好友","image":"share_wxhy_icon"],
     ["title":"QQ","image":"share_qq_icon"],
     ["title":"QQ空间","image":"share_qqzone_icon"]]
 
-typealias CompleteClosuse = (tag:Int) -> Void
+public protocol HDShareViewDelegate:NSObjectProtocol {
+    func didShareWithType(type:Int);
+}
 
-class HDShareView: UIView {
+public class HDShareView: UIView {
 
-    var shareClosuse:CompleteClosuse?
+    weak public var delegate:HDShareViewDelegate?
     
     override init(frame: CGRect) {
         
@@ -151,19 +153,17 @@ class HDShareView: UIView {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func completeClosuse(closuse:CompleteClosuse){
-     
-        shareClosuse = closuse
-        
     }
     
     func tagBtnOnclick(btn:UIButton){
         
-        shareClosuse!(tag: btn.tag - 1000)
+        if (self.delegate != nil) {
+            
+            self.delegate?.didShareWithType(btn.tag - 1000)
+            
+        }
         
     }
 

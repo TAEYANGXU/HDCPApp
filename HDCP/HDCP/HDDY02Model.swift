@@ -335,3 +335,94 @@ class HDDY02UserInfoModel: Mappable {
     }
     
 }
+
+/**************************************/
+
+class HDDY0202Response:Mappable {
+    
+    var request_id:String?
+    var result:HDDY0202Result?
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    func mapping(map: Map) {
+        
+        request_id <- map["request_id"]
+        result <- map["result"]
+        
+    }
+    
+}
+
+class HDDY0202Result: Mappable {
+    
+    var list:Array<HDDY0202ListModel>?
+    var count:Int?
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        count <- map["count"]
+        list <- map["list"]
+    }
+    
+}
+
+class HDDY0202ListModel: Mappable {
+    
+    var atContent:String?
+    var atImageSmallUrl:String?
+    var atImageUrl:String?
+    var atUserId:Int?
+    var atUserName:String?
+    var avatar:String?
+    var cid:Int?
+    var content:String?
+    var createTime:String?
+    var gender:Int?
+    var imageSmallUrl:String?
+    var imageUrl:String?
+    var isAuthor:Int?
+    var isVip:Int?
+    var photoFlag:Int?
+    var photoId:String?
+    var photoUrl:String?
+    var userId:Int?
+    var userName:String?
+    var contentHeight:CGFloat?
+    var atContentHeight:CGFloat?
+    var rowHeight:CGFloat?
+    
+    required init?(_ map: Map){
+        mapping(map)
+    }
+    
+    func mapping(map: Map) {
+        
+        atContent <- map["AtContent"]
+        atImageSmallUrl <- map["AtImageSmallUrl"]
+        atImageUrl <- map["AtImageUrl"]
+        atUserId <- map["AtUserId"]
+        atUserName <- map["AtUserName"]
+        avatar <- map["Avatar"]
+        cid <- map["Cid"]
+        content <- map["Content"]
+        createTime <- map["CreateTime"]
+        gender <- map["Gender"]
+        imageSmallUrl <- map["ImageSmallUrl"]
+        imageUrl <- map["ImageUrl"]
+        isAuthor <- map["IsAuthor"]
+        isVip <- map["IsVip"]
+        photoFlag <- map["PhotoFlag"]
+        photoId <- map["PhotoId"]
+        photoUrl <- map["PhotoUrl"]
+        userId <- map["UserId"]
+        userName <- map["UserName"]
+    }
+    
+}
+

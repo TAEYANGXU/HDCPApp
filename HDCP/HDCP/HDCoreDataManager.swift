@@ -58,14 +58,11 @@ public class HDCoreDataManager: NSObject {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         
-        
-//        let optionsDictionary = NSDictionary(dictionary: [NSMigratePersistentStoresAutomaticallyOption:NSNumber(bool: true),NSInferMappingModelAutomaticallyOption:NSNumber(bool: true)])
-        
-        
-        let optionsDictionary = NSDictionary(dictionary: [NSMigratePersistentStoresAutomaticallyOption:NSNumber(bool: true),NSInferMappingModelAutomaticallyOption:NSNumber(bool: true)])
+        // 这里是添加的部分，名如其意，当我们需要自动版本迁移时，我们需要在addPersistentStoreWithType方法中设置如下options
+        let options = [NSInferMappingModelAutomaticallyOption: true, NSMigratePersistentStoresAutomaticallyOption: true]
         
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
         } catch {
             
             var dict = [String: AnyObject]()

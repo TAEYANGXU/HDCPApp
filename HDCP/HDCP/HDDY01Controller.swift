@@ -29,10 +29,28 @@ class HDDY01Controller: UITableViewController {
         offset = 0
         dataArray  = NSMutableArray()
         
-        setupUI()
-        showHud()
-        doGetRequestData(10,offset: self.offset)
         
+        if HDDY01Service().isExistEntity() {
+            
+            /**
+             *  读取本地数据
+             */
+            dataArray.addObjectsFromArray((HDDY01Service().getAllResponseEntity().result?.list)!)
+            getRowHeight();
+            setupUI()
+            doGetRequestData(20,offset: self.offset)
+            
+        }else{
+            
+            if CoreUtils.networkIsReachable() {
+                
+                showHud()
+                setupUI()
+                doGetRequestData(20,offset: self.offset)
+                
+            }
+            
+        }
         
     }
     
@@ -52,10 +70,10 @@ class HDDY01Controller: UITableViewController {
         
         
         //当列表滚动到底端 视图自动刷新
-        unowned let WS = self
-        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-            WS.doGetRequestData(10,offset: WS.offset)
-        })
+//        unowned let WS = self
+//        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
+//            WS.doGetRequestData(10,offset: WS.offset)
+//        })
     }
     
     
@@ -155,17 +173,16 @@ class HDDY01Controller: UITableViewController {
             
             WS.hidenHud()
             
+            WS.dataArray  = NSMutableArray()
             WS.dataArray.addObjectsFromArray((hdResponse.result?.list)!)
             
             WS.getRowHeight();
-            
-            WS.tableView.mj_footer.endRefreshing()
             
             WS.tableView.reloadData()
             
         }) { (error) -> Void in
             
-            WS.tableView.mj_footer.endRefreshing()
+            WS.hidenHud()
             CoreUtils.showWarningHUD(WS.view, title: Constants.HD_NO_NET_MSG)
         }
         

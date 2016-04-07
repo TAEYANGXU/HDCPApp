@@ -26,8 +26,21 @@ class HDDY01Service {
                 
                 /// JSON 转换成对象
                 let response = Mapper<HDDY01Response>().map(response.result.value)
-                /// 回调
-                successBlock(hdResponse: response!)
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                    
+                    //更新本地数据
+                    self.deleteEntity()
+                    self.addEntity(response!)
+                    
+                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                        
+                        /// 回调
+                        successBlock(hdResponse:response!)
+                        
+                    })
+                    
+                })
                 
             }else{
                 
@@ -45,6 +58,8 @@ class HDDY01Service {
     func addEntity(hddy01Response:HDDY01Response){
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
+        
+        let response = NSEntityDescription.insertNewObjectForEntityForName("HDDY01ResponseEntity", inManagedObjectContext: context) as? HDDY01ResponseEntity
         
         let result = NSEntityDescription.insertNewObjectForEntityForName("HDDY01ResultEntity", inManagedObjectContext: context) as? HDDY01ResultEntity
         
@@ -73,12 +88,16 @@ class HDDY01Service {
             dataModel!.isDigg = model?.data!.isDigg
             dataModel!.url = model?.data!.url
             dataModel!.hasVideo = model?.data!.hasVideo
+            if  model?.data!.hasVideo == nil {
+                dataModel!.hasVideo = 0
+            }
             dataModel!.title = model?.data!.title
             dataModel!.tagId = model?.data!.tagId
             dataModel!.tagName = model?.data!.tagName
             dataModel!.tagUrl = model?.data!.tagUrl
             dataModel!.img = model?.data!.img
             dataModel!.content = model?.data!.content
+            
             
             listEntity?.data = dataModel
             
@@ -120,7 +139,10 @@ class HDDY01Service {
              *   设置关联
              */
             listEntity?.result = result
+            
         }
+        
+        response?.result = result
         
         /**
          *  保存
@@ -139,7 +161,6 @@ class HDDY01Service {
         
         request.relationshipKeyPathsForPrefetching = ["HDDY01ResultEntity","HDDY01ListEntity","HDDY01DataEntity","HDDY01UserInfoEntity","HDDY01CommentListEntity"]
         
-        
         let hmResponse = HDDY01Response()
         
         do {
@@ -148,49 +169,85 @@ class HDDY01Service {
             
             if list.count>0 {
                 
-                // 组装Response
-//                let response = list[0] as! HDDY01ResponseEntity
-//                hmResponse.request_id = response.request_id
-//                
-//                let list = NSMutableArray()
-//                
-//                let result = HDHM01Result()
-//                
-//                for model in (response.result?.list)! {
-//                    
-//                    let listModel = model as! HDDY01ListEntity
-//                    
-//                    let dataModel = HDDY01DataModel()
-//                    
-//                    let userInfoModel = HDDY01UserInfoModel()
-//                    
-//                    
-//                    if listModel.data?.commentList?.count > 0 {
-//                        
-//                        let commentlist = NSMutableArray()
-//                        for cmodel in (listModel.data?.commentList)! {
-//                            
-//                            let comModel = cmodel as! HDDY01CommentListEntity
-//                            let rModel = HDDY01CommentListModel()
-//                            
-//                            
-//                            rModel.cid = comModel.cid!.longValue
-//                            rModel.userId = comModel.userId!.longValue
-//                            rModel.userName = comModel.userName
-//                            rModel.content = comModel.content
-//                            rModel.isAuthor = comModel.isAuthor!.longValue
-//                            rModel.isVip = comModel.isVip!.longValue
-//                            
-//                            commentlist.addObject(rModel)
-//                        }
-//                        
-//                        dataModel.commentList =   NSArray(array: commentlist) as? Array<HDDY01CommentListModel>
-//                    }
-//                    
-//                    
-//                    
-//                }
-//                
+                 //组装Response
+                let response = list[0] as! HDDY01ResponseEntity
+                hmResponse.request_id = response.request_id
+                
+                let list = NSMutableArray()
+                
+                let result = HDDY01Result()
+                
+                for model in (response.result?.list)! {
+                    
+                    let listModel = model as! HDDY01ListEntity
+                    
+                    let vListModel = HDDY01ListModel()
+                    
+                    
+                    let vDataModel = HDDY01DataModel()
+                    vDataModel.actionType = listModel.data!.actionType?.longValue
+                    vDataModel.address = listModel.data!.address
+                    vDataModel.commentCnt = listModel.data!.commentCnt!.longValue
+                    vDataModel.commentUrl = listModel.data!.commentUrl
+                    vDataModel.diggCnt = listModel.data!.diggCnt!.longValue
+                    vDataModel.diggId = listModel.data!.diggId!.longValue
+                    vDataModel.diggType = listModel.data!.diggType!.longValue
+                    vDataModel.entityType = listModel.data!.entityType!.longValue
+                    vDataModel.feedId = listModel.data!.feedId!.longValue
+                    vDataModel.formatTime = listModel.data!.formatTime
+                    vDataModel.id = listModel.data!.id!.longValue
+                    vDataModel.intro = listModel.data!.intro
+                    vDataModel.isDigg = listModel.data!.isDigg!.longValue
+                    vDataModel.url = listModel.data!.url
+                    vDataModel.hasVideo = listModel.data!.hasVideo!.longValue
+                    vDataModel.title = listModel.data!.title
+                    vDataModel.tagName = listModel.data!.tagName
+                    vDataModel.tagUrl = listModel.data!.tagUrl
+                    vDataModel.img = listModel.data!.img
+                    vDataModel.content = listModel.data!.content
+                    
+                    vListModel.data = vDataModel
+                    
+                    let vUserInfoModel = HDDY01UserInfoModel()
+                    vUserInfoModel.avatar = listModel.userInfo!.avatar
+                    vUserInfoModel.gender = listModel.userInfo!.gender!.longValue
+                    vUserInfoModel.intro = listModel.userInfo!.intro
+                    vUserInfoModel.openUrl = listModel.userInfo!.openUrl
+                    vUserInfoModel.relation = listModel.userInfo!.relation!.longValue
+                    vUserInfoModel.userId = listModel.userInfo!.userId!.longValue
+                    vUserInfoModel.userName = listModel.userInfo!.userName
+                    vUserInfoModel.vip = listModel.userInfo!.vip!.longValue
+                    vListModel.userInfo = vUserInfoModel
+                    
+                    if listModel.data?.commentList?.count > 0 {
+                        
+                        let commentlist = NSMutableArray()
+                        for cmodel in (listModel.data?.commentList)! {
+                            
+                            let comModel = cmodel as! HDDY01CommentListEntity
+                            let rModel = HDDY01CommentListModel()
+                            
+                            
+                            rModel.cid = comModel.cid!.longValue
+                            rModel.userId = comModel.userId!.longValue
+                            rModel.userName = comModel.userName
+                            rModel.content = comModel.content
+                            rModel.isAuthor = comModel.isAuthor!.longValue
+                            rModel.isVip = comModel.isVip!.longValue
+                            
+                            commentlist.addObject(rModel)
+                        }
+                        
+                        vDataModel.commentList =   NSArray(array: commentlist) as? Array<HDDY01CommentListModel>
+                    }
+                    
+                    list.addObject(vListModel)
+                    
+                }
+                
+                result.list = NSArray(array: list) as? Array<HDDY01ListModel>
+                hmResponse.result = result
+                
             }
             
         } catch {

@@ -32,7 +32,7 @@ class Constants: NSObject {
     /**
      *   日志开关 true:开 false:关
      **/
-    static let HDLOG:Bool = true
+    static let HDLOG:Bool = false
     
     /**
      *   提示消息

@@ -223,6 +223,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             scrollView?.delegate = self
             scrollView?.contentSize = CGSizeMake(3*Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
             scrollView?.pagingEnabled = true
+            scrollView?.showsHorizontalScrollIndicator = false
             self.view.addSubview(scrollView!)
             unowned let WS = self
             scrollView?.snp_makeConstraints(closure: { (make) in
@@ -306,7 +307,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             titleLb.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(WS.infoView!).offset(0)
+                make.top.equalTo(WS.infoView!).offset(5)
                 make.left.equalTo(WS.infoView!).offset(15)
                 make.height.equalTo(25)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
@@ -380,7 +381,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             userName.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.top.equalTo(WS.createTime.snp_bottom).offset(10)
                 make.left.equalTo(WS.headIcon.snp_right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-30)

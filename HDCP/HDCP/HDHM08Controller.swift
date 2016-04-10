@@ -295,7 +295,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             userName.snp_makeConstraints(closure: { (make) -> Void in
                 
-                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.top.equalTo(WS.createTime.snp_bottom).offset(10)
                 make.left.equalTo(WS.headIcon.snp_right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-30)

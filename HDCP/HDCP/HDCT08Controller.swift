@@ -44,7 +44,7 @@ class HDCT08Controller: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新

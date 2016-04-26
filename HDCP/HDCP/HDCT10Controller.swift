@@ -37,7 +37,7 @@ class HDCT10Controller: UITableViewController {
         
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
 
         

@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import SDWebImage
 import ObjectMapper
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -147,40 +148,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func networkMonitoring(){
         
-        var reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-            
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: #selector(AppDelegate.reachabilityChanged(_:)),
-                name: ReachabilityChangedNotification,
-                object: reachability)
-            
-            try reachability.startNotifier()
-        } catch {
-            
-            HDLog.LogOut("Unable to create Reachability")
-            return
-        }
+        let manager = NetworkReachabilityManager()
         
-    }
-    
-    func reachabilityChanged(note: NSNotification) {
-        
-        let reachability = note.object as! Reachability
-        
-        if reachability.isReachable() {
-            if reachability.isReachableViaWiFi() {
-                
-                HDLog.LogOut("Reachable via WiFi")
-            } else {
-                
-                HDLog.LogOut("Reachable via Cellular")
+        manager?.listener = { status in
+            
+            print("Network Status Changed: \(status)")
+            switch status {
+            case .Unknown:
+                HDLog.LogOut("Unknown")
+                break
+            case .NotReachable:
+                HDLog.LogOut("NotReachable")
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDHM01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDGG01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
+                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDDY01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
+                break
+            case .Reachable(NetworkReachabilityManager.ConnectionType.WWAN):
+                HDLog.LogOut("WWAN")
+                break
+            case .Reachable(NetworkReachabilityManager.ConnectionType.EthernetOrWiFi):
+                HDLog.LogOut("EthernetOrWiFi")
+                break
             }
-        } else {
             
-            HDLog.LogOut("Not reachable")
         }
+        
+        manager?.startListening()
     }
     
     /**

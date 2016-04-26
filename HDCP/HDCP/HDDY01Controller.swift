@@ -16,9 +16,7 @@ class DYView: UIView {
 
 class HDDY01Controller: UITableViewController {
     
-    var videoPlayerController:HDVideoPlayerController?
-    var dataArray:NSMutableArray!
-    var offset:Int!
+    var dataArray = Array<HDDY01ListModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,19 +24,19 @@ class HDDY01Controller: UITableViewController {
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
         
-        offset = 0
-        dataArray  = NSMutableArray()
-        
-        
         if HDDY01Service().isExistEntity() {
             
             /**
              *  读取本地数据
              */
-            dataArray.addObjectsFromArray((HDDY01Service().getAllResponseEntity().result?.list)!)
+            dataArray = (HDDY01Service().getAllResponseEntity().result?.list)!
             getRowHeight();
             setupUI()
-            doGetRequestData(20,offset: self.offset)
+            if CoreUtils.networkIsReachable() {
+
+                doGetRequestData()
+                
+            }
             
         }else{
             
@@ -46,7 +44,7 @@ class HDDY01Controller: UITableViewController {
                 
                 showHud()
                 setupUI()
-                doGetRequestData(20,offset: self.offset)
+                doGetRequestData()
                 
             }
             
@@ -63,19 +61,12 @@ class HDDY01Controller: UITableViewController {
     // MARK: - 创建UI视图
     func setupUI(){
         
-        self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "DY01Cell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-        
-        
-        //当列表滚动到底端 视图自动刷新
-//        unowned let WS = self
-//        self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
-//            WS.doGetRequestData(10,offset: WS.offset)
-//        })
+        self.tableView.tableFooterView = UIView()
     }
-    
+
     
     // MARK: - 提示动画显示和隐藏
     func showHud(){
@@ -99,7 +90,7 @@ class HDDY01Controller: UITableViewController {
             
             for i in 0 ..< dataArray.count {
                 
-                let model = dataArray[i] as! HDDY01ListModel
+                let model = dataArray[i]
                 
                 let contentStr = String(format: "[%@]%@", model.data!.tagName!,model.data!.content!)
                 
@@ -153,7 +144,7 @@ class HDDY01Controller: UITableViewController {
         
         HDLog.LogOut("index", obj: view.index!)
         
-        let model = dataArray[view.index!] as! HDDY01ListModel
+        let model = dataArray[view.index!]
         
         let hd10VC = HDHM10Controller()
         hd10VC.rid = model.data?.id
@@ -163,18 +154,14 @@ class HDDY01Controller: UITableViewController {
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(){
         
         unowned let WS = self
-        HDDY01Service().doGetRequest_HDDY01_URL(0, offset: 0, successBlock: { (hdResponse) -> Void in
-            
-            
-            WS.offset = WS.offset+10
+        HDDY01Service().doGetRequest_HDDY01_URL({ (hdResponse) -> Void in
             
             WS.hidenHud()
             
-            WS.dataArray  = NSMutableArray()
-            WS.dataArray.addObjectsFromArray((hdResponse.result?.list)!)
+            WS.dataArray  = (hdResponse.result?.list)!
             
             WS.getRowHeight();
             
@@ -188,7 +175,6 @@ class HDDY01Controller: UITableViewController {
         
     }
     
-    
     // MARK: - UITableView delegate/datasource
     
     override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
@@ -198,7 +184,8 @@ class HDDY01Controller: UITableViewController {
     
     override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCellWithIdentifier("DY01Cell", forIndexPath: indexPath)
+
         cell.accessoryType = UITableViewCellAccessoryType.None
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
@@ -559,7 +546,7 @@ class HDDY01Controller: UITableViewController {
             
         }
         
-        let model = dataArray[indexPath.row] as! HDDY01ListModel
+        let model = dataArray[indexPath.row]
         
         name?.text = model.userInfo?.userName
         
@@ -675,7 +662,7 @@ class HDDY01Controller: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         
-        let model = dataArray[indexPath.row] as! HDDY01ListModel
+        let model = dataArray[indexPath.row]
         
         return model.rowHeight!
     }
@@ -683,7 +670,7 @@ class HDDY01Controller: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         
-        let model = dataArray[indexPath.row] as! HDDY01ListModel
+        let model = dataArray[indexPath.row]
         
         if model.data?.hasVideo == 1 {
             let hddy02VC = HDDY02Controller()

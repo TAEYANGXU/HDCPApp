@@ -74,7 +74,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     var centerImageView:UIImageView?
     var leftImageView:UIImageView?
     var rightImageView:UIImageView?
-    
+   
+   /**
+    * 网络变化
+    */
+   var netStatusView:UILabel?
+   
     override func viewDidLoad() {
       
         super.viewDidLoad()
@@ -149,9 +154,36 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         createCollectListView()
         
         createWikiListView()
-        
-//        self.view.backgroundColor = HDColor(red: 105, green: 249, blue: 0, alpha: 1).color
+      
+        createNetStatusView()
+      
     }
+   
+   func createNetStatusView() {
+      
+      if netStatusView == nil {
+         
+         netStatusView = UILabel()
+         netStatusView?.backgroundColor = UIColor(red: 0.88, green: 0.27, blue: 0.28, alpha: 0.8)
+         netStatusView?.textColor = UIColor.whiteColor()
+         netStatusView?.text = "当前网络不可以，请检查网络设置"
+         netStatusView?.font = UIFont.systemFontOfSize(15)
+         netStatusView?.textAlignment = NSTextAlignment.Center
+         netStatusView?.hidden = true
+         self.view.addSubview(netStatusView!)
+         
+         netStatusView?.snp_makeConstraints(closure: { (make) in
+            
+            make.left.equalTo(0)
+            make.right.equalTo(0)
+            make.bottom.equalTo(0)
+            make.height.equalTo(40);
+            
+         })
+         
+      }
+      
+   }
     
     /**
      *  创建滚动容器
@@ -756,6 +788,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
          
       }
       
+      if flag == "NETCHANGE" {
+         
+         self.showNetView()
+         
+         self.performSelector(#selector(hideNetView), withObject: self, afterDelay: 2.5)
+         
+      }
       
    }
     
@@ -838,6 +877,16 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     func hidenHud(){
         
         CoreUtils.hidProgressHUD(self.view)
+    }
+   
+    func showNetView() {
+      
+       netStatusView?.hidden = false
+      
+    }
+    func hideNetView() {
+      
+       netStatusView?.hidden = true
     }
     
     // MARK: - 数据加载

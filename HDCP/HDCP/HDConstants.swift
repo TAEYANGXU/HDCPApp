@@ -65,6 +65,7 @@ class Constants: NSObject {
     static let HDREFRESHHDHM01 = "kHDREFRESHHDHM01"
     static let HDREFRESHHDGG01 = "kHDREFRESHHDGG01"
     static let HDREFRESHHDCT01 = "KHDREFRESHHDCT01"
+    static let HDREFRESHHDDY01 = "KHDREFRESHHDDY01"
     
     /*******************************************URL*********************************************/
     

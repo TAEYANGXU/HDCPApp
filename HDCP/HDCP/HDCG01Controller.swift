@@ -23,12 +23,10 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
 
  
     var searchBar:UISearchBar!
-    var dataArray:Array<HDCG01ListModel>!
+    var dataArray = Array<HDCG01ListModel>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dataArray = Array<HDCG01ListModel>()
         
         self.edgesForExtendedLayout = UIRectEdge.None;
         self.navigationController?.navigationBar.translucent = false
@@ -109,7 +107,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             
             WS.hidenHud()
             if HDCG01Response.result?.list!.count>0 {
-                WS.dataArray = HDCG01Response.result?.list!
+                WS.dataArray = (HDCG01Response.result?.list!)!
             }
             WS.tableView!.reloadData()
             

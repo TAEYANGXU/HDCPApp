@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class CoreUtils: NSObject {
 
@@ -223,20 +224,22 @@ class CoreUtils: NSObject {
      */
     static func networkIsReachable()->Bool{
         
-        let reachability:Reachability
-        var ret:Bool
+        var ret:Bool!
+        let manager = NetworkReachabilityManager()
         
-        do{
-            reachability = try Reachability(hostname: "www.apple.com")
-            if reachability.isReachable() {
-                ret = true
-            }else{
-                ret = false
-            }
-        }catch{
+        if  manager?.isReachable ?? false {
+            
+//            if ((manager?.isReachableOnEthernetOrWiFi) != nil) {
+//                //do some stuff
+//            }else if(manager?.isReachableOnWWAN)! {
+//                //do some stuff
+//            }
+//            
+            ret = true
+        }
+        else {
             ret = false
         }
-        
         return ret
         
     }

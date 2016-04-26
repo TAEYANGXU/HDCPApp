@@ -40,9 +40,9 @@ class HDCT09Controller: UITableViewController {
     // MARK: - 创建UI视图
     func setupUI(){
         
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "hotCell")
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "groupCell")
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "starCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "hotCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "groupCell")
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "starCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
        

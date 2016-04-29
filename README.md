@@ -25,6 +25,7 @@
     ObjectMapper ：对象映射，Json转Model
     ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享(真机才能分享)
     CoreData ：所有Tab主页做了本地存储
+    HDVideoPlayer：视频播放
 
 项目备注
 

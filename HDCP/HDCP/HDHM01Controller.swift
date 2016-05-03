@@ -26,7 +26,7 @@ private let resourceArray = [["title":"排行榜","image":"HPHBIcon"],
 class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     private enum HDHM01MenuTag: Int {
-        case PHB, YYCZ, FBCP, SYS
+        case PHB = 0, YYCZ, FBCP, SYS
     }
     
     var baseView:UIScrollView!

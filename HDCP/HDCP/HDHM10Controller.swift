@@ -46,7 +46,15 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         tableView.tableFooterView = UIView()
-        tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+        
+        tableView.snp_makeConstraints { (make) in
+            
+            make.left.equalTo(0)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.top.equalTo(0)
+            make.bottom.equalTo(-50)
+            
+        }
         
         tableView.userInteractionEnabled = true
         
@@ -61,7 +69,15 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         putView.backgroundColor = Constants.HDBGViewColor
         self.view.addSubview(putView)
         
-        putView.frame = CoreUtils.HDFrame(0, y: Constants.HDSCREENHEIGHT-50-64, width: Constants.HDSCREENWITH, height: 50)
+        
+        putView.snp_makeConstraints { (make) in
+            
+            make.left.equalTo(0)
+            make.width.equalTo(Constants.HDSCREENWITH)
+            make.top.equalTo(WS.tableView.snp_bottom).offset(0)
+            make.bottom.equalTo(0);
+            
+        }
         
         
         /**
@@ -163,10 +179,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         unowned let WS = self
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            WS.putView.frame = CoreUtils.HDFrame(0, y: self.view.frame.size.height-height-50, width: Constants.HDSCREENWITH, height: 50)
-            WS.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50-height)
+            WS.tableView.snp_updateConstraints(closure: { (make) in
+                make.bottom.equalTo(-(height+50))
+            })
             
-            
+            WS.view.layoutIfNeeded()
             
             if WS.commentArray.count>0 {
                 
@@ -184,9 +201,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         unowned let WS = self
         UIView.animateWithDuration(0.3) { () -> Void in
             
-            WS.putView.frame = CoreUtils.HDFrame(0, y:Constants.HDSCREENHEIGHT-64-50, width: Constants.HDSCREENWITH, height: 50)
-            WS.tableView.frame = CoreUtils.HDFrame(0, y: 0, width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT-64-50)
+            WS.tableView.snp_updateConstraints(closure: { (make) in
+                make.bottom.equalTo(-50)
+            })
             
+            WS.view.layoutIfNeeded()
             
             if WS.commentArray.count>0 {
                 

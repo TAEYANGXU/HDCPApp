@@ -58,9 +58,9 @@ class CoreUtils: NSObject {
     
 
     /**
-     二进制转RGB
+     16进制转RGB
      
-     *  @ parameter hex:   二进制
+     *  @ parameter hex:   16进制
      *  @ parameter alpha: 透明度
      
      *  @ returns: UIColor

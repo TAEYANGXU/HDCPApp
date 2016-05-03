@@ -646,10 +646,16 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
             })
             
-            shareSubView = HDShareView(frame: CGRectMake(0,self.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight))
+            shareSubView = HDShareView()
             shareSubView.delegate = self
             shareView.addSubview(shareSubView)
-            
+            shareSubView .snp_makeConstraints(closure: { (make) in
+                
+                make.left.equalTo(0)
+                make.width.equalTo(Constants.HDSCREENWITH)
+                make.height.equalTo(shareViewHeight)
+                make.top.equalTo(WS.view.bounds.size.height)
+            })
             
         }
         
@@ -660,23 +666,34 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         
         unowned let WS = self
         UIView.animateWithDuration(0.3, animations: { () -> Void in
-            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height,Constants.HDSCREENWITH,shareViewHeight)
+            
+            WS.shareSubView.snp_updateConstraints(closure: { (make) in
+                
+                make.top.equalTo(WS.view.bounds.size.height)
+            })
+            
             WS.shareView.alpha = 0.0
+            WS.view.layoutIfNeeded()
+            
             }, completion: { (ret) -> Void in
                 WS.shareView?.hidden = true
         })
         
     }
+    
     func showShareView(){
         
         shareView?.hidden = false
         unowned let WS = self
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             WS.shareView.alpha = 1
-            WS.shareSubView.frame = CGRectMake(0,WS.view.bounds.size.height-shareViewHeight,Constants.HDSCREENWITH,shareViewHeight)
+            WS.shareSubView.snp_updateConstraints(closure: { (make) in
+                
+                make.top.equalTo(WS.view.bounds.size.height - shareViewHeight)
+            })
+            WS.view.layoutIfNeeded()
         })
     }
-
     
     // MARK: - 获取视频地址
     func getVedioUrl(str:String) -> String {

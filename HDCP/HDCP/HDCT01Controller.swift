@@ -289,6 +289,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+    // MARK: - private Methods
+    
+    
+    
     // MARK: - events
     func loginOrRegistAction(){
     

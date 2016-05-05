@@ -17,15 +17,15 @@
 
 第三方库
 
-    Alamofire : 网络请求库
-    SDWebImage : 图片加载库
+    Alamofire : 网络数据请求库
+    SDWebImage : 网络图片加载库
     MJRefresh : 下拉刷新
     MBProgressHUD ：提示HUD
-    SnapKit ：自动布局
+    SnapKit ：UI自动布局库
     ObjectMapper ：对象映射，Json转Model
     ShareSDK ：实现微信好友，朋友圈，QQ，QQ空间分享(真机才能分享)
-    CoreData ：所有Tab主页做了本地存储
-    HDVideoPlayer：视频播放
+    CoreData ：数据本地存储
+    HDVideoPlayer：网络视频播放(自定义)
 
 项目备注
 

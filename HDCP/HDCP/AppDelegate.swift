@@ -11,6 +11,7 @@ import CoreData
 import SDWebImage
 import ObjectMapper
 import Alamofire
+import ReachabilitySwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -148,32 +149,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func networkMonitoring(){
         
-        let manager = NetworkReachabilityManager()
-        
-        manager?.listener = { status in
-            
-            print("Network Status Changed: \(status)")
-            switch status {
-            case .Unknown:
-                HDLog.LogOut("Unknown")
-                break
-            case .NotReachable:
-                HDLog.LogOut("NotReachable")
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDHM01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDGG01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDDY01, object: nil, userInfo: ["FLAG":"NETCHANGE"])
-                break
-            case .Reachable(NetworkReachabilityManager.ConnectionType.WWAN):
-                HDLog.LogOut("WWAN")
-                break
-            case .Reachable(NetworkReachabilityManager.ConnectionType.EthernetOrWiFi):
-                HDLog.LogOut("EthernetOrWiFi")
-                break
-            }
-            
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+        } catch {
+            print("Unable to create Reachability")
+            return
         }
         
-        manager?.startListening()
+        
+        reachability.whenReachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                if reachability.isReachableViaWiFi() {
+                    print("Reachable via WiFi")
+                } else {
+                    print("Reachable via Cellular")
+                }
+            }
+        }
+        reachability.whenUnreachable = { reachability in
+            // this is called on a background thread, but UI updates must
+            // be on the main thread, like this:
+            dispatch_async(dispatch_get_main_queue()) {
+                print("Not reachable")
+            }
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
     
     /**

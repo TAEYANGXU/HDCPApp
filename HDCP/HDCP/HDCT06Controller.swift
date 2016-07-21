@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let ct06ArrayLogin = [[["title":"社交绑定"],
     ["title":"消息设置"],["title":"隐私设置"],["title":"账号安全"]],
@@ -26,6 +27,7 @@ class HDCT06Controller: UITableViewController{
         [["title":"关于"],
             ["title":"意见反馈"],["title":"给我们评星"]],[]]
     var titleArray = ["个人","通用","支持",""]
+    var cacheSize:CGFloat = 0.0;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,8 @@ class HDCT06Controller: UITableViewController{
             
         }
         
+        self.cacheSize = self.getCacheSize();
+        
         setupUI()
         
     }
@@ -55,6 +59,52 @@ class HDCT06Controller: UITableViewController{
     deinit{
     
         HDLog.LogClassDestory("HDCT06Controller")
+    }
+    
+    // MARK: - 计算缓存大小
+    
+    func getCacheSize() -> CGFloat {
+        
+        let size = SDImageCache.sharedImageCache().getSize()
+        let mb:CGFloat = CGFloat(size/1024/1024)
+        
+        return mb
+    }
+    
+    // MARK: - 删除本地缓存
+    
+    func deleteCacheFile() -> Bool {
+        
+        showHud()
+        
+        let path:String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
+        let cachePath = path.stringByAppendingString("/default/com.hackemist.SDWebImageCache.default")
+        
+        let fileManager = NSFileManager.defaultManager()
+        let contents = try! fileManager.contentsOfDirectoryAtPath(cachePath)
+        
+        for fileName in contents {
+            
+            try! fileManager.removeItemAtPath(cachePath.stringByAppendingString("/"+fileName))
+        }
+        
+        print("delete over !")
+        
+        self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 1.5)
+        
+        return true
+    }
+    
+    // MARK: - 提示动画显示和隐藏
+    func showHud(){
+        
+        CoreUtils.showProgressHUD(self.view)
+        
+    }
+    
+    func hidenHud(){
+        
+        CoreUtils.hidProgressHUD(self.view)
     }
     
     // MARK: - events
@@ -96,16 +146,15 @@ class HDCT06Controller: UITableViewController{
         /**
          *  名称
          */
-        var title:UILabel? = cell.viewWithTag(2000) as? UILabel
+        var title:UILabel? = cell.contentView.viewWithTag(2000) as? UILabel
         if title == nil {
             
             title = UILabel()
             title?.tag = 2000
-            
             title?.font = UIFont.systemFontOfSize(16)
             cell.contentView.addSubview(title!)
+            
             title?.snp_makeConstraints(closure: { (make) -> Void in
-                
                 make.width.equalTo(200)
                 make.height.equalTo(44)
                 make.left.equalTo(cell.contentView).offset(16)
@@ -113,9 +162,41 @@ class HDCT06Controller: UITableViewController{
             })
         }
         
+        //缓存大小
+        var cacheSizeLabel:UILabel? = cell.contentView.viewWithTag(2001) as? UILabel
+        
+        if cacheSizeLabel == nil {
+        
+            cacheSizeLabel = UILabel()
+            cacheSizeLabel?.hidden = true
+            cacheSizeLabel?.tag = 2001
+            cacheSizeLabel?.textColor = Constants.HDMainTextColor
+            cacheSizeLabel?.textAlignment = NSTextAlignment.Right
+            cacheSizeLabel?.font = UIFont.systemFontOfSize(14)
+            cell.contentView.addSubview(cacheSizeLabel!)
+            
+            cacheSizeLabel?.snp_makeConstraints(closure: { (make) in
+                make.top.equalTo(7)
+                make.right.equalTo(-20)
+                make.size.equalTo(CGSizeMake(60, 30))
+            })
+        }
         
         let array = ct06Array[indexPath.section]
         title?.text =   array[indexPath.row]["title"]
+        
+        
+        if indexPath.section == 1 {
+        
+            if indexPath.row == 3 {
+            
+                cacheSizeLabel?.hidden = false
+                cacheSizeLabel?.text = String(format: "%0.1fMB",self.cacheSize)
+            }else{
+            
+                cacheSizeLabel?.hidden = true
+            }
+        }
         
         if indexPath.section == 3 {
             
@@ -189,6 +270,28 @@ class HDCT06Controller: UITableViewController{
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        if indexPath.section == 1 {
+        
+            if indexPath.row == 3 {
+                
+                let alertVC = UIAlertController(title: nil, message: "确定要删除吗?", preferredStyle: .Alert)
+                let cancelAl = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) in
+                    return
+                })
+                
+                unowned let ws = self
+                let okAl = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) in
+                    ws.deleteCacheFile()
+                })
+                
+                alertVC.addAction(cancelAl)
+                alertVC.addAction(okAl)
+                
+                self.presentViewController(alertVC, animated: true, completion: nil)
+            }
+            
+        }
+        
         if indexPath.section == 3 {
             
             HDLog.LogOut("退出登录")

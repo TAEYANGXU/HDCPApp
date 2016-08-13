@@ -1,18 +1,35 @@
 PODS:
-  - Alamofire (3.1.4)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - Alamofire (3.4.1)
+  - MOBFoundation (2.0.8)
+  - ObjectMapper (1.4.0)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
+  - ShareSDK3 (3.4.0):
+    - ShareSDK3/ShareSDK (= 3.4.0)
+  - ShareSDK3/ShareSDK (3.4.0)
+  - ShareSDK3/ShareSDKPlatforms/QQ (3.4.0)
+  - ShareSDK3/ShareSDKPlatforms/WeChat (3.4.0)
   - SnapKit (0.15.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - MOBFoundation
+  - ObjectMapper (~> 1.2)
   - SDWebImage (~> 3.7)
+  - ShareSDK3
+  - ShareSDK3/ShareSDKPlatforms/QQ
+  - ShareSDK3/ShareSDKPlatforms/WeChat
   - SnapKit (~> 0.15.0)
 
 SPEC CHECKSUMS:
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  MOBFoundation: 6f2006b941bd4002e2689a638d04c6b535c4cc64
+  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  ShareSDK3: df89140111729eae7a2bf06688372af969322a37
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 25577eb24bc334b83ce5bd997e1c8d5ce48a7a24
+
+COCOAPODS: 1.0.1

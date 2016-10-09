@@ -1,19 +1,19 @@
 PODS:
-  - Alamofire (3.4.1)
-  - MOBFoundation (2.0.8)
-  - ObjectMapper (1.4.0)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
-  - ShareSDK3 (3.4.0):
-    - ShareSDK3/ShareSDK (= 3.4.0)
-  - ShareSDK3/ShareSDK (3.4.0)
-  - ShareSDK3/ShareSDKPlatforms/QQ (3.4.0)
-  - ShareSDK3/ShareSDKPlatforms/WeChat (3.4.0)
+  - Alamofire (3.5.0)
+  - MOBFoundation (2.0.11)
+  - ObjectMapper (1.5.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - ShareSDK3 (3.4.2):
+    - ShareSDK3/ShareSDK (= 3.4.2)
+  - ShareSDK3/ShareSDK (3.4.2)
+  - ShareSDK3/ShareSDKPlatforms/QQ (3.4.2)
+  - ShareSDK3/ShareSDKPlatforms/WeChat (3.4.2)
   - SnapKit (0.15.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.0)
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, tag `3.5.0`)
   - MOBFoundation
   - ObjectMapper (~> 1.2)
   - SDWebImage (~> 3.7)
@@ -22,14 +22,24 @@ DEPENDENCIES:
   - ShareSDK3/ShareSDKPlatforms/WeChat
   - SnapKit (~> 0.15.0)
 
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 3.5.0
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 3.5.0
+
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  MOBFoundation: 6f2006b941bd4002e2689a638d04c6b535c4cc64
-  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
-  ShareSDK3: df89140111729eae7a2bf06688372af969322a37
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  MOBFoundation: e213065e65eebd8146ab29d10a8445dc8f385091
+  ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  ShareSDK3: 2fa975dd22937fc7de3f6b5d0c41a18ba0dd1661
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
 
-PODFILE CHECKSUM: 25577eb24bc334b83ce5bd997e1c8d5ce48a7a24
+PODFILE CHECKSUM: f900f6f9d4c437a330f1534b7a009e12767377d6
 
 COCOAPODS: 1.0.1

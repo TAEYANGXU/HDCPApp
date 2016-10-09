@@ -87,7 +87,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
         self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 0.5)
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
         
         
         CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)

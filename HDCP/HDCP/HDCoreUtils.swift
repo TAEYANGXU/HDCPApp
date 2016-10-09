@@ -278,7 +278,7 @@ class CoreUtils: NSObject {
         image.drawInRect(CGRectMake(0, 0, newSize.width, newSize.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage
+        return newImage!
         
     }
     

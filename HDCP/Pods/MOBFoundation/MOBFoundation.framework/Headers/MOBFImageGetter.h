@@ -6,9 +6,9 @@
 //  Copyright © 2016年 MOB. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "MOBFImageServiceTypeDef.h"
 #import "MOBFImageObserver.h"
+#import "MOBFImageServiceTypeDef.h"
+#import <Foundation/Foundation.h>
 
 /**
  *  图片获取器
@@ -23,6 +23,15 @@
 + (instancetype)sharedInstance;
 
 /**
+ *  是否存在图片缓存
+ *
+ *  @param url 图片URL
+ *
+ *  @return YES 表示图片已缓存，NO 图片未缓存
+ */
+- (BOOL)existsImageCacheWithURL:(NSURL *)url;
+
+/**
  *  获取图片
  *
  *  @param url           图片路径
@@ -31,7 +40,8 @@
  *  @return 服务观察者
  */
 - (MOBFImageObserver *)getImageWithURL:(NSURL *)url
-                                 result:(MOBFImageGetterResultHandler)resultHandler;
+                                result:
+                                    (MOBFImageGetterResultHandler)resultHandler;
 
 /**
  *  移除图片观察者

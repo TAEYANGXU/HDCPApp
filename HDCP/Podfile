@@ -5,7 +5,7 @@ target 'HDCP' do
   # Comment this line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-pod 'Alamofire', '~> 3.0'
+pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '3.5.0'
 pod 'SDWebImage', '~>3.7'
 pod 'SnapKit', '~> 0.15.0'
 pod 'ObjectMapper', '~> 1.2'
@@ -14,4 +14,12 @@ pod 'MOBFoundation'
 pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
 pod 'ShareSDK3/ShareSDKPlatforms/QQ'
  
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '2.3'
+        end
+    end
 end

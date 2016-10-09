@@ -4,6 +4,10 @@
 <dict>
 	<key>ShareContentMapField</key>
 	<dict>
+		<key>clientShare</key>
+		<string>@client_share</string>
+		<key>urlName</key>
+		<string>url_name</string>
 		<key>videoFlashUrl</key>
 		<string>video_flash_url</string>
 		<key>audioFlashUrl</key>
@@ -221,6 +225,17 @@
 	<dict>
 		<key>PlatformID</key>
 		<integer>12</integer>
+		<key>HostType</key>
+		<string>host_type</string>
+		<key>ConsumerSecret</key>
+		<string>consumer_secret</string>
+		<key>ConsumerKey</key>
+		<string>consumer_key</string>
+	</dict>
+	<key>EvernoteInternational</key>
+	<dict>
+		<key>PlatformID</key>
+		<integer>996</integer>
 		<key>HostType</key>
 		<string>host_type</string>
 		<key>ConsumerSecret</key>

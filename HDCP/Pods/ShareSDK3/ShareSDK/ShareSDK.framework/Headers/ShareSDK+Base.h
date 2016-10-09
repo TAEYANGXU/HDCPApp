@@ -54,6 +54,17 @@
  */
 + (void)setCurrentUser:(SSDKUser *)user forPlatformType:(SSDKPlatformType)platformType;
 
+
+/**
+ *  获取配置文件分享参数
+ *
+ *  @param contentName  分享内容节点名称
+ *  @param customFields 自定义字段
+ *
+ *  @return 分享参数
+ */
++ (NSMutableDictionary *)getShareParamsWithContentName:(NSString *)contentName customFields:(NSDictionary *)customFields;
+
 /**
  *  分享平台授权
  *

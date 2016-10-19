@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class HDShareSDKManager {
+open class HDShareSDKManager {
     
     /**
      *  ShareSDK 初始化
      */
-    public class func initializeShareSDK(){
+    open class func initializeShareSDK(){
         
         /**
         *  设置ShareSDK的appKey，如果尚未在ShareSDK官网注册过App，请移步到http://mob.com/login 登录后台进行应用注册，
@@ -23,38 +23,32 @@ public class HDShareSDKManager {
         *  如果您使用的时服务端托管平台信息时，第二、四项参数可以传入nil，第三项参数则根据服务端托管平台来决定要连接的社交SDK。
         */
         
-        ShareSDK.registerApp("ef272badd3ca",
-            
-            activePlatforms: [
-                SSDKPlatformType.TypeWechat.rawValue,SSDKPlatformType.TypeQQ.rawValue,SSDKPlatformType.SubTypeQQFriend.rawValue,SSDKPlatformType.SubTypeQZone.rawValue,],
-            onImport: {(platform : SSDKPlatformType) -> Void in
-                
+        ShareSDK.registerApp("ef272badd3ca", activePlatforms: [
+            SSDKPlatformType.typeWechat.rawValue,SSDKPlatformType.typeQQ.rawValue,SSDKPlatformType.subTypeQQFriend.rawValue,SSDKPlatformType.subTypeQZone.rawValue,], onImport: { (platform : SSDKPlatformType) in
                 switch platform{
-                    
-                case .TypeWechat:
+                case .typeWechat:
                     ShareSDKConnector.connectWeChat(WXApi.classForCoder())
-                case .TypeQQ:
+                case .typeQQ:
                     ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
                 default:
                     break
                 }
-            },
-            onConfiguration: {(platform : SSDKPlatformType,appInfo : NSMutableDictionary!) -> Void in
+        }) { (platform:SSDKPlatformType, appInfo:NSMutableDictionary?) in
                 switch platform {
-                
-                case .TypeWechat:
+                    
+                case .typeWechat:
                     //设置微信应用信息
-                    appInfo.SSDKSetupWeChatByAppId("wxa31fc3ddf49a3a53", appSecret: "36d04f1ddf538e8efeab2791f0caf016")
+                    appInfo?.ssdkSetupWeChat(byAppId: "wxa31fc3ddf49a3a53", appSecret: "36d04f1ddf538e8efeab2791f0caf016")
                     break
-                case .TypeQQ:
+                case .typeQQ:
                     //设置腾讯应用信息，其中authType设置为只用Web形式授权
-                    appInfo.SSDKSetupQQByAppId("1105128294", appKey: "c46wxXfFpd9VDcn3", authType: SSDKAuthTypeBoth)
+                    appInfo?.ssdkSetupQQ(byAppId: "1105128294", appKey: "c46wxXfFpd9VDcn3", authType: SSDKAuthTypeBoth)
                     break
-                    default:
+                default:
                     break
                     
                 }
-        })
+        }
         
     }
     
@@ -77,120 +71,121 @@ public class HDShareSDKManager {
      * parameter shareCancel:  取消分享
      */
     
-    public class func doShareSDK(title:String,context:String,image:UIImage,type:SSDKPlatformType,url:String,shareSuccess:()->Void,shareFail:()->Void,shareCancel:()->Void){
+    open class func doShareSDK(_ title:String,context:String,image:UIImage,type:SSDKPlatformType,url:String,shareSuccess:@escaping ()->Void,shareFail:@escaping ()->Void,shareCancel:@escaping ()->Void){
         
          // 1.创建分享参数
         let shareParames = NSMutableDictionary()
         
-        shareParames.SSDKSetupShareParamsByText(context,
+        shareParames.ssdkSetupShareParams(byText: context,
             images : image,
-            url : NSURL(string:url),
+            url : URL(string:url),
             title : title,
-            type : SSDKContentType.WebPage)
+            type : SSDKContentType.webPage)
         
         //2.进行分享
         
         switch type {
             
-        case SSDKPlatformType.SubTypeWechatSession:
+        case SSDKPlatformType.subTypeWechatSession:
             /**
             *  微信好友
             */
-            ShareSDK.share(SSDKPlatformType.SubTypeWechatSession, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
+            
+            ShareSDK.share(SSDKPlatformType.subTypeWechatSession, parameters: shareParames, onStateChanged: { (state:SSDKResponseState,nil, contentEntity:SSDKContentEntity?, error:Error?) in
                 
                 switch state{
                     
-                case .Success:
+                case .success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case .Fail:
+                case .fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case .Cancel:
+                case .cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
                     break
                 }
-            }
+                
+            })
             break
-        case SSDKPlatformType.SubTypeWechatTimeline:
+        case SSDKPlatformType.subTypeWechatTimeline:
             /**
             *  微信朋友圈
             */
-            ShareSDK.share(SSDKPlatformType.SubTypeWechatTimeline, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
-                
+            ShareSDK.share(SSDKPlatformType.subTypeWechatTimeline, parameters: shareParames, onStateChanged: { (state:SSDKResponseState,nil, contentEntity:SSDKContentEntity?, error:Error?) in
                 switch state{
                     
-                case .Success:
+                case .success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case .Fail:
+                case .fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case .Cancel:
+                case .cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
                     break
                 }
-            }
+            })
             break
-        case SSDKPlatformType.SubTypeQQFriend:
+        case SSDKPlatformType.subTypeQQFriend:
             /**
             *  QQ好友
             */
-            ShareSDK.share(SSDKPlatformType.SubTypeQQFriend, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
+            ShareSDK.share(SSDKPlatformType.subTypeQQFriend, parameters: shareParames, onStateChanged: { (state:SSDKResponseState,nil, contentEntity:SSDKContentEntity?, error:Error?) in
                 
                 switch state{
                     
-                case .Success:
+                case .success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case .Fail:
+                case .fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case .Cancel:
+                case .cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
                     break
                 }
-            }
+            })
             break
-        case SSDKPlatformType.SubTypeQZone:
+        case SSDKPlatformType.subTypeQZone:
             /**
             *  QQ空间
             */
-            ShareSDK.share(SSDKPlatformType.SubTypeQZone, parameters: shareParames) { (state : SSDKResponseState, userData : [NSObject : AnyObject]!, contentEntity :SSDKContentEntity!, error : NSError!) -> Void in
+            ShareSDK.share(SSDKPlatformType.subTypeQZone, parameters: shareParames, onStateChanged: { (state:SSDKResponseState,nil, contentEntity:SSDKContentEntity?, error:Error?) in
                 
                 switch state{
                     
-                case .Success:
+                case .success:
                     HDLog.LogOut("分享成功")
                     shareSuccess()
                     break
-                case .Fail:
+                case .fail:
                     HDLog.LogOut("分享失败,错误描述:", obj: error)
                     shareFail()
                     break
-                case .Cancel:
+                case .cancel:
                     HDLog.LogOut("分享取消")
                     shareCancel()
                     break
                 default:
                     break
                 }
-            }
+            })
             break
 
         default:

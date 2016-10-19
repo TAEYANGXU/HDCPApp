@@ -19,7 +19,7 @@ private let kHeadViewHeight:CGFloat = 280
 class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
 
     enum BTNTag: Int {
-        case GZ = 1000 , FS, HY
+        case gz = 1000 , fs, hy
     }
     
     var tableView:UITableView!
@@ -34,29 +34,29 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.edgesForExtendedLayout = UIRectEdge.None;
+        self.edgesForExtendedLayout = UIRectEdge();
         self.extendedLayoutIncludesOpaqueBars = false;
         self.modalPresentationCapturesStatusBarAppearance = false;
         self.automaticallyAdjustsScrollViewInsets = true;
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ct01Notification(_:)), name: Constants.HDREFRESHHDCT01, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ct01Notification(_:)), name: NSNotification.Name(rawValue: Constants.HDREFRESHHDCT01), object: nil)
         
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     deinit{
     
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: Constants.HDREFRESHHDCT01, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: Constants.HDREFRESHHDCT01), object: nil)
         HDLog.LogClassDestory("HDCT01Controller")
     }
     
@@ -76,7 +76,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         navView?.alpha = 0
         self.view.addSubview(navView!)
         
-        navView?.snp_makeConstraints(closure: { (make) -> Void in
+        navView?.snp.makeConstraints( { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(64)
@@ -85,14 +85,14 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         })
         
         let title = UILabel()
-        title.font = UIFont.systemFontOfSize(18)
-        title.textColor = UIColor.whiteColor()
+        title.font = UIFont.systemFont(ofSize: 18)
+        title.textColor = UIColor.white
         title.text = "我的"
-        title.textAlignment = NSTextAlignment.Center
+        title.textAlignment = NSTextAlignment.center
         navView?.addSubview(title)
         
         unowned let WS = self
-        title.snp_makeConstraints { (make) -> Void in
+        title.snp.makeConstraints { (make) -> Void in
             
             make.top.equalTo(WS.navView!).offset(20)
             make.height.equalTo(44)
@@ -110,10 +110,10 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         /**
         *   背景图
         */
-        headerBg = UIImageView(frame: CGRectMake(0,-kHeadViewHeight,Constants.HDSCREENWITH,kHeadViewHeight))
-        headerBg?.backgroundColor = UIColor.whiteColor()
+        headerBg = UIImageView(frame: CGRect(x: 0,y: -kHeadViewHeight,width: Constants.HDSCREENWITH,height: kHeadViewHeight))
+        headerBg?.backgroundColor = UIColor.white
         headerBg?.image = UIImage(named: "bg02Icon")
-        headerBg?.userInteractionEnabled = true
+        headerBg?.isUserInteractionEnabled = true
         
         /**
         *   头像
@@ -121,17 +121,17 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         headerIcon = UIImageView()
         headerIcon?.layer.cornerRadius = Constants.HDSCREENWITH/8;
         headerIcon?.layer.masksToBounds = true
-        headerIcon?.layer.borderColor = UIColor.whiteColor().CGColor
+        headerIcon?.layer.borderColor = UIColor.white.cgColor
         headerIcon?.layer.borderWidth = 1.5
         headerIcon?.image = UIImage(named: "defaultIcon")
-        headerIcon?.backgroundColor = UIColor.redColor()
+        headerIcon?.backgroundColor = UIColor.red
         headerBg?.addSubview(headerIcon!)
         
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(loginOrRegistAction))
-        headerIcon?.userInteractionEnabled = true
+        headerIcon?.isUserInteractionEnabled = true
         headerIcon?.addGestureRecognizer(tapGes)
         
-        headerIcon?.snp_makeConstraints(closure: { (make) -> Void in
+        headerIcon?.snp.makeConstraints( { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH/4)
             make.height.equalTo(Constants.HDSCREENWITH/4)
@@ -143,14 +143,14 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         *   登录或注册
         */
         userName = UILabel()
-        userName?.textColor = UIColor.whiteColor()
-        userName?.textAlignment = NSTextAlignment.Center
-        userName?.font = UIFont.systemFontOfSize(16)
+        userName?.textColor = UIColor.white
+        userName?.textAlignment = NSTextAlignment.center
+        userName?.font = UIFont.systemFont(ofSize: 16)
         headerBg?.addSubview(userName!)
         
-        userName?.snp_makeConstraints(closure: { (make) -> Void in
+        userName?.snp.makeConstraints( { (make) -> Void in
             
-            make.top.equalTo(WS.headerIcon!.snp_bottom).offset(5)
+            make.top.equalTo(WS.headerIcon!.snp.bottom).offset(5)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(30)
             make.left.equalTo(WS.headerBg!).offset(0)
@@ -163,39 +163,39 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         sLine?.backgroundColor = Constants.HDBGViewColor
         headerBg?.addSubview(sLine!)
         
-        sLine?.snp_makeConstraints(closure: { (make) -> Void in
+        sLine?.snp.makeConstraints( { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace)
             make.left.equalTo(0)
-            make.bottom.equalTo(WS.headerBg!.snp_bottom).offset(0)
+            make.bottom.equalTo(WS.headerBg!.snp.bottom).offset(0)
             
         })
         
         //显示关注 粉丝 好友 数量
         cntView = UIView()
         cntView?.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.4)
-        cntView?.hidden = true
+        cntView?.isHidden = true
         headerBg?.addSubview(cntView!)
         
-        cntView?.snp_makeConstraints(closure: { (make) -> Void in
+        cntView?.snp.makeConstraints( { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(40)
-            make.bottom.equalTo(WS.headerBg!.snp_bottom).offset(-10)
+            make.bottom.equalTo(WS.headerBg!.snp.bottom).offset(-10)
             
         })
         
         let space = Constants.HDSCREENWITH/3
         for i in 0 ..< cntArray.count {
         
-            let btn = UIButton(type: UIButtonType.Custom)
+            let btn = UIButton(type: UIButtonType.custom)
             btn.tag = 1000 + i
-            btn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            btn.addTarget(self, action: #selector(cntAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-            btn.titleLabel?.font = UIFont.systemFontOfSize(14)
+            btn.setTitleColor(UIColor.white, for: UIControlState())
+            btn.addTarget(self, action: #selector(cntAction(_:)), for: UIControlEvents.touchUpInside)
+            btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             cntView?.addSubview(btn)
-            btn.snp_makeConstraints(closure: { (make) -> Void in
+            btn.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(WS.cntView!).offset(CGFloat(i)*space)
                 make.top.equalTo(0)
@@ -212,11 +212,11 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     func createtableView(){
     
-        self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.Plain)
+        self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(kHeadViewHeight, 0, 0, 0)
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         self.tableView.addSubview(headerBg!)
@@ -228,46 +228,46 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
         
         //判断用户是否已登录
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let sign = defaults.objectForKey(Constants.HDSign)
+        let defaults = UserDefaults.standard
+        let sign = defaults.object(forKey: Constants.HDSign)
         
         if let _ = sign {
             
-            cntView?.hidden = false
-            userName?.hidden = false
-            headerIcon?.userInteractionEnabled = false
+            cntView?.isHidden = false
+            userName?.isHidden = false
+            headerIcon?.isUserInteractionEnabled = false
             
             //关注 粉丝 好友
             
             let gzBtn = cntView?.viewWithTag(1000) as! UIButton
-            gzBtn.setTitle(String(format: "关注: %d", HDUserInfoManager.shareInstance.followCnt!), forState: UIControlState.Normal)
+            gzBtn.setTitle(String(format: "关注: %d", HDUserInfoManager.shareInstance.followCnt!), for: UIControlState())
             
             let fsBtn = cntView?.viewWithTag(1001) as! UIButton
-            fsBtn.setTitle(String(format: "粉丝: %d", HDUserInfoManager.shareInstance.fansCount!), forState: UIControlState.Normal)
+            fsBtn.setTitle(String(format: "粉丝: %d", HDUserInfoManager.shareInstance.fansCount!), for: UIControlState())
             
             let hyBtn = cntView?.viewWithTag(1002) as! UIButton
-            hyBtn.setTitle(String(format: "好友: %d", HDUserInfoManager.shareInstance.friendCnt!), forState: UIControlState.Normal)
+            hyBtn.setTitle(String(format: "好友: %d", HDUserInfoManager.shareInstance.friendCnt!), for: UIControlState())
             
             HDLog.LogOut(HDUserInfoManager.shareInstance.avatar!)
             
             userName?.text = HDUserInfoManager.shareInstance.userName
-            headerIcon?.sd_setImageWithURL(NSURL(string: HDUserInfoManager.shareInstance.avatar!), placeholderImage: UIImage(named: "defaultIcon"))
+            headerIcon?.sd_setImage(with: URL(string: HDUserInfoManager.shareInstance.avatar!), placeholderImage: UIImage(named: "defaultIcon"))
             
         }else{
         
             headerIcon?.image = UIImage(named: "defaultIcon")
-            cntView?.hidden = true
-            userName?.hidden = true
-            headerIcon?.userInteractionEnabled = true
+            cntView?.isHidden = true
+            userName?.isHidden = true
+            headerIcon?.isUserInteractionEnabled = true
         }
         
     }
     
     // MARK: - 通知事件
-    func ct01Notification(note:NSNotification){
+    func ct01Notification(_ note:Notification){
     
         
-        let flag = note.userInfo!["FLAG"] as? String
+        let flag = (note as NSNotification).userInfo!["FLAG"] as? String
         
         if flag == "LOGIN" {
         
@@ -302,7 +302,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
         self.hidesBottomBarWhenPushed = false;
     }
     
-    func cntAction(btn:UIButton){
+    func cntAction(_ btn:UIButton){
     
         switch(btn.tag) {
         
@@ -322,21 +322,21 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     // MARK: - UITableView delegate/datasource
     
-    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return ct01Array[section].count
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return ct01Array.count
     }
     
-    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         /**
          *  图标
@@ -347,7 +347,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             icon = UIImageView()
             icon?.tag = 1000
             cell.contentView.addSubview(icon!)
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -368,9 +368,9 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(15)
+            title?.font = UIFont.systemFont(ofSize: 15)
             cell.contentView.addSubview(title!)
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(200)
                 make.height.equalTo(44)
@@ -389,7 +389,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             arrow?.tag = 3000
             cell.contentView.addSubview(arrow!)
             
-            arrow?.snp_makeConstraints(closure: { (make) -> Void in
+            arrow?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -400,31 +400,31 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
         }
         
-        let array = ct01Array[indexPath.section]
-        icon?.image = UIImage(named: array[indexPath.row]["image"]!)
-        title?.text =   array[indexPath.row]["title"]
+        let array = ct01Array[(indexPath as NSIndexPath).section]
+        icon?.image = UIImage(named: array[(indexPath as NSIndexPath).row]["image"]!)
+        title?.text =   array[(indexPath as NSIndexPath).row]["title"]
         arrow?.image = UIImage(named: "arrowIcon")
         
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //判断用户是否已登录
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let sign = defaults.objectForKey(Constants.HDSign)
+        let defaults = UserDefaults.standard
+        let sign = defaults.object(forKey: Constants.HDSign)
         
         
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             
             if let _ = sign {
             
@@ -442,7 +442,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             }
             
             
-        }else if indexPath.row == 1 {
+        }else if (indexPath as NSIndexPath).row == 1 {
             
             
             if let _ = sign {
@@ -461,7 +461,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             }
 
             
-        }else if indexPath.row == 2 {
+        }else if (indexPath as NSIndexPath).row == 2 {
             
             if let _ = sign {
                 
@@ -478,7 +478,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 self.hidesBottomBarWhenPushed = false;
             }
             
-        }else if indexPath.row == 3 {
+        }else if (indexPath as NSIndexPath).row == 3 {
             
             if let _ = sign {
                 
@@ -509,7 +509,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     // MARK: - UIScrollView Delegate
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         /**
         *  通过滚动视图获取到滚动偏移量从而去改变图片的变化
@@ -546,29 +546,29 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             rect?.size.width = Constants.HDSCREENWITH + fabs(xOffset)*2
             headerBg?.frame = rect!
             
-            headerIcon?.snp_updateConstraints(closure: { (make) -> Void in
+            headerIcon?.snp.updateConstraints({ (make) -> Void in
                 
                 make.left.equalTo(((rect?.width)! - 80)/2)
                 
             })
             
-            userName?.snp_updateConstraints(closure: { (make) -> Void in
+            userName?.snp.updateConstraints({ (make) -> Void in
                 
                 
                 make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
             })
             
-            sLine?.snp_updateConstraints(closure: { (make) -> Void in
+            sLine?.snp.updateConstraints({ (make) -> Void in
                 
                 make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
-                make.bottom.equalTo(headerBg!.snp_bottom).offset(0)
+                make.bottom.equalTo(headerBg!.snp.bottom).offset(0)
                 
             })
             
-            cntView?.snp_updateConstraints(closure: { (make) -> Void in
+            cntView?.snp.updateConstraints({ (make) -> Void in
                 
                 make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
-                make.bottom.equalTo(headerBg!.snp_bottom).offset(-10)
+                make.bottom.equalTo(headerBg!.snp.bottom).offset(-10)
                 
             })
             

@@ -17,21 +17,21 @@ class HDCG03Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDCG03_URL(keyword:String,limit:Int,offset:Int,successBlock:(hm04Response:HDHM04Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCG03_URL(_ keyword:String,limit:Int,offset:Int,successBlock:@escaping (_ hm04Response:HDHM04Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
         
         
-        HDRequestManager.doPostRequest(["tagid":"","keyword":keyword,"limit":limit,"offset":offset], URL: Constants.HDCG03_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["tagid":"" as AnyObject,"keyword":keyword as AnyObject,"limit":limit as AnyObject,"offset":offset as AnyObject], URL: Constants.HDCG03_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let response = Mapper<HDHM04Response>().map(response.result.value)
+                let response = Mapper<HDHM04Response>().map(JSONObject: response.result.value)
                 /// 回调
-                successBlock(hm04Response: response!)
+                successBlock(response!)
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
         }
         

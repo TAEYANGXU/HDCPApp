@@ -19,8 +19,8 @@ class CollectListModel:Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -44,8 +44,8 @@ class RecipeListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -64,8 +64,8 @@ class TagListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -85,8 +85,8 @@ class WikiListModel:Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -110,8 +110,8 @@ class HDHM01Result: Mappable {
     
     init(){}
 
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -132,8 +132,8 @@ class HDHM01Response: Mappable {
 
     init(){}
 
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
 

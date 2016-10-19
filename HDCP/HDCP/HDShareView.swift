@@ -16,17 +16,17 @@ private let resourceArray = [["title":"微信好友","image":"share_wxhy_icon"],
     ["title":"QQ空间","image":"share_qqzone_icon"]]
 
 public protocol HDShareViewDelegate:NSObjectProtocol {
-    func didShareWithType(type:Int);
+    func didShareWithType(_ type:Int);
 }
 
-public class HDShareView: UIView {
+open class HDShareView: UIView {
 
-    weak public var delegate:HDShareViewDelegate?
+    weak open var delegate:HDShareViewDelegate?
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         createSubviews()
         
     }
@@ -38,19 +38,19 @@ public class HDShareView: UIView {
             if i == 3 {
             
                 let btn = HDShareButton()
-                btn.backgroundColor = UIColor.whiteColor()
-                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                btn.backgroundColor = UIColor.white
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
                 btn.tag = i + 1000;
-                btn.titleLabel?.textAlignment = NSTextAlignment.Center
-                btn.titleLabel?.font = UIFont.systemFontOfSize(14)
-                btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
-                btn.setImage(UIImage(named:resourceArray[i]["image"]!), forState: UIControlState.Normal)
-                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                btn.titleLabel?.textAlignment = NSTextAlignment.center
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                btn.setTitle(resourceArray[i]["title"], for: UIControlState())
+                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControlState())
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-180)/6
                 
-                btn.snp_makeConstraints(closure: { (make) -> Void in
+                btn.snp.makeConstraints( { (make) -> Void in
                     
                     
                     make.top.equalTo(self).offset(HDShareButtonHeight+20+20+15)
@@ -65,26 +65,26 @@ public class HDShareView: UIView {
                 */
                 if !QQApiInterface.isQQInstalled() {
                     
-                    btn.enabled = false
+                    btn.isEnabled = false
                 }
 
                 
             }else{
             
                 let btn = HDShareButton()
-                btn.backgroundColor = UIColor.whiteColor()
-                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                btn.backgroundColor = UIColor.white
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
                 btn.tag = i + 1000;
-                btn.titleLabel?.textAlignment = NSTextAlignment.Center
-                btn.titleLabel?.font = UIFont.systemFontOfSize(14)
-                btn.setTitle(resourceArray[i]["title"], forState: UIControlState.Normal)
-                btn.setImage(UIImage(named:resourceArray[i]["image"]!), forState: UIControlState.Normal)
-                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                btn.titleLabel?.textAlignment = NSTextAlignment.center
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+                btn.setTitle(resourceArray[i]["title"], for: UIControlState())
+                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControlState())
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-CGFloat(3*HDShareButtonHeight))/6
                 
-                btn.snp_makeConstraints(closure: { (make) -> Void in
+                btn.snp.makeConstraints( { (make) -> Void in
                     
                     
                     make.top.equalTo(self).offset(20)
@@ -101,7 +101,7 @@ public class HDShareView: UIView {
                     */
                     if !WXApi.isWXAppInstalled() {
                     
-                        btn.enabled = false
+                        btn.isEnabled = false
                         
                     }
                     
@@ -112,7 +112,7 @@ public class HDShareView: UIView {
                     */
                     if !QQApiInterface.isQQInstalled() {
                     
-                        btn.enabled = false
+                        btn.isEnabled = false
                     }
                     
                 }
@@ -123,28 +123,28 @@ public class HDShareView: UIView {
         let line = UILabel()
         line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1.0)
         self.addSubview(line)
-        line.snp_makeConstraints { (make) -> Void in
+        line.snp.makeConstraints { (make) -> Void in
             
             make.left.equalTo(self).offset(0)
-            make.bottom.equalTo(self.snp_bottom).offset(-44)
+            make.bottom.equalTo(self.snp.bottom).offset(-44)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(1)
         }
         
         
         let cancelBtn = UIButton()
-        cancelBtn.backgroundColor = UIColor.whiteColor()
-        cancelBtn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-        cancelBtn.setTitle("取消", forState: UIControlState.Normal)
+        cancelBtn.backgroundColor = UIColor.white
+        cancelBtn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+        cancelBtn.setTitle("取消", for: UIControlState())
         cancelBtn.tag = 4 + 1000;
-        cancelBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
-        cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
         self.addSubview(cancelBtn)
         
-        cancelBtn.snp_makeConstraints { (make) -> Void in
+        cancelBtn.snp.makeConstraints { (make) -> Void in
             
             make.left.equalTo(self).offset(0)
-            make.bottom.equalTo(self.snp_bottom).offset(0)
+            make.bottom.equalTo(self.snp.bottom).offset(0)
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(44)
             
@@ -157,7 +157,7 @@ public class HDShareView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tagBtnOnclick(btn:UIButton){
+    func tagBtnOnclick(_ btn:UIButton){
         
         if (self.delegate != nil) {
             
@@ -174,14 +174,14 @@ public class HDShareView: UIView {
 
 class HDShareButton: UIButton {
     
-    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
         
-        return CGRectMake(0, contentRect.size.height*0.75, contentRect.size.width, contentRect.size.height*0.25);
+        return CGRect(x: 0, y: contentRect.size.height*0.75, width: contentRect.size.width, height: contentRect.size.height*0.25);
     }
     
-    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         
-        return CGRectMake(0, 0,contentRect.size.width,contentRect.size.height*0.75);
+        return CGRect(x: 0, y: 0,width: contentRect.size.width,height: contentRect.size.height*0.75);
     }
     
     

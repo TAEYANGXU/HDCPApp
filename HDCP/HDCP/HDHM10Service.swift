@@ -18,20 +18,20 @@ class HDHM10Service {
      - parameter failBlock:    失败
      */
     
-    func doGetRequest_HDHM10_URL(limit:Int,offset:Int,rid:Int,successBlock:(hdHM10Response:HDHM10Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDHM10_URL(_ limit:Int,offset:Int,rid:Int,successBlock:@escaping (_ hdHM10Response:HDHM10Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
         
-        HDRequestManager.doPostRequest(["limit":limit,"offset":offset,"rid":rid,"type":0], URL: Constants.HDHM10_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":limit as AnyObject,"offset":offset as AnyObject,"rid":rid as AnyObject,"type":0 as AnyObject], URL: Constants.HDHM10_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let hdResponse = Mapper<HDHM10Response>().map(response.result.value)
+                let hdResponse = Mapper<HDHM10Response>().map(JSONObject: response.result.value)
                 /// 回调
-                successBlock(hdHM10Response: hdResponse!)
+                successBlock(hdResponse!)
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import Kingfisher
 
 private let cateArray = [["title":"口味","image":"KWIcon"],
     ["title":"菜系","image":"CXIcon"],
@@ -28,8 +29,8 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = UIRectEdge.None;
-        self.navigationController?.navigationBar.translucent = false
+        self.edgesForExtendedLayout = UIRectEdge();
+        self.navigationController?.navigationBar.isTranslucent = false
         
         setupUI()
         
@@ -51,7 +52,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hidenHud()
     }
@@ -59,7 +60,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
     
     deinit{
         
-        HDLog.LogClassDestory("HDCG01Controller")
+        HDLog.LogClassDestory("HDCG01Controller" as AnyObject)
         
     }
     
@@ -79,7 +80,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
     
     func setupUI(){
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
@@ -87,11 +88,11 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         searchBar =  UISearchBar()
         searchBar.placeholder = "搜索菜谱、食材或功效"
         searchBar.delegate = self
-        searchBar.frame = CGRectMake(0, 0, Constants.HDSCREENWITH, 44)
+        searchBar.frame = CGRect(x: 0, y: 0, width: Constants.HDSCREENWITH, height: 44)
         searchBar.sizeToFit()
         searchBar.barTintColor = Constants.HDBGViewColor
         searchBar.layer.borderWidth = 1;
-        searchBar.layer.borderColor = Constants.HDBGViewColor.CGColor;
+        searchBar.layer.borderColor = Constants.HDBGViewColor.cgColor;
         searchBar.showsCancelButton = false
         self.tableView.tableHeaderView = searchBar
         
@@ -106,7 +107,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         HDCG01Service().doGetRequest_HDCG02_URL({ (HDCG01Response) -> Void in
             
             WS.hidenHud()
-            if HDCG01Response.result?.list!.count>0 {
+            if (HDCG01Response.result?.list!.count)!>0 {
                 WS.dataArray = (HDCG01Response.result?.list!)!
             }
             WS.tableView!.reloadData()
@@ -123,7 +124,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
 
     // MARK: - UISearchBar delegate
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
         let hdHM04VC = HDCG03Controller()
         self.hidesBottomBarWhenPushed = true;
@@ -136,15 +137,15 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         /**
          *  图标
          */
@@ -154,7 +155,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             icon = UIImageView()
             icon?.tag = 1000
             cell.contentView.addSubview(icon!)
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -175,13 +176,13 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(15)
+            title?.font = UIFont.systemFont(ofSize: 15)
             cell.contentView.addSubview(title!)
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(200)
                 make.height.equalTo(44)
-                make.left.equalTo((icon?.snp_right)!).offset(16)
+                make.left.equalTo((icon?.snp.right)!).offset(16)
                 make.top.equalTo(cell.contentView).offset(0)
             })
         }
@@ -196,7 +197,7 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
             arrow?.tag = 3000
             cell.contentView.addSubview(arrow!)
             
-            arrow?.snp_makeConstraints(closure: { (make) -> Void in
+            arrow?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -208,16 +209,23 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         }
         
         
-        let model = dataArray[indexPath.row] as HDCG01ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as HDCG01ListModel
         
-        let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model.imgUrl!)
+        let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model.imgUrl!)
         if let _ = image {
             icon?.image = image
         }else{
-            icon?.sd_setImageWithURL(NSURL(string: (model.imgUrl!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                //保存图片，并保存到物理存储上  
-                SDImageCache.sharedImageCache().storeImage(image, forKey: model.imgUrl!, toDisk: true)
+            icon?.kf.setImage(with: URL(string:model.imgUrl!),
+                              placeholder: UIImage(named: "noDataDefaultIcon"),
+                              options: nil,
+                              progressBlock: { receivedSize, totalSize in
+                                
+                },
+                              completionHandler: { image, error, cacheType, imageURL in
+                                
             })
+            //icon?.sd_setImageWithURL(with: URL(string:model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+//            icon?.sd_setImage(with:URL(string: (model.imgUrl!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         }
         
         title?.text =   model.cate!
@@ -227,16 +235,16 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 44
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         /**
         *  分类列表
         */
-        let model = dataArray[indexPath.row] as HDCG01ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as HDCG01ListModel
         
         let hdcg02VC = HDCG02Controller()
         hdcg02VC.name = model.cate

@@ -15,7 +15,7 @@ class WelcomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        UIApplication.sharedApplication().statusBarHidden = true
+        UIApplication.shared.isStatusBarHidden = true
      
         setupUI()
     }
@@ -29,15 +29,15 @@ class WelcomeController: UIViewController {
     func setupUI(){
         
         welcomeView = UIScrollView()
-        welcomeView?.contentSize = CGSizeMake(Constants.HDSCREENWITH*5, Constants.HDSCREENHEIGHT)
-        welcomeView?.pagingEnabled = true
+        welcomeView?.contentSize = CGSize(width: Constants.HDSCREENWITH*5, height: Constants.HDSCREENHEIGHT)
+        welcomeView?.isPagingEnabled = true
         welcomeView?.bounces = false
         welcomeView?.showsHorizontalScrollIndicator = false
         welcomeView?.showsVerticalScrollIndicator = false
         self.view.addSubview(welcomeView!)
         
         unowned let WS = self;
-        welcomeView?.snp_makeConstraints(closure: { (make) -> Void in
+        welcomeView?.snp.makeConstraints( { (make) -> Void in
             
             make.top.equalTo(WS.view).offset(0)
             make.left.equalTo(WS.view).offset(0)
@@ -52,7 +52,7 @@ class WelcomeController: UIViewController {
             let imageView = UIImageView()
             imageView.image = UIImage(named: String(format: "guide_step0%d",i))
             welcomeView?.addSubview(imageView)
-            imageView.snp_makeConstraints(closure: { (make) -> Void in
+            imageView.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(welcomeView!).offset(0)
                 make.left.equalTo(welcomeView!).offset(CGFloat(i-1)*Constants.HDSCREENWITH)
@@ -62,19 +62,19 @@ class WelcomeController: UIViewController {
 
             if i == 5 {
             
-                let btn = UIButton(type: UIButtonType.Custom)
-                btn.backgroundColor = UIColor.clearColor()
-                btn.setTitle("立即体验", forState: UIControlState.Normal)
+                let btn = UIButton(type: UIButtonType.custom)
+                btn.backgroundColor = UIColor.clear
+                btn.setTitle("立即体验", for: UIControlState())
                 btn.layer.cornerRadius = 5;
                 btn.layer.masksToBounds = true
-                btn.setTitleColor(Constants.HDYellowColor, forState: UIControlState.Normal)
-                btn.layer.borderColor = Constants.HDMainColor.CGColor
+                btn.setTitleColor(Constants.HDYellowColor, for: UIControlState.normal)
+                btn.layer.borderColor = Constants.HDMainColor.cgColor
                 btn.layer.borderWidth = 1
                 welcomeView?.addSubview(btn)
                 
-                btn.addTarget(self, action: #selector(toMain), forControlEvents: UIControlEvents.TouchUpInside)
+                btn.addTarget(self, action: #selector(toMain), for: UIControlEvents.touchUpInside)
                 
-                btn.snp_makeConstraints(closure: { (make) -> Void in
+                btn.snp.makeConstraints( { (make) -> Void in
                     
                     make.bottom.equalTo(welcomeView!).offset(Constants.HDSCREENHEIGHT-100)
                     make.left.equalTo(welcomeView!).offset(CGFloat(i-1)*Constants.HDSCREENWITH+Constants.HDSCREENWITH/2-50)
@@ -101,9 +101,9 @@ class WelcomeController: UIViewController {
 //        userDefault.setValue(Constants.HDShowWelcome, forKey: Constants.HDShowWelcome)
 //        userDefault.synchronize()
         
-        UIApplication.sharedApplication().statusBarHidden = false
-        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        UIApplication.sharedApplication().delegate?.window!!.rootViewController = MainViewController()
+        UIApplication.shared.isStatusBarHidden = false
+        UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+        UIApplication.shared.delegate?.window!!.rootViewController = MainViewController()
         
     }
     

@@ -18,8 +18,8 @@ class HDHM07ListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -41,8 +41,8 @@ class HDHM07Result: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -60,8 +60,8 @@ class HDHM07Response: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         

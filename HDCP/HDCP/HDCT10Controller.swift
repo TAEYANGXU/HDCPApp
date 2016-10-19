@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class DTView: UIView {
     
@@ -36,8 +56,8 @@ class HDCT10Controller: UITableViewController {
     func setupUI(){
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
 
         
@@ -75,7 +95,7 @@ class HDCT10Controller: UITableViewController {
                 
                 let contentStr = String(format: "[%@]%@", model.data!.tagName!,model.data!.content!)
                 
-                let contentRect = CoreUtils.getTextRectSize(contentStr, font: UIFont.systemFontOfSize(14), size: CGSizeMake(Constants.HDSCREENWITH-100, 9999))
+                let contentRect = CoreUtils.getTextRectSize(contentStr as NSString, font: UIFont.systemFont(ofSize: 14), size: CGSize(width: Constants.HDSCREENWITH-100, height: 9999))
                 model.contentHeight = contentRect.size.height;
                 
                 let row = Int(contentRect.size.height/16)
@@ -95,7 +115,7 @@ class HDCT10Controller: UITableViewController {
                 
                     let comment:HDCT10CommentListModel = model.data!.commentList![0]
                     let commentStr = String(format: "%@: %@",comment.userName!,comment.content!)
-                    let commentRect = CoreUtils.getTextRectSize(commentStr, font: UIFont.systemFontOfSize(14), size: CGSizeMake(Constants.HDSCREENWITH-110, 9999))
+                    let commentRect = CoreUtils.getTextRectSize(commentStr as NSString, font: UIFont.systemFont(ofSize: 14), size: CGSize(width: Constants.HDSCREENWITH-110, height: 9999))
                     let row = Int(commentRect.size.height/16)
                     model.fcommentRow = row
                     model.rowHeight = 365 + model.contentHeight!
@@ -117,11 +137,11 @@ class HDCT10Controller: UITableViewController {
     
     deinit{
         
-        HDLog.LogOut("HDCT10Controller")
+        HDLog.LogOut("HDCT10Controller" as AnyObject)
         videoPlayerController = nil
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "动态"
@@ -133,23 +153,23 @@ class HDCT10Controller: UITableViewController {
     func backAction(){
         
         videoPlayerController?.close()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
-    func commentAction(tap:UITapGestureRecognizer){
+    func commentAction(_ tap:UITapGestureRecognizer){
     
         
         let view = tap.view as! DTView;
         
-        HDLog.LogOut("index", obj: view.index!)
+        HDLog.LogOut("index" as AnyObject, obj: view.index! as AnyObject)
         
         
     }
     
 
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
         
         unowned let WS = self;
         HDCT10Service().doGetRequest_HDCT10_URL(0, offset: 0, successBlock: { (hdResponse) -> Void in
@@ -158,7 +178,7 @@ class HDCT10Controller: UITableViewController {
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hdResponse.result?.list)!)
+            WS.dataArray.addObjects(from: (hdResponse.result?.list)!)
             
             WS.getRowHeight();
             
@@ -177,16 +197,16 @@ class HDCT10Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.None
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
+        cell.accessoryType = UITableViewCellAccessoryType.none
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         //头像
         var icon = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -199,7 +219,7 @@ class HDCT10Controller: UITableViewController {
             icon?.layer.masksToBounds = true
             cell.contentView.addSubview(icon!)
             
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints({ (make) -> Void in
                 
                 make.left.equalTo(15)
                 make.top.equalTo(10)
@@ -219,12 +239,12 @@ class HDCT10Controller: UITableViewController {
             name?.textColor = Constants.HDMainTextColor
             name?.adjustsFontSizeToFitWidth=true
             name?.tag = 2000
-            name?.font = UIFont.systemFontOfSize(17)
+            name?.font = UIFont.systemFont(ofSize: 17)
             cell.contentView.addSubview(name!)
             
-            name?.snp_makeConstraints(closure: { (make) -> Void in
+            name?.snp.makeConstraints({ (make) -> Void in
                 
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.top.equalTo(cell.contentView).offset(10)
                 make.width.equalTo(60)
                 make.height.equalTo(20)
@@ -241,10 +261,10 @@ class HDCT10Controller: UITableViewController {
             vip?.tag = 3000
             cell.contentView.addSubview(vip!)
             
-            vip?.snp_makeConstraints(closure: { (make) -> Void in
+            vip?.snp.makeConstraints({ (make) -> Void in
                 
                 make.top.equalTo(10)
-                make.left.equalTo(name!.snp_right).offset(10)
+                make.left.equalTo(name!.snp.right).offset(10)
                 make.width.equalTo(20)
                 make.height.equalTo(20)
                 
@@ -261,11 +281,11 @@ class HDCT10Controller: UITableViewController {
             sex?.tag = 4000
             cell.contentView.addSubview(sex!)
             
-            sex?.snp_makeConstraints(closure: { (make) -> Void in
+            sex?.snp.makeConstraints({ (make) -> Void in
                 
                 
                 make.top.equalTo(10)
-                make.left.equalTo(vip!.snp_right).offset(10)
+                make.left.equalTo(vip!.snp.right).offset(10)
                 make.width.equalTo(20)
                 make.height.equalTo(20)
             })
@@ -280,13 +300,13 @@ class HDCT10Controller: UITableViewController {
             title = UILabel()
             title?.tag = 5000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(15)
+            title?.font = UIFont.systemFont(ofSize: 15)
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(icon!.snp_bottom).offset(5)
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.top.equalTo(icon!.snp.bottom).offset(5)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.width.equalTo(Constants.HDSCREENWITH - 120)
                 make.height.equalTo(20);
                 
@@ -304,13 +324,13 @@ class HDCT10Controller: UITableViewController {
             content?.tag = 6000
             content?.textColor = Constants.HDMainTextColor
             content?.numberOfLines = 0
-            content?.font = UIFont.systemFontOfSize(14)
+            content?.font = UIFont.systemFont(ofSize: 14)
             cell.contentView.addSubview(content!)
             
-            content?.snp_makeConstraints(closure: { (make) -> Void in
+            content?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(title!.snp_bottom).offset(5)
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.top.equalTo(title!.snp.bottom).offset(5)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.width.equalTo(Constants.HDSCREENWITH - 100)
                 make.height.equalTo(20);
                 
@@ -326,10 +346,10 @@ class HDCT10Controller: UITableViewController {
             imageView = UIImageView()
             imageView?.tag = 7000
             cell.contentView.addSubview(imageView!)
-            imageView?.snp_makeConstraints(closure: { (make) -> Void in
+            imageView?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(content!.snp_bottom).offset(5)
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.top.equalTo(content!.snp.bottom).offset(5)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.height.equalTo(120)
                 make.width.equalTo(Constants.HDSCREENWITH - 150)
                 
@@ -345,7 +365,7 @@ class HDCT10Controller: UITableViewController {
             playView?.tag = 7100
             playView?.image = UIImage(named: "playIcon")
             imageView!.addSubview(playView!)
-            playView?.snp_makeConstraints(closure: { (make) -> Void in
+            playView?.snp.makeConstraints({ (make) -> Void in
                 
                 make.top.equalTo(120/2-25)
                 make.left.equalTo((Constants.HDSCREENWITH - 150)/2-25)
@@ -363,13 +383,13 @@ class HDCT10Controller: UITableViewController {
             time = UILabel()
             time?.tag = 8000
             time?.textColor = Constants.HDMainTextColor
-            time?.font = UIFont.systemFontOfSize(14)
+            time?.font = UIFont.systemFont(ofSize: 14)
             cell.contentView.addSubview(time!)
             
-            time?.snp_makeConstraints(closure: { (make) -> Void in
+            time?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(imageView!.snp_bottom).offset(10)
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.top.equalTo(imageView!.snp.bottom).offset(10)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.width.equalTo(Constants.HDSCREENWITH - 100)
                 make.height.equalTo(20);
                 
@@ -389,10 +409,10 @@ class HDCT10Controller: UITableViewController {
             commentView?.backgroundColor = CoreUtils.HDColor(249, g: 249, b: 249, a: 1)
             cell.contentView.addSubview(commentView!)
             
-            commentView?.snp_makeConstraints(closure: { (make) -> Void in
+            commentView?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(time!.snp_bottom).offset(15)
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.top.equalTo(time!.snp.bottom).offset(15)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.width.equalTo(Constants.HDSCREENWITH - 100)
                 make.height.equalTo(80);
                 
@@ -409,10 +429,10 @@ class HDCT10Controller: UITableViewController {
             comment?.tag = 10000
             comment?.textColor = Constants.HDMainTextColor
             comment?.numberOfLines = 0
-            comment?.font = UIFont.systemFontOfSize(14)
+            comment?.font = UIFont.systemFont(ofSize: 14)
             commentView!.addSubview(comment!)
             
-            comment?.snp_makeConstraints(closure: { (make) -> Void in
+            comment?.snp.makeConstraints({ (make) -> Void in
                 
                 make.top.equalTo(5)
                 make.left.equalTo(5)
@@ -431,12 +451,12 @@ class HDCT10Controller: UITableViewController {
             commentCnt = UILabel()
             commentCnt?.tag = 11000
             commentCnt?.textColor = Constants.HDMainTextColor
-            commentCnt?.font = UIFont.systemFontOfSize(14)
+            commentCnt?.font = UIFont.systemFont(ofSize: 14)
             commentView!.addSubview(commentCnt!)
             
-            commentCnt?.snp_makeConstraints(closure: { (make) -> Void in
+            commentCnt?.snp.makeConstraints({ (make) -> Void in
                 
-                make.top.equalTo(comment!.snp_bottom).offset(5)
+                make.top.equalTo(comment!.snp.bottom).offset(5)
                 make.left.equalTo(5)
                 make.width.equalTo(Constants.HDSCREENWITH - 110)
                 make.height.equalTo(25);
@@ -453,7 +473,7 @@ class HDCT10Controller: UITableViewController {
             spaceView?.tag = 12000
             spaceView?.backgroundColor = Constants.HDBGViewColor
             cell.contentView.addSubview(spaceView!)
-            spaceView?.snp_makeConstraints(closure: { (make) -> Void in
+            spaceView?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(Constants.HDSpace)
@@ -464,11 +484,11 @@ class HDCT10Controller: UITableViewController {
             
         }
         
-        let model = dataArray[indexPath.row] as! HDCT10ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDCT10ListModel
         
         name?.text = model.userInfo?.userName
         
-        icon?.sd_setImageWithURL(NSURL(string: (model.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+        icon?.sd_setImage(with: URL(string: (model.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
         
         title?.text = model.data?.title
         
@@ -480,7 +500,7 @@ class HDCT10Controller: UITableViewController {
         }
         
         
-        imageView?.sd_setImageWithURL(NSURL(string:  (model.data?.img)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        imageView?.sd_setImage(with: URL(string:  (model.data?.img)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         
         time?.text = model.data?.createTime
         
@@ -504,25 +524,25 @@ class HDCT10Controller: UITableViewController {
             let str = String(format: "%d", (model.data?.commentCnt)!)
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
             attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
             commentCnt?.attributedText =  attributed
         
         }else{
         
-            commentView?.hidden = true
+            commentView?.isHidden = true
         }
         
         
         if model.userInfo?.vip == 1 {
             
             //是vip用户
-            vip?.hidden = false
+            vip?.isHidden = false
             vip?.image = UIImage(named: "VIcon")
             
         }else{
             
-            vip?.hidden = true
+            vip?.isHidden = true
         }
         
         //0:=女 1:男
@@ -537,37 +557,37 @@ class HDCT10Controller: UITableViewController {
         if model.data?.hasVideo == 1 {
         
             //是视频
-            playView?.hidden = false
+            playView?.isHidden = false
         }else{
         
             //是图片
-            playView?.hidden = true
+            playView?.isHidden = true
         }
         
-        content?.snp_updateConstraints(closure: { (make) -> Void in
+        content?.snp.updateConstraints({ (make) -> Void in
             
             make.height.equalTo(model.contentHeight!)
         })
         
-        imageView?.snp_updateConstraints(closure: { (make) -> Void in
+        imageView?.snp.updateConstraints({ (make) -> Void in
             
-            make.top.equalTo(content!.snp_bottom).offset(5)
+            make.top.equalTo(content!.snp.bottom).offset(5)
             
         })
 
-        time?.snp_updateConstraints(closure: { (make) -> Void in
+        time?.snp.updateConstraints({ (make) -> Void in
             
-            make.top.equalTo(imageView!.snp_bottom).offset(15)
+            make.top.equalTo(imageView!.snp.bottom).offset(15)
             
         })
         
-        commentView?.snp_updateConstraints(closure: { (make) -> Void in
+        commentView?.snp.updateConstraints({ (make) -> Void in
             
-            make.top.equalTo(time!.snp_bottom).offset(15)
+            make.top.equalTo(time!.snp.bottom).offset(15)
             
         })
 
-        commentView?.index = indexPath.row
+        commentView?.index = (indexPath as NSIndexPath).row
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(HDCT10Controller.commentAction(_:)))
         commentView?.addGestureRecognizer(tapGes)
         
@@ -575,15 +595,15 @@ class HDCT10Controller: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
-        let model = dataArray[indexPath.row] as! HDCT10ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDCT10ListModel
         
         return model.rowHeight!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
        
         

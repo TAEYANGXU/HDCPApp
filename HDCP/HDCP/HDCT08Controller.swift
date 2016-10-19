@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class HDCT08Controller: UITableViewController {
 
@@ -25,7 +45,7 @@ class HDCT08Controller: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "豆友"
@@ -43,8 +63,8 @@ class HDCT08Controller: UITableViewController {
     func setupUI(){
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -58,12 +78,12 @@ class HDCT08Controller: UITableViewController {
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
     
         unowned let WS = self
         HDCT08Service().doGetRequest_HDCT08_URL(limit, offset: offset, successBlock: { (hdResponse) -> Void in
@@ -72,7 +92,7 @@ class HDCT08Controller: UITableViewController {
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hdResponse.result?.list)!)
+            WS.dataArray.addObjects(from: (hdResponse.result?.list)!)
             
             WS.tableView.mj_footer.endRefreshing()
             
@@ -100,14 +120,14 @@ class HDCT08Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         //豆友头像
         var icon = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -120,7 +140,7 @@ class HDCT08Controller: UITableViewController {
             icon?.layer.masksToBounds = true
             cell.contentView.addSubview(icon!)
             
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(15)
                 make.top.equalTo(10)
@@ -140,12 +160,12 @@ class HDCT08Controller: UITableViewController {
             name?.textColor = Constants.HDMainTextColor
             name?.adjustsFontSizeToFitWidth=true
             name?.tag = 2000
-            name?.font = UIFont.systemFontOfSize(16)
+            name?.font = UIFont.systemFont(ofSize: 16)
             cell.contentView.addSubview(name!)
         
-            name?.snp_makeConstraints(closure: { (make) -> Void in
+            name?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(icon!.snp_right).offset(20)
+                make.left.equalTo(icon!.snp.right).offset(20)
                 make.top.equalTo(cell.contentView).offset(10)
                 make.width.equalTo(60)
                 make.height.equalTo(20)
@@ -162,10 +182,10 @@ class HDCT08Controller: UITableViewController {
             vip?.tag = 3000
             cell.contentView.addSubview(vip!)
             
-            vip?.snp_makeConstraints(closure: { (make) -> Void in
+            vip?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(10)
-                make.left.equalTo(name!.snp_right).offset(10)
+                make.left.equalTo(name!.snp.right).offset(10)
                 make.width.equalTo(20)
                 make.height.equalTo(20)
                 
@@ -182,11 +202,11 @@ class HDCT08Controller: UITableViewController {
             sex?.tag = 4000
             cell.contentView.addSubview(sex!)
             
-            sex?.snp_makeConstraints(closure: { (make) -> Void in
+            sex?.snp.makeConstraints( { (make) -> Void in
                 
                 
                 make.top.equalTo(10)
-                make.left.equalTo(vip!.snp_right).offset(10)
+                make.left.equalTo(vip!.snp.right).offset(10)
                 make.width.equalTo(20)
                 make.height.equalTo(20)
             })
@@ -201,13 +221,13 @@ class HDCT08Controller: UITableViewController {
             favoriteList = UILabel()
             favoriteList?.tag = 5000
             favoriteList?.textColor = Constants.HDMainTextColor
-            favoriteList?.font = UIFont.systemFontOfSize(13)
+            favoriteList?.font = UIFont.systemFont(ofSize: 13)
             cell.contentView.addSubview(favoriteList!)
             
-            favoriteList?.snp_makeConstraints(closure: { (make) -> Void in
+            favoriteList?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(icon!.snp_right).offset(20)
-                make.top.equalTo(name!.snp_bottom).offset(10)
+                make.left.equalTo(icon!.snp.right).offset(20)
+                make.top.equalTo(name!.snp.bottom).offset(10)
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 make.height.equalTo(20)
                 
@@ -222,14 +242,14 @@ class HDCT08Controller: UITableViewController {
             
             address = UILabel()
             address?.tag = 6000
-            address?.textColor = UIColor.lightGrayColor()
-            address?.font = UIFont.systemFontOfSize(12)
+            address?.textColor = UIColor.lightGray
+            address?.font = UIFont.systemFont(ofSize: 12)
             cell.contentView.addSubview(address!)
             
-            address?.snp_makeConstraints(closure: { (make) -> Void in
+            address?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(icon!.snp_right).offset(20)
-                make.bottom.equalTo(cell.contentView.snp_bottom).offset(-10)
+                make.left.equalTo(icon!.snp.right).offset(20)
+                make.bottom.equalTo(cell.contentView.snp.bottom).offset(-10)
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 make.height.equalTo(20)
                 
@@ -247,26 +267,26 @@ class HDCT08Controller: UITableViewController {
             line?.backgroundColor = Constants.HDBGViewColor
             cell.contentView.addSubview(line!)
             
-            line?.snp_makeConstraints(closure: { (make) -> Void in
+            line?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(Constants.HDSpace/2)
-                make.bottom.equalTo(cell.contentView.snp_bottom).offset(0)
+                make.bottom.equalTo(cell.contentView.snp.bottom).offset(0)
                 
             })
             
         }
         
-        let model = dataArray[indexPath.row] as! HDCT08ListModel
-        icon?.sd_setImageWithURL(NSURL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDCT08ListModel
+        icon?.sd_setImage(with:URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
         
         /// 文本宽度计算
         let text:NSString = NSString(string: model.userName)
         let attributes = [NSFontAttributeName: name!.font]
-        let option = NSStringDrawingOptions.UsesLineFragmentOrigin
-        let rect = text.boundingRectWithSize(CGSizeMake(200, 300), options: option, attributes: attributes, context: nil)
+        let option = NSStringDrawingOptions.usesLineFragmentOrigin
+        let rect = text.boundingRect(with: CGSize(width: 200, height: 300), options: option, attributes: attributes, context: nil)
         name?.text = model.userName
-        name?.snp_updateConstraints(closure: { (make) -> Void in
+        name?.snp.updateConstraints({ (make) -> Void in
             
             make.width.equalTo(rect.size.width)
         })
@@ -274,12 +294,12 @@ class HDCT08Controller: UITableViewController {
         if model.vip == 1 {
             
             //是vip用户
-            vip?.hidden = false
+            vip?.isHidden = false
             vip?.image = UIImage(named: "VIcon")
             
         }else{
         
-            vip?.hidden = true
+            vip?.isHidden = true
         }
         
         //0:=女 1:男
@@ -304,29 +324,29 @@ class HDCT08Controller: UITableViewController {
                 let favorite = model.favoriteList![i]
                 
                 if i == (model.favoriteList?.count)!-1 {
-                    favoriteStr.appendContentsOf(favorite.name!)
+                    favoriteStr.append(favorite.name!)
                     
                 }else{
-                    favoriteStr.appendContentsOf(String(format: "%@、", favorite.name!))
+                    favoriteStr.append(String(format: "%@、", favorite.name!))
                 }
                 
             }
             
-            favoriteList?.hidden = false
+            favoriteList?.isHidden = false
             favoriteList?.text = favoriteStr
             
         }else{
         
             favoriteList?.text = ""
-            favoriteList?.hidden = true
+            favoriteList?.isHidden = true
         }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let model = dataArray[indexPath.row] as! HDCT08ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDCT08ListModel
         if model.favoriteList?.count > 0 {
         
             return 100
@@ -336,7 +356,7 @@ class HDCT08Controller: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
         

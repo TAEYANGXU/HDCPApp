@@ -35,7 +35,7 @@ class HDHM07Cell: UITableViewCell {
             coverImageV?.layer.masksToBounds = true
             self.contentView.addSubview(coverImageV!)
             
-            coverImageV?.snp_makeConstraints(closure: { (make) -> Void in
+            coverImageV?.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(self.contentView).offset(16)
                 make.top.equalTo(self.contentView).offset(10)
@@ -50,13 +50,13 @@ class HDHM07Cell: UITableViewCell {
             
             
             title = UILabel()
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFont(ofSize: 16)
             title?.textColor = Constants.HDMainTextColor
             self.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(coverImageV!.snp_right).offset(5)
+                make.left.equalTo(coverImageV!.snp.right).offset(5)
                 make.right.equalTo(self.contentView).offset(-20)
                 make.top.equalTo(self.contentView).offset(10)
                 make.height.equalTo(25)
@@ -69,15 +69,15 @@ class HDHM07Cell: UITableViewCell {
             
             content = UILabel()
             content?.numberOfLines = 2 
-            content?.font = UIFont.systemFontOfSize(13)
-            content?.textColor = UIColor.lightGrayColor()
+            content?.font = UIFont.systemFont(ofSize: 13)
+            content?.textColor = UIColor.lightGray
             self.contentView.addSubview(content!)
             
-            content?.snp_makeConstraints(closure: { (make) -> Void in
+            content?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(coverImageV!.snp_right).offset(5)
+                make.left.equalTo(coverImageV!.snp.right).offset(5)
                 make.right.equalTo(self.contentView).offset(-20)
-                make.top.equalTo(title!.snp_bottom).offset(0)
+                make.top.equalTo(title!.snp.bottom).offset(0)
                 make.height.equalTo(35)
                 
             })
@@ -98,7 +98,7 @@ class HDHM07Cell: UITableViewCell {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

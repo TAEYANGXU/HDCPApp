@@ -26,7 +26,7 @@ class HDHM02Controller: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "排行榜"
@@ -46,7 +46,7 @@ class HDHM02Controller: UITableViewController {
     
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
     }
@@ -67,11 +67,11 @@ class HDHM02Controller: UITableViewController {
     
     func backAction(){
     
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
-    func didHeaderView(ges:UITapGestureRecognizer){
+    func didHeaderView(_ ges:UITapGestureRecognizer){
     
         
         let headerView = ges.view
@@ -90,7 +90,7 @@ class HDHM02Controller: UITableViewController {
         dataArray[tag] = model
         
         //刷新指定组
-        self.tableView.reloadSections(NSIndexSet(index: tag), withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView.reloadSections(IndexSet(integer: tag), with: UITableViewRowAnimation.fade)
         
         
     }
@@ -119,7 +119,7 @@ class HDHM02Controller: UITableViewController {
     }
     
     // MARK: - UITableView delegate
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         let model:HDHM02List = dataArray[section]
         
@@ -133,27 +133,27 @@ class HDHM02Controller: UITableViewController {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return self.dataArray.count
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         
         let model:HDHM02List = dataArray[section]
         
-        let headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,49))
-        headerView.backgroundColor = UIColor.whiteColor()
+        let headerView = UIView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: 49))
+        headerView.backgroundColor = UIColor.white
         
         /// 名称
         let title = UILabel()
-        title.font = UIFont.systemFontOfSize(16)
+        title.font = UIFont.systemFont(ofSize: 16)
         title.textColor = Constants.HDMainTextColor
         title.text = model.title
         headerView.addSubview(title)
         
-        title.snp_makeConstraints { (make) -> Void in
+        title.snp.makeConstraints { (make) -> Void in
             
             make.left.equalTo(headerView).offset(16)
             make.top.equalTo(headerView).offset(5)
@@ -175,7 +175,7 @@ class HDHM02Controller: UITableViewController {
         
         headerView.addSubview(arrowView)
         
-        arrowView.snp_makeConstraints { (make) -> Void in
+        arrowView.snp.makeConstraints { (make) -> Void in
             
             make.width.equalTo(20)
             make.height.equalTo(20)
@@ -189,7 +189,7 @@ class HDHM02Controller: UITableViewController {
         lineTopView.backgroundColor = Constants.HDBGViewColor
         headerView.addSubview(lineTopView)
         
-        lineTopView.snp_makeConstraints { (make) -> Void in
+        lineTopView.snp.makeConstraints { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace/2)
@@ -203,7 +203,7 @@ class HDHM02Controller: UITableViewController {
         lineBottomView.backgroundColor = Constants.HDBGViewColor
         headerView.addSubview(lineBottomView)
         
-        lineBottomView.snp_makeConstraints { (make) -> Void in
+        lineBottomView.snp.makeConstraints { (make) -> Void in
             
             make.width.equalTo(Constants.HDSCREENWITH)
             make.height.equalTo(Constants.HDSpace/2)
@@ -220,10 +220,10 @@ class HDHM02Controller: UITableViewController {
         return headerView
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
         
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         /// 图标
         var icon =  cell.contentView.viewWithTag(1000) as? UIImageView
@@ -234,7 +234,7 @@ class HDHM02Controller: UITableViewController {
             icon?.tag = 1000
             cell.contentView.addSubview(icon!)
             
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(24)
                 make.height.equalTo(24)
@@ -253,12 +253,12 @@ class HDHM02Controller: UITableViewController {
         
             num = UILabel()
             num?.tag = 2000
-            num?.textAlignment = NSTextAlignment.Center
-            num?.textColor = UIColor.whiteColor()
-            num!.font = UIFont.systemFontOfSize(13)
+            num?.textAlignment = NSTextAlignment.center
+            num?.textColor = UIColor.white
+            num!.font = UIFont.systemFont(ofSize: 13)
             cell.contentView.addSubview(num!)
             
-            num?.snp_makeConstraints(closure: { (make) -> Void in
+            num?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -276,13 +276,13 @@ class HDHM02Controller: UITableViewController {
         
             title = UILabel()
             title?.tag = 3000
-            title!.font = UIFont.systemFontOfSize(15)
+            title!.font = UIFont.systemFont(ofSize: 15)
             title!.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
-                make.left.equalTo(icon!.snp_right).offset(10)
+                make.left.equalTo(icon!.snp.right).offset(10)
                 make.top.equalTo(cell.contentView).offset(0)
                 make.bottom.equalTo(cell.contentView).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH-140)
@@ -298,12 +298,12 @@ class HDHM02Controller: UITableViewController {
             
             rconut = UILabel()
             rconut?.tag = 4000
-            rconut!.font = UIFont.systemFontOfSize(14)
-            rconut!.textAlignment = NSTextAlignment.Right
+            rconut!.font = UIFont.systemFont(ofSize: 14)
+            rconut!.textAlignment = NSTextAlignment.right
             rconut!.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(rconut!)
             
-            rconut?.snp_makeConstraints(closure: { (make) -> Void in
+            rconut?.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(cell.contentView).offset(Constants.HDSCREENWITH-100)
                 make.top.equalTo(cell.contentView).offset(0)
@@ -315,8 +315,8 @@ class HDHM02Controller: UITableViewController {
         }
         
         //赋值
-        let model:HDHM02List = dataArray[indexPath.section]
-        let repice:HDHM02RecipeModel = model.recipe![indexPath.row]
+        let model:HDHM02List = dataArray[(indexPath as NSIndexPath).section]
+        let repice:HDHM02RecipeModel = model.recipe![(indexPath as NSIndexPath).row]
         
         title?.text = repice.title
         rconut!.text = String(format: "%ld", repice.viewCount!)
@@ -326,50 +326,50 @@ class HDHM02Controller: UITableViewController {
         *   根据排名 显示不同的Icon
         */
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             
             /// 第一名
             icon?.image = UIImage(named: "HM02OneIcon")
             //防止复用
             num?.text = ""
             
-        }else if indexPath.row == 1 {
+        }else if (indexPath as NSIndexPath).row == 1 {
         
             /// 第二名
             icon?.image = UIImage(named: "HM02TwoIcon")
-            num?.text = String(format: "%ld", indexPath.row+1)
-        }else if indexPath.row == 2 {
+            num?.text = String(format: "%ld", (indexPath as NSIndexPath).row+1)
+        }else if (indexPath as NSIndexPath).row == 2 {
         
             /// 第三名
             icon?.image = UIImage(named: "HM02ThreeIcon")
-            num?.text = String(format: "%ld", indexPath.row+1)
+            num?.text = String(format: "%ld", (indexPath as NSIndexPath).row+1)
         }else{
         
             /// 其他
             icon?.image = UIImage(named: "HM02FourIcon")
-            num?.text = String(format: "%ld", indexPath.row+1)
+            num?.text = String(format: "%ld", (indexPath as NSIndexPath).row+1)
             
         }
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 44
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         return 50
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model:HDHM02List = dataArray[indexPath.section]
-        let repice:HDHM02RecipeModel = model.recipe![indexPath.row]
+        let model:HDHM02List = dataArray[(indexPath as NSIndexPath).section]
+        let repice:HDHM02RecipeModel = model.recipe![(indexPath as NSIndexPath).row]
         
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = repice.recipeId

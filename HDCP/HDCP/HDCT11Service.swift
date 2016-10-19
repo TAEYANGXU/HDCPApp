@@ -11,7 +11,7 @@ import ObjectMapper
 
 class HDCT11Service {
     
-    func doGetRequest_HDCT11_URL(successBlcok:(hdResponse:HDCT11Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCT11_URL(_ successBlcok:(_ hdResponse:HDCT11Response)->Void,failBlock:(_ error:NSError)->Void){
     
         
         

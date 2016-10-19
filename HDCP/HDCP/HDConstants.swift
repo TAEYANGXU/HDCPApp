@@ -22,12 +22,12 @@ class Constants: NSObject {
     /**
      *   当前设备屏幕的宽带
      **/
-    static let HDSCREENWITH = UIScreen.mainScreen().bounds.width
+    static let HDSCREENWITH = UIScreen.main.bounds.width
     
     /**
      *   当前设备屏幕的高度
      **/
-    static let HDSCREENHEIGHT = UIScreen.mainScreen().bounds.height
+    static let HDSCREENHEIGHT = UIScreen.main.bounds.height
     
     /**
      *   日志开关 true:开 false:关

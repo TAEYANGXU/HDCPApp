@@ -11,7 +11,7 @@ import ObjectMapper
 
 class HDCT11Response:Mappable {
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     

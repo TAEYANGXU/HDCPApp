@@ -10,6 +10,26 @@ import UIKit
 import SDWebImage
 import Alamofire
 import SnapKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 private let HeadViewHeight:CGFloat = 200.0
 
@@ -25,8 +45,8 @@ private let resourceArray = [["title":"排行榜","image":"HPHBIcon"],
 
 class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
-    private enum HDHM01MenuTag: Int {
-        case PHB = 0, YYCZ, FBCP, SYS
+    fileprivate enum HDHM01MenuTag: Int {
+        case phb = 0, yycz, fbcp, sys
     }
     
     var baseView:UIScrollView!
@@ -84,11 +104,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
       
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = UIRectEdge.None;
-        self.navigationController?.navigationBar.translucent = false
+        self.edgesForExtendedLayout = UIRectEdge();
+        self.navigationController?.navigationBar.isTranslucent = false
       
         //双击TabItem通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(hm01Notification(_:)), name: Constants.HDREFRESHHDHM01, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hm01Notification(_:)), name: NSNotification.Name(rawValue: Constants.HDREFRESHHDHM01), object: nil)
         
         if HDHM01Service().isExistEntity() {
         
@@ -112,12 +132,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hidenHud()
     }
@@ -128,7 +148,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
         if self.hdHM01Response?.result?.tagList?.count>0 {
             let height:Int = (self.hdHM01Response?.result?.tagList?.count)!/4*TagHeight
-            baseView.contentSize = CGSizeMake(Constants.HDSCREENWITH, HeadViewHeight+Constants.HDSCREENWITH/4+5+CGFloat(height)+300+300+CGFloat(Constants.HDSpace*4))
+            baseView.contentSize = CGSize(width: Constants.HDSCREENWITH, height: HeadViewHeight+Constants.HDSCREENWITH/4+5+CGFloat(height)+300+300+CGFloat(Constants.HDSpace*4))
         }
         
     }
@@ -136,7 +156,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
    deinit{
    
       baseView.delegate = nil
-      HDLog.LogClassDestory("HDHM01Controller")
+      HDLog.LogClassDestory("HDHM01Controller" as AnyObject)
    }
     
     // MARK: - 创建UI视图
@@ -165,14 +185,14 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
          
          netStatusView = UILabel()
          netStatusView?.backgroundColor = UIColor(red: 0.88, green: 0.27, blue: 0.28, alpha: 0.8)
-         netStatusView?.textColor = UIColor.whiteColor()
+         netStatusView?.textColor = UIColor.white
          netStatusView?.text = "当前网络不可以，请检查网络设置"
-         netStatusView?.font = UIFont.systemFontOfSize(15)
-         netStatusView?.textAlignment = NSTextAlignment.Center
-         netStatusView?.hidden = true
+         netStatusView?.font = UIFont.systemFont(ofSize: 15)
+         netStatusView?.textAlignment = NSTextAlignment.center
+         netStatusView?.isHidden = true
          self.view.addSubview(netStatusView!)
          
-         netStatusView?.snp_makeConstraints(closure: { (make) in
+         netStatusView?.snp.makeConstraints( { (make) in
             
             make.left.equalTo(0)
             make.right.equalTo(0)
@@ -198,7 +218,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             self.view.addSubview(baseView)
             
-            baseView.snp_makeConstraints { (make) -> Void in
+            baseView.snp.makeConstraints { (make) -> Void in
                 
                 make.top.equalTo(WS.view).offset(0)
                 make.left.equalTo(WS.view).offset(0)
@@ -236,7 +256,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             headView = UIView()
             baseView.addSubview(headView)
             
-            headView.snp_makeConstraints(closure: { (make) -> Void in
+            headView.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(baseView).offset(0)
                 make.left.equalTo(baseView).offset(0)
@@ -253,15 +273,15 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             if headerSView == nil {
                 
                 headerSView = UIScrollView()
-                headerSView.pagingEnabled = true
-                headerSView.userInteractionEnabled = true;
+                headerSView.isPagingEnabled = true
+                headerSView.isUserInteractionEnabled = true;
                 headerSView.delegate = self;
                 headerSView.bounces = false
                 headerSView.showsVerticalScrollIndicator = false;
                 headerSView.showsHorizontalScrollIndicator = false;
                 headView.addSubview(headerSView)
                 
-                headerSView.snp_makeConstraints(closure: { (make) -> Void in
+                headerSView.snp.makeConstraints( { (make) -> Void in
                     
                     make.top.equalTo(headView).offset(0)
                     make.left.equalTo(headView).offset(0)
@@ -272,28 +292,28 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 })
             }
             
-            headerSView?.contentSize = CGSizeMake(CGFloat(3)*Constants.HDSCREENWITH, HeadViewHeight)
-            headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+            headerSView?.contentSize = CGSize(width: CGFloat(3)*Constants.HDSCREENWITH, height: HeadViewHeight)
+            headerSView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH,y: 0)
             
             
-            centerImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH,0,Constants.HDSCREENWITH,HeadViewHeight))
-            centerImageView!.contentMode = UIViewContentMode.ScaleToFill;
-            centerImageView?.userInteractionEnabled = true
+            centerImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH,y: 0,width: Constants.HDSCREENWITH,height: HeadViewHeight))
+            centerImageView!.contentMode = UIViewContentMode.scaleToFill;
+            centerImageView?.isUserInteractionEnabled = true
             headerSView?.addSubview(centerImageView!)
             let ctapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(ctapGes)
             
             
-            leftImageView = UIImageView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,HeadViewHeight))
-            leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
-            leftImageView?.userInteractionEnabled = true
+            leftImageView = UIImageView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: HeadViewHeight))
+            leftImageView!.contentMode = UIViewContentMode.scaleToFill;
+            leftImageView?.isUserInteractionEnabled = true
             headerSView?.addSubview(leftImageView!)
             let ltapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(ltapGes)
             
-            rightImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH*2,0,Constants.HDSCREENWITH,HeadViewHeight))
-            rightImageView!.contentMode = UIViewContentMode.ScaleToFill;
-            rightImageView?.userInteractionEnabled = true
+            rightImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH*2,y: 0,width: Constants.HDSCREENWITH,height: HeadViewHeight))
+            rightImageView!.contentMode = UIViewContentMode.scaleToFill;
+            rightImageView?.isUserInteractionEnabled = true
             headerSView?.addSubview(rightImageView!)
             let rtapGes:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
             centerImageView?.addGestureRecognizer(rtapGes)
@@ -306,13 +326,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             if pageControl == nil {
                 
                 pageControl = UIPageControl()
-                pageControl?.addTarget(self, action: #selector(pageAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                pageControl?.addTarget(self, action: #selector(pageAction(_:)), for: UIControlEvents.touchUpInside)
                 pageControl?.numberOfPages = 3;
                 pageControl?.currentPage = 0;
                 pageControl?.pageIndicatorTintColor = Constants.HDMainColor
                 headView.addSubview(pageControl!)
                 
-                pageControl.snp_makeConstraints(closure: { (make) -> Void in
+                pageControl.snp.makeConstraints( { (make) -> Void in
                     
                     make.bottom.equalTo(0)
                     make.right.equalTo(0)
@@ -332,11 +352,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             if headerTitle == nil {
                 
                 headerTitle = UILabel()
-                headerTitle.font = UIFont.systemFontOfSize(18)
+                headerTitle.font = UIFont.systemFont(ofSize: 18)
                 headerTitle.textColor = Constants.HDMainColor
                 headView.addSubview(headerTitle)
                 
-                headerTitle.snp_makeConstraints(closure: { (make) -> Void in
+                headerTitle.snp.makeConstraints( { (make) -> Void in
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(20)
@@ -365,12 +385,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         if menuView == nil {
             
             menuView = UIView()
-            menuView.backgroundColor = UIColor.whiteColor()
+            menuView.backgroundColor = UIColor.white
             baseView.addSubview(menuView)
             
-            menuView.snp_makeConstraints { (make) -> Void in
+            menuView.snp.makeConstraints { (make) -> Void in
                 
-                make.top.equalTo(headView.snp_bottom).offset(0)
+                make.top.equalTo(headView.snp.bottom).offset(0)
                 make.left.equalTo(baseView).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(Constants.HDSCREENWITH/4+5)
@@ -390,15 +410,15 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 btn = HDHM01Button()
                 btn!.tag = i+300
-                btn!.setImage(UIImage(named: resourceArray[i]["image"]!), forState: UIControlState.Normal)
-                btn!.setTitle(resourceArray[i]["title"]!, forState: UIControlState.Normal)
-                btn!.titleLabel?.font = UIFont.systemFontOfSize(15)
-                btn!.titleLabel?.textAlignment = NSTextAlignment.Center
-                btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                btn!.addTarget(self, action: #selector(menuBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                btn!.setImage(UIImage(named: resourceArray[i]["image"]!), for: UIControlState())
+                btn!.setTitle(resourceArray[i]["title"]!, for: UIControlState())
+                btn!.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                btn!.titleLabel?.textAlignment = NSTextAlignment.center
+                btn!.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                btn!.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
                 menuView.addSubview(btn!)
                 
-                btn!.snp_makeConstraints { (make) -> Void in
+                btn!.snp.makeConstraints { (make) -> Void in
                     
                     make.left.equalTo(menuView).offset(CGFloat(i)*Constants.HDSCREENWITH/4)
                     make.top.equalTo(menuView).offset(0)
@@ -422,12 +442,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         if tagListView == nil {
             
             tagListView = UIView()
-            tagListView.backgroundColor = UIColor.whiteColor()
+            tagListView.backgroundColor = UIColor.white
             baseView.addSubview(tagListView)
             
-            tagListView.snp_makeConstraints { (make) -> Void in
+            tagListView.snp.makeConstraints { (make) -> Void in
                 
-                make.top.equalTo(menuView.snp_bottom).offset(Constants.HDSpace)
+                make.top.equalTo(menuView.snp.bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo((self.hdHM01Response?.result?.tagList?.count)!/4*TagHeight)
@@ -454,17 +474,17 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 if btn == nil {
                     
                     btn = UIButton()
-                    btn!.backgroundColor = UIColor.whiteColor()
-                    btn!.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                    btn!.backgroundColor = UIColor.white
+                    btn!.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
                     btn!.tag = index+1000;
-                    btn!.titleLabel?.font = UIFont.systemFontOfSize(15)
-                    btn!.setTitle(model.name, forState: UIControlState.Normal)
+                    btn!.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                    btn!.setTitle(model.name, for: UIControlState())
                     btn!.layer.borderWidth = 0.5
-                    btn!.layer.borderColor = Constants.HDBGViewColor.CGColor
-                    btn!.addTarget(self, action: #selector(tagBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    btn!.layer.borderColor = Constants.HDBGViewColor.cgColor
+                    btn!.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
                     tagListView.addSubview(btn!)
                     
-                    btn!.snp_makeConstraints(closure: { (make) -> Void in
+                    btn!.snp.makeConstraints( { (make) -> Void in
                         
                         make.width.equalTo(Constants.HDSCREENWITH/4)
                         make.height.equalTo(TagHeight)
@@ -491,12 +511,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         if  collectListView == nil {
             
             collectListView = UIView()
-            collectListView.backgroundColor = UIColor.whiteColor()
+            collectListView.backgroundColor = UIColor.white
             baseView.addSubview(collectListView)
             
-            collectListView.snp_makeConstraints { (make) -> Void in
+            collectListView.snp.makeConstraints { (make) -> Void in
                 
-                make.top.equalTo(tagListView.snp_bottom).offset(Constants.HDSpace)
+                make.top.equalTo(tagListView.snp.bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(300)
@@ -504,12 +524,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
             let title = UILabel()
-            title.backgroundColor = UIColor.clearColor()
+            title.backgroundColor = UIColor.clear
             title.textColor = Constants.HDMainColor
             title.text = "菜谱专辑"
             collectListView.addSubview(title)
             
-            title.snp_makeConstraints { (make) -> Void in
+            title.snp.makeConstraints { (make) -> Void in
                 
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(collectListView).offset(0)
@@ -523,7 +543,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             line.backgroundColor = Constants.HDBGViewColor
             collectListView.addSubview(line)
             
-            line.snp_makeConstraints { (make) -> Void in
+            line.snp.makeConstraints { (make) -> Void in
                 
                 
                 make.left.equalTo(collectListView).offset(16)
@@ -534,13 +554,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
             let collectmore = UILabel()
-            collectmore.backgroundColor = UIColor.clearColor()
+            collectmore.backgroundColor = UIColor.clear
             collectmore.textColor = Constants.HDMainTextColor
-            collectmore.font = UIFont.systemFontOfSize(16)
+            collectmore.font = UIFont.systemFont(ofSize: 16)
             collectmore.text = "查看全部菜谱"
             collectListView.addSubview(collectmore)
             
-            collectmore.snp_makeConstraints { (make) -> Void in
+            collectmore.snp.makeConstraints { (make) -> Void in
                 
                 make.left.equalTo(collectListView).offset(16)
                 make.top.equalTo(line).offset(0)
@@ -552,7 +572,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             let moreArrow = UIImageView()
             moreArrow.image = UIImage(named: "moreArrowIcon")
             collectListView.addSubview(moreArrow)
-            moreArrow.snp_makeConstraints(closure: { (make) -> Void in
+            moreArrow.snp.makeConstraints( { (make) -> Void in
                 
                 make.right.equalTo(collectListView).offset(-16)
                 make.top.equalTo(line).offset(10)
@@ -564,11 +584,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             //添加点击Button
             let onclickBtn = UIButton()
             onclickBtn.tag = 10000
-            onclickBtn.backgroundColor = UIColor.clearColor()
+            onclickBtn.backgroundColor = UIColor.clear
             collectListView.addSubview(onclickBtn)
-            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControlEvents.touchUpInside)
             
-            onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
+            onclickBtn.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(collectListView).offset(0)
                 make.top.equalTo(line).offset(0)
@@ -601,7 +621,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                 rowView!.detail.text = model?.content
                 
-                rowView!.snp_makeConstraints { (make) -> Void in
+                rowView!.snp.makeConstraints { (make) -> Void in
                     
                     make.left.equalTo(collectListView).offset(16)
                     make.top.equalTo(collectListView).offset(i*110+40)
@@ -612,14 +632,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             }
          
-            let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model!.cover!)
+            let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model!.cover!)
             if let _ = image {
                rowView!.imageView.image = image
             }else{
-               rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                  //保存图片，并保存到物理存储上
-                  SDImageCache.sharedImageCache().storeImage(image, forKey: model!.cover!, toDisk: true)
-               })
+               rowView!.imageView.sd_setImage(with:URL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             }
          
         }
@@ -634,12 +651,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         if wikiListView == nil {
             
             wikiListView = UIView()
-            wikiListView.backgroundColor = UIColor.whiteColor()
+            wikiListView.backgroundColor = UIColor.white
             baseView.addSubview(wikiListView)
             
-            wikiListView.snp_makeConstraints { (make) -> Void in
+            wikiListView.snp.makeConstraints { (make) -> Void in
                 
-                make.top.equalTo(collectListView.snp_bottom).offset(Constants.HDSpace)
+                make.top.equalTo(collectListView.snp.bottom).offset(Constants.HDSpace)
                 make.left.equalTo(baseView).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(300)
@@ -647,12 +664,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             }
             
             let title = UILabel()
-            title.backgroundColor = UIColor.clearColor()
+            title.backgroundColor = UIColor.clear
             title.textColor = Constants.HDMainColor
             title.text = "厨房宝典"
             wikiListView.addSubview(title)
             
-            title.snp_makeConstraints { (make) -> Void in
+            title.snp.makeConstraints { (make) -> Void in
                 
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(wikiListView).offset(0)
@@ -665,7 +682,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             line.backgroundColor = Constants.HDBGViewColor
             wikiListView.addSubview(line)
             
-            line.snp_makeConstraints { (make) -> Void in
+            line.snp.makeConstraints { (make) -> Void in
                 
                 
                 make.left.equalTo(wikiListView).offset(16)
@@ -677,13 +694,13 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             
             
             let wikimore = UILabel()
-            wikimore.backgroundColor = UIColor.clearColor()
+            wikimore.backgroundColor = UIColor.clear
             wikimore.textColor = Constants.HDMainTextColor
-            wikimore.font = UIFont.systemFontOfSize(16)
+            wikimore.font = UIFont.systemFont(ofSize: 16)
             wikimore.text = "查看全部宝典"
             wikiListView.addSubview(wikimore)
             
-            wikimore.snp_makeConstraints { (make) -> Void in
+            wikimore.snp.makeConstraints { (make) -> Void in
                 
                 make.left.equalTo(wikiListView).offset(16)
                 make.top.equalTo(line).offset(0)
@@ -695,7 +712,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             let moreArrow = UIImageView()
             moreArrow.image = UIImage(named: "moreArrowIcon")
             wikiListView.addSubview(moreArrow)
-            moreArrow.snp_makeConstraints(closure: { (make) -> Void in
+            moreArrow.snp.makeConstraints( { (make) -> Void in
                 
                 make.right.equalTo(collectListView).offset(-16)
                 make.top.equalTo(line).offset(10)
@@ -707,11 +724,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             //添加点击Button
             let onclickBtn = UIButton()
             onclickBtn.tag = 20000
-            onclickBtn.backgroundColor = UIColor.clearColor()
+            onclickBtn.backgroundColor = UIColor.clear
             wikiListView.addSubview(onclickBtn)
-            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControlEvents.touchUpInside)
             
-            onclickBtn.snp_makeConstraints(closure: { (make) -> Void in
+            onclickBtn.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(collectListView).offset(0)
                 make.top.equalTo(line).offset(0)
@@ -748,7 +765,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                
                 rowView!.detail.text = model?.content
                 
-                rowView!.snp_makeConstraints { (make) -> Void in
+                rowView!.snp.makeConstraints { (make) -> Void in
                     
                     make.left.equalTo(wikiListView).offset(16)
                     make.top.equalTo(wikiListView).offset(i*110+40)
@@ -759,14 +776,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             }
          
-            let image:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(model!.cover!)
+            let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model!.cover!)
             if let _ = image {
                rowView!.imageView.image = image
             }else{
-               rowView!.imageView.sd_setImageWithURL(NSURL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                  //保存图片，并保存到物理存储上
-                  SDImageCache.sharedImageCache().storeImage(image, forKey: model!.cover!, toDisk: true)
-               })
+               rowView!.imageView.sd_setImage(with:URL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             }
             
         }
@@ -775,9 +789,9 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     }
     // MARK: - 通知事件
    
-   func hm01Notification(noti:NSNotification){
+   func hm01Notification(_ noti:Notification){
    
-      let flag = noti.userInfo!["FLAG"] as? String
+      let flag = (noti as NSNotification).userInfo!["FLAG"] as? String
       
       if flag == Constants.HDREFRESHHDHM01 {
       
@@ -792,7 +806,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
          
          self.showNetView()
          
-         self.performSelector(#selector(hideNetView), withObject: self, afterDelay: 2.5)
+         self.perform(#selector(hideNetView), with: self, afterDelay: 2.5)
          
       }
       
@@ -818,7 +832,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
-    func setInfoByCurrentImageIndex(index:Int){
+    func setInfoByCurrentImageIndex(_ index:Int){
         
         let cmodel = self.hdHM01Response?.result?.recipeList?[index]
         
@@ -829,38 +843,29 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         */
         headerTitle.text = cmodel!.title
       
-        let Cimage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(cmodel?.cover!)
+        let Cimage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: cmodel?.cover!)
         if let _ = Cimage {
             centerImageView!.image = Cimage
         }else{
-            centerImageView!.sd_setImageWithURL(NSURL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-               //保存图片，并保存到物理存储上
-               SDImageCache.sharedImageCache().storeImage(image, forKey: cmodel!.cover!, toDisk: true)
-            })
+            centerImageView!.sd_setImage(with:URL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         }
       
         let lmodel = self.hdHM01Response?.result?.recipeList![((index-1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
       
-        let Limage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(lmodel?.cover!)
+        let Limage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: lmodel?.cover!)
         if let _ = Limage {
             leftImageView!.image = Limage
         }else{
-            leftImageView!.sd_setImageWithURL(NSURL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-               //保存图片，并保存到物理存储上
-               SDImageCache.sharedImageCache().storeImage(image, forKey: lmodel!.cover!, toDisk: true)
-            })
+            leftImageView!.sd_setImage(with:URL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         }
       
         let rmodel = self.hdHM01Response?.result?.recipeList![((index+1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
       
-        let Rimage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(rmodel?.cover!)
+        let Rimage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: rmodel?.cover!)
         if let _ = Rimage {
             rightImageView!.image = Rimage
         }else{
-            rightImageView!.sd_setImageWithURL(NSURL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-               //保存图片，并保存到物理存储上
-               SDImageCache.sharedImageCache().storeImage(image, forKey: rmodel!.cover!, toDisk: true)
-            })
+            rightImageView!.sd_setImage(with:URL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         }
       
         
@@ -881,12 +886,12 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
    
     func showNetView() {
       
-       netStatusView?.hidden = false
+       netStatusView?.isHidden = false
       
     }
     func hideNetView() {
       
-       netStatusView?.hidden = true
+       netStatusView?.isHidden = true
     }
     
     // MARK: - 数据加载
@@ -933,7 +938,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     /**
     *   菜谱列表
     */
-    func collectGesAction(ges:UITapGestureRecognizer){
+    func collectGesAction(_ ges:UITapGestureRecognizer){
         
         let view = ges.view as! HDHM01RowView
         let model = self.hdHM01Response?.result?.collectList?[view.tag-100]
@@ -951,7 +956,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     /**
      *   厨房宝典详情
      */
-    func wikiGesAction(ges:UITapGestureRecognizer){
+    func wikiGesAction(_ ges:UITapGestureRecognizer){
         
         let view = ges.view as! HDHM01RowView
         let model = self.hdHM01Response?.result?.wikiList?[view.tag-100]
@@ -968,7 +973,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     /**
      *   菜谱详情
      */
-    func headGesAction(ges:UITapGestureRecognizer){
+    func headGesAction(_ ges:UITapGestureRecognizer){
         
         let recopeMddel:RecipeListModel = (self.hdHM01Response?.result?.recipeList![index!])!
         let hdHM08VC = HDHM08Controller()
@@ -980,7 +985,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
-    func menuBtnOnclick(btn:UIButton){
+    func menuBtnOnclick(_ btn:UIButton){
         
         let tag:Int = btn.tag - 300
         switch tag {
@@ -1028,7 +1033,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             HDLog.LogOut("晒一晒")
             break
         default:
-            "default"
+         break
         }
         
         
@@ -1036,7 +1041,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
     
     //更多
     
-    func moreAction(btn:UIButton){
+    func moreAction(_ btn:UIButton){
         
         switch(btn.tag){
             
@@ -1046,7 +1051,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM06VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            HDLog.LogOut("全部菜谱")
+            HDLog.LogOut("全部菜谱"as AnyObject)
             break
         case 20000:
             
@@ -1054,16 +1059,16 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             self.hidesBottomBarWhenPushed = true;
             self.navigationController?.pushViewController(hdHM07VC, animated: true)
             self.hidesBottomBarWhenPushed = false;
-            HDLog.LogOut("全部宝典")
+            HDLog.LogOut("全部宝典" as AnyObject)
             break
         default:
-            "default"
+            break
         }
         
     }
     
     //分类
-    func tagBtnOnclick(btn:UIButton){
+    func tagBtnOnclick(_ btn:UIButton){
         
         let model:TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag-1000])!
         let hdHM04VC = HDHM04Controller()
@@ -1074,19 +1079,19 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         
     }
     
-    func pageAction(sender:AnyObject){
+    func pageAction(_ sender:AnyObject){
         
         
-        headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+        headerSView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH,y: 0)
         index = pageControl?.currentPage
         loadImage()
     }
     
     // MARK: - UIScrollView delegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
         loadImage()
-        headerSView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+        headerSView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH,y: 0)
         
         //        pageControl?.currentPage = index
     }

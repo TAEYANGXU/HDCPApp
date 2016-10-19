@@ -25,7 +25,7 @@ class HDHM07Controller: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "厨房宝典"
@@ -42,7 +42,7 @@ class HDHM07Controller: UITableViewController {
     func setupUI(){
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(HDHM07Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(HDHM07Cell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -69,12 +69,12 @@ class HDHM07Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
         
         unowned let WS = self
         HDHM07Service().doGetRequest_HDHM07_URL(limit, offset: offset, successBlock: { (hm07Response) -> Void in
@@ -83,7 +83,7 @@ class HDHM07Controller: UITableViewController {
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hm07Response.result?.list)!)
+            WS.dataArray.addObjects(from: (hm07Response.result?.list)!)
             
             WS.tableView.mj_footer.endRefreshing()
             
@@ -99,17 +99,17 @@ class HDHM07Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM07Cell
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! HDHM07Cell
         
-        let model = dataArray[indexPath.row] as! HDHM07ListModel
-        cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM07ListModel
+        cell.coverImageV?.sd_setImage(with:URL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         cell.title?.text = model.title
         cell.content?.text = model.content
 
@@ -117,13 +117,13 @@ class HDHM07Controller: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray[indexPath.row] as! HDHM07ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM07ListModel
         let hdWebVC = HDWebController()
         hdWebVC.name = model.title
         hdWebVC.url = model.url

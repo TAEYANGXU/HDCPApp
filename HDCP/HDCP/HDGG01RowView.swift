@@ -10,7 +10,7 @@ import UIKit
 
 public protocol HDGG01RowViewProtocol{
 
-    func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void;
+    func didSelectHDGG01RowView(_ indexPath:IndexPath,index:Int)->Void;
     
 }
 
@@ -21,7 +21,7 @@ class HDGG01RowView: UIView {
     
     var delegate:HDGG01RowViewProtocol?
     
-    var indexPath:NSIndexPath!
+    var indexPath:IndexPath!
     var index:Int!
     
     override init(frame: CGRect) {
@@ -41,7 +41,7 @@ class HDGG01RowView: UIView {
             imageView.layer.masksToBounds = true
             self.addSubview(imageView)
             
-            imageView.snp_makeConstraints { (make) -> Void in
+            imageView.snp.makeConstraints { (make) -> Void in
                 
                 make.top.equalTo(self).offset(0)
                 make.left.equalTo(self).offset(0)
@@ -54,13 +54,13 @@ class HDGG01RowView: UIView {
         if title == nil {
             
             title = UILabel()
-            title.font = UIFont.boldSystemFontOfSize(15)
-            title.textColor = UIColor.whiteColor()
+            title.font = UIFont.boldSystemFont(ofSize: 15)
+            title.textColor = UIColor.white
             title.backgroundColor = CoreUtils.HDColor(105, g: 149, b: 0, a: 0.5)
-            title.textAlignment = NSTextAlignment.Center
+            title.textAlignment = NSTextAlignment.center
             self.addSubview(title)
             
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            title.snp.makeConstraints( { (make) -> Void in
                 
                 make.bottom.equalTo(self).offset(0)
                 make.left.equalTo(self).offset(0)

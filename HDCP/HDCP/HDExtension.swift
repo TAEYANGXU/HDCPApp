@@ -19,7 +19,7 @@ extension UIViewController{
         
         if (self.tabBarController != nil) {
             
-            self.tabBarController?.tabBar.hidden = false
+            self.tabBarController?.tabBar.isHidden = false
             
         }
         
@@ -32,7 +32,7 @@ extension UIViewController{
         
         if (self.tabBarController != nil) {
             
-            self.tabBarController?.tabBar.hidden = true
+            self.tabBarController?.tabBar.isHidden = true
             
         }
         

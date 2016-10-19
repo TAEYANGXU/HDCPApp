@@ -18,14 +18,14 @@ class HDHM01Button: UIButton {
     }
     */
     
-    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
+    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
         
-        return CGRectMake(0, contentRect.size.height*0.75, contentRect.size.width, contentRect.size.height*0.2);
+        return CGRect(x: 0, y: contentRect.size.height*0.75, width: contentRect.size.width, height: contentRect.size.height*0.2);
     }
     
-    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
+    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         
-        return CGRectMake(contentRect.size.width*0.2, contentRect.size.height*0.1,contentRect.size.width*0.6,contentRect.size.height*0.6);
+        return CGRect(x: contentRect.size.width*0.2, y: contentRect.size.height*0.1,width: contentRect.size.width*0.6,height: contentRect.size.height*0.6);
     }
 
     

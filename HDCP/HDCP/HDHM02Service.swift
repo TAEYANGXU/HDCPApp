@@ -17,20 +17,20 @@ class HDHM02Service {
      - parameter successBlock: 成功
      - parameter failBlock:    失败
      */
-    func doGetRequest_HDHM02_URL(successBlock:(hdHM02Response:HDHM02Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDHM02_URL(_ successBlock:@escaping (_ hdHM02Response:HDHM02Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
         HDRequestManager.doGetRequest(Constants.HDHM02_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let hd02Response = Mapper<HDHM02Response>().map(response.result.value)
+                let hd02Response = Mapper<HDHM02Response>().map(JSONObject: response.result.value)
                 /// 回调
-                successBlock(hdHM02Response: hd02Response!)
+                successBlock(hd02Response!)
                 
             }else{
                 
-                failBlock(error:response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }

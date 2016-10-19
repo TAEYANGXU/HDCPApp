@@ -17,8 +17,8 @@ class HDHM08AdDataModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     func mapping(map: Map) {
         
@@ -40,8 +40,8 @@ class HDHM08StuffModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -63,8 +63,8 @@ class HDHM08StepModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -82,8 +82,8 @@ class HDHM08TagModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -123,8 +123,8 @@ class HDHM08InfoModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -172,8 +172,8 @@ class HDHM08Comment: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -197,8 +197,8 @@ class HDHM08Result: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -217,8 +217,8 @@ class HDHM08Response: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         

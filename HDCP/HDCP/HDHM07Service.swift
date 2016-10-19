@@ -17,20 +17,20 @@ class HDHM07Service {
     - parameter successBlock: 成功
     - parameter failBlock:    失败
     */
-    func doGetRequest_HDHM07_URL(limit:Int,offset:Int,successBlock:(hdHM07Response:HDHM07Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDHM07_URL(_ limit:Int,offset:Int,successBlock:@escaping (_ hdHM07Response:HDHM07Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["type":1,"tagid":0,"limit":limit,"offset":offset], URL: Constants.HDHM07_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["type":1 as AnyObject,"tagid":0 as AnyObject,"limit":limit as AnyObject,"offset":offset as AnyObject], URL: Constants.HDHM07_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let hdResponse:HDHM07Response = Mapper<HDHM07Response>().map(response.result.value)!
+                let hdResponse:HDHM07Response = Mapper<HDHM07Response>().map(JSONObject: response.result.value)!
                 /// 回调
-                successBlock(hdHM07Response: hdResponse)
+                successBlock(hdResponse)
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
                 
             }
             

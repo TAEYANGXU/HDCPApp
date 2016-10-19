@@ -18,8 +18,8 @@ class HDHM02RecipeModel :Mappable{
     var recipeId:Int?
     var isVip:String?
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
         
     }
     
@@ -48,8 +48,8 @@ class HDHM02List: Mappable {
         
     }
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -68,8 +68,8 @@ class HDHM02Result: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -87,8 +87,8 @@ class HDHM02Response: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         

@@ -18,32 +18,32 @@ class HDCT02Service {
     * parameter failBlock:    失败
     */
     
-    func doGetRequest_HDCT02_URL(name:String,pwd:String,successBlock:(hdResponse:HDCT02Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCT02_URL(_ name:String,pwd:String,successBlock:@escaping (_ hdResponse:HDCT02Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["name":name,"pwd":"w2eRuQ%2BRlzi%2BK48lE6Hl8BYy8ryWOVlZjy6oz3qEHQgvGDsvchjIuoR0BkdSTxXVGhlRL%2FR3t3WazrIzl%2Fi6RbITk14kSLAXqwV%2B%2B%2BKojJbXW3%2FpjTQo%2FujiTKMIXYxZlGg9ulpaSVOyHzRiBGc0vjdFsR2CRzjekbCEwuwX5M0%3D","uuid":"7408f5dd81db1165cd1896e8175a75e4"], URL: Constants.HDCT02_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["name":name as AnyObject,"pwd":"w2eRuQ%2BRlzi%2BK48lE6Hl8BYy8ryWOVlZjy6oz3qEHQgvGDsvchjIuoR0BkdSTxXVGhlRL%2FR3t3WazrIzl%2Fi6RbITk14kSLAXqwV%2B%2B%2BKojJbXW3%2FpjTQo%2FujiTKMIXYxZlGg9ulpaSVOyHzRiBGc0vjdFsR2CRzjekbCEwuwX5M0%3D" as AnyObject,"uuid":"7408f5dd81db1165cd1896e8175a75e4" as AnyObject], URL: Constants.HDCT02_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
-                //使用SwiftyJSON解析data
-                let json = JSON(data: response.data!)
-                
-                if json["status"] == 201 {
-                
-                    //登录失败
-                    let str = json["result"]["errormsg"]
-                    HDLog.LogOut("errormsg = ", obj: str.string!)
-                    
-                }else{
-                    // JSON 转换成对象
-                    let response = Mapper<HDCT02Response>().map(response.result.value)
-                    // 回调
-                     successBlock(hdResponse: response!)
-                    
-                }
+//                //使用SwiftyJSON解析data
+//                let json = JSON(data: response.data!)
+//                
+//                if json["status"] == 201 {
+//                
+//                    //登录失败
+//                    let str = json["result"]["errormsg"]
+//                    HDLog.LogOut("errormsg = ", obj: str.string!)
+//                    
+//                }else{
+//                    // JSON 转换成对象
+//                    let response = Mapper<HDCT02Response>().map(JSONObject: response.result.value)
+//                    // 回调
+//                     successBlock(response!)
+//                    
+//                }
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }
@@ -56,15 +56,15 @@ class HDCT02Service {
     * parameter successBlock: 成功
     * parameter failBlock:    失败
     */
-    func doGetRequest_HDCT02_01_URL(userId:String,successBlock:(hdResponse:HDCT02Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCT02_01_URL(_ userId:String,successBlock:@escaping (_ hdResponse:HDCT02Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
         
-        HDRequestManager.doPostRequest(["uid":userId,"sign":"4864f65f7e5827e7ea50a48bb70f7a2a","uuid":"7408f5dd81db1165cd1896e8175a75e4"], URL: Constants.HDCT02_01_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["uid":userId as AnyObject,"sign":"4864f65f7e5827e7ea50a48bb70f7a2a" as AnyObject,"uuid":"7408f5dd81db1165cd1896e8175a75e4" as AnyObject], URL: Constants.HDCT02_01_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 // JSON 转换成对象
-                let response = Mapper<HDCT02Response>().map(response.result.value)
+                let response = Mapper<HDCT02Response>().map(JSONObject: response.result.value)
                 
                 //保存用户个人信息
                 HDUserInfoManager.shareInstance.sign = "4864f65f7e5827e7ea50a48bb70f7a2a"
@@ -82,11 +82,11 @@ class HDCT02Service {
                 HDUserInfoManager.shareInstance.save()
                 
                 // 回调
-                successBlock(hdResponse: response!)
+                successBlock(response!)
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }

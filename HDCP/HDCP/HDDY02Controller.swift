@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 private let shareViewHeight = CGFloat(255)
 private let titleArray = ["详情","步骤","评论"]
@@ -75,19 +95,19 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         doGetRequestData()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = listModel?.data?.title
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
      
-        let button = UIButton(type: UIButtonType.Custom) as UIButton
-        button.frame = CGRectMake(0, 0, 30, 30)
-        button.titleLabel?.font = UIFont.systemFontOfSize(15)
-        button.setBackgroundImage(UIImage(named: "shareIcon"), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(share), forControlEvents: UIControlEvents.TouchUpInside)
-        button.contentMode = UIViewContentMode.ScaleToFill
+        let button = UIButton(type: UIButtonType.custom) as UIButton
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setBackgroundImage(UIImage(named: "shareIcon"), for: UIControlState())
+        button.addTarget(self, action: #selector(share), for: UIControlEvents.touchUpInside)
+        button.contentMode = UIViewContentMode.scaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
 
@@ -123,19 +143,19 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 //适配6P
                 vedioHeight = 220.0
-                videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,0,Constants.HDSCREENWITH,vedioHeight!))
+                videoPlayerController = HDVideoPlayerController(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: vedioHeight!))
                 
             }else if Constants.HDSCREENWITH == 375.0{
                 
                 //适配6
                 vedioHeight = 200.0
-                videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,0,Constants.HDSCREENWITH,vedioHeight!))
+                videoPlayerController = HDVideoPlayerController(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: vedioHeight!))
                 
             }else{
                 
                 //适配4,5
                 vedioHeight = 180.0
-                videoPlayerController = HDVideoPlayerController(frame: CGRectMake(0,0,Constants.HDSCREENWITH,vedioHeight!))
+                videoPlayerController = HDVideoPlayerController(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: vedioHeight!))
             }
             
             videoPlayerController?.delegate = self
@@ -154,7 +174,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             menuView = UIView()
             self.view.addSubview(menuView!)
             unowned let WS = self
-            menuView?.snp_makeConstraints(closure: { (make) in
+            menuView?.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(40)
@@ -166,7 +186,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             let line = UILabel()
             line.backgroundColor = Constants.HDBGViewColor
             menuView?.addSubview(line)
-            line.snp_makeConstraints(closure: { (make) in
+            line.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(1)
@@ -179,18 +199,18 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             for i in 0..<titleArray.count {
                 
-                let btn = UIButton(type: UIButtonType.Custom)
-                btn .setTitle(titleArray[i], forState: UIControlState.Normal)
-                btn.titleLabel?.font = UIFont.systemFontOfSize(15)
+                let btn = UIButton(type: UIButtonType.custom)
+                btn .setTitle(titleArray[i], for: UIControlState())
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
                 btn.tag = 2016 + i
-                btn.addTarget(self, action: #selector(menuAction(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                btn.addTarget(self, action: #selector(menuAction(_:)), for: UIControlEvents.touchUpInside)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
                 menuView?.addSubview(btn)
 
                 if i == 0 {
-                    btn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+                    btn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
                 }
-                btn.snp_makeConstraints(closure: { (make) in
+                btn.snp.makeConstraints( { (make) in
                     
                     make.top.equalTo(0)
                     make.left.equalTo(CGFloat(i)*btnWith)
@@ -202,7 +222,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
             }
             
-            menuLineView  = UIView(frame: CGRectMake(lineSpace,40-3,lineWith,3))
+            menuLineView  = UIView(frame: CGRect(x: lineSpace,y: 40-3,width: lineWith,height: 3))
             menuLineView?.backgroundColor = Constants.HDMainColor
             menuView?.addSubview(menuLineView!)
        
@@ -221,16 +241,16 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             scrollView = UIScrollView()
             scrollView?.delegate = self
-            scrollView?.contentSize = CGSizeMake(3*Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
-            scrollView?.pagingEnabled = true
+            scrollView?.contentSize = CGSize(width: 3*Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            scrollView?.isPagingEnabled = true
             scrollView?.showsHorizontalScrollIndicator = false
             self.view.addSubview(scrollView!)
             unowned let WS = self
-            scrollView?.snp_makeConstraints(closure: { (make) in
+            scrollView?.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
-                make.top.equalTo(WS.menuView!.snp_bottom).offset(0)
+                make.top.equalTo(WS.menuView!.snp.bottom).offset(0)
                 make.left.equalTo(0)
                 
             })
@@ -238,7 +258,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             detailView = UIScrollView()
             scrollView?.addSubview(detailView!)
-            detailView!.snp_makeConstraints(closure: { (make) in
+            detailView!.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.top.equalTo(0)
@@ -249,9 +269,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             
             stepsView = UIScrollView()
-            stepsView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            stepsView?.contentSize = CGSize(width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
             scrollView?.addSubview(stepsView!)
-            stepsView!.snp_makeConstraints(closure: { (make) in
+            stepsView!.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.top.equalTo(0)
@@ -261,9 +281,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             commentView = UIScrollView()
-            commentView?.contentSize = CGSizeMake(Constants.HDSCREENWITH, Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
+            commentView?.contentSize = CGSize(width: Constants.HDSCREENWITH, height: Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)
             scrollView?.addSubview(commentView!)
-            commentView!.snp_makeConstraints(closure: { (make) in
+            commentView!.snp.makeConstraints( { (make) in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.top.equalTo(0)
@@ -289,7 +309,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             detailView?.addSubview(infoView!)
             
             
-            infoView?.snp_makeConstraints(closure: { (make) -> Void in
+            infoView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(Constants.HDSpace)
                 make.left.equalTo(0)
@@ -301,11 +321,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             titleLb = UILabel()
             titleLb.textColor = Constants.HDMainTextColor
-            titleLb.font = UIFont.systemFontOfSize(20)
+            titleLb.font = UIFont.systemFont(ofSize: 20)
             infoView?.addSubview(titleLb)
             
             
-            titleLb.snp_makeConstraints(closure: { (make) -> Void in
+            titleLb.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.infoView!).offset(5)
                 make.left.equalTo(WS.infoView!).offset(15)
@@ -315,14 +335,14 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             createTime = UILabel()
-            createTime.textColor = UIColor.lightGrayColor()
-            createTime.font = UIFont.systemFontOfSize(12)
+            createTime.textColor = UIColor.lightGray
+            createTime.font = UIFont.systemFont(ofSize: 12)
             infoView?.addSubview(createTime)
             
             
-            createTime.snp_makeConstraints(closure: { (make) -> Void in
+            createTime.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.top.equalTo(WS.titleLb.snp.bottom).offset(5)
                 make.left.equalTo(WS.infoView!).offset(15)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/2-30)
@@ -334,9 +354,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             headIcon.layer.masksToBounds = true
             infoView?.addSubview(headIcon)
             
-            headIcon.snp_makeConstraints(closure: { (make) -> Void in
+            headIcon.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.createTime.snp_bottom).offset(5)
+                make.top.equalTo(WS.createTime.snp.bottom).offset(5)
                 make.left.equalTo(WS.infoView!).offset(15)
                 make.width.equalTo(50)
                 make.height.equalTo(50)
@@ -344,14 +364,14 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             
             viewCount = UILabel()
-            viewCount.textColor = UIColor.lightGrayColor()
-            viewCount.font = UIFont.systemFontOfSize(12)
+            viewCount.textColor = UIColor.lightGray
+            viewCount.font = UIFont.systemFont(ofSize: 12)
             infoView?.addSubview(viewCount)
             
             
-            viewCount.snp_makeConstraints(closure: { (make) -> Void in
+            viewCount.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
+                make.top.equalTo(WS.titleLb.snp.bottom).offset(5)
                 make.left.equalTo(WS.infoView!).offset(Constants.HDSCREENWITH/2+20)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/4-10)
@@ -359,15 +379,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             commentCount = UILabel()
-            commentCount.textColor = UIColor.lightGrayColor()
-            commentCount.font = UIFont.systemFontOfSize(12)
-            commentCount.userInteractionEnabled = true
+            commentCount.textColor = UIColor.lightGray
+            commentCount.font = UIFont.systemFont(ofSize: 12)
+            commentCount.isUserInteractionEnabled = true
             infoView?.addSubview(commentCount)
             
-            commentCount.snp_makeConstraints(closure: { (make) -> Void in
+            commentCount.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.titleLb.snp_bottom).offset(5)
-                make.left.equalTo(WS.viewCount.snp_right).offset(10)
+                make.top.equalTo(WS.titleLb.snp.bottom).offset(5)
+                make.left.equalTo(WS.viewCount.snp.right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH/4-20)
                 
@@ -376,27 +396,27 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             userName = UILabel()
             userName.textColor = Constants.HDMainTextColor
-            userName.font = UIFont.systemFontOfSize(16)
+            userName.font = UIFont.systemFont(ofSize: 16)
             infoView?.addSubview(userName)
             
-            userName.snp_makeConstraints(closure: { (make) -> Void in
+            userName.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.createTime.snp_bottom).offset(10)
-                make.left.equalTo(WS.headIcon.snp_right).offset(10)
+                make.top.equalTo(WS.createTime.snp.bottom).offset(10)
+                make.left.equalTo(WS.headIcon.snp.right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 
             })
             
             tags = UILabel()
-            tags.textColor = UIColor.lightGrayColor()
-            tags.font = UIFont.systemFontOfSize(12)
+            tags.textColor = UIColor.lightGray
+            tags.font = UIFont.systemFont(ofSize: 12)
             infoView?.addSubview(tags)
             
-            tags.snp_makeConstraints(closure: { (make) -> Void in
+            tags.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.userName.snp_bottom).offset(5)
-                make.left.equalTo(WS.headIcon.snp_right).offset(10)
+                make.top.equalTo(WS.userName.snp.bottom).offset(5)
+                make.left.equalTo(WS.headIcon.snp.right).offset(10)
                 make.height.equalTo(20)
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 
@@ -418,15 +438,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             introView = UILabel()
             introView?.textColor = Constants.HDMainTextColor
-            introView?.font = UIFont.systemFontOfSize(15)
+            introView?.font = UIFont.systemFont(ofSize: 15)
             introView?.numberOfLines = 0
             detailView?.addSubview(introView!)
             
             
             
-            introView?.snp_makeConstraints(closure: { (make) -> Void in
+            introView?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.infoView!.snp_bottom).offset(5)
+                make.top.equalTo(WS.infoView!.snp.bottom).offset(5)
                 make.left.equalTo(WS.detailView!).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(0)
@@ -448,15 +468,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             stuffTableView = UITableView()
             stuffTableView?.delegate = self
             stuffTableView?.dataSource = self
-            stuffTableView?.scrollEnabled = false
+            stuffTableView?.isScrollEnabled = false
             detailView?.addSubview(stuffTableView!)
             
-            stuffTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+            stuffTableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
             
             unowned let WS = self
-            stuffTableView?.snp_makeConstraints(closure: { (make) -> Void in
+            stuffTableView?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.introView!.snp_bottom).offset(10)
+                make.top.equalTo(WS.introView!.snp.bottom).offset(10)
                 make.left.equalTo(WS.detailView!).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(0)
@@ -480,21 +500,21 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             tipsView = UIView()
             detailView?.addSubview(tipsView!)
             
-            tipsView?.snp_makeConstraints(closure: { (make) -> Void in
+            tipsView?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(WS.stuffTableView!.snp_bottom).offset(0)
+                make.top.equalTo(WS.stuffTableView!.snp.bottom).offset(0)
                 make.left.equalTo(WS.detailView!).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
                 
             })
             
             let title = UILabel()
-            title.font = UIFont.systemFontOfSize(18)
+            title.font = UIFont.systemFont(ofSize: 18)
             title.text = "小贴士"
-            title.textColor = UIColor.lightGrayColor()
+            title.textColor = UIColor.lightGray
             tipsView?.addSubview(title)
             
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            title.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.tipsView!).offset(20)
                 make.left.equalTo(WS.tipsView!).offset(15)
@@ -503,15 +523,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             })
             
             tips = UILabel()
-            tips.font = UIFont.systemFontOfSize(14)
+            tips.font = UIFont.systemFont(ofSize: 14)
             tips.textColor = Constants.HDMainTextColor
             tips.numberOfLines = 0
             tipsView?.addSubview(tips)
             
             
-            tips.snp_makeConstraints(closure: { (make) -> Void in
+            tips.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(title.snp_bottom).offset(20)
+                make.top.equalTo(title.snp.bottom).offset(20)
                 make.left.equalTo(WS.tipsView!).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 
@@ -535,9 +555,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             stepsTableView?.tableFooterView = UIView()
             stepsView?.addSubview(stepsTableView!)
             
-            stepsTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "stepsCell")
+            stepsTableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "stepsCell")
             
-            stepsTableView?.snp_makeConstraints(closure: { (make) -> Void in
+            stepsTableView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(0)
                 make.left.equalTo(0)
@@ -558,8 +578,8 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             activityIndicatorView = UIActivityIndicatorView()
             activityIndicatorView?.startAnimating()
-            activityIndicatorView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-            activityIndicatorView?.center = CGPointMake(Constants.HDSCREENWITH/2, CGFloat(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)/2)
+            activityIndicatorView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            activityIndicatorView?.center = CGPoint(x: Constants.HDSCREENWITH/2, y: CGFloat(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64)/2)
             commentView?.addSubview(activityIndicatorView!)
             
         }
@@ -578,9 +598,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             commentTableView?.dataSource = self
             commentTableView?.tableFooterView = UIView()
             commentView?.addSubview(commentTableView!)
-            commentTableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "commentCell")
+            commentTableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "commentCell")
             
-            commentTableView?.snp_makeConstraints(closure: { (make) -> Void in
+            commentTableView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(0)
                 make.left.equalTo(0)
@@ -602,11 +622,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         
             noComment = UILabel()
             noComment?.textColor = Constants.HDMainTextColor
-            noComment?.font = UIFont.systemFontOfSize(15)
-            noComment?.textAlignment = NSTextAlignment.Center
+            noComment?.font = UIFont.systemFont(ofSize: 15)
+            noComment?.textAlignment = NSTextAlignment.center
             noComment?.text = "暂无评论"
             commentView?.addSubview(noComment!)
-            noComment?.snp_makeConstraints(closure: { (make) in
+            noComment?.snp.makeConstraints( { (make) in
                 
                 make.top.equalTo(20)
                 make.left.equalTo(0)
@@ -628,7 +648,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         if shareView == nil {
             
             shareView = UIView()
-            shareView.hidden = true
+            shareView.isHidden = true
             shareView.backgroundColor = CoreUtils.HDColor(0, g: 0, b: 0, a: 0.2)
             shareView.alpha = 0.0
             self.view.addSubview(shareView!)
@@ -636,7 +656,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             shareView.addGestureRecognizer(tapGes)
             
             unowned let WS = self
-            shareView?.snp_makeConstraints(closure: { (make) -> Void in
+            shareView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.view).offset(0)
                 make.left.equalTo(WS.view).offset(0)
@@ -649,7 +669,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             shareSubView = HDShareView()
             shareSubView.delegate = self
             shareView.addSubview(shareSubView)
-            shareSubView .snp_makeConstraints(closure: { (make) in
+            shareSubView .snp.makeConstraints( { (make) in
                 
                 make.left.equalTo(0)
                 make.width.equalTo(Constants.HDSCREENWITH)
@@ -665,9 +685,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     func hideShareView(){
         
         unowned let WS = self
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
-            WS.shareSubView.snp_updateConstraints(closure: { (make) in
+            WS.shareSubView.snp.updateConstraints({ (make) in
                 
                 make.top.equalTo(WS.view.bounds.size.height)
             })
@@ -676,18 +696,18 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             WS.view.layoutIfNeeded()
             
             }, completion: { (ret) -> Void in
-                WS.shareView?.hidden = true
+                WS.shareView?.isHidden = true
         })
         
     }
     
     func showShareView(){
         
-        shareView?.hidden = false
+        shareView?.isHidden = false
         unowned let WS = self
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             WS.shareView.alpha = 1
-            WS.shareSubView.snp_updateConstraints(closure: { (make) in
+            WS.shareSubView.snp.updateConstraints({ (make) in
                 
                 make.top.equalTo(WS.view.bounds.size.height - shareViewHeight)
             })
@@ -696,13 +716,13 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     // MARK: - 获取视频地址
-    func getVedioUrl(str:String) -> String {
+    func getVedioUrl(_ str:String) -> String {
         
         var vedioUrl = ""
         if  str.characters.count > 0 {
             
-            let arrayStr = str.componentsSeparatedByString("/l/")[1]
-            let str = arrayStr.componentsSeparatedByString("_")[0]
+            let arrayStr = str.components(separatedBy: "/l/")[1]
+            let str = arrayStr.components(separatedBy: "_")[0]
             vedioUrl = String(format: "http://v.hoto.cn/%@.mp4",str)
             
         }
@@ -719,13 +739,13 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 let model = commentList[i]
                 
-                let contentRect = CoreUtils.getTextRectSize(model.content!, font: UIFont.systemFontOfSize(14), size: CGSizeMake(Constants.HDSCREENWITH-80, 9999))
+                let contentRect = CoreUtils.getTextRectSize(model.content! as NSString, font: UIFont.systemFont(ofSize: 14), size: CGSize(width: Constants.HDSCREENWITH-80, height: 9999))
                 model.contentHeight = contentRect.size.height + 3.0;
                 
                 
                 if model.atUserId > 0 {
                     
-                    let atContentRect = CoreUtils.getTextRectSize(model.atContent!, font: UIFont.systemFontOfSize(13), size: CGSizeMake(Constants.HDSCREENWITH-110, 9999))
+                    let atContentRect = CoreUtils.getTextRectSize(model.atContent! as NSString, font: UIFont.systemFont(ofSize: 13), size: CGSize(width: Constants.HDSCREENWITH-110, height: 9999))
                     model.atContentHeight = atContentRect.size.height + 3.0
                     
                     model.rowHeight = 95.0 + model.contentHeight! + model.atContentHeight!
@@ -745,7 +765,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     /**
      *  菜谱分享
      */
-    func shareAction(tag:Int){
+    func shareAction(_ tag:Int){
         
         hideShareView()
         
@@ -757,7 +777,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  微信好友
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.subTypeWechatSession, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -773,7 +793,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  微信朋友圈
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.subTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -791,7 +811,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              *  QQ
              */
             
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -808,7 +828,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  QQ空间
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -833,15 +853,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     // MARK: - 滚动下滑条
-    func scrollLine(index:Int)  {
+    func scrollLine(_ index:Int)  {
         
         
         for view in (menuView?.subviews)! {
             
-            if view.isMemberOfClass(UIButton.classForCoder()) {
+            if view.isMember(of: UIButton.classForCoder()) {
                 
                 let btn = view as! UIButton
-                btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
                 
             }
             
@@ -861,20 +881,20 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             btn = menuView?.viewWithTag(2018) as? UIButton
         }
         
-        btn!.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+        btn!.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
         
         unowned let WS = self
-        UIView.animateWithDuration(0.3) { 
-            WS.menuLineView?.frame = CGRectMake(CGFloat(index)*(40+2*lineSpace)+lineSpace,40-3,lineWith,3)
-        }
+        UIView.animate(withDuration: 0.3, animations: { 
+            WS.menuLineView?.frame = CGRect(x: CGFloat(index)*(40+2*lineSpace)+lineSpace,y: 40-3,width: lineWith,height: 3)
+        }) 
         
     }
     
     // MARK: - 滚动视图
-    func scrollViewToScroll(index:Int) {
+    private func scrollViewToScroll(_ index:Int) {
         
         //滚动时有动画
-        scrollView?.setContentOffset(CGPointMake(CGFloat(index) * Constants.HDSCREENWITH, 0), animated: true)
+        scrollView?.setContentOffset(CGPoint(x: CGFloat(index) * Constants.HDSCREENWITH, y: 0), animated: true)
         
     }
     
@@ -894,7 +914,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     func backAction(){
         
         videoPlayerController?.close()
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -912,7 +932,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     //显示/隐藏分享视图
     func share(){
         
-        if (shareView.hidden) {
+        if (shareView.isHidden) {
             
             showShareView()
             
@@ -924,7 +944,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         
     }
     
-    func menuAction(btn:UIButton) {
+    func menuAction(_ btn:UIButton) {
         
         
         switch btn.tag {
@@ -966,34 +986,34 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         userName.text = dy02Info?.userInfo?.userName
         commentCount.text = String(format: "评论:%d", (listModel?.data?.commentCnt)!)
         viewCount.text = String(format: "浏览:%ld", (dy02Info?.viewCount)!)
-        headIcon.sd_setImageWithURL(NSURL(string: (dy02Info?.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+        headIcon.sd_setImage(with:URL(string: (dy02Info?.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
         titleLb.text = dy02Info?.title
         createTime.text = String(format: "创建日期:%@", (dy02Info?.reviewTime)!)
         
-        let size = CoreUtils.getTextRectSize((dy02Info?.intro!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+        let size = CoreUtils.getTextRectSize((dy02Info?.intro!)! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH-30, height: 99999))
         introView?.text = dy02Info?.intro!
-        introView?.snp_updateConstraints(closure: { (make) in
+        introView?.snp.updateConstraints({ (make) in
             
             make.height.equalTo(size.size.height + 10)
         })
         
         let stuffHeight = (dy02Info?.stuff?.count)!*44+30+44
-        stuffTableView?.snp_updateConstraints(closure: { (make) in
+        stuffTableView?.snp.updateConstraints({ (make) in
             
             make.height.equalTo(stuffHeight)
         })
         
-        let tipsSize = CoreUtils.getTextRectSize((dy02Info?.tips!)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-30, 99999))
+        let tipsSize = CoreUtils.getTextRectSize((dy02Info?.tips!)! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH-30, height: 99999))
         tips.text = dy02Info?.tips!
         
-        tipsView?.snp_updateConstraints(closure: { (make) in
+        tipsView?.snp.updateConstraints({ (make) in
             make.height.equalTo(60+tipsSize.size.height+5)
         })
-        tips.snp_updateConstraints { (make) in
+        tips.snp.updateConstraints { (make) in
             make.height.equalTo(tipsSize.size.height+5)
         }
         
-        detailView!.contentSize = CGSizeMake(Constants.HDSCREENWITH, 110 + size.size.height + 40 + CGFloat(stuffHeight)+60.0+tipsSize.size.height+5)
+        detailView!.contentSize = CGSize(width: Constants.HDSCREENWITH, height: 110 + size.size.height + 40 + CGFloat(stuffHeight)+60.0+tipsSize.size.height+5)
     }
     
     // MARK: - 数据加载
@@ -1004,7 +1024,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             WS.hidenHud()
             WS.dy02Info = hdResponse.result?.info
-            WS.videoPlayerController?.movieBackgroundView.sd_setImageWithURL(NSURL(string: (WS.dy02Info?.cover)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            WS.videoPlayerController?.movieBackgroundView.sd_setImage(with:URL(string: (WS.dy02Info?.cover)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             
             if WS.dy02Info?.hasVideo == 1 {
             
@@ -1013,7 +1033,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                  */
                 WS.dy02Info?.vedioUrl = WS.getVedioUrl((WS.dy02Info?.cover)!)
                 HDLog.LogOut("vedioUrl", obj: (WS.dy02Info?.vedioUrl)!)
-                WS.videoPlayerController?.contentURL = NSURL(string: (WS.dy02Info?.vedioUrl)!)
+                WS.videoPlayerController?.contentURL = URL(string: (WS.dy02Info?.vedioUrl)!)
                 
             }
             
@@ -1059,7 +1079,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
     
     // MARK: - HDShareViewDelegate delegate
-    func didShareWithType(type:Int){
+    func didShareWithType(_ type:Int){
     
         hideShareView()
         
@@ -1071,7 +1091,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  微信好友
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatSession, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.subTypeWechatSession, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1087,7 +1107,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  微信朋友圈
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.SubTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: (videoPlayerController?.movieBackgroundView.image)!, type: SSDKPlatformType.subTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1105,7 +1125,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              *  QQ
              */
             
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQQFriend, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1122,7 +1142,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *  QQ空间
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.SubTypeQZone, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
                 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1149,23 +1169,23 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     // MARK: - HDVideoPlayerController delegate
     func didFullScreen() {
         
-        scrollView?.hidden = true
-        menuView?.hidden = true
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Fade)
+        scrollView?.isHidden = true
+        menuView?.isHidden = true
+        UIApplication.shared.setStatusBarHidden(true, with: UIStatusBarAnimation.fade)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
     }
     
     func didshrinkScreen() {
         
-        scrollView?.hidden = false
-        menuView?.hidden = false
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.None)
+        scrollView?.isHidden = false
+        menuView?.isHidden = false
+        UIApplication.shared.setStatusBarHidden(false, with: UIStatusBarAnimation.none)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     // MARK: - UIScrollView delegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     
         if scrollView == self.scrollView {
             let index = Int(scrollView.contentOffset.x/Constants.HDSCREENWITH)
@@ -1183,7 +1203,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     
     // MARK: - UITableView delegate/datasource
     
-    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         if stuffTableView == tableView {
             
@@ -1197,31 +1217,31 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
     
-    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
         
         
         
         if stuffTableView == tableView {
             
-            let cell = UITableViewCell.init(style: UITableViewCellStyle.Default, reuseIdentifier: nil)
+            let cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: nil)
             
             /**
              *   食材
              */
             
             
-            if indexPath.row == (dy02Info?.stuff?.count)! {
+            if (indexPath as NSIndexPath).row == (dy02Info?.stuff?.count)! {
                 let title = UILabel()
-                title.font = UIFont.systemFontOfSize(15)
+                title.font = UIFont.systemFont(ofSize: 15)
                 cell.contentView.addSubview(title)
                 
-                title.snp_makeConstraints(closure: { (make) -> Void in
+                title.snp.makeConstraints( { (make) -> Void in
                     make.top.equalTo(cell.contentView).offset(0)
                     make.left.equalTo(cell.contentView).offset(15)
                     make.height.equalTo(44)
@@ -1234,10 +1254,10 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 
                 let title = UILabel()
-                title.font = UIFont.systemFontOfSize(15)
+                title.font = UIFont.systemFont(ofSize: 15)
                 cell.contentView.addSubview(title)
                 
-                title.snp_makeConstraints(closure: { (make) -> Void in
+                title.snp.makeConstraints( { (make) -> Void in
                     make.top.equalTo(cell.contentView).offset(0)
                     make.left.equalTo(cell.contentView).offset(15)
                     make.height.equalTo(44)
@@ -1245,25 +1265,25 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 })
                 
                 let weight = UILabel()
-                weight.textColor = UIColor.lightGrayColor()
-                weight.font = UIFont.systemFontOfSize(15)
+                weight.textColor = UIColor.lightGray
+                weight.font = UIFont.systemFont(ofSize: 15)
                 cell.contentView.addSubview(weight)
                 
-                weight.snp_makeConstraints(closure: { (make) -> Void in
+                weight.snp.makeConstraints( { (make) -> Void in
                     make.top.equalTo(cell.contentView).offset(0)
-                    make.left.equalTo(title.snp_right).offset(30)
+                    make.left.equalTo(title.snp.right).offset(30)
                     make.height.equalTo(44)
                     make.width.equalTo(Constants.HDSCREENWITH/2-30)
                 })
                 
                 
-                title.textColor = UIColor.lightGrayColor()
-                let model = dy02Info!.stuff![indexPath.row]
+                title.textColor = UIColor.lightGray
+                let model = dy02Info!.stuff![(indexPath as NSIndexPath).row]
                 title.text = model.name
                 weight.text = model.weight
             }
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
             
         }else if  stepsTableView == tableView {
@@ -1271,9 +1291,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              *   步骤
              */
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("stepsCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "stepsCell", for: indexPath)
             
-            let model = dy02Info?.steps![indexPath.row]
+            let model = dy02Info?.steps![(indexPath as NSIndexPath).row]
             
             var index = cell.contentView.viewWithTag(1000) as? UILabel
             if index == nil {
@@ -1281,11 +1301,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 index = UILabel()
                 index?.tag = 1000
                 index?.textColor = Constants.HDYellowColor
-                index?.textAlignment = NSTextAlignment.Center
-                index?.font = UIFont.systemFontOfSize(15)
+                index?.textAlignment = NSTextAlignment.center
+                index?.font = UIFont.systemFont(ofSize: 15)
                 cell.contentView.addSubview(index!)
                 
-                index?.snp_makeConstraints(closure: { (make) in
+                index?.snp.makeConstraints( { (make) in
                     
                     make.left.equalTo(15)
                     make.top.equalTo(15)
@@ -1304,12 +1324,12 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 stuff?.tag = 2000
                 stuff?.numberOfLines = 2
                 stuff?.textColor = Constants.HDMainTextColor
-                stuff?.font = UIFont.systemFontOfSize(14)
+                stuff?.font = UIFont.systemFont(ofSize: 14)
                 cell.contentView.addSubview(stuff!)
                 
-                stuff?.snp_makeConstraints(closure: { (make) in
+                stuff?.snp.makeConstraints( { (make) in
                     
-                    make.left.equalTo(index!.snp_right).offset(5)
+                    make.left.equalTo(index!.snp.right).offset(5)
                     make.top.equalTo(10)
                     make.width.equalTo(Constants.HDSCREENWITH - 60)
                     make.height.equalTo(40)
@@ -1320,9 +1340,9 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             
             stuff?.text = model!.intro
-            index?.text = String(format: "%d", indexPath.row+1)
+            index?.text = String(format: "%d", (indexPath as NSIndexPath).row+1)
             
-//            let introSize = CoreUtils.getTextRectSize(String(format: "%d.%@",indexPath.row+1, model!.intro!), font: UIFont.systemFontOfSize(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
+//            let introSize = CoreUtils.getTextRectSize(String(format: "%d.%@",indexPath.row+1, model!.intro!), font: UIFont.systemFont(16), size:CGSizeMake(Constants.HDSCREENWITH-120, 99999))
             
           
             
@@ -1332,11 +1352,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             /**
              *   评论
              */
-            let cell = tableView.dequeueReusableCellWithIdentifier("commentCell", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
         
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
-            let model = commentList[indexPath.row]
+            let model = commentList[(indexPath as NSIndexPath).row]
             
             /**
              *   头像
@@ -1352,7 +1372,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 icon?.layer.masksToBounds = true
                 cell.contentView.addSubview(icon!)
                 
-                icon?.snp_makeConstraints(closure: { (make) -> Void in
+                icon?.snp.makeConstraints( { (make) -> Void in
                     
                     make.top.equalTo(cell.contentView).offset(10)
                     make.left.equalTo(cell.contentView).offset(15)
@@ -1374,14 +1394,14 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 username = UILabel()
                 username?.tag = 2000
-                username?.font = UIFont.systemFontOfSize(13)
+                username?.font = UIFont.systemFont(ofSize: 13)
                 username?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(username!)
                 
-                username?.snp_makeConstraints(closure: { (make) -> Void in
+                username?.snp.makeConstraints( { (make) -> Void in
                     
                     make.top.equalTo(cell.contentView).offset(10)
-                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.left.equalTo(icon!.snp.right).offset(5)
                     make.width.equalTo(200)
                     make.height.equalTo(15)
                 })
@@ -1399,14 +1419,14 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 createTime = UILabel()
                 createTime?.tag = 3000
-                createTime?.font = UIFont.systemFontOfSize(10)
-                createTime?.textColor = UIColor.lightGrayColor()
+                createTime?.font = UIFont.systemFont(ofSize: 10)
+                createTime?.textColor = UIColor.lightGray
                 cell.contentView.addSubview(createTime!)
                 
-                createTime?.snp_makeConstraints(closure: { (make) -> Void in
+                createTime?.snp.makeConstraints( { (make) -> Void in
                     
-                    make.top.equalTo(username!.snp_bottom).offset(0)
-                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.top.equalTo(username!.snp.bottom).offset(0)
+                    make.left.equalTo(icon!.snp.right).offset(5)
                     make.width.equalTo(200)
                     make.height.equalTo(15)
                 })
@@ -1423,15 +1443,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 content = UILabel()
                 content?.tag = 4000
-                content?.font = UIFont.systemFontOfSize(14)
+                content?.font = UIFont.systemFont(ofSize: 14)
                 content?.textColor = CoreUtils.HDColor(130, g: 130, b: 130, a: 1)
                 content?.numberOfLines = 0
                 cell.contentView.addSubview(content!)
                 
-                content?.snp_makeConstraints(closure: { (make) -> Void in
+                content?.snp.makeConstraints( { (make) -> Void in
                     
-                    make.top.equalTo(icon!.snp_bottom).offset(5)
-                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.top.equalTo(icon!.snp.bottom).offset(5)
+                    make.left.equalTo(icon!.snp.right).offset(5)
                     make.width.equalTo(Constants.HDSCREENWITH-80)
                     make.height.equalTo(0)
                 })
@@ -1450,10 +1470,10 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 commentView?.backgroundColor = CoreUtils.HDColor(249, g: 249, b: 249, a: 1)
                 cell.contentView.addSubview(commentView!)
                 
-                commentView?.snp_makeConstraints(closure: { (make) -> Void in
+                commentView?.snp.makeConstraints( { (make) -> Void in
                     
-                    make.top.equalTo(content!.snp_bottom).offset(5)
-                    make.left.equalTo(icon!.snp_right).offset(5)
+                    make.top.equalTo(content!.snp.bottom).offset(5)
+                    make.left.equalTo(icon!.snp.right).offset(5)
                     make.width.equalTo(Constants.HDSCREENWITH - 60)
                     make.height.equalTo(0);
                     
@@ -1468,11 +1488,11 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 atUsername = UILabel()
                 atUsername?.tag = 6000
-                atUsername?.font = UIFont.systemFontOfSize(13)
+                atUsername?.font = UIFont.systemFont(ofSize: 13)
                 atUsername?.textColor = Constants.HDMainTextColor
                 commentView!.addSubview(atUsername!)
                 
-                atUsername?.snp_makeConstraints(closure: { (make) -> Void in
+                atUsername?.snp.makeConstraints( { (make) -> Void in
                     
                     make.top.equalTo(10)
                     make.left.equalTo(10)
@@ -1489,14 +1509,14 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 
                 atContent = UILabel()
                 atContent?.tag = 7000
-                atContent?.font = UIFont.systemFontOfSize(13)
+                atContent?.font = UIFont.systemFont(ofSize: 13)
                 atContent?.textColor = CoreUtils.HDColor(130, g: 130, b: 130, a: 1)
                 atContent?.numberOfLines = 0
                 commentView!.addSubview(atContent!)
                 
-                atContent?.snp_makeConstraints(closure: { (make) -> Void in
+                atContent?.snp.makeConstraints( { (make) -> Void in
                     
-                    make.top.equalTo(atUsername!.snp_bottom).offset(0)
+                    make.top.equalTo(atUsername!.snp.bottom).offset(0)
                     make.left.equalTo(10)
                     make.width.equalTo(Constants.HDSCREENWITH-110)
                     make.height.equalTo(0)
@@ -1505,7 +1525,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             }
 
             
-            content?.snp_updateConstraints(closure: { (make) in
+            content?.snp.updateConstraints({ (make) in
                 make.height.equalTo(model.contentHeight!)
             })
             
@@ -1514,22 +1534,22 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 atUsername?.text = String(format: "回复：%@",model.atUserName!)
                 atContent?.text = model.atContent
                 
-                commentView?.hidden = false
+                commentView?.isHidden = false
                 
-                commentView?.snp_updateConstraints(closure: { (make) in
+                commentView?.snp.updateConstraints({ (make) in
                     make.height.equalTo(35.0 + model.atContentHeight!);
                 })
-                atContent?.snp_updateConstraints(closure: { (make) in
+                atContent?.snp.updateConstraints({ (make) in
                     
                     make.height.equalTo(model.atContentHeight!)
                 })
                 
             }else{
             
-                commentView?.hidden = true
+                commentView?.isHidden = true
             }
             
-            icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "defaultIcon"))
+            icon?.sd_setImage(with:URL(string: (model.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
             username?.text = model.userName
             createTime?.text = model.createTime
             content?.text = model.content
@@ -1540,15 +1560,15 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,30))
+        let view = UIView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: 30))
         
         if stuffTableView == tableView {
             
-            let title = UILabel(frame: CGRectMake(15,0,Constants.HDSCREENWITH-15,30))
-            title.textColor = UIColor.lightGrayColor()
-            title.font = UIFont.systemFontOfSize(15)
+            let title = UILabel(frame: CGRect(x: 15,y: 0,width: Constants.HDSCREENWITH-15,height: 30))
+            title.textColor = UIColor.lightGray
+            title.font = UIFont.systemFont(ofSize: 15)
             view.addSubview(title)
             
             title.text = "食材"
@@ -1558,7 +1578,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     }
    
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if tableView == stuffTableView {
             return CGFloat(Constants.HDSpace*3)
@@ -1566,7 +1586,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         return 0
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if stuffTableView == tableView {
             
@@ -1576,7 +1596,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             return 60
         }else{
         
-            let model = commentList[indexPath.row]
+            let model = commentList[(indexPath as NSIndexPath).row]
             return model.rowHeight!
         }
         

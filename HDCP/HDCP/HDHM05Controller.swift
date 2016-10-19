@@ -38,7 +38,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -60,14 +60,14 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         layout.itemSize = CGSize(width: Constants.HDSCREENWITH/2-20, height: Constants.HDSCREENWITH/2-20)
         
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView?.delegate = self
         collectionView?.dataSource = self
         self.view.addSubview(collectionView!)
         
         unowned let WS = self;
         
-        collectionView?.snp_makeConstraints(closure: { (make) -> Void in
+        collectionView?.snp.makeConstraints( { (make) -> Void in
             
             make.top.equalTo(WS.view).offset(0)
             make.left.equalTo(WS.view).offset(0)
@@ -78,7 +78,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
         
         //注册cell
-        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         self.collectionView!.backgroundColor = Constants.HDBGViewColor
         
@@ -102,7 +102,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(cid:Int,limit:Int,offset:Int){
+    func doGetRequestData(_ cid:Int,limit:Int,offset:Int){
         
         unowned let WS = self;
         HDHM05Service().doGetRequest_HDHM05_URL(cid, limit: limit, offset: offset, successBlock: { (hm05Response) -> Void in
@@ -111,7 +111,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hm05Response.result?.list)!)
+            WS.dataArray.addObjects(from: (hm05Response.result?.list)!)
             
             WS.collectionView!.mj_footer.endRefreshing()
             
@@ -129,25 +129,25 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
 
     // MARK: UICollectionViewDataSource
-     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+     func numberOfSections(in collectionView: UICollectionView) -> Int {
     
         return 1
     }
 
 
-     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return dataArray.count
     }
 
-     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         var imageView = cell.contentView.viewWithTag(1000) as?  UIImageView
         
@@ -155,7 +155,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         
             imageView = UIImageView()
             cell.contentView.addSubview(imageView!)
-            imageView?.snp_makeConstraints(closure: { (make) -> Void in
+            imageView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(0)
                 make.left.equalTo(cell.contentView).offset(0)
@@ -172,15 +172,15 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
             
             title = UILabel()
             title?.backgroundColor = CoreUtils.HDColor(105, g: 149, b: 0, a: 0.5)
-            title?.textColor = UIColor.whiteColor()
-            title?.font = UIFont.systemFontOfSize(15)
-            title?.textAlignment = NSTextAlignment.Center
+            title?.textColor = UIColor.white
+            title?.font = UIFont.systemFont(ofSize: 15)
+            title?.textAlignment = NSTextAlignment.center
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
                 make.left.equalTo(cell.contentView).offset(0)
-                make.bottom.equalTo(cell.contentView.snp_bottom).offset(0)
+                make.bottom.equalTo(cell.contentView.snp.bottom).offset(0)
                 make.width.equalTo(Constants.HDSCREENWITH/2-20)
                 make.height.equalTo(20)
                 
@@ -188,18 +188,18 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
             
         }
         
-        let model = dataArray[indexPath.row] as! HDHM05ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM05ListModel
         
-        imageView?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        imageView?.sd_setImage(with:URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text = model.title
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         
-        let model = dataArray[indexPath.row] as! HDHM05ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM05ListModel
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = model.rid
         hdHM08VC.name = model.title

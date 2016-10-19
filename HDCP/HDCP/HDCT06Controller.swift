@@ -34,8 +34,8 @@ class HDCT06Controller: UITableViewController{
 
         self.title = "设置"
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let sign = defaults.objectForKey(Constants.HDSign)
+        let defaults = UserDefaults.standard
+        let sign = defaults.object(forKey: Constants.HDSign)
         
         if let _ = sign {
         
@@ -50,7 +50,7 @@ class HDCT06Controller: UITableViewController{
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -65,7 +65,7 @@ class HDCT06Controller: UITableViewController{
     
     func getCacheSize() -> CGFloat {
         
-        let size = SDImageCache.sharedImageCache().getSize()
+        let size = SDImageCache.shared().getSize()
         let mb:CGFloat = CGFloat(size/1024/1024)
         
         return mb
@@ -77,20 +77,20 @@ class HDCT06Controller: UITableViewController{
         
         showHud()
         
-        let path:String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as String
-        let cachePath = path.stringByAppendingString("/default/com.hackemist.SDWebImageCache.default")
+        let path:String = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as String
+        let cachePath = path + "/default/com.hackemist.SDWebImageCache.default"
         
-        let fileManager = NSFileManager.defaultManager()
-        let contents = try! fileManager.contentsOfDirectoryAtPath(cachePath)
+        let fileManager = FileManager.default
+        let contents = try! fileManager.contentsOfDirectory(atPath: cachePath)
         
         for fileName in contents {
             
-            try! fileManager.removeItemAtPath(cachePath.stringByAppendingString("/"+fileName))
+            try! fileManager.removeItem(atPath: cachePath + ("/"+fileName))
         }
         
         print("delete over !")
         
-        self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 1.5)
+        self.perform(#selector(hidenHud), with: self, afterDelay: 1.5)
         
         return true
     }
@@ -111,7 +111,7 @@ class HDCT06Controller: UITableViewController{
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -119,26 +119,26 @@ class HDCT06Controller: UITableViewController{
     
     func setupUI(){
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
     }
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return ct06Array[section].count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return titleArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
     
         
@@ -151,10 +151,10 @@ class HDCT06Controller: UITableViewController{
             
             title = UILabel()
             title?.tag = 2000
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFont(ofSize: 16)
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 make.width.equalTo(200)
                 make.height.equalTo(44)
                 make.left.equalTo(cell.contentView).offset(16)
@@ -168,47 +168,48 @@ class HDCT06Controller: UITableViewController{
         if cacheSizeLabel == nil {
         
             cacheSizeLabel = UILabel()
-            cacheSizeLabel?.hidden = true
+            cacheSizeLabel?.isHidden = true
             cacheSizeLabel?.tag = 2001
             cacheSizeLabel?.textColor = Constants.HDMainTextColor
-            cacheSizeLabel?.textAlignment = NSTextAlignment.Right
-            cacheSizeLabel?.font = UIFont.systemFontOfSize(14)
+            cacheSizeLabel?.textAlignment = NSTextAlignment.right
+            cacheSizeLabel?.font = UIFont.systemFont(ofSize: 14)
             cell.contentView.addSubview(cacheSizeLabel!)
             
-            cacheSizeLabel?.snp_makeConstraints(closure: { (make) in
+            cacheSizeLabel?.snp.makeConstraints( { (make) in
                 make.top.equalTo(7)
                 make.right.equalTo(-20)
-                make.size.equalTo(CGSizeMake(60, 30))
+                make.width.equalTo(60)
+                make.height.equalTo(30)
             })
         }
         
-        let array = ct06Array[indexPath.section]
-        title?.text =   array[indexPath.row]["title"]
+        let array = ct06Array[(indexPath as NSIndexPath).section]
+        title?.text =   array[(indexPath as NSIndexPath).row]["title"]
         
         
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
         
-            if indexPath.row == 3 {
+            if (indexPath as NSIndexPath).row == 3 {
             
-                cacheSizeLabel?.hidden = false
+                cacheSizeLabel?.isHidden = false
                 cacheSizeLabel?.text = String(format: "%0.1fMB",self.cacheSize)
             }else{
             
-                cacheSizeLabel?.hidden = true
+                cacheSizeLabel?.isHidden = true
             }
         }
         
-        if indexPath.section == 3 {
+        if (indexPath as NSIndexPath).section == 3 {
             
             /**
              *  名称
              */
-            title?.textColor = UIColor.redColor()
-            title?.textAlignment = NSTextAlignment.Center
-            title?.backgroundColor = UIColor.whiteColor()
-            cell.backgroundColor = UIColor.clearColor()
+            title?.textColor = UIColor.red
+            title?.textAlignment = NSTextAlignment.center
+            title?.backgroundColor = UIColor.white
+            cell.backgroundColor = UIColor.clear
             
-            title?.snp_updateConstraints(closure: { (make) -> Void in
+            title?.snp.updateConstraints({ (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(44)
@@ -219,10 +220,10 @@ class HDCT06Controller: UITableViewController{
         }else{
             
             title?.textColor = Constants.HDMainTextColor
-            title?.textAlignment = NSTextAlignment.Left
-            cell.backgroundColor = UIColor.whiteColor()
+            title?.textAlignment = NSTextAlignment.left
+            cell.backgroundColor = UIColor.white
             
-            title?.snp_updateConstraints(closure: { (make) -> Void in
+            title?.snp.updateConstraints({ (make) -> Void in
                 
                 make.width.equalTo(200)
                 make.height.equalTo(44)
@@ -232,76 +233,76 @@ class HDCT06Controller: UITableViewController{
             
         }
         
-        if indexPath.section == 1 || indexPath.section == 3 {
+        if (indexPath as NSIndexPath).section == 1 || (indexPath as NSIndexPath).section == 3 {
         
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
             
             
         }else{
             
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
             
         }
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Constants.HDSpace*4)
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let titleView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,40))
+        let titleView = UIView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: 40))
         titleView.backgroundColor = Constants.HDBGViewColor
-        let title = UILabel(frame: CGRectMake(16,0,Constants.HDSCREENWITH,40))
-        title.font = UIFont.systemFontOfSize(13)
+        let title = UILabel(frame: CGRect(x: 16,y: 0,width: Constants.HDSCREENWITH,height: 40))
+        title.font = UIFont.systemFont(ofSize: 13)
         title.text = titleArray[section]
         titleView.addSubview(title)
         
         return titleView
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         return 44
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-        if indexPath.section == 1 {
+        if (indexPath as NSIndexPath).section == 1 {
         
-            if indexPath.row == 3 {
+            if (indexPath as NSIndexPath).row == 3 {
                 
-                let alertVC = UIAlertController(title: nil, message: "确定要删除吗?", preferredStyle: .Alert)
-                let cancelAl = UIAlertAction(title: "取消", style: .Cancel, handler: { (UIAlertAction) in
+                let alertVC = UIAlertController(title: nil, message: "确定要删除吗?", preferredStyle: .alert)
+                let cancelAl = UIAlertAction(title: "取消", style: .cancel, handler: { (UIAlertAction) in
                     return
                 })
                 
                 unowned let ws = self
-                let okAl = UIAlertAction(title: "确定", style: .Default, handler: { (UIAlertAction) in
+                let okAl = UIAlertAction(title: "确定", style: .default, handler: { (UIAlertAction) in
                     ws.deleteCacheFile()
                 })
                 
                 alertVC.addAction(cancelAl)
                 alertVC.addAction(okAl)
                 
-                self.presentViewController(alertVC, animated: true, completion: nil)
+                self.present(alertVC, animated: true, completion: nil)
             }
             
         }
         
-        if indexPath.section == 3 {
+        if (indexPath as NSIndexPath).section == 3 {
             
             HDLog.LogOut("退出登录")
             
             HDUserInfoManager.shareInstance.clear()
-            NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGOUT"])
+            NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.HDREFRESHHDCT01), object: nil, userInfo: ["FLAG":"LOGOUT"])
             
             for vc in (self.navigationController?.viewControllers)! {
             
-                if vc.isMemberOfClass(HDCT01Controller.classForCoder()){
+                if vc.isMember(of: HDCT01Controller.classForCoder()){
                 
                     self.navigationController?.popToViewController(vc, animated: true)
                     break

@@ -16,8 +16,8 @@ class HDDY01Response: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -34,8 +34,8 @@ class HDDY01Result: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -57,8 +57,8 @@ class HDDY01ListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -83,8 +83,8 @@ class HDDY01UserInfoModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -134,8 +134,8 @@ class HDDY01DataModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -183,8 +183,8 @@ class HDDY01CommentListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -205,8 +205,8 @@ class HDDY01ImagesModel: Mappable {
     var smallUrl:String?
     var url:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -226,8 +226,8 @@ class HDDY01TopicTagsModel: Mappable {
     var name:String?
     var tagUrl:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {

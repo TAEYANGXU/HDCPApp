@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
@@ -24,7 +44,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         offset = 0
         
@@ -44,10 +64,10 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         tableView?.dataSource = self
         self.view.addSubview(tableView!)
         
-        tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         tableView.tableFooterView = UIView()
         
-        tableView.snp_makeConstraints { (make) in
+        tableView.snp.makeConstraints { (make) in
             
             make.left.equalTo(0)
             make.width.equalTo(Constants.HDSCREENWITH)
@@ -56,7 +76,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
         }
         
-        tableView.userInteractionEnabled = true
+        tableView.isUserInteractionEnabled = true
         
         /**
         *   添加点击事件收齐键盘
@@ -70,11 +90,11 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         self.view.addSubview(putView)
         
         
-        putView.snp_makeConstraints { (make) in
+        putView.snp.makeConstraints { (make) in
             
             make.left.equalTo(0)
             make.width.equalTo(Constants.HDSCREENWITH)
-            make.top.equalTo(WS.tableView.snp_bottom).offset(0)
+            make.top.equalTo(WS.tableView.snp.bottom).offset(0)
             make.bottom.equalTo(0);
             
         }
@@ -96,14 +116,14 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         textView = UITextField()
         textView.placeholder = "说点什么..."
         textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = Constants.HDMainTextColor.CGColor
+        textView.layer.borderColor = Constants.HDMainTextColor.cgColor
         textView.layer.cornerRadius = 5
-        textView.backgroundColor = UIColor.whiteColor()
-        textView.font = UIFont.systemFontOfSize(15)
+        textView.backgroundColor = UIColor.white
+        textView.font = UIFont.systemFont(ofSize: 15)
         textView.layer.masksToBounds = true
         putView.addSubview(textView)
         
-        textView.snp_makeConstraints { (make) -> Void in
+        textView.snp.makeConstraints { (make) -> Void in
             
             make.top.equalTo(WS.putView.snp_top).offset(5)
             make.left.equalTo(WS.putView).offset(15)
@@ -113,39 +133,39 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         }
         
         
-        commitBtn = UIButton(type: UIButtonType.Custom)
-        commitBtn.setTitle("发送", forState: UIControlState.Normal)
-        commitBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
+        commitBtn = UIButton(type: UIButtonType.custom)
+        commitBtn.setTitle("发送", for: UIControlState())
+        commitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         commitBtn.backgroundColor = Constants.HDMainColor
-        commitBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        commitBtn.addTarget(self, action: #selector(sendComment), forControlEvents: UIControlEvents.TouchUpInside)
+        commitBtn.setTitleColor(UIColor.white, for: UIControlState())
+        commitBtn.addTarget(self, action: #selector(sendComment), for: UIControlEvents.touchUpInside)
         commitBtn.layer.cornerRadius = 5
         commitBtn.layer.masksToBounds = true
         putView.addSubview(commitBtn)
         
-        commitBtn.snp_makeConstraints { (make) -> Void in
+        commitBtn.snp.makeConstraints { (make) -> Void in
             
-            make.left.equalTo(WS.textView.snp_right).offset(10)
+            make.left.equalTo(WS.textView.snp.right).offset(10)
             make.top.equalTo(WS.putView.snp_top).offset(5)
             make.width.equalTo(60)
             make.height.equalTo(40)
         }
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIKeyboardWillChangeFrameNotification , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame , object: nil)
         
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -161,25 +181,25 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         /**
         *  移除通知
         */
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
         
         HDLog.LogClassDestory("HDHM10Controller")
     }
     
     // MARK: - 键盘变化
-    func keyboardWillShow(note:NSNotification){
+    func keyboardWillShow(_ note:Notification){
     
         
-       let rect =  note.userInfo![UIKeyboardFrameEndUserInfoKey]
+       let rect =  (note as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey]
         
-        let height:CGFloat = (rect?.CGRectValue.height)!
+        let height:CGFloat = ((rect as AnyObject).cgRectValue.height)
         
         unowned let WS = self
-        UIView.animateWithDuration(0.3) { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
-            WS.tableView.snp_updateConstraints(closure: { (make) in
+            WS.tableView.snp.updateConstraints({ (make) in
                 make.bottom.equalTo(-(height+50))
             })
             
@@ -188,20 +208,20 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             if WS.commentArray.count>0 {
                 
                 /// cell滚动到底部
-                let indexPath = NSIndexPath(forRow: WS.commentArray.count-1, inSection: 0)
-                WS.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                let indexPath = IndexPath(row: WS.commentArray.count-1, section: 0)
+                WS.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: false)
             }
             
-        }
+        }) 
         
     }
     
-    func keyboardWillHide(note:NSNotification){
+    func keyboardWillHide(_ note:Notification){
         
         unowned let WS = self
-        UIView.animateWithDuration(0.3) { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
-            WS.tableView.snp_updateConstraints(closure: { (make) in
+            WS.tableView.snp.updateConstraints({ (make) in
                 make.bottom.equalTo(-50)
             })
             
@@ -210,15 +230,15 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             if WS.commentArray.count>0 {
                 
                 /// cell滚动到底部
-                let indexPath = NSIndexPath(forRow: WS.commentArray.count-1, inSection: 0)
-                WS.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                let indexPath = IndexPath(row: WS.commentArray.count-1, section: 0)
+                WS.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: false)
             }
             
-        }
+        }) 
         
     }
     
-    func keyboardWillChange(note:NSNotification){
+    func keyboardWillChange(_ note:Notification){
         
        
 
@@ -243,7 +263,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
         for i in 0 ..< commentArray.count {
         
-            let rect = CoreUtils.getTextRectSize((commentArray[i].content)!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
+            let comment:HDHM10Comment = commentArray[i]
+            let rect = CoreUtils.getTextRectSize((comment.content)! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH-80, height: 999))
             commentArray[i].height = rect.height
             
         }
@@ -252,7 +273,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
         
         unowned let WS = self
         
@@ -285,7 +306,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -312,15 +333,15 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             model.content = textView.text
             model.createTime = "刚刚"
             model.userName = "小徐"
-            let rect = CoreUtils.getTextRectSize(textView.text!, font: UIFont.systemFontOfSize(15), size: CGSizeMake(Constants.HDSCREENWITH-80, 999))
+            let rect = CoreUtils.getTextRectSize(textView.text! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH-80, height: 999))
             model.height = rect.height
-            mutableArray.addObject(model)
+            mutableArray.add(model)
             commentArray = NSArray(array: mutableArray) as! Array<HDHM10Comment>
             
             tableView.reloadData()
             
-            let indexPath = NSIndexPath(forRow: commentArray.count-1, inSection: 0)
-            tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+            let indexPath = IndexPath(row: commentArray.count-1, section: 0)
+            tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
             
             textView.text = ""
             
@@ -332,17 +353,17 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     }
     
     // MARK: - UIScrollView delegate
-    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return commentArray.count
     }
     
-    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
         
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
         /**
         *   头像
@@ -358,7 +379,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             icon?.layer.masksToBounds = true
             cell.contentView.addSubview(icon!)
             
-            icon?.snp_makeConstraints(closure: { (make) -> Void in
+            icon?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(10)
                 make.left.equalTo(cell.contentView).offset(15)
@@ -380,14 +401,14 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
             username = UILabel()
             username?.tag = 2000
-            username?.font = UIFont.systemFontOfSize(14)
+            username?.font = UIFont.systemFont(ofSize: 14)
             username?.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(username!)
             
-            username?.snp_makeConstraints(closure: { (make) -> Void in
+            username?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(12)
-                make.left.equalTo(icon!.snp_right).offset(5)
+                make.left.equalTo(icon!.snp.right).offset(5)
                 make.width.equalTo(200)
                 make.height.equalTo(20)
             })
@@ -405,14 +426,14 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
             createTime = UILabel()
             createTime?.tag = 3000
-            createTime?.font = UIFont.systemFontOfSize(12)
+            createTime?.font = UIFont.systemFont(ofSize: 12)
             createTime?.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(createTime!)
             
-            createTime?.snp_makeConstraints(closure: { (make) -> Void in
+            createTime?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(username!.snp_bottom).offset(0)
-                make.left.equalTo(icon!.snp_right).offset(5)
+                make.top.equalTo(username!.snp.bottom).offset(0)
+                make.left.equalTo(icon!.snp.right).offset(5)
                 make.width.equalTo(200)
                 make.height.equalTo(20)
             })
@@ -430,14 +451,14 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
             
             content = UILabel()
             content?.tag = 4000
-            content?.font = UIFont.systemFontOfSize(15)
+            content?.font = UIFont.systemFont(ofSize: 15)
             content?.textColor = Constants.HDMainTextColor
             content?.numberOfLines = 0
             cell.contentView.addSubview(content!)
             
-            content?.snp_makeConstraints(closure: { (make) -> Void in
+            content?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(icon!.snp_bottom).offset(5)
+                make.top.equalTo(icon!.snp.bottom).offset(5)
                 make.left.equalTo(cell.contentView).offset(60)
                 make.width.equalTo(Constants.HDSCREENWITH-80)
                 make.height.equalTo(20)
@@ -446,14 +467,14 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         }
 
         
-        let model = commentArray[indexPath.row]
+        let model = commentArray[(indexPath as NSIndexPath).row]
         
-        icon?.sd_setImageWithURL(NSURL(string: (model.avatar)!), placeholderImage: UIImage(imageLiteral: "defaultIcon"))
+        icon?.sd_setImage(with:URL(string: (model.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
         username?.text = model.userName
         createTime?.text = model.createTime
         content?.text = model.content
         
-        content?.snp_updateConstraints(closure: { (make) -> Void in
+        content?.snp.updateConstraints({ (make) -> Void in
             
             make.height.equalTo(model.height)
             
@@ -464,9 +485,9 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         */
         if model.content.hasPrefix("@") {
         
-            let str:String =  model.content.componentsSeparatedByString(":")[0]
+            let str:String =  model.content.components(separatedBy: ":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
             attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
             content?.attributedText =  attributed
         }else{
@@ -477,10 +498,10 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     
         
-        let model = commentArray[indexPath.row]
+        let model = commentArray[(indexPath as NSIndexPath).row]
         return 60 + model.height
     }
 }

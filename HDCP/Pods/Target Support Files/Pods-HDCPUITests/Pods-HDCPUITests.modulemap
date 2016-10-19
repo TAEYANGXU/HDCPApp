@@ -1,0 +1,6 @@
+framework module Pods_HDCPUITests {
+  umbrella header "Pods-HDCPUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

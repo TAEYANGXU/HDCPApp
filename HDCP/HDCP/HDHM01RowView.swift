@@ -32,7 +32,7 @@ class HDHM01RowView: UIView {
             imageView.layer.masksToBounds = true
             self.addSubview(imageView)
             
-            imageView.snp_makeConstraints { (make) -> Void in
+            imageView.snp.makeConstraints { (make) -> Void in
                 
                 make.top.equalTo(self).offset(0)
                 make.left.equalTo(self).offset(0)
@@ -45,13 +45,13 @@ class HDHM01RowView: UIView {
         if title == nil {
         
             title = UILabel()
-            title.font = UIFont.boldSystemFontOfSize(17)
+            title.font = UIFont.boldSystemFont(ofSize: 17)
             self.addSubview(title)
             
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            title.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(self).offset(0)
-                make.left.equalTo(imageView.snp_right).offset(5)
+                make.left.equalTo(imageView.snp.right).offset(5)
                 make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(25)
                 
@@ -62,14 +62,14 @@ class HDHM01RowView: UIView {
         if userName == nil {
         
             userName = UILabel()
-            userName.font = UIFont.systemFontOfSize(15)
+            userName.font = UIFont.systemFont(ofSize: 15)
             userName.textColor = Constants.HDMainTextColor
             self.addSubview(userName)
             
-            userName.snp_makeConstraints(closure: { (make) -> Void in
+            userName.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(title.snp_bottom).offset(2)
-                make.left.equalTo(imageView.snp_right).offset(5)
+                make.top.equalTo(title.snp.bottom).offset(2)
+                make.left.equalTo(imageView.snp.right).offset(5)
                 make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(25)
                 
@@ -82,15 +82,15 @@ class HDHM01RowView: UIView {
         
             
             detail = UILabel()
-            detail.font = UIFont.systemFontOfSize(15)
+            detail.font = UIFont.systemFont(ofSize: 15)
             detail.textColor = Constants.HDMainTextColor
             detail.numberOfLines = 0
             self.addSubview(detail)
             
-            detail.snp_makeConstraints(closure: { (make) -> Void in
+            detail.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(userName.snp_bottom).offset(0)
-                make.left.equalTo(imageView.snp_right).offset(5)
+                make.top.equalTo(userName.snp.bottom).offset(0)
+                make.left.equalTo(imageView.snp.right).offset(5)
                 make.width.equalTo(Constants.HDSCREENWITH-36-100)
                 make.height.equalTo(50)
             })

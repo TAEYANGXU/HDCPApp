@@ -19,7 +19,7 @@ class HDHM01Service {
      * parameter failBlock:    失败
      */
     
-    func doGetRequest_HDHM01_URL(successBlock:((hdResponse:HDHM01Response)->Void),failBlock:((error:NSError)->Void)){
+    func doGetRequest_HDHM01_URL(_ successBlock:@escaping ((_ hdResponse:HDHM01Response)->Void),failBlock:@escaping ((_ error:NSError)->Void)){
     
         
         HDRequestManager.doGetRequest(Constants.HDHM01_URL) { (response) -> Void in
@@ -27,29 +27,25 @@ class HDHM01Service {
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let hdHM01Response = Mapper<HDHM01Response>().map(response.result.value)
-                
+//                let hdHM01Response = Mapper<HDHM01Response>().map(JSONObject: response.result.value)
+                let hdHM01Response = Mapper<HDHM01Response>().map(JSONObject: response.result.value)
                 /**
                 *  防止卡顿
                 */
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                DispatchQueue.global().async {
                     
                     //更新本地数据
                     self.deleteEntity()
                     self.addEntity(hdHM01Response!)
-                    
-                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                        
-                        /// 回调
-                        successBlock(hdResponse:hdHM01Response!)
-                        
-                    })
-                    
-                })
+
+                    DispatchQueue.main.async {
+                        successBlock(hdHM01Response!)
+                    }
+                }
                 
             }else{
                 
-                failBlock(error:response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
 
         }
@@ -59,22 +55,22 @@ class HDHM01Service {
     /**
      *  将数据存到本地
      */
-    func addEntity(hdHM01Response:HDHM01Response){
+    func addEntity(_ hdHM01Response:HDHM01Response){
     
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
         
-        let result = NSEntityDescription.insertNewObjectForEntityForName("HDHM01ResultEntity", inManagedObjectContext: context) as? HDHM01ResultEntity
+        let result = NSEntityDescription.insertNewObject(forEntityName: "HDHM01ResultEntity", into: context) as? HDHM01ResultEntity
         
         /// 菜谱专辑
         
-        for (i,_) in (hdHM01Response.result?.collectList?.enumerate())! {
+        for (i,_) in (hdHM01Response.result?.collectList?.enumerated())! {
             
             let model = hdHM01Response.result?.collectList![i]
             
-            let collectModel = NSEntityDescription.insertNewObjectForEntityForName("HM01CollectListEntity", inManagedObjectContext: context) as? HM01CollectListEntity
+            let collectModel = NSEntityDescription.insertNewObject(forEntityName: "HM01CollectListEntity", into: context) as? HM01CollectListEntity
             
-            collectModel!.cid = model!.cid
+            collectModel!.cid = model!.cid as NSNumber?
             collectModel!.content = model!.content
             collectModel!.cover = model!.cover
             collectModel!.title = model!.title
@@ -90,12 +86,12 @@ class HDHM01Service {
         if !isExistRecipeListEntity() {
             
             /// 滚动栏
-            for (i,_) in (hdHM01Response.result?.recipeList?.enumerate())! {
+            for (i,_) in (hdHM01Response.result?.recipeList?.enumerated())! {
                 
                 let model = hdHM01Response.result?.recipeList?[i]
                 
-                let recipeModel = NSEntityDescription.insertNewObjectForEntityForName("HM01RecipeListEntity", inManagedObjectContext: context) as? HM01RecipeListEntity
-                recipeModel!.rid = model!.rid
+                let recipeModel = NSEntityDescription.insertNewObject(forEntityName: "HM01RecipeListEntity", into: context) as? HM01RecipeListEntity
+                recipeModel!.rid = model!.rid as NSNumber?
                 recipeModel!.cover = model!.cover
                 recipeModel!.title = model!.title
                 recipeModel!.userName = model!.userName
@@ -112,11 +108,11 @@ class HDHM01Service {
         
         
         /// 厨房宝典
-        for (i,_) in (hdHM01Response.result?.wikiList?.enumerate())! {
+        for (i,_) in (hdHM01Response.result?.wikiList?.enumerated())! {
             
             let model = hdHM01Response.result?.wikiList?[i]
             
-            let wikiModel = NSEntityDescription.insertNewObjectForEntityForName("HM01WikiListEntity", inManagedObjectContext: context) as? HM01WikiListEntity
+            let wikiModel = NSEntityDescription.insertNewObject(forEntityName: "HM01WikiListEntity", into: context) as? HM01WikiListEntity
 
             wikiModel!.cover = model!.cover
             wikiModel!.title = model!.title
@@ -131,13 +127,13 @@ class HDHM01Service {
         
         
         //分类
-        for (i,_) in (hdHM01Response.result?.tagList?.enumerate())! {
+        for (i,_) in (hdHM01Response.result?.tagList?.enumerated())! {
             
             let model = hdHM01Response.result?.tagList?[i]
             
-            let tagModel = NSEntityDescription.insertNewObjectForEntityForName("HM01TagListEntity", inManagedObjectContext: context) as? HM01TagListEntity
+            let tagModel = NSEntityDescription.insertNewObject(forEntityName: "HM01TagListEntity", into: context) as? HM01TagListEntity
             
-            tagModel!.id = model!.id
+            tagModel!.id = model!.id as NSNumber?
             tagModel!.name = model!.name
             /**
             *   设置关联
@@ -146,7 +142,7 @@ class HDHM01Service {
         }
         
         
-        let response = NSEntityDescription.insertNewObjectForEntityForName("HDHM01ResponseEntity", inManagedObjectContext: context) as? HDHM01ResponseEntity
+        let response = NSEntityDescription.insertNewObject(forEntityName: "HDHM01ResponseEntity", into: context) as? HDHM01ResponseEntity
         response?.request_id = hdHM01Response.request_id
         response?.result = result
         
@@ -163,17 +159,17 @@ class HDHM01Service {
     
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
         do {
             
-           let list =  try context.executeFetchRequest(request) as Array
+           let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
                 for model in list {
                     
-                    context.deleteObject(model as! NSManagedObject)
+                    context.delete(model as! NSManagedObject)
                     
                 }
                 
@@ -197,7 +193,7 @@ class HDHM01Service {
     
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
         /**
         
@@ -210,7 +206,7 @@ class HDHM01Service {
         
         do {
             
-            let list =  try context.executeFetchRequest(request) as Array
+            let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
@@ -223,12 +219,12 @@ class HDHM01Service {
                 for model in response.result!.collectList! {
                     
                     let cModel = CollectListModel()
-                    cModel.title = model.title
-                    cModel.userName = model.userName
-                    cModel.content = model.content
-                    cModel.cover = model.cover
-                    cModel.cid = model.cid!!.longValue
-                    collectList.addObject(cModel)
+                    cModel.title = (model as AnyObject).title
+                    cModel.userName = (model as AnyObject).userName
+                    cModel.content = (model as AnyObject).content
+                    cModel.cover = (model as AnyObject).cover
+//                    cModel.cid = (model as AnyObject).cid!!.longValue
+                    collectList.add(cModel)
                     
                 }
                 
@@ -236,11 +232,11 @@ class HDHM01Service {
                 for model in response.result!.recipeList! {
                     
                     let rModel = RecipeListModel()
-                    rModel.title = model.title
-                    rModel.userName = model.userName
-                    rModel.cover = model.cover
-                    rModel.rid = model.rid!!.longValue
-                    recipeList.addObject(rModel)
+                    rModel.title = (model as AnyObject).title
+                    rModel.userName = (model as AnyObject).userName
+                    rModel.cover = (model as AnyObject).cover
+//                    rModel.rid = (model as AnyObject).rid!!.unsignedIntValue
+                    recipeList.add(rModel)
                     
                 }
                 
@@ -248,12 +244,12 @@ class HDHM01Service {
                 for model in response.result!.wikiList! {
                     
                     let wModel = WikiListModel()
-                    wModel.title = model.title
-                    wModel.userName = model.userName
-                    wModel.cover = model.cover
-                    wModel.content = model.content
-                    wModel.url = model.url
-                    wikiList.addObject(wModel)
+                    wModel.title = (model as AnyObject).title
+                    wModel.userName = (model as AnyObject).userName
+                    wModel.cover = (model as AnyObject).cover
+                    wModel.content = (model as AnyObject).content
+                    wModel.url = (model as AnyObject).url
+                    wikiList.add(wModel)
                     
                 }
                 
@@ -261,9 +257,9 @@ class HDHM01Service {
                 for model in response.result!.tagList! {
                     
                     let tModel = TagListModel()
-                    tModel.id = model.id!!.longValue
-                    tModel.name = model.name
-                    tagList.addObject(tModel)
+//                    tModel.id = (model as AnyObject).id!!.longValue
+                    tModel.name = (model as AnyObject).name
+                    tagList.add(tModel)
                     
                 }
                 
@@ -292,12 +288,12 @@ class HDHM01Service {
     func isExistEntity()->Bool {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HDHM01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDHM01ResponseEntity")
         
         var ret:Bool = false
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 ret = true
             }
@@ -316,12 +312,12 @@ class HDHM01Service {
     func isExistRecipeListEntity()->Bool {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HM01RecipeListEntity")
+        let request:NSFetchRequest<NSFetchRequestResult>  = NSFetchRequest(entityName: "HM01RecipeListEntity")
         
         var ret:Bool = false
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 ret = true
             }

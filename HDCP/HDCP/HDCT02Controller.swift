@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
 
@@ -25,13 +45,13 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
     func setupUI(){
     
         self.view.backgroundColor = Constants.HDBGViewColor
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
-        self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -46,7 +66,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -97,8 +117,8 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         HDCT02Service().doGetRequest_HDCT02_01_URL("8752979", successBlock: { (hdResponse) -> Void in
             
                 WS.hidenHud()
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDCT01, object: nil, userInfo: ["FLAG":"LOGIN"])
-                WS.navigationController?.popToRootViewControllerAnimated(true)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.HDREFRESHHDCT01), object: nil, userInfo: ["FLAG":"LOGIN"])
+                WS.navigationController?.popToRootViewController(animated: true)
             
             }) { (error) -> Void in
                 
@@ -117,23 +137,23 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return 3
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
             
             let bg = UILabel()
             cell.contentView.addSubview(bg)
             bg.backgroundColor = Constants.HDBGViewColor
-            bg.snp_makeConstraints(closure: { (make) -> Void in
+            bg.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH)
                 make.height.equalTo(10)
@@ -143,10 +163,10 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             
             let title = UILabel()
             title.text = "账号:"
-            title.font = UIFont.systemFontOfSize(16)
+            title.font = UIFont.systemFont(ofSize: 16)
             title.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(title)
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            title.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(50)
                 make.height.equalTo(50)
@@ -157,13 +177,13 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             username = UITextField()
             username.text = "15221472030"
             username.placeholder = "请输入邮箱账号或手机号码"
-            username.font = UIFont.systemFontOfSize(16)
+            username.font = UIFont.systemFont(ofSize: 16)
             cell.contentView.addSubview(username)
-            username.snp_makeConstraints(closure: { (make) -> Void in
+            username.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-80)
                 make.height.equalTo(40)
-                make.left.equalTo(title.snp_right).offset(0)
+                make.left.equalTo(title.snp.right).offset(0)
                 make.top.equalTo(cell.contentView).offset(15)
                 
             })
@@ -172,7 +192,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
             cell.contentView.addSubview(line)
             
-            line.snp_makeConstraints(closure: { (make) -> Void in
+            line.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(1)
@@ -181,14 +201,14 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
                 
             })
             
-        }else if indexPath.row == 1 {
+        }else if (indexPath as NSIndexPath).row == 1 {
             
             let title = UILabel()
             title.text = "密码:"
-            title.font = UIFont.systemFontOfSize(16)
+            title.font = UIFont.systemFont(ofSize: 16)
             title.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(title)
-            title.snp_makeConstraints(closure: { (make) -> Void in
+            title.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(50)
                 make.height.equalTo(50)
@@ -199,14 +219,14 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             password = UITextField()
             password.placeholder = "密码不少于6位，限字母和数字"
             password.text = "12345678"
-            password.font = UIFont.systemFontOfSize(16)
-            password.secureTextEntry = true
+            password.font = UIFont.systemFont(ofSize: 16)
+            password.isSecureTextEntry = true
             cell.contentView.addSubview(password)
-            password.snp_makeConstraints(closure: { (make) -> Void in
+            password.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-80)
                 make.height.equalTo(40)
-                make.left.equalTo(title.snp_right).offset(0)
+                make.left.equalTo(title.snp.right).offset(0)
                 make.top.equalTo(cell.contentView).offset(5)
                 
             })
@@ -215,7 +235,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             line.backgroundColor = CoreUtils.HDColor(227, g: 227, b: 229, a: 1)
             cell.contentView.addSubview(line)
             
-            line.snp_makeConstraints(closure: { (make) -> Void in
+            line.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-16)
                 make.height.equalTo(1)
@@ -226,14 +246,14 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
 
         }else{
             
-            let forgetBtn = UIButton(type: UIButtonType.Custom)
-            forgetBtn.setTitle("忘记密码?", forState: UIControlState.Normal)
-            forgetBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
-            forgetBtn.addTarget(self, action: #selector(forgetAction), forControlEvents: UIControlEvents.TouchUpInside)
-            forgetBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+            let forgetBtn = UIButton(type: UIButtonType.custom)
+            forgetBtn.setTitle("忘记密码?", for: UIControlState())
+            forgetBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            forgetBtn.addTarget(self, action: #selector(forgetAction), for: UIControlEvents.touchUpInside)
+            forgetBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
             cell.contentView.addSubview(forgetBtn)
             
-            forgetBtn.snp_makeConstraints(closure: { (make) -> Void in
+            forgetBtn.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(80)
                 make.height.equalTo(40)
@@ -243,14 +263,14 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             
-            let registBtn = UIButton(type: UIButtonType.Custom)
-            registBtn.setTitle("注册", forState: UIControlState.Normal)
-            registBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
-            registBtn.addTarget(self, action: #selector(registAction), forControlEvents: UIControlEvents.TouchUpInside)
-            registBtn.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+            let registBtn = UIButton(type: UIButtonType.custom)
+            registBtn.setTitle("注册", for: UIControlState())
+            registBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            registBtn.addTarget(self, action: #selector(registAction), for: UIControlEvents.touchUpInside)
+            registBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
             cell.contentView.addSubview(registBtn)
             
-            registBtn.snp_makeConstraints(closure: { (make) -> Void in
+            registBtn.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(80)
                 make.height.equalTo(40)
@@ -260,16 +280,16 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             })
             
             
-            let loginBtn = UIButton(type: UIButtonType.Custom)
-            loginBtn.setTitle("登录", forState: UIControlState.Normal)
+            let loginBtn = UIButton(type: UIButtonType.custom)
+            loginBtn.setTitle("登录", for: UIControlState())
             loginBtn.backgroundColor = Constants.HDMainColor
-            loginBtn.addTarget(self, action: #selector(loginAction), forControlEvents: UIControlEvents.TouchUpInside)
+            loginBtn.addTarget(self, action: #selector(loginAction), for: UIControlEvents.touchUpInside)
             loginBtn.layer.cornerRadius = 5
             loginBtn.layer.masksToBounds = true
-            loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            loginBtn.setTitleColor(UIColor.white, for: UIControlState())
             cell.contentView.addSubview(loginBtn)
 
-            loginBtn.snp_makeConstraints(closure: { (make) -> Void in
+            loginBtn.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-40)
                 make.height.equalTo(40)
@@ -283,12 +303,12 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row == 0 {
+        if (indexPath as NSIndexPath).row == 0 {
         
             return 60
-        }else if indexPath.row == 1 {
+        }else if (indexPath as NSIndexPath).row == 1 {
         
             return 50
         }else{

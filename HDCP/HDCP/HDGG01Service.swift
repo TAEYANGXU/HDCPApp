@@ -19,55 +19,48 @@ class HDGG01Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDGG01_URL(successBlock:(hdResponse:HDGG01Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDGG01_URL(_ successBlock:@escaping (_ hdResponse:HDGG01Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
 
-        HDRequestManager.doPostRequest(["limit":"20","offset":"0"], URL: Constants.HDGG01_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":"20" as AnyObject,"offset":"0" as AnyObject], URL: Constants.HDGG01_URL) { (response) -> Void in
 
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let hdggResponse = Mapper<HDGG01Response>().map(response.result.value)
+                let hdggResponse = Mapper<HDGG01Response>().map(JSONObject: response.result.value)
                 
                 let array2D = NSMutableArray()
                 var array:NSMutableArray?
                 
-                for (i,_) in (hdggResponse?.result?.gg01List?.enumerate())! {
+                for (i,_) in (hdggResponse?.result?.gg01List?.enumerated())! {
                 
                     if i%3 == 0 {
                         array = nil
                         array = NSMutableArray()
-                        array2D.addObject(array!)
+                        array2D.add(array!)
                         
                     }
                     
-                    array?.addObject((hdggResponse?.result?.gg01List![i])!)
+                    array?.add((hdggResponse?.result?.gg01List![i])!)
                     
                 }
                 
                 array2D.removeLastObject()
                 
                 hdggResponse?.array2D = array2D
-                
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                DispatchQueue.global().async {
                     
                     //更新本地数据
-                    self.deleteEntity()
-                    self.addEntity(hdggResponse!)
-                    
-                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                        
-                        /// 回调
-                        successBlock(hdResponse: hdggResponse!)
-                        
-                    })
-                    
-                })
-                
-                
+                    //                    self.deleteEntity()
+                    //                    self.addEntity(response!)
+                    DispatchQueue.main.async {
+                        // 主线程中
+                        successBlock(hdggResponse!)
+                    }
+                }
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
 
         }
@@ -78,27 +71,27 @@ class HDGG01Service {
     /**
      *  将数据存到本地
      */
-    func addEntity(hdggResponse:HDGG01Response){
+    func addEntity(_ hdggResponse:HDGG01Response){
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
     
-        let result = NSEntityDescription.insertNewObjectForEntityForName("HDGG01ResultEntity", inManagedObjectContext: context) as? HDGG01ResultEntity
+        let result = NSEntityDescription.insertNewObject(forEntityName: "HDGG01ResultEntity", into: context) as? HDGG01ResultEntity
         
-        for (i,_) in (hdggResponse.result?.gg01List?.enumerate())! {
+        for (i,_) in (hdggResponse.result?.gg01List?.enumerated())! {
         
             let model = hdggResponse.result?.gg01List![i]
             
-            let listModel = NSEntityDescription.insertNewObjectForEntityForName("HDGG01ListEntity", inManagedObjectContext: context) as? HDGG01ListEntity
+            let listModel = NSEntityDescription.insertNewObject(forEntityName: "HDGG01ListEntity", into: context) as? HDGG01ListEntity
             listModel?.image = model?.image
             listModel?.url = model?.url
-            listModel?.type = model?.type
+            listModel?.type = model?.type as NSNumber?
             listModel?.title = model?.title
             
             listModel?.result = result
             
         }
         
-        let response = NSEntityDescription.insertNewObjectForEntityForName("HDGG01ResponseEntity", inManagedObjectContext: context) as? HDGG01ResponseEntity
+        let response = NSEntityDescription.insertNewObject(forEntityName: "HDGG01ResponseEntity", into: context) as? HDGG01ResponseEntity
         response?.request_id = hdggResponse.request_id
         response?.result = result
         
@@ -112,15 +105,14 @@ class HDGG01Service {
     func getAllResponseEntity() -> HDGG01Response{
     
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        
-        let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
         request.relationshipKeyPathsForPrefetching = ["HDGG01ResultEntity","HDGG01ListEntity"]
         
         let hdGG01Response:HDGG01Response! = HDGG01Response()
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             let gg01List = NSMutableArray()
             
             if list.count>0 {
@@ -131,12 +123,12 @@ class HDGG01Service {
                 
                     let ggModel = HDGG01ListModel()
                     
-                    ggModel.image = model.image
-                    ggModel.title = model.title
-                    ggModel.type = model.type!!.longValue
-                    ggModel.url = model.url
+                    ggModel.image = (model as AnyObject).image
+                    ggModel.title = (model as AnyObject).title
+//                    ggModel.type = model.type!!.longValue
+                    ggModel.url = (model as AnyObject).url
                     
-                    gg01List.addObject(ggModel)
+                    gg01List.add(ggModel)
                 }
                 
                 let result = HDGG01Result()
@@ -153,11 +145,11 @@ class HDGG01Service {
                     if i%3 == 0 {
                         array = nil
                         array = NSMutableArray()
-                        array2D.addObject(array!)
+                        array2D.add(array!)
                         
                     }
                     
-                    array?.addObject(gg01List[i])
+                    array?.add(gg01List[i])
                     
                 }
                 
@@ -188,14 +180,14 @@ class HDGG01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
         request.relationshipKeyPathsForPrefetching = ["HDGG01ResultEntity","HDGG01ListEntity"]
         
         var ret:Bool = false
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 ret = true
             }
@@ -217,17 +209,17 @@ class HDGG01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDGG01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDGG01ResponseEntity")
         
         do {
             
-            let list =  try context.executeFetchRequest(request) as Array
+            let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
                 for model in list {
                     
-                    context.deleteObject(model as! NSManagedObject)
+                    context.delete(model as! NSManagedObject)
                     
                 }
                 

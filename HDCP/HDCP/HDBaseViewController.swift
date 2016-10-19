@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
         self.view.backgroundColor = Constants.HDBGViewColor
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         

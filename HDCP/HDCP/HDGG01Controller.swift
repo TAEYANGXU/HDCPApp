@@ -25,11 +25,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.edgesForExtendedLayout = UIRectEdge.None;
-        self.navigationController?.navigationBar.translucent = false
+        self.edgesForExtendedLayout = UIRectEdge();
+        self.navigationController?.navigationBar.isTranslucent = false
         
         //双击TabItem通知
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(gg01Notification(_:)), name: Constants.HDREFRESHHDGG01, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(gg01Notification(_:)), name: NSNotification.Name(rawValue: Constants.HDREFRESHHDGG01), object: nil)
         
         count = 0
         setupUI()
@@ -43,7 +43,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             self.count = hdGG01Response.array2D!.count
             self.tableView!.reloadData()
             
-            self.tableView?.hidden = false
+            self.tableView?.isHidden = false
             
             doGetRequestData()
             
@@ -59,7 +59,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hidenHud()
     }
@@ -89,8 +89,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
         if headerView == nil {
             
-            headerView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH/3,2*Constants.HDSCREENWITH/3+2*CGFloat(Constants.HDSpace)))
-            headerView?.backgroundColor = UIColor.clearColor()
+            headerView = UIView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH/3,height: 2*Constants.HDSCREENWITH/3+2*CGFloat(Constants.HDSpace)))
+            headerView?.backgroundColor = UIColor.clear
             tableView?.tableHeaderView = headerView
             
             var index = 0
@@ -101,19 +101,19 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 
                     let btn = HDGG01Button()
                     btn.tag = index+400
-                    btn.setImage(UIImage(named: gg01Array[index]["image"]!), forState: UIControlState.Normal)
-                    btn.setTitle(gg01Array[index]["title"]!, forState: UIControlState.Normal)
-                    btn.titleLabel?.font = UIFont.systemFontOfSize(15)
-                    btn.backgroundColor = UIColor.whiteColor()
-                    btn.titleLabel?.textAlignment = NSTextAlignment.Center
+                    btn.setImage(UIImage(named: gg01Array[index]["image"]!), for: UIControlState())
+                    btn.setTitle(gg01Array[index]["title"]!, for: UIControlState())
+                    btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+                    btn.backgroundColor = UIColor.white
+                    btn.titleLabel?.textAlignment = NSTextAlignment.center
                     btn.layer.borderWidth = 0.5
-                    btn.layer.borderColor = Constants.HDBGViewColor.CGColor
-                    btn.setTitleColor(Constants.HDMainTextColor, forState: UIControlState.Normal)
-                    btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    btn.layer.borderColor = Constants.HDBGViewColor.cgColor
+                    btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                    btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
                     headerView!.addSubview(btn)
 
                     unowned let WS = self
-                    btn.snp_makeConstraints(closure: { (make) -> Void in
+                    btn.snp.makeConstraints( { (make) -> Void in
                         
                         make.top.equalTo(WS.headerView!).offset(CGFloat(i)*Constants.HDSCREENWITH/3+10)
                         make.left.equalTo(WS.headerView!).offset(CGFloat(j)*Constants.HDSCREENWITH/3)
@@ -138,14 +138,14 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             tableView?.tableFooterView = UIView()
             tableView?.delegate = self
             tableView?.dataSource = self
-            tableView?.backgroundColor = UIColor.clearColor()
-            tableView?.separatorStyle = UITableViewCellSeparatorStyle.None
-            self.tableView?.hidden = true
+            tableView?.backgroundColor = UIColor.clear
+            tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+            self.tableView?.isHidden = true
             self.view.addSubview(self.tableView!)
-            tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
-            tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell2")
+            tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+            tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "mycell2")
             unowned let WS = self
-            tableView?.snp_makeConstraints(closure: { (make) -> Void in
+            tableView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.view).offset(0)
                 make.left.equalTo(WS.view).offset(0)
@@ -178,9 +178,9 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
     // MARK: - 通知事件
     
-    func gg01Notification(noti:NSNotification){
+    func gg01Notification(_ noti:Notification){
         
-        let flag = noti.userInfo!["FLAG"] as? String
+        let flag = (noti as NSNotification).userInfo!["FLAG"] as? String
         
         if flag == Constants.HDREFRESHHDGG01 {
             
@@ -196,7 +196,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     
     // MARK: - onclik events
     
-    func menuBtnOnclick(btn:UIButton){
+    func menuBtnOnclick(_ btn:UIButton){
     
         let tag:Int = btn.tag - 400
         switch tag {
@@ -266,7 +266,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             break
 
         default:
-            "default"
+            break
         }
         
     }
@@ -285,7 +285,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             WS.hdGG01Response = hdResponse
             WS.tableView!.reloadData()
             
-            WS.tableView?.hidden = false
+            WS.tableView?.isHidden = false
             
             WS.tableView?.mj_header.endRefreshing()
             
@@ -300,10 +300,10 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     // MARK: - HDGG01RowViewProtocol
-    func didSelectHDGG01RowView(indexPath:NSIndexPath,index:Int)->Void{
+    func didSelectHDGG01RowView(_ indexPath:IndexPath,index:Int)->Void{
         
         
-        let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
+        let array2d = self.hdGG01Response.array2D![(indexPath as NSIndexPath).row] as! Array<HDGG01ListModel>
         let model:HDGG01ListModel = array2d[index]
         
         if model.url.hasPrefix("http") {
@@ -333,23 +333,23 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
     }
     
     // MARK: - UIScrollView delegate
-    func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return count
     }
     
-    func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
         
         
         
-        if indexPath.row%2==0 {
+        if (indexPath as NSIndexPath).row%2==0 {
         
             /**
              *  左边大图
              */
             
-            let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+            let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
             
             // 大图 左
             var leftImageView = cell.viewWithTag(1000)  as? HDGG01RowView
@@ -359,7 +359,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 leftImageView?.tag = 1000
                 cell.contentView.addSubview(leftImageView!)
                 
-                leftImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                leftImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.top.equalTo(cell.contentView).offset(10)
@@ -377,7 +377,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 topImageView?.tag = 2000
                 cell.contentView.addSubview(topImageView!)
                 
-                topImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                topImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.top.equalTo(cell.contentView).offset(10)
@@ -394,7 +394,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 bottomImageView?.tag = 3000
                 cell.contentView.addSubview(bottomImageView!)
                 
-                bottomImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                bottomImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.bottom.equalTo(cell.contentView).offset(-20)
@@ -413,7 +413,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 bgLine?.backgroundColor = Constants.HDBGViewColor
                 cell.contentView.addSubview(bgLine!)
                 
-                bgLine?.snp_makeConstraints(closure: { (make) -> Void in
+                bgLine?.snp.makeConstraints( { (make) -> Void in
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(0)
@@ -423,18 +423,15 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 })
             }
             
-            let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
+            let array2d = self.hdGG01Response.array2D![(indexPath as NSIndexPath).row] as! Array<HDGG01ListModel>
             
             let leftModel = array2d[0]
             
-            let leftImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(leftModel.image!)
+            let leftImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: leftModel.image!)
             if let _ = leftImage {
                 leftImageView!.imageView.image = leftImage
             }else{
-                leftImageView!.imageView.sd_setImageWithURL(NSURL(string: (leftModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                    //保存图片，并保存到物理存储上
-                    SDImageCache.sharedImageCache().storeImage(image, forKey: leftModel.image!, toDisk: true)
-                })
+                leftImageView!.imageView.sd_setImage(with:URL(string: (leftModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             }
             
             leftImageView?.title.text = leftModel.title
@@ -443,14 +440,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             leftImageView!.index = 0
             
             let topModel = array2d[1]
-            let topImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(topModel.image!)
+            let topImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: topModel.image!)
             if let _ = topImage {
                 topImageView!.imageView.image = topImage
             }else{
-                topImageView!.imageView.sd_setImageWithURL(NSURL(string: (topModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                    //保存图片，并保存到物理存储上
-                    SDImageCache.sharedImageCache().storeImage(image, forKey: topModel.image!, toDisk: true)
-                })
+                topImageView!.imageView.sd_setImage(with:URL(string: (topModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             }
             
             topImageView?.title.text = topModel.title
@@ -459,14 +453,11 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             topImageView!.index = 1
             
             let bottomModel = array2d[2]
-            let bottomImage:UIImage? = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(bottomModel.image!)
+            let bottomImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: bottomModel.image!)
             if let _ = bottomImage {
                 bottomImageView!.imageView.image = bottomImage
             }else{
-                bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: (bottomModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"), completed: { (image, error, type, url) -> Void in
-                    //保存图片，并保存到物理存储上
-                    SDImageCache.sharedImageCache().storeImage(image, forKey: bottomModel.image!, toDisk: true)
-                })
+                bottomImageView!.imageView.sd_setImage(with:URL(string: (bottomModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             }
             
             bottomImageView?.title.text = bottomModel.title
@@ -474,7 +465,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             bottomImageView?.indexPath = indexPath
             bottomImageView!.index = 2
             
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             return cell
         }else{
@@ -483,7 +474,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
              *  右边大图
              */
 
-            let cell = tableView .dequeueReusableCellWithIdentifier("mycell2", forIndexPath: indexPath)
+            let cell = tableView .dequeueReusableCell(withIdentifier: "mycell2", for: indexPath)
             
             //  右大图
             var rightImageView = cell.viewWithTag(4000)  as? HDGG01RowView
@@ -492,7 +483,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 rightImageView?.tag = 4000
                 cell.contentView.addSubview(rightImageView!)
                 
-                rightImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                rightImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.right.equalTo(cell.contentView).offset(-10)
                     make.top.equalTo(cell.contentView).offset(10)
@@ -510,7 +501,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 topImageView?.tag = 5000
                 cell.contentView.addSubview(topImageView!)
                 
-                topImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                topImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.top.equalTo(cell.contentView).offset(10)
@@ -528,7 +519,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 bottomImageView?.tag = 6000
                 cell.contentView.addSubview(bottomImageView!)
                 
-                bottomImageView?.snp_makeConstraints(closure: { (make) -> Void in
+                bottomImageView?.snp.makeConstraints( { (make) -> Void in
                     
                     make.left.equalTo(cell.contentView).offset(10)
                     make.bottom.equalTo(cell.contentView).offset(-20)
@@ -548,7 +539,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 bgLine?.backgroundColor = Constants.HDBGViewColor
                 cell.contentView.addSubview(bgLine!)
                 
-                bgLine?.snp_makeConstraints(closure: { (make) -> Void in
+                bgLine?.snp.makeConstraints( { (make) -> Void in
                     
                     make.bottom.equalTo(0)
                     make.left.equalTo(0)
@@ -558,37 +549,37 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
                 })
             }
             
-            let array2d = self.hdGG01Response.array2D![indexPath.row] as! Array<HDGG01ListModel>
+            let array2d = self.hdGG01Response.array2D![(indexPath as NSIndexPath).row] as! Array<HDGG01ListModel>
             
             let rightModel:HDGG01ListModel = array2d[0]
-            rightImageView!.imageView.sd_setImageWithURL(NSURL(string: rightModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            rightImageView!.imageView.sd_setImage(with:URL(string: rightModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             rightImageView?.title.text = rightModel.title
             rightImageView?.delegate = self
             rightImageView?.indexPath = indexPath
             rightImageView!.index = 0
             
             let topModel = array2d[1]
-            topImageView!.imageView.sd_setImageWithURL(NSURL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            topImageView!.imageView.sd_setImage(with:URL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             topImageView?.title.text = topModel.title
             topImageView?.delegate = self
             topImageView?.indexPath = indexPath
             topImageView!.index = 1
             
             let bottomModel = array2d[2] 
-            bottomImageView!.imageView.sd_setImageWithURL(NSURL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            bottomImageView!.imageView.sd_setImage(with:URL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             bottomImageView?.title.text = bottomModel.title
             bottomImageView?.delegate = self
             bottomImageView?.indexPath = indexPath
             bottomImageView!.index = 2
         
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             return cell
         }
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 3*Constants.HDSCREENWITH/5+20+10
     }
 

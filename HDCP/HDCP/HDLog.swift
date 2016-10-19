@@ -13,7 +13,7 @@ import Foundation
 */
 class HDLog {
     
-    static func LogOut(obj:AnyObject){
+    static func LogOut(_ obj:Any){
     
         if Constants.HDLOG {
         
@@ -23,7 +23,7 @@ class HDLog {
         
     }
     
-    static func LogOut(obj_name:AnyObject,obj:AnyObject){
+    static func LogOut(_ obj_name:Any,obj:Any){
         
         if Constants.HDLOG {
             
@@ -33,7 +33,7 @@ class HDLog {
         
     }
     
-    static func LogClassDestory(className:AnyObject){
+    static func LogClassDestory(_ className:Any){
     
         if Constants.HDLOG {
             

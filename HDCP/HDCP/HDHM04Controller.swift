@@ -32,7 +32,7 @@ class HDHM04Controller: UITableViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -48,7 +48,7 @@ class HDHM04Controller: UITableViewController {
     func setupUI(){
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -72,7 +72,7 @@ class HDHM04Controller: UITableViewController {
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(tagId:Int,limit:Int,offset:Int){
+    func doGetRequestData(_ tagId:Int,limit:Int,offset:Int){
     
         unowned let WS = self;
         HDHM04Service().doGetRequest_HDHM04_URL(tagId, limit: limit, offset: offset, successBlock: { (hm04Response) -> Void in
@@ -81,7 +81,7 @@ class HDHM04Controller: UITableViewController {
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hm04Response.result?.list)!)
+            WS.dataArray.addObjects(from: (hm04Response.result?.list)!)
             
             WS.tableView.mj_footer.endRefreshing()
             
@@ -99,39 +99,39 @@ class HDHM04Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! HDHM04Cell
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! HDHM04Cell
         
-        let model = dataArray[indexPath.row] as! HDHM04ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM04ListModel
         
-        cell.coverImageV?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        cell.coverImageV?.sd_setImage(with:URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         cell.title?.text = model.title
         cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
         
         var stuffStr = String()
         
-        for (i,_) in (model.stuff?.enumerate())! {
+        for (i,_) in (model.stuff?.enumerated())! {
             
             let stuff = model.stuff![i]
             
             if i == (model.stuff?.count)!-1 {
-                stuffStr.appendContentsOf(stuff.name!)
+                stuffStr.append(stuff.name!)
                 
             }else{
-                stuffStr.appendContentsOf(String(format: "%@、", stuff.name!))
+                stuffStr.append(String(format: "%@、", stuff.name!))
             }
             
         }
@@ -141,13 +141,13 @@ class HDHM04Controller: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray[indexPath.row] as! HDHM04ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM04ListModel
 
         let hdHM08VC = HDHM08Controller()
         hdHM08VC.rid = model.recipeId

@@ -23,7 +23,7 @@ class HDGG03Controller: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -39,7 +39,7 @@ class HDGG03Controller: UITableViewController {
     
     func setupUI(){
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
@@ -49,21 +49,21 @@ class HDGG03Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     // MARK: - UITableView  delegate/datasource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         
         return dataArray.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         
         /**
@@ -75,9 +75,9 @@ class HDGG03Controller: UITableViewController {
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFont(ofSize: 16)
             cell.contentView.addSubview(title!)
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(200)
                 make.height.equalTo(44)
@@ -96,7 +96,7 @@ class HDGG03Controller: UITableViewController {
             arrow?.tag = 3000
             cell.contentView.addSubview(arrow!)
             
-            arrow?.snp_makeConstraints(closure: { (make) -> Void in
+            arrow?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(20)
                 make.height.equalTo(20)
@@ -107,7 +107,7 @@ class HDGG03Controller: UITableViewController {
             
         }
         
-        let model = dataArray[indexPath.row]
+        let model = dataArray[(indexPath as NSIndexPath).row]
         
         title?.text =   model.name
         arrow?.image = UIImage(named: "arrowIcon")
@@ -116,9 +116,9 @@ class HDGG03Controller: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray[indexPath.row]
+        let model = dataArray[(indexPath as NSIndexPath).row]
         let hdHM04VC = HDHM04Controller()
         let tmodel = TagListModel()
         tmodel.id = model.id;

@@ -26,7 +26,7 @@ class HDHM03Controller: UITableViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "营养餐桌"
@@ -43,7 +43,7 @@ class HDHM03Controller: UITableViewController {
     func setupUI(){
 
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -70,12 +70,12 @@ class HDHM03Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
     
         unowned let WS = self;
         HDHM03Service().doGetRequest_HDHM03_URL(limit, offset: offset, successBlock: { (hdResponse) -> Void in
@@ -85,7 +85,7 @@ class HDHM03Controller: UITableViewController {
             
                 WS.hidenHud()
             
-                WS.dataArray.addObjectsFromArray(hdResponse.result.list)
+                WS.dataArray.addObjects(from: hdResponse.result.list)
             
                 WS.tableView.mj_footer.endRefreshing()
             
@@ -102,14 +102,14 @@ class HDHM03Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         /// 图片
         var hm03ImageView = cell.viewWithTag(1000) as? UIImageView
@@ -117,11 +117,11 @@ class HDHM03Controller: UITableViewController {
         if hm03ImageView == nil {
         
             hm03ImageView = UIImageView()
-            hm03ImageView?.backgroundColor = UIColor.redColor()
+            hm03ImageView?.backgroundColor = UIColor.red
             hm03ImageView?.tag = 1000
             cell.contentView.addSubview(hm03ImageView!)
             
-            hm03ImageView?.snp_makeConstraints(closure: { (make) -> Void in
+            hm03ImageView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(5)
                 make.left.equalTo(cell.contentView).offset(15)
@@ -139,13 +139,13 @@ class HDHM03Controller: UITableViewController {
         
             title = UILabel()
             title?.tag = 2000
-            title?.font = UIFont.systemFontOfSize(15)
+            title?.font = UIFont.systemFont(ofSize: 15)
             title?.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(hm03ImageView!.snp_bottom).offset(0)
+                make.top.equalTo(hm03ImageView!.snp.bottom).offset(0)
                 make.left.equalTo(cell.contentView).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(20)
@@ -162,13 +162,13 @@ class HDHM03Controller: UITableViewController {
             content = UILabel()
             content?.tag = 3000
             content?.numberOfLines = 2
-            content?.font = UIFont.systemFontOfSize(14)
+            content?.font = UIFont.systemFont(ofSize: 14)
             content?.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(content!)
             
-            content?.snp_makeConstraints(closure: { (make) -> Void in
+            content?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo(title!.snp_bottom).offset(0)
+                make.top.equalTo(title!.snp.bottom).offset(0)
                 make.left.equalTo(cell.contentView).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(40)
@@ -178,25 +178,25 @@ class HDHM03Controller: UITableViewController {
         }
         
         /// 设置UI内容
-        let model = dataArray[indexPath.row] as! HDHM03List
-        hm03ImageView?.sd_setImageWithURL(NSURL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM03List
+        hm03ImageView?.sd_setImage(with:URL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text = model.title
         content?.text = model.content
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 185
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         /**
         *   根据URL显示web页面
         */
         let hdWebVC = HDWebController()
-        let model = dataArray[indexPath.row] as! HDHM03List
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM03List
         self.hidesBottomBarWhenPushed = true;
         hdWebVC.name = model.title
         hdWebVC.url = model.url

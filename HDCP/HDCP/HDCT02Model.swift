@@ -14,8 +14,8 @@ class HDCT02Response:Mappable {
     var request_id:String?
     var result:HDCT02Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     func mapping(map: Map) {
         
@@ -65,8 +65,8 @@ class HDCT02Result: Mappable {
     var userId:Int?
     var vip:Int?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -117,8 +117,8 @@ class HDCT02AreaModel: Mappable {
     var provinceId:Int?
     var provinceName:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -137,8 +137,8 @@ class HDCT02FavoriteListModel: Mappable {
     var id:Int?
     var name:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {

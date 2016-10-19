@@ -37,7 +37,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         if hdhm01vc == nil {
         
             hdhm01vc = HDHM01Controller()
-            hdhm01vc.tabBarItem = UITabBarItem(title: "菜谱", image: UIImage(named: "tab_icon_off_01")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_01")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hdhm01vc.tabBarItem = UITabBarItem(title: "菜谱", image: UIImage(named: "tab_icon_off_01")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_01")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
             hdhm01vc.title = "菜谱"
             navc = UINavigationController(rootViewController: hdhm01vc)
             self.addChildViewController(navc)
@@ -51,7 +51,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         if hdgg01vc == nil {
             
             hdgg01vc = HDGG01Controller()
-            hdgg01vc.tabBarItem = UITabBarItem(title: "逛逛", image: UIImage(named: "tab_icon_off_04")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_04")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hdgg01vc.tabBarItem = UITabBarItem(title: "逛逛", image: UIImage(named: "tab_icon_off_04")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_04")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
             hdgg01vc.title = "逛逛"
             navc = UINavigationController(rootViewController: hdgg01vc)
             self.addChildViewController(navc)
@@ -64,7 +64,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         if hdcg01vc == nil {
             
             hdcg01vc = HDCG01Controller()
-            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
             hdcg01vc.title = "分类"
             navc = UINavigationController(rootViewController: hdcg01vc)
             self.addChildViewController(navc)
@@ -78,7 +78,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         if hddy01vc == nil {
             
             hddy01vc = HDDY01Controller()
-            hddy01vc.tabBarItem = UITabBarItem(title: "动态", image: UIImage(named: "tab_icon_off_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hddy01vc.tabBarItem = UITabBarItem(title: "动态", image: UIImage(named: "tab_icon_off_02")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
             hddy01vc.title = "动态"
             navc = UINavigationController(rootViewController: hddy01vc)
             self.addChildViewController(navc)
@@ -91,7 +91,7 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         if hdct01vc == nil {
         
             hdct01vc = HDCT01Controller()
-            hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal))
+            hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
             hdct01vc.title = "我的"
             navc = UINavigationController(rootViewController: hdct01vc)
             self.addChildViewController(navc)
@@ -102,11 +102,11 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
 
     // MARK: - UITabBarController delegate
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
     }
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         /**
         *  双击TabItem添加自动下拉刷新
@@ -118,20 +118,20 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
             let navViewController = viewController as! UINavigationController
             let rootViewController = navViewController.viewControllers[0]
             
-            if rootViewController.isKindOfClass(HDHM01Controller.classForCoder()){
+            if rootViewController.isKind(of: HDHM01Controller.classForCoder()){
                 
                 /**
                 *  刷新菜谱主页
                 */
                 
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDHM01, object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDHM01])
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.HDREFRESHHDHM01), object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDHM01])
                 
-            }else if rootViewController.isKindOfClass(HDGG01Controller.classForCoder()) {
+            }else if rootViewController.isKind(of: HDGG01Controller.classForCoder()) {
             
                 /**
                 *  刷新逛逛主页
                 */
-                NSNotificationCenter.defaultCenter().postNotificationName(Constants.HDREFRESHHDGG01, object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDGG01])
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.HDREFRESHHDGG01), object: nil, userInfo: ["FLAG":Constants.HDREFRESHHDGG01])
             }
             
         }

@@ -24,7 +24,7 @@ class HDCT09Controller: UITableViewController {
         doGetRequestData(0, offset: 0)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "话题"
@@ -34,17 +34,17 @@ class HDCT09Controller: UITableViewController {
     
     deinit{
     
-        HDLog.LogClassDestory("HDCT09Controller")
+        HDLog.LogClassDestory("HDCT09Controller" as AnyObject)
     }
     
     // MARK: - 创建UI视图
     func setupUI(){
         
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "hotCell")
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "groupCell")
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "starCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "hotCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "groupCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "starCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
        
     }
 
@@ -52,7 +52,7 @@ class HDCT09Controller: UITableViewController {
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -70,7 +70,7 @@ class HDCT09Controller: UITableViewController {
     
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
         
         unowned let WS = self
         HDCT09Service().doGetRequest_HDCT09_URL(0, offset: 0, successBlock: { (hdResponse) -> Void in
@@ -92,7 +92,7 @@ class HDCT09Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             
@@ -107,25 +107,25 @@ class HDCT09Controller: UITableViewController {
         
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int{
+    override func numberOfSections(in tableView: UITableView) -> Int{
     
         return 3;
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(Constants.HDSpace*3)
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headView = UIView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,30))
+        let headView = UIView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: 30))
         headView.backgroundColor = Constants.HDBGViewColor
         
         let icon = UIImageView()
         icon.layer.cornerRadius = 8;
         icon.layer.masksToBounds = true
         headView.addSubview(icon)
-        icon.snp_makeConstraints { (make) in
+        icon.snp.makeConstraints { (make) in
             
             make.top.equalTo(7)
             make.left.equalTo(10)
@@ -136,13 +136,13 @@ class HDCT09Controller: UITableViewController {
         
         //标题
         let title = UILabel()
-        title.font = UIFont.systemFontOfSize(14)
+        title.font = UIFont.systemFont(ofSize: 14)
         title.textColor = Constants.HDMainTextColor
         headView.addSubview(title)
-        title.snp_makeConstraints { (make) in
+        title.snp.makeConstraints { (make) in
             
             make.top.equalTo(0)
-            make.left.equalTo(icon.snp_right).offset(5)
+            make.left.equalTo(icon.snp.right).offset(5)
             make.width.equalTo(100)
             make.height.equalTo(30)
             
@@ -152,7 +152,7 @@ class HDCT09Controller: UITableViewController {
         rightIcon.image = UIImage(named: "ArroIcon")
         headView.addSubview(rightIcon)
         
-        rightIcon.snp_makeConstraints { (make) in
+        rightIcon.snp.makeConstraints { (make) in
             
             make.top.equalTo(5)
             make.right.equalTo(-15)
@@ -180,12 +180,12 @@ class HDCT09Controller: UITableViewController {
         return headView
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
             return 100
-        }else if indexPath.section == 1 {
+        }else if (indexPath as NSIndexPath).section == 1 {
         
             return 60
         }else{
@@ -195,14 +195,14 @@ class HDCT09Controller: UITableViewController {
         
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
         
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             
-            let cell = tableView .dequeueReusableCellWithIdentifier("hotCell", forIndexPath: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            let cell = tableView .dequeueReusableCell(withIdentifier: "hotCell", for: indexPath)
+            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             //图片
             var hotImageV = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -213,7 +213,7 @@ class HDCT09Controller: UITableViewController {
                 hotImageV?.tag = 1000
                 cell.contentView.addSubview(hotImageV!)
                 
-                hotImageV?.snp_makeConstraints(closure: { (make) in
+                hotImageV?.snp.makeConstraints( { (make) in
                     
                     make.top.equalTo(10)
                     make.left.equalTo(10)
@@ -231,14 +231,14 @@ class HDCT09Controller: UITableViewController {
                 
                 title = UILabel()
                 title?.tag = 2000
-                title?.font = UIFont.systemFontOfSize(15)
+                title?.font = UIFont.systemFont(ofSize: 15)
                 title?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(title!)
                 
-                title?.snp_makeConstraints(closure: { (make) in
+                title?.snp.makeConstraints({ (make) in
                     
                     make.top.equalTo(5)
-                    make.left.equalTo(hotImageV!.snp_right).offset(10)
+                    make.left.equalTo(hotImageV!.snp.right).offset(10)
                     make.width.equalTo(Constants.HDSCREENWITH - 110)
                     make.height.equalTo(20)
                     
@@ -258,10 +258,10 @@ class HDCT09Controller: UITableViewController {
                 uIcon?.layer.masksToBounds = true
                 cell.contentView.addSubview(uIcon!)
                 
-                uIcon?.snp_makeConstraints(closure: { (make) in
+                uIcon?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(title!.snp_bottom).offset(0)
-                    make.left.equalTo(hotImageV!.snp_right).offset(10)
+                    make.top.equalTo(title!.snp.bottom).offset(0)
+                    make.left.equalTo(hotImageV!.snp.right).offset(10)
                     make.width.equalTo(15)
                     make.height.equalTo(15)
                     
@@ -277,14 +277,14 @@ class HDCT09Controller: UITableViewController {
                 
                 userName = UILabel()
                 userName?.tag = 4000
-                userName?.font = UIFont.systemFontOfSize(12)
-                userName?.textColor = UIColor.lightGrayColor()
+                userName?.font = UIFont.systemFont(ofSize: 12)
+                userName?.textColor = UIColor.lightGray
                 cell.contentView.addSubview(userName!)
                 
-                userName?.snp_makeConstraints(closure: { (make) in
+                userName?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(title!.snp_bottom).offset(0)
-                    make.left.equalTo(uIcon!.snp_right).offset(10)
+                    make.top.equalTo(title!.snp.bottom).offset(0)
+                    make.left.equalTo(uIcon!.snp.right).offset(10)
                     make.width.equalTo(200)
                     make.height.equalTo(15)
                     
@@ -299,15 +299,15 @@ class HDCT09Controller: UITableViewController {
                 
                 content = UILabel()
                 content?.tag = 5000
-                content?.font = UIFont.systemFontOfSize(14)
+                content?.font = UIFont.systemFont(ofSize: 14)
                 content?.numberOfLines = 2
-                content?.textColor = UIColor.lightGrayColor()
+                content?.textColor = UIColor.lightGray
                 cell.contentView.addSubview(content!)
                 
-                content?.snp_makeConstraints(closure: { (make) in
+                content?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(userName!.snp_bottom).offset(0)
-                    make.left.equalTo(hotImageV!.snp_right).offset(10)
+                    make.top.equalTo(userName!.snp.bottom).offset(0)
+                    make.left.equalTo(hotImageV!.snp.right).offset(10)
                     make.width.equalTo(Constants.HDSCREENWITH - 110)
                     make.height.equalTo(35)
                     
@@ -325,10 +325,10 @@ class HDCT09Controller: UITableViewController {
                 digIcon?.image = UIImage(named: "zanIcon")
                 cell.contentView.addSubview(digIcon!)
                 
-                digIcon?.snp_makeConstraints(closure: { (make) in
+                digIcon?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(content!.snp_bottom).offset(1)
-                    make.left.equalTo(hotImageV!.snp_right).offset(10)
+                    make.top.equalTo(content!.snp.bottom).offset(1)
+                    make.left.equalTo(hotImageV!.snp.right).offset(10)
                     make.width.equalTo(15)
                     make.height.equalTo(15)
                     
@@ -342,13 +342,13 @@ class HDCT09Controller: UITableViewController {
                 
                 digCount = UILabel()
                 digCount?.tag = 7000
-                digCount?.font = UIFont.systemFontOfSize(12)
-                digCount?.textColor = UIColor.lightGrayColor()
+                digCount?.font = UIFont.systemFont(ofSize: 12)
+                digCount?.textColor = UIColor.lightGray
                 cell.contentView.addSubview(digCount!)
-                digCount?.snp_makeConstraints(closure: { (make) in
+                digCount?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(content!.snp_bottom).offset(1)
-                    make.left.equalTo(digIcon!.snp_right).offset(5)
+                    make.top.equalTo(content!.snp.bottom).offset(1)
+                    make.left.equalTo(digIcon!.snp.right).offset(5)
                     make.width.equalTo(25)
                     make.height.equalTo(15)
                     
@@ -365,10 +365,10 @@ class HDCT09Controller: UITableViewController {
                 commentIcon?.image = UIImage(named: "commIcon")
                 cell.contentView.addSubview(commentIcon!)
                 
-                commentIcon?.snp_makeConstraints(closure: { (make) in
+                commentIcon?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(content!.snp_bottom).offset(1)
-                    make.left.equalTo(digCount!.snp_right).offset(0)
+                    make.top.equalTo(content!.snp.bottom).offset(1)
+                    make.left.equalTo(digCount!.snp.right).offset(0)
                     make.width.equalTo(15)
                     make.height.equalTo(15)
                     
@@ -382,13 +382,13 @@ class HDCT09Controller: UITableViewController {
                 
                 commentCount = UILabel()
                 commentCount?.tag = 9000
-                commentCount?.font = UIFont.systemFontOfSize(12)
-                commentCount?.textColor = UIColor.lightGrayColor()
+                commentCount?.font = UIFont.systemFont(ofSize: 12)
+                commentCount?.textColor = UIColor.lightGray
                 cell.contentView.addSubview(commentCount!)
-                commentCount?.snp_makeConstraints(closure: { (make) in
+                commentCount?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(content!.snp_bottom).offset(1)
-                    make.left.equalTo(commentIcon!.snp_right).offset(5)
+                    make.top.equalTo(content!.snp.bottom).offset(1)
+                    make.left.equalTo(commentIcon!.snp.right).offset(5)
                     make.width.equalTo(60)
                     make.height.equalTo(15)
                     
@@ -396,10 +396,10 @@ class HDCT09Controller: UITableViewController {
             }
             
             
-            let model = ct09HotList[indexPath.row]
+            let model = ct09HotList[(indexPath as NSIndexPath).row]
             
-            hotImageV?.sd_setImageWithURL(NSURL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            uIcon?.sd_setImageWithURL(NSURL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+            hotImageV?.sd_setImage(with: URL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            uIcon?.sd_setImage(with: URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
             userName?.text = model.userName
             content?.text = model.previewContent
             title?.text = model.title
@@ -407,11 +407,11 @@ class HDCT09Controller: UITableViewController {
             commentCount?.text = String(format: "%d",model.commentCount)
             
             return cell
-        }else if indexPath.section == 1 {
+        }else if (indexPath as NSIndexPath).section == 1 {
             
-            let cell = tableView .dequeueReusableCellWithIdentifier("groupCell", forIndexPath: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            let cell = tableView .dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
+            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             //图片
             var topicImageV = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -421,7 +421,7 @@ class HDCT09Controller: UITableViewController {
                 topicImageV?.tag = 1000
                 cell.contentView.addSubview(topicImageV!)
                 
-                topicImageV?.snp_makeConstraints(closure: { (make) in
+                topicImageV?.snp.makeConstraints( { (make) in
                     
                     make.top.equalTo(5)
                     make.left.equalTo(10)
@@ -439,14 +439,14 @@ class HDCT09Controller: UITableViewController {
                 
                 title = UILabel()
                 title?.tag = 2000
-                title?.font = UIFont.systemFontOfSize(15)
+                title?.font = UIFont.systemFont(ofSize: 15)
                 title?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(title!)
                 
-                title?.snp_makeConstraints(closure: { (make) in
+                title?.snp.makeConstraints( { (make) in
                     
                     make.top.equalTo(5)
-                    make.left.equalTo(topicImageV!.snp_right).offset(10)
+                    make.left.equalTo(topicImageV!.snp.right).offset(10)
                     make.width.equalTo(Constants.HDSCREENWITH - 210)
                     make.height.equalTo(20)
                     
@@ -461,12 +461,12 @@ class HDCT09Controller: UITableViewController {
                 
                 ViewDesc = UILabel()
                 ViewDesc?.tag = 3000
-                ViewDesc?.textAlignment = NSTextAlignment.Right
-                ViewDesc?.font = UIFont.systemFontOfSize(12)
+                ViewDesc?.textAlignment = NSTextAlignment.right
+                ViewDesc?.font = UIFont.systemFont(ofSize: 12)
                 ViewDesc?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(ViewDesc!)
                 
-                ViewDesc?.snp_makeConstraints(closure: { (make) in
+                ViewDesc?.snp.makeConstraints( { (make) in
                     
                     make.top.equalTo(5)
                     make.right.equalTo(-10)
@@ -485,14 +485,14 @@ class HDCT09Controller: UITableViewController {
                 
                 desc = UILabel()
                 desc?.tag = 4000
-                desc?.font = UIFont.systemFontOfSize(14)
+                desc?.font = UIFont.systemFont(ofSize: 14)
                 desc?.textColor = Constants.HDMainTextColor
                 cell.contentView.addSubview(desc!)
                 
-                desc?.snp_makeConstraints(closure: { (make) in
+                desc?.snp.makeConstraints( { (make) in
                     
-                    make.top.equalTo(title!.snp_bottom).offset(10)
-                    make.left.equalTo(topicImageV!.snp_right).offset(10)
+                    make.top.equalTo(title!.snp.bottom).offset(10)
+                    make.left.equalTo(topicImageV!.snp.right).offset(10)
                     make.width.equalTo(Constants.HDSCREENWITH - 80)
                     make.height.equalTo(20)
                     
@@ -509,7 +509,7 @@ class HDCT09Controller: UITableViewController {
                 line?.tag = 5000
                 line?.backgroundColor = Constants.HDBGViewColor
                 cell.contentView.addSubview(line!)
-                line?.snp_makeConstraints(closure: { (make) in
+                line?.snp.makeConstraints( { (make) in
                     
                     make.width.equalTo(Constants.HDSCREENWITH-10)
                     make.left.equalTo(10)
@@ -520,9 +520,9 @@ class HDCT09Controller: UITableViewController {
                 
             }
             
-            let model = ct09GroupList[indexPath.row]
+            let model = ct09GroupList[(indexPath as NSIndexPath).row]
             
-            topicImageV?.sd_setImageWithURL(NSURL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            topicImageV?.sd_setImage(with: URL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             title?.text = model.name
             ViewDesc?.text = model.viewDesc
             desc?.text = model.desc
@@ -530,9 +530,9 @@ class HDCT09Controller: UITableViewController {
             return cell
         }else{
             
-            let cell = tableView .dequeueReusableCellWithIdentifier("starCell", forIndexPath: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            let cell = tableView .dequeueReusableCell(withIdentifier: "starCell", for: indexPath)
+            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             
             
             if todayStar.count > 0 {
@@ -553,7 +553,7 @@ class HDCT09Controller: UITableViewController {
                         icon?.layer.masksToBounds = true
                         cell.contentView.addSubview(icon!)
                         
-                        icon?.snp_makeConstraints(closure: { (make) in
+                        icon?.snp.makeConstraints( { (make) in
                             
                             make.top.equalTo(10)
                             make.left.equalTo(CGFloat(i)*(2*space+40)+space)
@@ -570,14 +570,14 @@ class HDCT09Controller: UITableViewController {
                         
                         username = UILabel()
                         username?.tag = 2000+i
-                        username?.font = UIFont.systemFontOfSize(11)
-                        username?.textAlignment = NSTextAlignment.Center
+                        username?.font = UIFont.systemFont(ofSize: 11)
+                        username?.textAlignment = NSTextAlignment.center
                         username?.textColor = Constants.HDMainTextColor
                         cell.contentView.addSubview(username!)
                         
-                        username?.snp_makeConstraints(closure: { (make) in
+                        username?.snp.makeConstraints( { (make) in
                             
-                            make.top.equalTo(icon!.snp_bottom).offset(5)
+                            make.top.equalTo(icon!.snp.bottom).offset(5)
                             make.left.equalTo(CGFloat(i)*Constants.HDSCREENWITH/5)
                             make.width.equalTo(Constants.HDSCREENWITH/5)
                             make.height.equalTo(20)
@@ -587,10 +587,10 @@ class HDCT09Controller: UITableViewController {
                         
                     }
                     
-                    icon?.sd_setImageWithURL(NSURL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+                    icon?.sd_setImage(with: URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
                     //去空格
-                    let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-                    username?.text = model.userName.stringByTrimmingCharactersInSet(whitespace)
+                    let whitespace = CharacterSet.whitespacesAndNewlines
+                    username?.text = model.userName.trimmingCharacters(in: whitespace)
                     
                 }
                 
@@ -601,7 +601,7 @@ class HDCT09Controller: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
     }

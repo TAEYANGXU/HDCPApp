@@ -27,7 +27,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         setupUI()
     }
@@ -50,22 +50,22 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
     
         if  cancelBtn == nil {
         
-            cancelBtn = UIButton(type: UIButtonType.Custom) as UIButton
-            cancelBtn?.setTitle("x", forState: UIControlState.Normal)
+            cancelBtn = UIButton(type: UIButtonType.custom) as UIButton
+            cancelBtn?.setTitle("x", for: UIControlState())
             cancelBtn?.layer.cornerRadius = 15
-            cancelBtn?.titleLabel?.textAlignment = NSTextAlignment.Center
+            cancelBtn?.titleLabel?.textAlignment = NSTextAlignment.center
             cancelBtn?.layer.masksToBounds = true
-            cancelBtn?.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
+            cancelBtn?.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
             cancelBtn?.layer.borderWidth = 0.5
-            cancelBtn?.addTarget(self, action: #selector(backAction), forControlEvents: UIControlEvents.TouchUpInside)
-            cancelBtn?.layer.borderColor = Constants.HDMainColor.CGColor
+            cancelBtn?.addTarget(self, action: #selector(backAction), for: UIControlEvents.touchUpInside)
+            cancelBtn?.layer.borderColor = Constants.HDMainColor.cgColor
             self.view.addSubview(cancelBtn!)
             
             unowned let WS = self
-            cancelBtn?.snp_makeConstraints(closure: { (make) -> Void in
+            cancelBtn?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.view).offset(50)
-                make.right.equalTo(WS.view.snp_right).offset(-30)
+                make.right.equalTo(WS.view.snp.right).offset(-30)
                 make.width.equalTo(30)
                 make.height.equalTo(30)
                 
@@ -80,15 +80,15 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         if imageScrollView == nil {
             
             imageScrollView = UIScrollView()
-            imageScrollView!.pagingEnabled = true
-            imageScrollView!.userInteractionEnabled = true
+            imageScrollView!.isPagingEnabled = true
+            imageScrollView!.isUserInteractionEnabled = true
             imageScrollView!.delegate = self
             imageScrollView!.showsVerticalScrollIndicator = false
             imageScrollView!.showsHorizontalScrollIndicator = false
             self.view.addSubview(imageScrollView!)
             
             unowned let WS = self
-            imageScrollView!.snp_makeConstraints(closure: { (make) -> Void in
+            imageScrollView!.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(WS.view).offset(Constants.HDSCREENHEIGHT/2-100)
                 make.left.equalTo(WS.view).offset(0)
@@ -98,22 +98,22 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
                 
             })
             
-            imageScrollView?.contentSize = CGSizeMake(CGFloat(3)*Constants.HDSCREENWITH, 200)
-            imageScrollView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+            imageScrollView?.contentSize = CGSize(width: CGFloat(3)*Constants.HDSCREENWITH, height: 200)
+            imageScrollView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH,y: 0)
 
             
-            centerImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH,0,Constants.HDSCREENWITH,200))
-            centerImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            centerImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH,y: 0,width: Constants.HDSCREENWITH,height: 200))
+            centerImageView!.contentMode = UIViewContentMode.scaleToFill;
             imageScrollView?.addSubview(centerImageView!)
 
             
-            leftImageView = UIImageView(frame: CGRectMake(0,0,Constants.HDSCREENWITH,200))
-            leftImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            leftImageView = UIImageView(frame: CGRect(x: 0,y: 0,width: Constants.HDSCREENWITH,height: 200))
+            leftImageView!.contentMode = UIViewContentMode.scaleToFill;
             imageScrollView?.addSubview(leftImageView!)
 
 
-            rightImageView = UIImageView(frame: CGRectMake(Constants.HDSCREENWITH*2,0,Constants.HDSCREENWITH,200))
-            rightImageView!.contentMode = UIViewContentMode.ScaleToFill;
+            rightImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH*2,y: 0,width: Constants.HDSCREENWITH,height: 200))
+            rightImageView!.contentMode = UIViewContentMode.scaleToFill;
             imageScrollView?.addSubview(rightImageView!)
 
             
@@ -129,11 +129,11 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             pageFlag = UILabel()
             pageFlag?.textColor = Constants.HDMainTextColor
             
-            pageFlag?.font = UIFont.systemFontOfSize(26)
+            pageFlag?.font = UIFont.systemFont(ofSize: 26)
             self.view.addSubview(pageFlag!)
             
             unowned let WS = self
-            pageFlag?.snp_makeConstraints(closure: { (make) -> Void in
+            pageFlag?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
                 make.height.equalTo(30)
@@ -149,15 +149,15 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
             context = UILabel()
             context?.numberOfLines = 0
             context?.textColor = Constants.HDMainTextColor
-            context?.font = UIFont.systemFontOfSize(18)
+            context?.font = UIFont.systemFont(ofSize: 18)
             self.view.addSubview(context!)
             
             unowned let WS = self
-            context?.snp_makeConstraints(closure: { (make) -> Void in
+            context?.snp.makeConstraints( { (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
                 make.height.equalTo(0)
-                make.top.equalTo(WS.imageScrollView!.snp_bottom).offset(20)
+                make.top.equalTo(WS.imageScrollView!.snp.bottom).offset(20)
                 make.left.equalTo(WS.view).offset(30)
                 
             })
@@ -172,7 +172,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
     
     func backAction(){
         
-        self.dismissViewControllerAnimated(true) { () -> Void in }
+        self.dismiss(animated: true) { () -> Void in }
         
     }
     
@@ -195,28 +195,28 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         
     }
     
-    func setInfoByCurrentImageIndex(index:Int){
+    func setInfoByCurrentImageIndex(_ index:Int){
     
         let cmodel = steps![index]
         
         /// 文本信息
         let str = String(format: "%d/%d", index+1,(steps?.count)!)
-        let str2:String =  str.componentsSeparatedByString("/")[0]
+        let str2:String =  str.components(separatedBy: "/")[0]
         let attributed = NSMutableAttributedString(string: str)
-        attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(26), range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 26), range: NSMakeRange(0, str2.characters.count))
         attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
         pageFlag?.attributedText =  attributed
         
-        centerImageView!.sd_setImageWithURL(NSURL(string: cmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        centerImageView!.sd_setImage(with:URL(string: cmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         let lmodel = steps![((index-1)+(steps?.count)!)%(steps?.count)!]
-        leftImageView!.sd_setImageWithURL(NSURL(string: lmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        leftImageView!.sd_setImage(with:URL(string: lmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         let rmodel = steps![((index+1)+(steps?.count)!)%(steps?.count)!]
-        rightImageView!.sd_setImageWithURL(NSURL(string: rmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        rightImageView!.sd_setImage(with:URL(string: rmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         
         context?.text = cmodel.intro
         /// 计算文本高度 重新赋值
-        let rect = CoreUtils.getTextRectSize(cmodel.intro!, font: UIFont.systemFontOfSize(18), size: CGSizeMake(Constants.HDSCREENWITH-60, 999))
-        context?.snp_updateConstraints(closure: { (make) -> Void in
+        let rect = CoreUtils.getTextRectSize(cmodel.intro! as NSString, font: UIFont.systemFont(ofSize: 18), size: CGSize(width: Constants.HDSCREENWITH-60, height: 999))
+        context?.snp.updateConstraints({ (make) -> Void in
             make.height.equalTo(rect.size.height+10)
         })
         
@@ -224,11 +224,11 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
     }
     
     // MARK: - UIScrollView  Delegate
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView){
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView){
     
         loadImage()
 
-        imageScrollView!.contentOffset = CGPointMake(Constants.HDSCREENWITH,0)
+        imageScrollView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH,y: 0)
         
         
     }

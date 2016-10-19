@@ -216,7 +216,7 @@
 + (instancetype)label
 {
     UILabel *label = [[self alloc] init];
-    label.font = MJRefreshLabelFont;
+//    label.font = MJRefreshLabelFont;
     label.textColor = MJRefreshLabelTextColor;
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.textAlignment = NSTextAlignmentCenter;

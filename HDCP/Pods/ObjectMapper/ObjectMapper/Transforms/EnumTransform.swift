@@ -6,7 +6,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014-2015 Hearst
+//  Copyright (c) 2014-2016 Hearst
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -28,20 +28,20 @@
 
 import Foundation
 
-public class EnumTransform<T: RawRepresentable>: TransformType {
+open class EnumTransform<T: RawRepresentable>: TransformType {
 	public typealias Object = T
 	public typealias JSON = T.RawValue
 	
 	public init() {}
 	
-	public func transformFromJSON(value: AnyObject?) -> T? {
+	open func transformFromJSON(_ value: Any?) -> T? {
 		if let raw = value as? T.RawValue {
 			return T(rawValue: raw)
 		}
 		return nil
 	}
 	
-	public func transformToJSON(value: T?) -> T.RawValue? {
+	open func transformToJSON(_ value: T?) -> T.RawValue? {
 		if let obj = value {
 			return obj.rawValue
 		}

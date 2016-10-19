@@ -14,8 +14,8 @@ class HDCT08Response:Mappable {
     var request_id:String?
     var result:HDCT08Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -30,8 +30,8 @@ class HDCT08Result: Mappable {
     
     var list:Array<HDCT08ListModel>?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -48,8 +48,8 @@ class HDCT08FavoriteModel:Mappable {
     var id:Int!
     var name:String!
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -73,8 +73,8 @@ class HDCT08CommonInfoModel:Mappable {
     var title:String?
     var url:String?
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -111,8 +111,8 @@ class HDCT08ListModel:Mappable {
     var favoriteList:Array<HDCT08FavoriteModel>?
     var commonInfo:HDCT08CommonInfoModel?
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {

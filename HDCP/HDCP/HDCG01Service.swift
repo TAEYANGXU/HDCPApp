@@ -18,7 +18,7 @@ class HDCG01Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDCG02_URL(successBlock:(HDCG01Response:HDCG01Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCG02_URL(_ successBlock:@escaping (_ HDCG01Response:HDCG01Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
         
         
         HDRequestManager.doGetRequest(Constants.HDCG01_URL) { (response) -> Void in
@@ -26,19 +26,19 @@ class HDCG01Service {
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let response = Mapper<HDCG01Response>().map(response.result.value)
+                let response = Mapper<HDCG01Response>().map(JSONObject: response.result.value)
                 
                 
                 self.addEntity(response!, finishBlcok: { () -> Void in
                     
                     /// 回调
-                    successBlock(HDCG01Response: response!)
+                    successBlock(response!)
                     
                 })
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }
@@ -50,19 +50,19 @@ class HDCG01Service {
     /**
      *  将数据存到本地
      */
-    func addEntity(cgResponse:HDCG01Response,finishBlcok:()->Void){
+    func addEntity(_ cgResponse:HDCG01Response,finishBlcok:()->Void){
         
         if !isExistEntity() {
             
             let context = HDCoreDataManager.sharedInstance.managedObjectContext
             
-            let result = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ResultEntity", inManagedObjectContext: context) as? HDCG01ResultEntity
+            let result = NSEntityDescription.insertNewObject(forEntityName: "HDCG01ResultEntity", into: context) as? HDCG01ResultEntity
             
-            for (i,_) in (cgResponse.result?.list?.enumerate())! {
+            for (i,_) in (cgResponse.result?.list?.enumerated())! {
                 
                 let model = cgResponse.result?.list![i]
                 
-                let listModel = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ListEntity", inManagedObjectContext: context) as? HDCG01ListEntity
+                let listModel = NSEntityDescription.insertNewObject(forEntityName: "HDCG01ListEntity", into: context) as? HDCG01ListEntity
                 
                 listModel!.cate = model?.cate
                 listModel?.imgUrl = model?.imgUrl
@@ -70,8 +70,8 @@ class HDCG01Service {
                 
                 for tagModel in (model?.tags)! {
                     
-                    let tModel = NSEntityDescription.insertNewObjectForEntityForName("HDCG01TagEntity", inManagedObjectContext: context) as? HDCG01TagEntity
-                    tModel?.id = tagModel.id
+                    let tModel = NSEntityDescription.insertNewObject(forEntityName: "HDCG01TagEntity", into: context) as? HDCG01TagEntity
+                    tModel?.id = tagModel.id as NSNumber?
                     tModel?.name = tagModel.name
                     tModel?.cate = model?.cate
                     
@@ -80,7 +80,7 @@ class HDCG01Service {
             }
             
             
-            let response = NSEntityDescription.insertNewObjectForEntityForName("HDCG01ResponseEntity", inManagedObjectContext: context) as? HDCG01ResponseEntity
+            let response = NSEntityDescription.insertNewObject(forEntityName: "HDCG01ResponseEntity", into: context) as? HDCG01ResponseEntity
             response?.request_id = cgResponse.request_id
             response?.result = result
             
@@ -100,14 +100,14 @@ class HDCG01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDCG01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDCG01ResponseEntity")
         
         request.relationshipKeyPathsForPrefetching = ["HDCG01ResultEntity","HDCG01ListEntity","HDCG01TagEntity"]
         
         var ret:Bool = false
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 ret = true
             }
@@ -129,7 +129,7 @@ class HDCG01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDCG01ListEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDCG01ListEntity")
         
         //排序
         let sort = NSSortDescriptor(key: "cate", ascending: false)
@@ -141,15 +141,15 @@ class HDCG01Service {
         
         do{
             
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 
                 for model in list {
                     
                     let tagModel = HDCG01ListModel()
-                    tagModel.imgUrl = model.imgUrl
-                    tagModel.cate = model.cate
-                    tagList.addObject(tagModel)
+                    tagModel.imgUrl = (model as AnyObject).imgUrl
+                    tagModel.cate = (model as AnyObject).cate
+                    tagList.add(tagModel)
                 }
                 
 
@@ -165,10 +165,10 @@ class HDCG01Service {
         return (NSArray(array:tagList) as? Array<HDCG01ListModel>)!
     }
     
-    func getTagListByCate(cate:String) -> Array<HDCG01TagModel>{
+    func getTagListByCate(_ cate:String) -> Array<HDCG01TagModel>{
     
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HDCG01TagEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDCG01TagEntity")
         
         //排序
         let sort = NSSortDescriptor(key: "name", ascending: false)
@@ -180,15 +180,15 @@ class HDCG01Service {
         let tags = NSMutableArray()
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 
                 for model in list {
                     
                     let tagModel = HDCG01TagModel()
-                    tagModel.id = model.id!!.longValue
-                    tagModel.name = model.name
-                    tags.addObject(tagModel)
+//                    tagModel.id = (model as AnyObject).id!!.longValue
+                    tagModel.name = (model as AnyObject).name
+                    tags.add(tagModel)
                     
                 }
                 
@@ -212,17 +212,17 @@ class HDCG01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDCG01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDCG01ResponseEntity")
         
         do {
             
-            let list =  try context.executeFetchRequest(request) as Array
+            let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
                 for model in list {
                     
-                    context.deleteObject(model as! NSManagedObject)
+                    context.delete(model as! NSManagedObject)
                     
                 }
                 

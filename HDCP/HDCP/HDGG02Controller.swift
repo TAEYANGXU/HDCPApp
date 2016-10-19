@@ -26,7 +26,7 @@ class HDGG02Controller: UITableViewController {
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -34,7 +34,7 @@ class HDGG02Controller: UITableViewController {
     
     deinit{
     
-        HDLog.LogClassDestory("HDGG02Controller")
+        HDLog.LogClassDestory("HDGG02Controller" as AnyObject)
         
     }
     
@@ -42,7 +42,7 @@ class HDGG02Controller: UITableViewController {
     
     func setupUI(){
         
-        self.tableView?.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
         
@@ -52,22 +52,22 @@ class HDGG02Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     
     // MARK: - UITableView  delegate/datasource
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         
         return appArray.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         
         /**
@@ -82,7 +82,7 @@ class HDGG02Controller: UITableViewController {
             coverImageV?.layer.masksToBounds = true
             cell.contentView.addSubview(coverImageV!)
             
-            coverImageV?.snp_makeConstraints(closure: { (make) -> Void in
+            coverImageV?.snp.makeConstraints({ (make) -> Void in
                 
                 make.left.equalTo(cell.contentView).offset(16)
                 make.top.equalTo(cell.contentView).offset(10)
@@ -102,13 +102,13 @@ class HDGG02Controller: UITableViewController {
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
-            title?.font = UIFont.systemFontOfSize(15)
+            title?.font = UIFont.systemFont(ofSize: 15)
             cell.contentView.addSubview(title!)
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 make.height.equalTo(20)
-                make.left.equalTo(coverImageV!.snp_right).offset(10)
+                make.left.equalTo(coverImageV!.snp.right).offset(10)
                 make.top.equalTo(cell.contentView).offset(7)
             })
         }
@@ -122,31 +122,31 @@ class HDGG02Controller: UITableViewController {
             
             intro = UILabel()
             intro?.tag = 2000
-            intro?.textColor = UIColor.lightGrayColor()
-            intro?.font = UIFont.systemFontOfSize(13)
+            intro?.textColor = UIColor.lightGray
+            intro?.font = UIFont.systemFont(ofSize: 13)
             intro?.numberOfLines = 2
             cell.contentView.addSubview(intro!)
-            intro?.snp_makeConstraints(closure: { (make) -> Void in
+            intro?.snp.makeConstraints({ (make) -> Void in
                 
                 make.width.equalTo(Constants.HDSCREENWITH-100)
                 make.height.equalTo(40)
-                make.left.equalTo(coverImageV!.snp_right).offset(10)
-                make.top.equalTo(title!.snp_bottom).offset(0)
+                make.left.equalTo(coverImageV!.snp.right).offset(10)
+                make.top.equalTo(title!.snp.bottom).offset(0)
             })
         }
 
 
 //        let intro = appArray[indexPath.row]["intro"]
         
-        title?.text = appArray[indexPath.row]["title"]
-        coverImageV?.image = UIImage(named: appArray[indexPath.row]["image"]!)
+        title?.text = appArray[(indexPath as NSIndexPath).row]["title"]
+        coverImageV?.image = UIImage(named: appArray[(indexPath as NSIndexPath).row]["image"]!)
         intro?.text = "2015年12月4日，苹果公司宣布其Swift编程语言现在开放源代码"
         
         return cell
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        
         return 70
     }

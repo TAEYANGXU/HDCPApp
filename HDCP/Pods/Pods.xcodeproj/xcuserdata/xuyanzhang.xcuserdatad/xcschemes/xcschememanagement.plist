@@ -9,12 +9,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-HDCP.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HDCPTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-HDCPUITests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,12 +47,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3DF0518FA6F21AAF47F686BB69A170EF</key>
+		<key>1DE93A359FA21F91DFBE81309E851A4A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>53DCCE5F303AA71B6C703C8AF8D51FDB</key>
+		<key>24A18A9A1435A06BD58F7061E6711EEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +62,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>95AB77E684F0DD727E1B1E0F323C00DA</key>
+		<key>8FA3398539A5C9ED9AC590F6D53DF990</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C49518CEC1F3C4003F4CCDFD58AE4667</key>
+		<key>B96C4692BDDC7F6B094EF894863E3143</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C0E995FBD285086C5427DB2AD34C55EA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C8A84485A82D0105AD90775E6388A52B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CCD56D37F19A0571F2913278FA836745</key>
 		<dict>
 			<key>primary</key>
 			<true/>

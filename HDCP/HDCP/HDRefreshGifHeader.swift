@@ -28,33 +28,33 @@ class HDRefreshGifHeader: MJRefreshGifHeader {
         
             let name:String = String(format: "Refresh%ld",i )
             let image = UIImage(named: name)
-            idleImages.addObject(image!)
+            idleImages.add(image!)
             
         }
         
         /**
         *   设置普通状态的动画图片
         */
-        self.setImages(idleImages as [AnyObject], forState: MJRefreshState.Idle)
+        self.setImages(idleImages as [AnyObject], for: MJRefreshState.idle)
         
         let refreshingImages = NSMutableArray()
         for i in 1 ..< 10 {
             
             let name:String = String(format: "Refresh%ld",i )
             let image = UIImage(named: name)
-            refreshingImages.addObject(image!)
+            refreshingImages.add(image!)
             
         }
         
         /**
         *   设置即将刷新状态的动画图片（一松开就会刷新的状态）
         */
-        self.setImages(refreshingImages as [AnyObject], forState: MJRefreshState.Pulling)
+        self.setImages(refreshingImages as [AnyObject], for: MJRefreshState.pulling)
         
         /**
         *   设置正在刷新状态的动画图片
         */
-        self.setImages(refreshingImages as [AnyObject], forState: MJRefreshState.Refreshing)
+        self.setImages(refreshingImages as [AnyObject], for: MJRefreshState.refreshing)
     }
 
 }

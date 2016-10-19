@@ -6,7 +6,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014-2015 Hearst
+//  Copyright (c) 2014-2016 Hearst
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -28,26 +28,26 @@
 
 import Foundation
 
-public class DateFormatterTransform: TransformType {
-	public typealias Object = NSDate
+open class DateFormatterTransform: TransformType {
+	public typealias Object = Date
 	public typealias JSON = String
 	
-	let dateFormatter: NSDateFormatter
+	let dateFormatter: DateFormatter
 	
-	public init(dateFormatter: NSDateFormatter) {
+	public init(dateFormatter: DateFormatter) {
 		self.dateFormatter = dateFormatter
 	}
 	
-	public func transformFromJSON(value: AnyObject?) -> NSDate? {
+	open func transformFromJSON(_ value: Any?) -> Date? {
 		if let dateString = value as? String {
-			return dateFormatter.dateFromString(dateString)
+			return dateFormatter.date(from: dateString)
 		}
 		return nil
 	}
 	
-	public func transformToJSON(value: NSDate?) -> String? {
+	open func transformToJSON(_ value: Date?) -> String? {
 		if let date = value {
-			return dateFormatter.stringFromDate(date)
+			return dateFormatter.string(from: date)
 		}
 		return nil
 	}

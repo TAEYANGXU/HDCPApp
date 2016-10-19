@@ -28,7 +28,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     // MARK: - 创建UI视图
     func setupUI(){
         
-        let request:NSURLRequest = NSURLRequest(URL: NSURL(string: Constants.HDCT07_URL)!, cachePolicy: NSURLRequestCachePolicy.UseProtocolCachePolicy, timeoutInterval: 30)
+        let request:URLRequest = URLRequest(url: URL(string: Constants.HDCT07_URL)!, cachePolicy: NSURLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: 30)
         webView = UIWebView()
         webView?.delegate = self
         webView?.backgroundColor = Constants.HDBGViewColor
@@ -36,7 +36,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
         self.view.addSubview(webView!)
         
         unowned let WS = self
-        webView?.snp_makeConstraints(closure: { (make) -> Void in
+        webView?.snp.makeConstraints( { (make) -> Void in
             
             make.top.equalTo(WS.view).offset(0)
             make.left.equalTo(WS.view).offset(0)
@@ -49,7 +49,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -57,14 +57,14 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     
     deinit{
         
-        HDLog.LogClassDestory("HDCT07Controller")
+        HDLog.LogClassDestory("HDCT07Controller" as AnyObject)
     }
     
     // MARK: - events
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -82,12 +82,12 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     
     // MARK: - UIWebViewDelegate
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         
-        self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 0.5)
+        self.perform(#selector(hidenHud), with: self, afterDelay: 0.5)
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         
         
         CoreUtils.showWarningHUD(self.view, title: Constants.HD_NO_NET_MSG)

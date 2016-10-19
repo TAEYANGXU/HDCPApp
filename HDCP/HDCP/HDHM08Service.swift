@@ -17,20 +17,21 @@ class HDHM08Service {
      - parameter successBlock: 成功
      - parameter failBlock:    失败
      */
-    func doGetRequest_HDHM08_URL(rid:Int,successBlock:(hdHM08Response:HDHM08Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDHM08_URL(_ rid:Int,successBlock:@escaping (_ hdHM08Response:HDHM08Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["rid":rid], URL: Constants.HDHM08_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["rid":rid as AnyObject], URL: Constants.HDHM08_URL) { (response) -> Void in
             
             if response.result.error == nil {
             
-                /// JSON 转换成对象
-                let hdResponse = Mapper<HDHM08Response>().map(response.result.value)
+                /// JSON 转换成对象'
+                let hdResponse = Mapper<HDHM08Response>().map(JSONObject: response.result.value)
+//                let hdResponse = Mapper<HDHM08Response>().map(JSONObject: response.result.value)
                 /// 回调
-                successBlock(hdHM08Response: hdResponse!)
+                successBlock(hdResponse!)
                 
             }else{
             
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }

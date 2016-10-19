@@ -22,7 +22,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
@@ -39,13 +39,13 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     func setupUI(){
         
         textView = UITextView()
-        textView?.font = UIFont.systemFontOfSize(15)
-        textView?.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+        textView?.font = UIFont.systemFont(ofSize: 15)
+        textView?.autoresizingMask = UIViewAutoresizing.flexibleWidth
         textView?.delegate = self
         self.view.addSubview(textView!)
         textView?.becomeFirstResponder()
         
-        textView?.snp_makeConstraints(closure: { (make) -> Void in
+        textView?.snp.makeConstraints( { (make) -> Void in
             
             make.top.equalTo(self.view).offset(0)
             make.left.equalTo(self.view).offset(0)
@@ -53,21 +53,21 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
             make.width.equalTo(Constants.HDSCREENWITH)
         })
         
-        btn = UIButton(type: UIButtonType.Custom)
-        btn?.setTitle("提交", forState: UIControlState.Normal)
-        btn?.setTitleColor(Constants.HDMainColor, forState: UIControlState.Normal)
-        btn?.backgroundColor = UIColor.whiteColor()
-        btn?.titleLabel?.font = UIFont.systemFontOfSize(15)
-        btn?.layer.borderColor = Constants.HDMainColor.CGColor
+        btn = UIButton(type: UIButtonType.custom)
+        btn?.setTitle("提交", for: UIControlState())
+        btn?.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+        btn?.backgroundColor = UIColor.white
+        btn?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        btn?.layer.borderColor = Constants.HDMainColor.cgColor
         btn?.layer.borderWidth = 1
         btn?.layer.cornerRadius = 5
         btn?.layer.masksToBounds = true
-        btn?.addTarget(self, action: #selector(onClickAction), forControlEvents: UIControlEvents.TouchUpInside)
+        btn?.addTarget(self, action: #selector(onClickAction), for: UIControlEvents.touchUpInside)
         self.view.addSubview(btn!)
         
-        btn?.snp_makeConstraints(closure: { (make) -> Void in
+        btn?.snp.makeConstraints( { (make) -> Void in
             
-            make.top.equalTo(textView!.snp_bottom).offset(40)
+            make.top.equalTo(textView!.snp.bottom).offset(40)
             make.left.equalTo(self.view).offset(20)
             make.width.equalTo(Constants.HDSCREENWITH-40)
             make.height.equalTo(40)
@@ -76,14 +76,14 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         
         placeholder = UILabel()
         
-        placeholder?.textColor = UIColor.lightGrayColor()
+        placeholder?.textColor = UIColor.lightGray
         placeholder?.text = "说点什么"
-        placeholder?.backgroundColor = UIColor.clearColor()
-        placeholder?.enabled = false
-        placeholder?.font = UIFont.systemFontOfSize(15)
+        placeholder?.backgroundColor = UIColor.clear
+        placeholder?.isEnabled = false
+        placeholder?.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(placeholder!)
         
-        placeholder?.snp_makeConstraints(closure: { (make) -> Void in
+        placeholder?.snp.makeConstraints( { (make) -> Void in
             
             make.top.equalTo(self.view).offset(7)
             make.left.equalTo(self.view).offset(8)
@@ -112,7 +112,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -124,13 +124,13 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         }else{
         
             showHud()
-            self.performSelector(#selector(hidenHud), withObject: self, afterDelay: 1.5)
+            self.perform(#selector(hidenHud), with: self, afterDelay: 1.5)
         }
         
     }
     
     // MARK: - UITextView delegate
-    func textViewDidChange(textView: UITextView){
+    func textViewDidChange(_ textView: UITextView){
     
         if textView.text.characters.count == 0 {
         

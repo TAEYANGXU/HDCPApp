@@ -9,6 +9,26 @@
 import Foundation
 import ObjectMapper
 import CoreData
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class HDDY01Service {
     
@@ -18,33 +38,28 @@ class HDDY01Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDDY01_URL(successBlock:(hdResponse:HDDY01Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDDY01_URL(_ successBlock:@escaping (_ hdResponse:HDDY01Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
         
-        HDRequestManager.doPostRequest(["sign":"4864f65f7e5827e7ea50a48bb70f7a2a","limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDDY01_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["sign":"4864f65f7e5827e7ea50a48bb70f7a2a" as AnyObject,"limit":20 as AnyObject,"offset":0 as AnyObject,"uid":"8752979" as AnyObject,"timestamp":Int(Date().timeIntervalSince1970) as AnyObject], URL: Constants.HDDY01_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let response = Mapper<HDDY01Response>().map(response.result.value)
+                let response = Mapper<HDDY01Response>().map(JSONObject: response.result.value)
+                DispatchQueue.global().async {
                 
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                    
                     //更新本地数据
-                    self.deleteEntity()
-                    self.addEntity(response!)
-                    
-                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                        
-                        /// 回调
-                        successBlock(hdResponse:response!)
-                        
-                    })
-                    
-                })
+//                    self.deleteEntity()
+//                    self.addEntity(response!)
+                    DispatchQueue.main.async {
+                        // 主线程中
+                        successBlock(response!)
+                    }
+                }
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }
@@ -55,44 +70,44 @@ class HDDY01Service {
     /**
      *  将数据存到本地
      */
-    func addEntity(hddy01Response:HDDY01Response){
+    func addEntity(_ hddy01Response:HDDY01Response){
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let response = NSEntityDescription.insertNewObjectForEntityForName("HDDY01ResponseEntity", inManagedObjectContext: context) as? HDDY01ResponseEntity
+        let response = NSEntityDescription.insertNewObject(forEntityName: "HDDY01ResponseEntity", into: context) as? HDDY01ResponseEntity
         
-        let result = NSEntityDescription.insertNewObjectForEntityForName("HDDY01ResultEntity", inManagedObjectContext: context) as? HDDY01ResultEntity
+        let result = NSEntityDescription.insertNewObject(forEntityName: "HDDY01ResultEntity", into: context) as? HDDY01ResultEntity
         
-        for (i,_) in (hddy01Response.result?.list?.enumerate())! {
+        for (i,_) in (hddy01Response.result?.list?.enumerated())! {
             
             let model = hddy01Response.result?.list![i]
             
-            let listEntity = NSEntityDescription.insertNewObjectForEntityForName("HDDY01ListEntity", inManagedObjectContext: context) as? HDDY01ListEntity
+            let listEntity = NSEntityDescription.insertNewObject(forEntityName: "HDDY01ListEntity", into: context) as? HDDY01ListEntity
      
-            let dataModel = NSEntityDescription.insertNewObjectForEntityForName("HDDY01DataEntity", inManagedObjectContext: context) as? HDDY01DataEntity
+            let dataModel = NSEntityDescription.insertNewObject(forEntityName: "HDDY01DataEntity", into: context) as? HDDY01DataEntity
             
-            dataModel!.actionType = model?.data!.actionType
+            dataModel!.actionType = model?.data!.actionType as NSNumber?
             dataModel!.address = model?.data!.address
-            dataModel!.commentCnt = model?.data!.commentCnt
-            dataModel!.commentCount = model?.data!.commentCount
+            dataModel!.commentCnt = model?.data!.commentCnt as NSNumber?
+            dataModel!.commentCount = model?.data!.commentCount as NSNumber?
             dataModel!.commentUrl = model?.data!.commentUrl
-            dataModel!.diggCnt = model?.data!.diggCnt
-            dataModel!.diggCount = model?.data!.diggCount
-            dataModel!.diggId = model?.data!.diggId
-            dataModel!.diggType = model?.data!.diggType
-            dataModel!.entityType = model?.data!.entityType
-            dataModel!.feedId = model?.data!.feedId
+            dataModel!.diggCnt = model?.data!.diggCnt as NSNumber?
+            dataModel!.diggCount = model?.data!.diggCount as NSNumber?
+            dataModel!.diggId = model?.data!.diggId as NSNumber?
+            dataModel!.diggType = model?.data!.diggType as NSNumber?
+            dataModel!.entityType = model?.data!.entityType as NSNumber?
+            dataModel!.feedId = model?.data!.feedId as NSNumber?
             dataModel!.formatTime = model?.data!.formatTime
-            dataModel!.id = model?.data!.id
+            dataModel!.id = model?.data!.id as NSNumber?
             dataModel!.intro = model?.data!.intro
-            dataModel!.isDigg = model?.data!.isDigg
+            dataModel!.isDigg = model?.data!.isDigg as NSNumber?
             dataModel!.url = model?.data!.url
-            dataModel!.hasVideo = model?.data!.hasVideo
+            dataModel!.hasVideo = model?.data!.hasVideo as NSNumber?
             if  model?.data!.hasVideo == nil {
                 dataModel!.hasVideo = 0
             }
             dataModel!.title = model?.data!.title
-            dataModel!.tagId = model?.data!.tagId
+            dataModel!.tagId = model?.data!.tagId as NSNumber?
             dataModel!.tagName = model?.data!.tagName
             dataModel!.tagUrl = model?.data!.tagUrl
             dataModel!.img = model?.data!.img
@@ -101,33 +116,33 @@ class HDDY01Service {
             
             listEntity?.data = dataModel
             
-            let userInfoModel = NSEntityDescription.insertNewObjectForEntityForName("HDDY01UserInfoEntity", inManagedObjectContext: context) as? HDDY01UserInfoEntity
+            let userInfoModel = NSEntityDescription.insertNewObject(forEntityName: "HDDY01UserInfoEntity", into: context) as? HDDY01UserInfoEntity
             
             userInfoModel!.avatar = model?.userInfo!.avatar
-            userInfoModel!.gender = model?.userInfo!.gender
+            userInfoModel!.gender = model?.userInfo!.gender as NSNumber?
             userInfoModel!.intro = model?.userInfo!.intro
             userInfoModel!.openUrl = model?.userInfo!.openUrl
-            userInfoModel!.relation = model?.userInfo!.relation
-            userInfoModel!.userId = model?.userInfo!.userId
+            userInfoModel!.relation = model?.userInfo!.relation as NSNumber?
+            userInfoModel!.userId = model?.userInfo!.userId as NSNumber?
             userInfoModel!.userName = model?.userInfo!.userName
-            userInfoModel!.vip = model?.userInfo!.vip
+            userInfoModel!.vip = model?.userInfo!.vip as NSNumber?
             
             listEntity?.userInfo = userInfoModel
             
             if model?.data!.commentList?.count > 0 {
             
-                for (i,_) in (model?.data!.commentList?.enumerate())!{
+                for (i,_) in (model?.data!.commentList?.enumerated())!{
                  
                     let cmodel = model?.data!.commentList![i]
                     
-                    let commentModel = NSEntityDescription.insertNewObjectForEntityForName("HDDY01CommentListEntity", inManagedObjectContext: context) as? HDDY01CommentListEntity
+                    let commentModel = NSEntityDescription.insertNewObject(forEntityName: "HDDY01CommentListEntity", into: context) as? HDDY01CommentListEntity
                     
-                    commentModel!.cid = cmodel?.cid
-                    commentModel!.userId = cmodel?.userId
+                    commentModel!.cid = cmodel?.cid as NSNumber?
+                    commentModel!.userId = cmodel?.userId as NSNumber?
                     commentModel!.userName = cmodel?.userName
                     commentModel!.content = cmodel?.content
-                    commentModel!.isAuthor = cmodel?.isAuthor
-                    commentModel!.isVip = cmodel?.isVip
+                    commentModel!.isAuthor = cmodel?.isAuthor as NSNumber?
+                    commentModel!.isVip = cmodel?.isVip as NSNumber?
                     
                     commentModel?.data = dataModel
                     
@@ -157,7 +172,7 @@ class HDDY01Service {
     
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HDDY01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDDY01ResponseEntity")
         
         request.relationshipKeyPathsForPrefetching = ["HDDY01ResultEntity","HDDY01ListEntity","HDDY01DataEntity","HDDY01UserInfoEntity","HDDY01CommentListEntity"]
         
@@ -165,7 +180,7 @@ class HDDY01Service {
         
         do {
             
-            let list =  try context.executeFetchRequest(request) as Array
+            let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
@@ -178,70 +193,69 @@ class HDDY01Service {
                 let result = HDDY01Result()
                 
                 for model in (response.result?.list)! {
+//                    
+//                    let listModel = model as! HDDY01ListEntity
+//                    
+//                    let vListModel = HDDY01ListModel()
                     
-                    let listModel = model as! HDDY01ListEntity
-                    
-                    let vListModel = HDDY01ListModel()
-                    
-                    
-                    let vDataModel = HDDY01DataModel()
-                    vDataModel.actionType = listModel.data!.actionType?.longValue
-                    vDataModel.address = listModel.data!.address
-                    vDataModel.commentCnt = listModel.data!.commentCnt!.longValue
-                    vDataModel.commentUrl = listModel.data!.commentUrl
-                    vDataModel.diggCnt = listModel.data!.diggCnt!.longValue
-                    vDataModel.diggId = listModel.data!.diggId!.longValue
-                    vDataModel.diggType = listModel.data!.diggType!.longValue
-                    vDataModel.entityType = listModel.data!.entityType!.longValue
-                    vDataModel.feedId = listModel.data!.feedId!.longValue
-                    vDataModel.formatTime = listModel.data!.formatTime
-                    vDataModel.id = listModel.data!.id!.longValue
-                    vDataModel.intro = listModel.data!.intro
-                    vDataModel.isDigg = listModel.data!.isDigg!.longValue
-                    vDataModel.url = listModel.data!.url
-                    vDataModel.hasVideo = listModel.data!.hasVideo!.longValue
-                    vDataModel.title = listModel.data!.title
-                    vDataModel.tagName = listModel.data!.tagName
-                    vDataModel.tagUrl = listModel.data!.tagUrl
-                    vDataModel.img = listModel.data!.img
-                    vDataModel.content = listModel.data!.content
-                    
-                    vListModel.data = vDataModel
-                    
-                    let vUserInfoModel = HDDY01UserInfoModel()
-                    vUserInfoModel.avatar = listModel.userInfo!.avatar
-                    vUserInfoModel.gender = listModel.userInfo!.gender!.longValue
-                    vUserInfoModel.intro = listModel.userInfo!.intro
-                    vUserInfoModel.openUrl = listModel.userInfo!.openUrl
-                    vUserInfoModel.relation = listModel.userInfo!.relation!.longValue
-                    vUserInfoModel.userId = listModel.userInfo!.userId!.longValue
-                    vUserInfoModel.userName = listModel.userInfo!.userName
-                    vUserInfoModel.vip = listModel.userInfo!.vip!.longValue
-                    vListModel.userInfo = vUserInfoModel
-                    
-                    if listModel.data?.commentList?.count > 0 {
-                        
-                        let commentlist = NSMutableArray()
-                        for cmodel in (listModel.data?.commentList)! {
-                            
-                            let comModel = cmodel as! HDDY01CommentListEntity
-                            let rModel = HDDY01CommentListModel()
-                            
-                            
-                            rModel.cid = comModel.cid!.longValue
-                            rModel.userId = comModel.userId!.longValue
-                            rModel.userName = comModel.userName
-                            rModel.content = comModel.content
-                            rModel.isAuthor = comModel.isAuthor!.longValue
-                            rModel.isVip = comModel.isVip!.longValue
-                            
-                            commentlist.addObject(rModel)
-                        }
-                        
-                        vDataModel.commentList =   NSArray(array: commentlist) as? Array<HDDY01CommentListModel>
-                    }
-                    
-                    list.addObject(vListModel)
+//                    let vDataModel = HDDY01DataModel()
+//                    vDataModel.actionType = listModel.data!.actionType?.int8Value
+//                    vDataModel.address = listModel.data!.address
+//                    vDataModel.commentCnt = listModel.data!.commentCnt!.int8Value
+//                    vDataModel.commentUrl = listModel.data!.commentUrl
+//                    vDataModel.diggCnt = listModel.data!.diggCnt!.int8Value
+//                    vDataModel.diggId = listModel.data!.diggId!.int8Value
+//                    vDataModel.diggType = listModel.data!.diggType!.int8Value
+//                    vDataModel.entityType = listModel.data!.entityType!.int8Value
+//                    vDataModel.feedId = listModel.data!.feedId!.int8Value
+//                    vDataModel.formatTime = listModel.data!.formatTime
+//                    vDataModel.id = listModel.data!.id!.int8Value
+//                    vDataModel.intro = listModel.data!.intro
+//                    vDataModel.isDigg = listModel.data!.isDigg!.int8Value
+//                    vDataModel.url = listModel.data!.url
+//                    vDataModel.hasVideo = listModel.data!.hasVideo!.int8Value
+//                    vDataModel.title = listModel.data!.title
+//                    vDataModel.tagName = listModel.data!.tagName
+//                    vDataModel.tagUrl = listModel.data!.tagUrl
+//                    vDataModel.img = listModel.data!.img
+//                    vDataModel.content = listModel.data!.content
+//                    
+//                    vListModel.data = vDataModel
+//                    
+//                    let vUserInfoModel = HDDY01UserInfoModel()
+//                    vUserInfoModel.avatar = listModel.userInfo!.avatar
+//                    vUserInfoModel.gender = listModel.userInfo!.gender!.longValue
+//                    vUserInfoModel.intro = listModel.userInfo!.intro
+//                    vUserInfoModel.openUrl = listModel.userInfo!.openUrl
+//                    vUserInfoModel.relation = listModel.userInfo!.relation!.longValue
+//                    vUserInfoModel.userId = listModel.userInfo!.userId!.longValue
+//                    vUserInfoModel.userName = listModel.userInfo!.userName
+//                    vUserInfoModel.vip = listModel.userInfo!.vip!.longValue
+//                    vListModel.userInfo = vUserInfoModel
+//                    
+//                    if listModel.data?.commentList?.count > 0 {
+//                        
+//                        let commentlist = NSMutableArray()
+//                        for cmodel in (listModel.data?.commentList)! {
+//                            
+//                            let comModel = cmodel as! HDDY01CommentListEntity
+//                            let rModel = HDDY01CommentListModel()
+//                            
+//                            
+//                            rModel.cid = comModel.cid!.longValue
+//                            rModel.userId = comModel.userId!.longValue
+//                            rModel.userName = comModel.userName
+//                            rModel.content = comModel.content
+//                            rModel.isAuthor = comModel.isAuthor!.longValue
+//                            rModel.isVip = comModel.isVip!.longValue
+//                            
+//                            commentlist.add(rModel)
+//                        }
+//                        
+//                        vDataModel.commentList =   NSArray(array: commentlist) as? Array<HDDY01CommentListModel>
+//                    }
+//                    
+//                    list.add(vListModel)
                     
                 }
                 
@@ -267,17 +281,17 @@ class HDDY01Service {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "HDDY01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDDY01ResponseEntity")
         
         do {
             
-            let list =  try context.executeFetchRequest(request) as Array
+            let list =  try context.fetch(request) as Array
             
             if list.count>0 {
                 
                 for model in list {
                     
-                    context.deleteObject(model as! NSManagedObject)
+                    context.delete(model as! NSManagedObject)
                     
                 }
                 
@@ -300,12 +314,12 @@ class HDDY01Service {
     func isExistEntity()->Bool {
         
         let context = HDCoreDataManager.sharedInstance.managedObjectContext
-        let request = NSFetchRequest(entityName: "HDDY01ResponseEntity")
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "HDDY01ResponseEntity")
         
         var ret:Bool = false
         
         do{
-            let list = try context.executeFetchRequest(request)
+            let list = try context.fetch(request)
             if list.count>0 {
                 ret = true
             }

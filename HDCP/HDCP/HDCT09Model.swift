@@ -14,8 +14,8 @@ class HDCT09Response:Mappable {
     var request_id:String?
     var result:HDCT09Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -40,8 +40,8 @@ class HDCT09Result: Mappable {
     var todayStarTitle:String?
     var todayStarUrl:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -69,8 +69,8 @@ class HDCT09TodayStarModel: Mappable {
     var avatar:String!
     var url:String!
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -89,8 +89,8 @@ class HDCT09ADModel: Mappable {
     var img:String!
     var url:String!
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -111,8 +111,8 @@ class HDCT09GroupModel: Mappable {
     var url:String!
     var viewDesc:String!
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -144,8 +144,8 @@ class HDCT09HotModel: Mappable {
     var userName:String!
     var vip:Int!
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {

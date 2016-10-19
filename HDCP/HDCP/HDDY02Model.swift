@@ -14,8 +14,8 @@ class HDDY02Response:Mappable {
     var request_id:String?
     var result:HDDY02Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     func mapping(map: Map) {
         
@@ -30,8 +30,8 @@ class HDDY02Result: Mappable {
     
     var info:HDDY02InfoModel?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -91,8 +91,8 @@ class HDDY02InfoModel: Mappable {
     
     var vedioUrl:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -153,8 +153,8 @@ class HDDY02Comment: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -176,8 +176,8 @@ class HDDY02LastDiggUsersModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -200,8 +200,8 @@ class HDDY02StuffModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map: map)
     }
     
     func mapping(map: Map) {
@@ -230,8 +230,8 @@ class HDDY02RecommendTopicModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -256,8 +256,8 @@ class HDDY02StepModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -275,8 +275,8 @@ class HDDY02TagsModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -293,8 +293,8 @@ class HDDY02FavoriteListModel: Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
-        mapping(map)
+    required init?(map: Map) {
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -317,8 +317,8 @@ class HDDY02UserInfoModel: Mappable {
     var favoriteList:Array<HDDY02FavoriteListModel>?
     
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -343,8 +343,8 @@ class HDDY0202Response:Mappable {
     var request_id:String?
     var result:HDDY0202Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -360,8 +360,8 @@ class HDDY0202Result: Mappable {
     var list:Array<HDDY0202ListModel>?
     var count:Int?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -397,8 +397,8 @@ class HDDY0202ListModel: Mappable {
     var atContentHeight:CGFloat?
     var rowHeight:CGFloat?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {

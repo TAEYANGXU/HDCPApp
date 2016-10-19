@@ -8,10 +8,12 @@
 
 import Foundation
 
+let single = HDUserInfoManager()
+
 class HDUserInfoManager {
     
     // 是否已经加载
-    private var loaded:Bool = false
+    fileprivate var loaded:Bool = false
     
     
     /**
@@ -48,16 +50,7 @@ class HDUserInfoManager {
     //单例模式
     static var shareInstance: HDUserInfoManager {
         
-        struct Singleton {
-            static var instance: HDUserInfoManager?
-            static var token: dispatch_once_t = 0
-        }
-        
-        dispatch_once(&Singleton.token) {
-            Singleton.instance = HDUserInfoManager()
-        }
-        
-        return Singleton.instance!
+        return single
     }
     
     /**
@@ -93,85 +86,85 @@ class HDUserInfoManager {
     /**
      *  初始化用户数据
      */
-    private func loadUserInfo(){
+    fileprivate func loadUserInfo(){
     
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
-        if (defaults.objectForKey("HD_CLIENT_USERNAME") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_USERNAME") != nil) {
             
-            userName = defaults.objectForKey("HD_CLIENT_USERNAME") as? String
+            userName = defaults.object(forKey: "HD_CLIENT_USERNAME") as? String
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_PASSWORD") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_PASSWORD") != nil) {
             
-            passWord = defaults.objectForKey("HD_CLIENT_PASSWORD") as? String
-            
-        }
-        
-        if (defaults.objectForKey("HD_CLIENT_USERID") != nil) {
-            
-            userId = defaults.objectForKey("HD_CLIENT_USERID") as? Int
+            passWord = defaults.object(forKey: "HD_CLIENT_PASSWORD") as? String
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_MOBILE") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_USERID") != nil) {
             
-            mobile = defaults.objectForKey("HD_CLIENT_MOBILE") as? String
-            
-        }
-        
-        if (defaults.objectForKey("HD_CLIENT_FOLLOWCNT") != nil) {
-            
-            followCnt = defaults.objectForKey("HD_CLIENT_FOLLOWCNT") as? Int
+            userId = defaults.object(forKey: "HD_CLIENT_USERID") as? Int
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_FANSCNT") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_MOBILE") != nil) {
             
-            fansCount = defaults.objectForKey("HD_CLIENT_FANSCNT") as? Int
-            
-        }
-        
-        if (defaults.objectForKey("HD_CLIENT_FRIENDCNT") != nil) {
-            
-            friendCnt = defaults.objectForKey("HD_CLIENT_FRIENDCNT") as? Int
+            mobile = defaults.object(forKey: "HD_CLIENT_MOBILE") as? String
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_CONSUMERMOBILE") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_FOLLOWCNT") != nil) {
             
-            consumerMobile = defaults.objectForKey("HD_CLIENT_CONSUMERMOBILE") as? String
-            
-        }
-        
-        if (defaults.objectForKey("HD_CLIENT_BIRTHDAY") != nil) {
-            
-            birthday = defaults.objectForKey("HD_CLIENT_BIRTHDAY") as? String
+            followCnt = defaults.object(forKey: "HD_CLIENT_FOLLOWCNT") as? Int
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_AVATAR") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_FANSCNT") != nil) {
             
-            avatar = defaults.objectForKey("HD_CLIENT_AVATAR") as? String
-            
-        }
-        
-        if (defaults.objectForKey(Constants.HDSign) != nil) {
-            
-            sign = defaults.objectForKey(Constants.HDSign) as? String
+            fansCount = defaults.object(forKey: "HD_CLIENT_FANSCNT") as? Int
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_GENDER") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_FRIENDCNT") != nil) {
             
-            gender = defaults.objectForKey("HD_CLIENT_GENDER") as? Int
+            friendCnt = defaults.object(forKey: "HD_CLIENT_FRIENDCNT") as? Int
             
         }
         
-        if (defaults.objectForKey("HD_CLIENT_VIP") != nil) {
+        if (defaults.object(forKey: "HD_CLIENT_CONSUMERMOBILE") != nil) {
             
-            vip = defaults.objectForKey("HD_CLIENT_VIP") as? Int
+            consumerMobile = defaults.object(forKey: "HD_CLIENT_CONSUMERMOBILE") as? String
+            
+        }
+        
+        if (defaults.object(forKey: "HD_CLIENT_BIRTHDAY") != nil) {
+            
+            birthday = defaults.object(forKey: "HD_CLIENT_BIRTHDAY") as? String
+            
+        }
+        
+        if (defaults.object(forKey: "HD_CLIENT_AVATAR") != nil) {
+            
+            avatar = defaults.object(forKey: "HD_CLIENT_AVATAR") as? String
+            
+        }
+        
+        if (defaults.object(forKey: Constants.HDSign) != nil) {
+            
+            sign = defaults.object(forKey: Constants.HDSign) as? String
+            
+        }
+        
+        if (defaults.object(forKey: "HD_CLIENT_GENDER") != nil) {
+            
+            gender = defaults.object(forKey: "HD_CLIENT_GENDER") as? Int
+            
+        }
+        
+        if (defaults.object(forKey: "HD_CLIENT_VIP") != nil) {
+            
+            vip = defaults.object(forKey: "HD_CLIENT_VIP") as? Int
             
         }
         
@@ -180,9 +173,9 @@ class HDUserInfoManager {
     /**
      *  保存或更新用户数据
      */
-    private func saveUserInfo(){
+    fileprivate func saveUserInfo(){
     
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
         if let _ = userName {
             
@@ -258,50 +251,50 @@ class HDUserInfoManager {
     /**
      *  删除用户数据 切换用户或者退出登录
      */
-    private func deleteUserdeInfo(){
+    fileprivate func deleteUserdeInfo(){
     
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
         userName = nil
-        defaults.removeObjectForKey("HD_CLIENT_USERNAME")
+        defaults.removeObject(forKey: "HD_CLIENT_USERNAME")
         
         passWord = nil
-        defaults.removeObjectForKey("HD_CLIENT_PASSWORD")
+        defaults.removeObject(forKey: "HD_CLIENT_PASSWORD")
         
         userId = nil
-        defaults.removeObjectForKey("HD_CLIENT_USERID")
+        defaults.removeObject(forKey: "HD_CLIENT_USERID")
         
         mobile = nil
-        defaults.removeObjectForKey("HD_CLIENT_MOBILE")
+        defaults.removeObject(forKey: "HD_CLIENT_MOBILE")
         
         followCnt = nil
-        defaults.removeObjectForKey("HD_CLIENT_FOLLOWCNT")
+        defaults.removeObject(forKey: "HD_CLIENT_FOLLOWCNT")
         
         fansCount = nil
-        defaults.removeObjectForKey("HD_CLIENT_FANSCNT")
+        defaults.removeObject(forKey: "HD_CLIENT_FANSCNT")
         
         friendCnt = nil
-        defaults.removeObjectForKey("HD_CLIENT_FRIENDCNT")
+        defaults.removeObject(forKey: "HD_CLIENT_FRIENDCNT")
         
         consumerMobile = nil
-        defaults.removeObjectForKey("HD_CLIENT_CONSUMERMOBILE")
+        defaults.removeObject(forKey: "HD_CLIENT_CONSUMERMOBILE")
         
         birthday = nil
-        defaults.removeObjectForKey("HD_CLIENT_BIRTHDAY")
+        defaults.removeObject(forKey: "HD_CLIENT_BIRTHDAY")
         
         avatar = nil
-        defaults.removeObjectForKey("HD_CLIENT_AVATAR")
+        defaults.removeObject(forKey: "HD_CLIENT_AVATAR")
     
         sign = nil
-        defaults.removeObjectForKey(Constants.HDSign)
+        defaults.removeObject(forKey: Constants.HDSign)
         
         gender = nil
-        defaults.removeObjectForKey("HD_CLIENT_GENDER")
+        defaults.removeObject(forKey: "HD_CLIENT_GENDER")
         
         vip = nil
-        defaults.removeObjectForKey("HD_CLIENT_VIP")
+        defaults.removeObject(forKey: "HD_CLIENT_VIP")
         
-        defaults.removeObjectForKey(Constants.HDHistory)
+        defaults.removeObject(forKey: Constants.HDHistory)
         
     }
 }

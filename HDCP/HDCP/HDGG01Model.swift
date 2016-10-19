@@ -18,9 +18,9 @@ class HDGG01ListModel:Mappable {
     
     init(){}
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
-        mapping(map)
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -40,8 +40,8 @@ class HDGG01Result: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -60,8 +60,8 @@ class HDGG01Response: Mappable {
     
     init(){}
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         

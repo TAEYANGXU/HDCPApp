@@ -25,7 +25,7 @@ class HDHM06Controller: UITableViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "菜谱专辑"
@@ -42,7 +42,7 @@ class HDHM06Controller: UITableViewController {
     func setupUI(){
     
         self.tableView.tableFooterView = UIView()
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
+        self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         
         //当列表滚动到底端 视图自动刷新
@@ -69,12 +69,12 @@ class HDHM06Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
     // MARK: - 数据加载
-    func doGetRequestData(limit:Int,offset:Int){
+    func doGetRequestData(_ limit:Int,offset:Int){
         
         unowned let WS = self;
         HDHM06Service().doGetRequest_HDHM06_URL(limit, offset: offset, successBlock: { (hm06Response) -> Void in
@@ -83,7 +83,7 @@ class HDHM06Controller: UITableViewController {
             
             WS.hidenHud()
             
-            WS.dataArray.addObjectsFromArray((hm06Response.result?.list)!)
+            WS.dataArray.addObjects(from: (hm06Response.result?.list)!)
             
             WS.tableView.mj_footer.endRefreshing()
             
@@ -99,14 +99,14 @@ class HDHM06Controller: UITableViewController {
     
     // MARK: - UITableView delegate/datasource
     
-    override func tableView(tableView:UITableView, numberOfRowsInSection section: Int) ->Int
+    override func tableView(_ tableView:UITableView, numberOfRowsInSection section: Int) ->Int
     {
         return self.dataArray.count
     }
     
-    override func tableView(tableView:UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) ->UITableViewCell
+    override func tableView(_ tableView:UITableView, cellForRowAt indexPath:IndexPath) ->UITableViewCell
     {
-        let cell = tableView .dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath)
+        let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
         
         var imageView = cell.contentView.viewWithTag(1000) as? UIImageView
         
@@ -116,7 +116,7 @@ class HDHM06Controller: UITableViewController {
             imageView?.tag = 1000
             cell.contentView.addSubview(imageView!)
             
-            imageView?.snp_makeConstraints(closure: { (make) -> Void in
+            imageView?.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(0)
                 make.left.equalTo(0)
@@ -133,13 +133,13 @@ class HDHM06Controller: UITableViewController {
             
             title = UILabel()
             title?.tag = 2000
-            title?.font = UIFont.systemFontOfSize(16)
+            title?.font = UIFont.systemFont(ofSize: 16)
             title?.textColor = Constants.HDMainTextColor
             cell.contentView.addSubview(title!)
             
-            title?.snp_makeConstraints(closure: { (make) -> Void in
+            title?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo((imageView?.snp_bottom)!).offset(5)
+                make.top.equalTo((imageView?.snp.bottom)!).offset(5)
                 make.left.equalTo(cell.contentView).offset(15)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(20)
@@ -153,13 +153,13 @@ class HDHM06Controller: UITableViewController {
         
             userName = UILabel()
             userName?.tag = 3000
-            userName?.font = UIFont.systemFontOfSize(15)
-            userName?.textColor = UIColor.lightGrayColor()
+            userName?.font = UIFont.systemFont(ofSize: 15)
+            userName?.textColor = UIColor.lightGray
             cell.contentView.addSubview(userName!)
             
-            userName?.snp_makeConstraints(closure: { (make) -> Void in
+            userName?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo((title?.snp_bottom)!).offset(0)
+                make.top.equalTo((title?.snp.bottom)!).offset(0)
                 make.left.equalTo(cell.contentView).offset(14)
                 make.width.equalTo(Constants.HDSCREENWITH-30)
                 make.height.equalTo(20)
@@ -177,9 +177,9 @@ class HDHM06Controller: UITableViewController {
             line?.backgroundColor = Constants.HDBGViewColor
             cell.contentView.addSubview(line!)
             
-            line?.snp_makeConstraints(closure: { (make) -> Void in
+            line?.snp.makeConstraints( { (make) -> Void in
                 
-                make.top.equalTo((userName?.snp_bottom)!).offset(5)
+                make.top.equalTo((userName?.snp.bottom)!).offset(5)
                 make.left.equalTo(cell.contentView).offset(0)
                 make.height.equalTo(10)
                 make.width.equalTo(Constants.HDSCREENWITH)
@@ -189,8 +189,8 @@ class HDHM06Controller: UITableViewController {
             
         }
         
-        let model = dataArray[indexPath.row] as! HDHM06ListModel
-        imageView?.sd_setImageWithURL(NSURL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM06ListModel
+        imageView?.sd_setImage(with:URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text = model.title
         userName?.text = String(format: "by %@", model.userName!)
         
@@ -198,13 +198,13 @@ class HDHM06Controller: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 260
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let model = dataArray[indexPath.row] as! HDHM06ListModel
+        let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM06ListModel
         let hdhm05VC = HDHM05Controller()
         hdhm05VC.name = model.title
         hdhm05VC.cid = model.id

@@ -14,8 +14,8 @@ class HDCT10Response:Mappable {
     var request_id:String?
     var result:HDCT10Result?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     func mapping(map: Map) {
         
@@ -30,8 +30,8 @@ class HDCT10Result: Mappable {
     
     var list:Array<HDCT10ListModel>?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -51,8 +51,8 @@ class HDCT10ListModel: Mappable {
     var contentHeight:CGFloat?
     var fcommentRow:Int?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -76,8 +76,8 @@ class HDCT10UserInfoModel: Mappable {
     var vip:Int?
 
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -125,8 +125,8 @@ class HDCT10DataModel: Mappable {
     var content:String?
     var commentList:Array<HDCT10CommentListModel>?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -172,8 +172,8 @@ class HDCT10CommentListModel: Mappable {
     var isAuthor:Int?
     var isVip:Int?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -194,8 +194,8 @@ class HDCT10ImagesModel: Mappable {
     var smallUrl:String?
     var url:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {
@@ -215,8 +215,8 @@ class HDCT10TopicTagsModel: Mappable {
     var name:String?
     var tagUrl:String?
     
-    required init?(_ map: Map){
-        mapping(map)
+    required init?(map: Map){
+        mapping(map:map)
     }
     
     func mapping(map: Map) {

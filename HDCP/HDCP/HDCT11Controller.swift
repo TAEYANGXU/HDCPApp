@@ -16,7 +16,7 @@ class HDCT11Controller: BaseViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         self.title = "消息"
@@ -32,7 +32,7 @@ class HDCT11Controller: BaseViewController {
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
         
     }
 

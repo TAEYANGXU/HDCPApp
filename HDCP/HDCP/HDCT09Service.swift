@@ -17,20 +17,20 @@ class HDCT09Service {
      * parameter successBlock: 成功
      * parameter failBlock:    失败
      */
-    func doGetRequest_HDCT09_URL(limit:Int,offset:Int,successBlock:(hdResponse:HDCT09Response)->Void,failBlock:(error:NSError)->Void){
+    func doGetRequest_HDCT09_URL(_ limit:Int,offset:Int,successBlock:@escaping (_ hdResponse:HDCT09Response)->Void,failBlock:@escaping (_ error:NSError)->Void){
     
-        HDRequestManager.doPostRequest(["limit":20,"offset":0,"uid":"8752979","timestamp":Int(NSDate().timeIntervalSince1970)], URL: Constants.HDCT10_URL) { (response) -> Void in
+        HDRequestManager.doPostRequest(["limit":20 as AnyObject,"offset":0 as AnyObject,"uid":"8752979" as AnyObject,"timestamp":Int(Date().timeIntervalSince1970) as AnyObject], URL: Constants.HDCT10_URL) { (response) -> Void in
             
             if response.result.error == nil {
                 
                 /// JSON 转换成对象
-                let response = Mapper<HDCT09Response>().map(response.result.value)
+                let response = Mapper<HDCT09Response>().map(JSONObject: response.result.value)
                 /// 回调
-                successBlock(hdResponse: response!)
+                successBlock(response!)
                 
             }else{
                 
-                failBlock(error: response.result.error!)
+                failBlock(response.result.error! as NSError)
             }
             
         }

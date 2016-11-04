@@ -100,7 +100,7 @@ open class HDShareSDKManager {
                     shareSuccess()
                     break
                 case .fail:
-                    HDLog.LogOut("分享失败,错误描述:", obj: error)
+                    HDLog.LogOut("分享失败,错误描述:", obj: error as Any)
                     shareFail()
                     break
                 case .cancel:
@@ -125,7 +125,7 @@ open class HDShareSDKManager {
                     shareSuccess()
                     break
                 case .fail:
-                    HDLog.LogOut("分享失败,错误描述:", obj: error)
+                    HDLog.LogOut("分享失败,错误描述:", obj: error as Any)
                     shareFail()
                     break
                 case .cancel:
@@ -150,7 +150,7 @@ open class HDShareSDKManager {
                     shareSuccess()
                     break
                 case .fail:
-                    HDLog.LogOut("分享失败,错误描述:", obj: error)
+                    HDLog.LogOut("分享失败,错误描述:", obj: error as Any)
                     shareFail()
                     break
                 case .cancel:
@@ -175,7 +175,7 @@ open class HDShareSDKManager {
                     shareSuccess()
                     break
                 case .fail:
-                    HDLog.LogOut("分享失败,错误描述:", obj: error)
+                    HDLog.LogOut("分享失败,错误描述:", obj: error as Any)
                     shareFail()
                     break
                 case .cancel:
@@ -189,7 +189,7 @@ open class HDShareSDKManager {
             break
 
         default:
-            ""
+            break
             
         }
         

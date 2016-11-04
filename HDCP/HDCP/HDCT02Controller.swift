@@ -66,7 +66,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     
@@ -118,7 +118,7 @@ class HDCT02Controller: UITableViewController ,UITextFieldDelegate{
             
                 WS.hidenHud()
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.HDREFRESHHDCT01), object: nil, userInfo: ["FLAG":"LOGIN"])
-                WS.navigationController?.popToRootViewController(animated: true)
+                WS.navigationController!.popToRootViewController(animated: true)
             
             }) { (error) -> Void in
                 

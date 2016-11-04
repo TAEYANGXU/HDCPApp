@@ -153,7 +153,7 @@ class HDCT10Controller: UITableViewController {
     func backAction(){
         
         videoPlayerController?.close()
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

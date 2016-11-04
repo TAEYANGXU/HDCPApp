@@ -512,7 +512,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     
@@ -666,7 +666,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
              */
             break
         default:
-            ""
+            break
             
         }
         

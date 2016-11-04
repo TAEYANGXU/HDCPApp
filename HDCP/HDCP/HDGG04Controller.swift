@@ -112,7 +112,7 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

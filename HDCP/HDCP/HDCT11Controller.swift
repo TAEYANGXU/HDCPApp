@@ -32,7 +32,7 @@ class HDCT11Controller: BaseViewController {
     // MARK: - events
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
 

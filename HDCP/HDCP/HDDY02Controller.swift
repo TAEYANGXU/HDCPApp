@@ -846,7 +846,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              */
             break
         default:
-            ""
+            break
             
         }
         
@@ -914,7 +914,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
     func backAction(){
         
         videoPlayerController?.close()
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     
@@ -974,7 +974,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             }
             break
         default:
-            ""
+            break
         }
         
     }
@@ -1160,7 +1160,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
              */
             break
         default:
-            ""
+            break
             
         }
         

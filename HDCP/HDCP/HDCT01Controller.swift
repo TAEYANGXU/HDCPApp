@@ -316,7 +316,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDLog.LogOut("好友")
             break
         default:
-            ""
+            break
         }
     }
     

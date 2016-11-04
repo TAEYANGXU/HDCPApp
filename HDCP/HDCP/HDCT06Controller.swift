@@ -111,7 +111,7 @@ class HDCT06Controller: UITableViewController{
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     
@@ -304,7 +304,7 @@ class HDCT06Controller: UITableViewController{
             
                 if vc.isMember(of: HDCT01Controller.classForCoder()){
                 
-                    self.navigationController?.popToViewController(vc, animated: true)
+                    self.navigationController!.popToViewController(vc, animated: true)
                     break
                 }
                 

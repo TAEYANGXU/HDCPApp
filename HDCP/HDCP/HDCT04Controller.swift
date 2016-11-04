@@ -66,7 +66,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
         
             if vc.isKind(of: HDCT02Controller.classForCoder()){
             
-                 self.navigationController?.popToViewController(vc, animated: true)
+                 self.navigationController!.popToViewController(vc, animated: true)
             }
             
         }

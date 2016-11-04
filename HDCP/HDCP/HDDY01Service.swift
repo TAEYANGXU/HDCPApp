@@ -192,7 +192,7 @@ class HDDY01Service {
                 
                 let result = HDDY01Result()
                 
-                for model in (response.result?.list)! {
+                for _ in (response.result?.list)! {
 //                    
 //                    let listModel = model as! HDDY01ListEntity
 //                    

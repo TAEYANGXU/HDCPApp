@@ -125,7 +125,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         
         textView.snp.makeConstraints { (make) -> Void in
             
-            make.top.equalTo(WS.putView.snp_top).offset(5)
+            make.top.equalTo(WS.putView.snp.top).offset(5)
             make.left.equalTo(WS.putView).offset(15)
             make.width.equalTo(Constants.HDSCREENWITH-15-80)
             make.height.equalTo(40)
@@ -146,7 +146,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
         commitBtn.snp.makeConstraints { (make) -> Void in
             
             make.left.equalTo(WS.textView.snp.right).offset(10)
-            make.top.equalTo(WS.putView.snp_top).offset(5)
+            make.top.equalTo(WS.putView.snp.top).offset(5)
             make.width.equalTo(60)
             make.height.equalTo(40)
         }
@@ -306,7 +306,7 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

@@ -49,7 +49,7 @@ class HDGG03Controller: UITableViewController {
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

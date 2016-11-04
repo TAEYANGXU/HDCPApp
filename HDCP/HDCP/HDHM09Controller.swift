@@ -137,7 +137,7 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
                 
                 make.width.equalTo(Constants.HDSCREENWITH-60)
                 make.height.equalTo(30)
-                make.bottom.equalTo(WS.imageScrollView!.snp_top).offset(-5)
+                make.bottom.equalTo(WS.imageScrollView!.snp.top).offset(-5)
                 make.left.equalTo(WS.view).offset(30)
                 
             })

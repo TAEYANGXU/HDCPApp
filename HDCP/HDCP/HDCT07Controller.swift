@@ -64,7 +64,7 @@ class HDCT07Controller: BaseViewController ,UIWebViewDelegate{
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

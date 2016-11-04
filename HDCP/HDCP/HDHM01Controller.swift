@@ -758,7 +758,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
                 rowView!.title.text = model?.title
                 rowView!.title.textColor = Constants.HDMainTextColor
-
+               
                if model?.userName != nil {
                   rowView!.userName.text = String(format: "by %@",(model?.userName)!)
                }

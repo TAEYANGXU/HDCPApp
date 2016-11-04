@@ -129,7 +129,7 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
     
     func backAction(){
         
-        self.navigationController?.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
 

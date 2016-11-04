@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import SDWebImage
-import ObjectMapper
 import Alamofire
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -94,7 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = MainViewController()
                 
             }else{
-                
                 
                 userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
                 userDefault.synchronize()
@@ -192,7 +190,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //缓存将保留5天
         SDImageCache.shared().maxCacheAge = 5*24*60*60
         //缓存最大占有内存100MB
-        SDImageCache.shared().maxCacheSize = 1024*1024*100
+        SDImageCache.shared().maxCacheSize = UInt(1024*1024*100)
         
     }
     

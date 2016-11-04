@@ -1,4 +1,4 @@
-![](https://camo.githubusercontent.com/776e965d43e3a3286de1609683eb918613a0ce84/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f53776966742d322e302d6f72616e67652e737667)<br/>
+![](https://camo.githubusercontent.com/f0604df64b4db3dad5b2a23439b9c253abedeae3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f53776966742d332e302d6f72616e67652e737667)<br/>
 
                                                             微菜谱
 
@@ -30,11 +30,11 @@
 项目备注
 
     App有些功能还没有实现,会抽空在后续更新。
-    要求:IOS8.0以上,Xcode 7.0 以上(建议使用7.3，Swift2.2语法发生了小的变化)。
+    要求:IOS8.0以上,Xcode 8.0 以上。
 
 项目运行
 
-  > ######运行App需要安装[CocoaPods](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
+  > ######运行App需要安装[CocoaPods1.1.0](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
   > ######打开[CoreData](http://blog.csdn.net/likendsl/article/details/16160677)的SQL语句输出开关<br/> 
 
 Swift学习

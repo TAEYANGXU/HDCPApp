@@ -296,5 +296,10 @@
  */
 - (void)SSDKSetupInstapaperByConsumerKey:(NSString *)consumerKey
                           consumerSecret:(NSString *)consumerSecret;
-
+/**
+ *  设置钉钉应用信息
+ *
+ *  @param appId 应用标识
+ */
+- (void)SSDKSetupDingTalkByAppId:(NSString *)appId;
 @end

@@ -62,11 +62,4 @@
  */
 - (void)runScript:(NSString *)script;
 
-/**
- *  调试脚本
- *
- *  @param script 脚本
- */
-- (void)debug:(NSString *)script;
-
 @end

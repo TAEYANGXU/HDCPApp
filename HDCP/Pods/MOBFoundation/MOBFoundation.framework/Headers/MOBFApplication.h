@@ -60,4 +60,20 @@
  */
 + (uint64_t)elapsedTime;
 
+/**
+ *  判断链接是否能打开
+ *
+ *  @param url 链接
+ *
+ *  @return YES 可以打开，NO 不能打开
+ */
++ (BOOL)canOpenUrl:(NSURL *)url;
+
+/**
+ *  打开链接
+ *
+ *  @param url 链接
+ */
++ (void)openUrl:(NSURL *)url;
+
 @end

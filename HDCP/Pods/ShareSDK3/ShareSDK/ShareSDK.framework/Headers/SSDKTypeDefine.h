@@ -217,6 +217,14 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformTypeAliPaySocial        = 50,
     /**
+     *  支付宝朋友圈
+     */
+    SSDKPlatformTypeAliPaySocialTimeline= 51,
+    /**
+     *  钉钉
+     */
+//    SSDKPlatformTypeDingTalk            = 52,
+    /**
      *  易信
      */
     SSDKPlatformTypeYiXin               = 994,
@@ -380,23 +388,6 @@ typedef void(^SSDKAuthorizeStateChangedHandler) (SSDKResponseState state, SSDKUs
  */
 typedef void(^SSDKGetUserStateChangedHandler) (SSDKResponseState state, SSDKUser *user, NSError *error);
 
-/**
- *  添加/关注好友状态变更回调处理器
- *
- *  @param state 状态
- *  @param user  好友信息，当且仅当state为SSDKResponseStateSuccess时返回
- *  @param error 错误信息，当且仅当state为SSDKResponseStateFail时返回
- */
-typedef void(^SSDKAddFriendStateChangedHandler) (SSDKResponseState state, SSDKUser *user, NSError *error);
-
-/**
- *  获取好友列表状态变更回调处理器
- *
- *  @param state  状态
- *  @param paging 好友列表分页信息，当且仅当state为SSDKResponseStateSuccess时返回
- *  @param error  错误信息，当且仅当state为SSDKResponseStateFail时返回
- */
-typedef void(^SSDKGetFriendsStateChangedHandler) (SSDKResponseState state, SSDKFriendsPaging *paging,  NSError *error);
 
 /**
  *  分享内容状态变更回调处理器

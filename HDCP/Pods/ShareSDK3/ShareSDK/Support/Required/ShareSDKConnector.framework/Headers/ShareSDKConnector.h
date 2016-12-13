@@ -73,4 +73,11 @@
  */
 + (void)connectFacebookMessenger:(Class)fbmApiClass;
 
+/**
+ *  链接钉钉以供ShareSDK可以正常使用钉钉进行分享
+ *
+ *  @param dtOpenApiClass 钉钉 SDK中的类型，应先导入DTShareKit.framework，再将[DTOpenAPI class]传入到此参数。
+ */
++ (void)connectDingTalk:(Class)dtOpenApiClass;
+
 @end

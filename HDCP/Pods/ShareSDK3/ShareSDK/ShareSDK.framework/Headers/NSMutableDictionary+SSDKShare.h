@@ -529,7 +529,28 @@
                                     image:(id)image
                                     title:(NSString *)title
                                       url:(NSURL *)url
-                                     type:(SSDKContentType)type;
+                                     type:(SSDKContentType)type __deprecated_msg("use [SSDKSetupAliPaySocialParamsByText:image:title:url:type:platformType:] method instead");
+
+/**
+ *  设置支付宝分享参数
+ *
+ *  @param text  分享文本
+ *  @param image 分享图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage。
+ *  @param title 标题
+ *  @param url   分享链接
+ *  @param type  分享类型，仅支持Text、Image、WebPage
+ *  @param platformType 分享平台类型，仅支持输入SSDKPlatformTypeAliPaySocial和SSDKPlatformTypeAliPaySocialTimeline
+ *  分享类型，平台支持情况如下：
+ *  SSDKPlatformTypeAliPaySocial(支付宝好友):支持Text、Image、WebPage
+ *  SSDKPlatformTypeAliPaySocialTimeline(支付宝朋友圈):支持Image、WebPage
+ *
+ */
+- (void)SSDKSetupAliPaySocialParamsByText:(NSString *)text
+                                    image:(id)image
+                                    title:(NSString *)title
+                                      url:(NSURL *)url
+                                     type:(SSDKContentType)type
+                             platformType:(SSDKPlatformType)platformType;
 
 /**
  *  设置Pinterest分享参数

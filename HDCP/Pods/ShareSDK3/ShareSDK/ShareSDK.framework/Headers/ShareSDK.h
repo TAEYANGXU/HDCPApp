@@ -86,30 +86,6 @@
         conditional:(SSDKUserQueryConditional *)conditional
      onStateChanged:(SSDKGetUserStateChangedHandler)stateChangedHandler;
 
-/**
- *  添加/关注好友
- *
- *  @param platformType       平台类型
- *  @param user               添加/关注用户信息，注：用户信息中的Id或者name项必须有一项填写（不同平台要求不一样），其他字段可选填
- *  @param stateChangedHandler 状态变更回调处理
- */
-+ (void)addFriend:(SSDKPlatformType)platformType
-             user:(SSDKUser *)user
-   onStateChanged:(SSDKAddFriendStateChangedHandler)stateChangedHandler;
-
-/**
- *  获取好友列表
- *
- *  @param platformType       平台类型
- *  @param cursor             分页游标
- *  @param size               分页大小
- *  @param stateChangeHandler 状态变更回调处理
- */
-+ (void)getFriends:(SSDKPlatformType)platformType
-            cursor:(NSUInteger)cursor
-              size:(NSUInteger)size
-    onStateChanged:(SSDKGetFriendsStateChangedHandler)stateChangedHandler;
-
 #pragma mark - 分享
 
 /**
@@ -123,17 +99,5 @@
    parameters:(NSMutableDictionary *)parameters
 onStateChanged:(SSDKShareStateChangedHandler)stateChangedHandler;
 
-/**
- *  使用配置文件的方式分享
- *
- *  @param contentName         ShareContent.xml内<Content>标签name属性的值
- *  @param platformType        平台类型
- *  @param customFields        自定义字段
- *  @param stateChangedHandler 状态变更回调处理
- */
-+ (void)shareWithContentName:(NSString *)contentName
-                    platform:(SSDKPlatformType)platformType
-                customFields:(NSDictionary *)customFields
-              onStateChanged:(SSDKShareStateChangedHandler)stateChangedHandler;
 
 @end

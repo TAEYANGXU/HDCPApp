@@ -40,8 +40,19 @@
  *  @return 服务观察者
  */
 - (MOBFImageObserver *)getImageWithURL:(NSURL *)url
-                                result:
-                                    (MOBFImageGetterResultHandler)resultHandler;
+                                result:(MOBFImageGetterResultHandler)resultHandler;
+
+
+/**
+ 获取图片数据
+
+ @param url           图片路径
+ @param resultHandler 返回事件
+
+ @return 服务观察者
+ */
+- (MOBFImageObserver *)getImageDataWithURL:(NSURL *)url
+                                    result:(MOBFImageDataGetterResultHandler)resultHandler;
 
 /**
  *  移除图片观察者

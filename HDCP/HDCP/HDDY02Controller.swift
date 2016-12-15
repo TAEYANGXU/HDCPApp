@@ -1006,12 +1006,12 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         let tipsSize = CoreUtils.getTextRectSize((dy02Info?.tips!)! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH-30, height: 99999))
         tips.text = dy02Info?.tips!
         
-        tipsView?.snp.updateConstraints({ (make) in
-            make.height.equalTo(60+tipsSize.size.height+5)
-        })
-        tips.snp.updateConstraints { (make) in
-            make.height.equalTo(tipsSize.size.height+5)
-        }
+//        tipsView?.snp.updateConstraints({ (make) in
+//            make.height.equalTo(60+tipsSize.size.height+5)
+//        })
+//        tips.snp.updateConstraints { (make) in
+//            make.height.equalTo(tipsSize.size.height+5)
+//        }
         
         detailView!.contentSize = CGSize(width: Constants.HDSCREENWITH, height: 110 + size.size.height + 40 + CGFloat(stuffHeight)+60.0+tipsSize.size.height+5)
     }

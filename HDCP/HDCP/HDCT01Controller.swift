@@ -565,12 +565,12 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
-            cntView?.snp.updateConstraints({ (make) -> Void in
-                
-                make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
-                make.bottom.equalTo(headerBg!.snp.bottom).offset(-10)
-                
-            })
+//            cntView?.snp.updateConstraints({ (make) -> Void in
+//                
+//                make.left.equalTo(((rect?.width)! - Constants.HDSCREENWITH)/2)
+//                make.bottom.equalTo(headerBg!.snp.bottom).offset(-10)
+//                
+//            })
             
         }
         

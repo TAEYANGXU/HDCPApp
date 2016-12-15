@@ -132,22 +132,6 @@ typedef NS_ENUM(NSUInteger, MOBFNetworkType)
 + (NSString *)duid;
 
 /**
- *  判断当前设备是否有麦克风
- *
- *  @return YES 有，NO 没有
- */
-+ (BOOL)hasMicrophone;
-
-/**
- *  判断是否存在指定音频线路
- *
- *  @param type 类型
- *
- *  @return YES 存在，NO 不存在
- */
-+ (BOOL)hasAudioRouteWithType:(NSString *)type;
-
-/**
  *  获取屏幕真实尺寸
  *
  *  @return 屏幕尺寸

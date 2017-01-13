@@ -83,7 +83,7 @@ public class RxTableViewDataSourceProxy
     ///
     /// - parameter parentObject: Parent object for delegate proxy.
     public required init(parentObject: AnyObject) {
-        self.tableView = (parentObject as! UITableView)
+        self.tableView = castOrFatalError(parentObject)
         super.init(parentObject: parentObject)
     }
 
@@ -103,9 +103,8 @@ public class RxTableViewDataSourceProxy
 
     /// For more information take a look at `DelegateProxyType`.
     public override class func createProxyForObject(_ object: AnyObject) -> AnyObject {
-        let tableView = (object as! UITableView)
-
-        return castOrFatalError(tableView.createRxDataSourceProxy())
+        let tableView: UITableView = castOrFatalError(object)
+        return tableView.createRxDataSourceProxy()
     }
 
     /// For more information take a look at `DelegateProxyType`.
@@ -130,6 +129,7 @@ public class RxTableViewDataSourceProxy
         let requiredMethodsDataSource: UITableViewDataSource? = castOptionalOrFatalError(forwardToDelegate)
         _requiredMethodsDataSource = requiredMethodsDataSource ?? tableViewDataSourceNotSet
         super.setForwardToDelegate(forwardToDelegate, retainDelegate: retainDelegate)
+        refreshTableViewDataSource()
     }
 
     override open func methodInvoked(_ selector: Selector) -> Observable<[Any]> {
@@ -176,7 +176,9 @@ public class RxTableViewDataSourceProxy
     private func refreshTableViewDataSource() {
         if self.tableView?.dataSource === self {
             self.tableView?.dataSource = nil
-            self.tableView?.dataSource = self
+            if _requiredMethodsDataSource != nil && _requiredMethodsDataSource !== tableViewDataSourceNotSet {
+                self.tableView?.dataSource = self
+            }
         }
     }
 

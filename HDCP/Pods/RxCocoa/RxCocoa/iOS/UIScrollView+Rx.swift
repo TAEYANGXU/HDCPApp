@@ -42,7 +42,7 @@ extension Reactive where Base: UIScrollView {
             scrollView.contentOffset = contentOffset
         }
 
-        return ControlProperty(values: proxy.contentOffsetSubject, valueSink: bindingObserver)
+        return ControlProperty(values: proxy.contentOffsetBehaviorSubject, valueSink: bindingObserver)
     }
 
     /// Bindable sink for `scrollEnabled` property.
@@ -50,6 +50,39 @@ extension Reactive where Base: UIScrollView {
         return UIBindingObserver(UIElement: self.base) { scrollView, scrollEnabled in
             scrollView.isScrollEnabled = scrollEnabled
         }
+    }
+
+    /// Reactive wrapper for delegate method `scrollViewDidScroll`
+    public var didScroll: ControlEvent<Void> {
+        let source = RxScrollViewDelegateProxy.proxyForObject(base).contentOffsetPublishSubject
+        return ControlEvent(events: source)
+    }
+	
+	/// Reactive wrapper for delegate method `scrollViewDidEndDecelerating`
+	public var didEndDecelerating: ControlEvent<Void> {
+		let source = delegate.methodInvoked(#selector(UIScrollViewDelegate.scrollViewDidEndDecelerating(_:))).map { _ in }
+		return ControlEvent(events: source)
+	}
+	
+	/// Reactive wrapper for delegate method `scrollViewDidEndDragging(_:willDecelerate:)`
+	public var didEndDragging: ControlEvent<Bool> {
+		let source = delegate.methodInvoked(#selector(UIScrollViewDelegate.scrollViewDidEndDragging(_:willDecelerate:))).map { value -> Bool in
+			return try castOrThrow(Bool.self, value[1])
+		}
+		return ControlEvent(events: source)
+	}
+
+    /// Reactive wrapper for delegate method `scrollViewDidZoom`
+    public var didZoom: ControlEvent<Void> {
+        let source = delegate.methodInvoked(#selector(UIScrollViewDelegate.scrollViewDidZoom)).map { _ in }
+        return ControlEvent(events: source)
+    }
+
+
+    /// Reactive wrapper for delegate method `scrollViewDidScrollToTop`
+    public var didScrollToTop: ControlEvent<Void> {
+        let source = delegate.methodInvoked(#selector(UIScrollViewDelegate.scrollViewDidScrollToTop(_:))).map { _ in }
+        return ControlEvent(events: source)
     }
 
     /// Installs delegate as forwarding delegate on `delegate`.

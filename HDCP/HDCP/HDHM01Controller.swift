@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import Alamofire
 import SnapKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -868,8 +869,6 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
             rightImageView!.sd_setImage(with:URL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         }
       
-        
-        
     }
     
     // MARK: - 提示动画显示和隐藏

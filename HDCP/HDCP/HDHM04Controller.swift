@@ -8,12 +8,16 @@
 
 import UIKit
 
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
+
 class HDHM04Controller: UITableViewController {
     
     var tagModel:TagListModel?
     var dataArray:NSMutableArray!
     var offset:Int!
-
+    var disposeBag = DisposeBag()
         
     override func viewDidLoad() {
         

@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import SDWebImage
 import Alamofire
+import RxSwift
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

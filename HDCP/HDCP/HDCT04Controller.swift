@@ -8,6 +8,9 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
+
 class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
     
     var code:UITextField!
@@ -16,6 +19,9 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
     var secondBtn:UIButton!
     var timer:Timer!
     var second:Int = 59
+    
+    
+    var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         
@@ -96,6 +102,7 @@ class HDCT04Controller: UITableViewController ,UITextFieldDelegate{
      */
     func againAction(){
     
+        timer.invalidate()
         timer = nil
         second = 59
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)

@@ -48,7 +48,7 @@ class WelcomeController: UIViewController {
         
         
         for i in 1...5 {
-        
+            
             let imageView = UIImageView()
             imageView.image = UIImage(named: String(format: "guide_step0%d",i))
             welcomeView?.addSubview(imageView)
@@ -82,7 +82,6 @@ class WelcomeController: UIViewController {
                     make.height.equalTo(30)
                     
                 })
-                
                 
             }
             

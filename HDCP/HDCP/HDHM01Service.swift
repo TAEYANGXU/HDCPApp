@@ -82,7 +82,6 @@ class HDHM01Service {
         }
         
         
-        
         if !isExistRecipeListEntity() {
             
             /// 滚动栏
@@ -100,12 +99,8 @@ class HDHM01Service {
                 */
                 recipeModel?.result = result
             }
-
             
         }
-
-        
-        
         
         /// 厨房宝典
         for (i,_) in (hdHM01Response.result?.wikiList?.enumerated())! {

@@ -39,7 +39,7 @@
     HDCT09Controller -> 话题
     HDCT10Controller -> 动态
     HDCT11Controller -> 消息
- 
+    HDCT12Controller -> 话题详情
  
     HDDY01Controller -> 动态
     HDDY02Controller -> 动态详情

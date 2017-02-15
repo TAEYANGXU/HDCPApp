@@ -152,6 +152,9 @@ class Constants: NSObject {
     //话题
      static let HDCT10_URL = "http://api.haodou.com/index.php?appid=4&appkey=573bbd2fbd1a6bac082ff4727d952ba3&appsign=a76e39e5d361690850a458ae04f01c6c&channel=appstore&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7C65E9FB11-64B3-4B5C-A62C-4B53FD796AC4%7C97F90A81-F659-474D-B27E-BE58CDFF30C0&format=json&loguid=8752979&method=Topic.indexTopic&nonce=1457966947&sessionid=1457966932&signmethod=md5&uuid=7408f5dd81db1165cd1896e8175a75e4&v=2&vc=46&vn=v6.0.3"
     
+    //话题
+    static let HDCT12_URL = "http://api.haodou.com/index.php?uuid=d0a290da740161c32d3642526c821ae3&signmethod=md5&vc=109&isBreak=0&appid=4&channel=appstore&idfa=0c040fd8521082b577891f58da53ebd7&vn=v6.1.19&format=json&sessionid=1487137650&appkey=573bbd2fbd1a6bac082ff4727d952ba3&deviceid=0f607264fc6318a92b9e13c65db7cd3c%7CCB9F92DA-AE9B-46D6-8C57-0D355D62103E%7C1E2D7D52-34DF-4E62-BA34-1E64AFD5E434&limit=20&offset=0&v=2&method=Topic.getTopicList"
+    
     //协议
     static let HDCT07_URL = "http://m.haodou.com/about.php?do=privacy"
     /*******************************************END*********************************************/

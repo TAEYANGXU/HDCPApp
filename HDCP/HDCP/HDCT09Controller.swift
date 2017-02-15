@@ -603,7 +603,28 @@ class HDCT09Controller: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        if indexPath.section == 0 {
+            
+            let model = ct09HotList[(indexPath as NSIndexPath).row]
+            let url = String("http://group.haodou.com/topic-\(model.topicId!).html")
+            let webVC = HDWebController()
+            webVC.name = "实时热点"
+            webVC.url = url
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(webVC, animated: true);
+            
+        }
         
+        if indexPath.section == 1 {
+         
+            let ct12VC = HDCT12Controller()
+            self.hidesBottomBarWhenPushed = true;
+            self.navigationController?.pushViewController(ct12VC, animated: true);
+            
+        }
+        
+        if indexPath.section == 2 {
+            
+        }
     }
-    
 }

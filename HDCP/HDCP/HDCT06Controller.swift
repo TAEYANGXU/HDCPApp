@@ -31,7 +31,10 @@ class HDCT06Controller: UITableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.edgesForExtendedLayout = UIRectEdge();
+        self.navigationController?.navigationBar.isTranslucent = false
+        
         self.title = "设置"
         
         let defaults = UserDefaults.standard
@@ -291,6 +294,21 @@ class HDCT06Controller: UITableViewController{
                 self.present(alertVC, animated: true, completion: nil)
             }
             
+        }
+        
+        if (indexPath as NSIndexPath).section == 2 {
+        
+            if (indexPath as NSIndexPath).row == 1{
+            
+                /**
+                 *   意见反馈
+                 */
+                let hdgg04VC = HDGG04Controller()
+                self.hidesBottomBarWhenPushed = true;
+                self.navigationController?.pushViewController(hdgg04VC, animated: true)
+                self.hidesBottomBarWhenPushed = false
+                
+            }
         }
         
         if (indexPath as NSIndexPath).section == 3 {

@@ -447,7 +447,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             if let _ = sign {
                 
-                //话题
+                //动态
                 let hdct10VC = HDCT10Controller()
                 self.hidesBottomBarWhenPushed = true;
                 self.navigationController?.pushViewController(hdct10VC, animated: true)
@@ -465,7 +465,7 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             if let _ = sign {
                 
-                //动态
+                //话题
                 let hdct09VC = HDCT09Controller()
                 self.hidesBottomBarWhenPushed = true;
                 self.navigationController?.pushViewController(hdct09VC, animated: true)

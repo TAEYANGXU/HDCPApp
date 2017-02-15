@@ -103,7 +103,7 @@ class HDHM04Controller: UITableViewController {
     
     func backAction(){
         
-//        navigationController!.popViewController(animated: true)
+        navigationController!.popViewController(animated: true)
         
     }
     

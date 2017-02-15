@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B068D3C1E5429B2008C90C6 /* HDCT12Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B068D3B1E5429B2008C90C6 /* HDCT12Controller.swift */; };
+		1B068D3E1E542B07008C90C6 /* HDCT12Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B068D3D1E542B07008C90C6 /* HDCT12Service.swift */; };
 		1B093E321C99B2E800038DC0 /* HDUserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B093E311C99B2E800038DC0 /* HDUserInfoManager.swift */; };
 		1B0FD0F31C3D5749009E85CD /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FD0C91C3D5749009E85CD /* MJRefreshAutoFooter.m */; };
 		1B0FD0F41C3D5749009E85CD /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0FD0CB1C3D5749009E85CD /* MJRefreshBackFooter.m */; };
@@ -200,6 +202,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B068D3B1E5429B2008C90C6 /* HDCT12Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT12Controller.swift; sourceTree = "<group>"; };
+		1B068D3D1E542B07008C90C6 /* HDCT12Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT12Service.swift; sourceTree = "<group>"; };
 		1B093E311C99B2E800038DC0 /* HDUserInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDUserInfoManager.swift; sourceTree = "<group>"; };
 		1B0FD0C81C3D5749009E85CD /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		1B0FD0C91C3D5749009E85CD /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
@@ -851,6 +855,7 @@
 				358970641C969E54003E10D2 /* HDCT09Controller.swift */,
 				358970661C969E6B003E10D2 /* HDCT10Controller.swift */,
 				358970681C969F92003E10D2 /* HDCT11Controller.swift */,
+				1B068D3B1E5429B2008C90C6 /* HDCT12Controller.swift */,
 			);
 			name = Center;
 			sourceTree = "<group>";
@@ -1041,6 +1046,7 @@
 				3589706C1C97ABE2003E10D2 /* HDCT09Service.swift */,
 				3589706E1C97ABED003E10D2 /* HDCT10Service.swift */,
 				358970701C97ABF9003E10D2 /* HDCT11Service.swift */,
+				1B068D3D1E542B07008C90C6 /* HDCT12Service.swift */,
 			);
 			name = CT;
 			sourceTree = "<group>";
@@ -1146,8 +1152,8 @@
 				TargetAttributes = {
 					356F39311C3A23E90056DF44 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 67SL8Y88GF;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					356F39481C3A23EA0056DF44 = {
 						CreatedOnToolsVersion = 7.1;
@@ -1407,6 +1413,7 @@
 				1B093E321C99B2E800038DC0 /* HDUserInfoManager.swift in Sources */,
 				35776A791C70616000903620 /* HDCT05Controller.swift in Sources */,
 				352A42901C50E1A2009D0F9F /* HDCG01ResultEntity+CoreDataProperties.swift in Sources */,
+				1B068D3C1E5429B2008C90C6 /* HDCT12Controller.swift in Sources */,
 				358970691C969F92003E10D2 /* HDCT11Controller.swift in Sources */,
 				1B0FD0F81C3D5749009E85CD /* MJRefreshAutoGifFooter.m in Sources */,
 				353DA4671CAB9A2000DFD15C /* HDDY01Model.swift in Sources */,
@@ -1425,6 +1432,7 @@
 				35321D211C46499F00023637 /* HDRefreshGifFooter.swift in Sources */,
 				1B0FD0F61C3D5749009E85CD /* MJRefreshFooter.m in Sources */,
 				356F39741C3A3FEE0056DF44 /* HDGG01Controller.swift in Sources */,
+				1B068D3E1E542B07008C90C6 /* HDCT12Service.swift in Sources */,
 				3566C8F11C47533B00573D97 /* HDHM04Cell.swift in Sources */,
 				3502FF361C44D6D70083F303 /* HDHM02Model.swift in Sources */,
 				352A42831C50E190009D0F9F /* HDGG01ResultEntity.swift in Sources */,
@@ -1653,12 +1661,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HDCP/HDCP-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1674,12 +1684,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.HDCP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HDCP/HDCP-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

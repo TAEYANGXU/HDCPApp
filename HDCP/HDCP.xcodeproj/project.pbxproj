@@ -34,6 +34,10 @@
 		1B6B08311C4B440C004B2CE2 /* HDHM06Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */; };
 		1B6B08331C4B4418004B2CE2 /* HDHM07Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */; };
 		1B6B08351C4B564E004B2CE2 /* HDHM07Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6B08341C4B564E004B2CE2 /* HDHM07Cell.swift */; };
+		1B92B5DA1E60226400943C17 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B92B5D91E60226400943C17 /* NotificationCenter.framework */; };
+		1B92B5DD1E60226400943C17 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B92B5DC1E60226400943C17 /* TodayViewController.swift */; };
+		1B92B5E01E60226400943C17 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B92B5DE1E60226400943C17 /* MainInterface.storyboard */; };
+		1B92B5E41E60226400943C17 /* hdcpwidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1B92B5D81E60226400943C17 /* hdcpwidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1BB0CF181C9E73C200D4D738 /* HDVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */; };
 		1BB0CF1B1C9E74F800D4D738 /* HDVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1A1C9E74F800D4D738 /* HDVideoPlayerController.m */; };
 		1BB0CF1D1C9E7A7B00D4D738 /* HDVideo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1C1C9E7A7B00D4D738 /* HDVideo.xcassets */; };
@@ -185,6 +189,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B92B5E21E60226400943C17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 356F392A1C3A23E90056DF44 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B92B5D71E60226400943C17;
+			remoteInfo = hdcpwidget;
+		};
 		356F394A1C3A23EA0056DF44 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 356F392A1C3A23E90056DF44 /* Project object */;
@@ -200,6 +211,20 @@
 			remoteInfo = HDCP;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1B92B5E81E60226400943C17 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1B92B5E41E60226400943C17 /* hdcpwidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B068D3B1E5429B2008C90C6 /* HDCT12Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCT12Controller.swift; sourceTree = "<group>"; };
@@ -248,6 +273,13 @@
 		1B6B08301C4B440C004B2CE2 /* HDHM06Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM06Service.swift; sourceTree = "<group>"; };
 		1B6B08321C4B4418004B2CE2 /* HDHM07Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Service.swift; sourceTree = "<group>"; };
 		1B6B08341C4B564E004B2CE2 /* HDHM07Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDHM07Cell.swift; sourceTree = "<group>"; };
+		1B92B5D81E60226400943C17 /* hdcpwidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = hdcpwidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B92B5D91E60226400943C17 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		1B92B5DC1E60226400943C17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		1B92B5DF1E60226400943C17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1B92B5E11E60226400943C17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B92B5E91E60228900943C17 /* HDCP.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HDCP.entitlements; sourceTree = "<group>"; };
+		1B92B5EA1E6022AE00943C17 /* hdcpwidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hdcpwidget.entitlements; sourceTree = "<group>"; };
 		1BB0CF161C9E73C200D4D738 /* HDVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDVideoPlayerView.h; sourceTree = "<group>"; };
 		1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDVideoPlayerView.m; sourceTree = "<group>"; };
 		1BB0CF191C9E74F800D4D738 /* HDVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDVideoPlayerController.h; sourceTree = "<group>"; };
@@ -417,6 +449,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1B92B5D51E60226400943C17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B92B5DA1E60226400943C17 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		356F392F1C3A23E90056DF44 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -464,6 +504,7 @@
 				977D0C093088951BA282438E /* Pods_HDCP.framework */,
 				D3C8E14B2F98D2F933806AF3 /* Pods_HDCPTests.framework */,
 				4AA6EFF6FB7F5ADC3927C933 /* Pods_HDCPUITests.framework */,
+				1B92B5D91E60226400943C17 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -559,6 +600,17 @@
 				1B0FD0E81C3D5749009E85CD /* MJRefreshStateHeader.m */,
 			);
 			path = Header;
+			sourceTree = "<group>";
+		};
+		1B92B5DB1E60226400943C17 /* hdcpwidget */ = {
+			isa = PBXGroup;
+			children = (
+				1B92B5EA1E6022AE00943C17 /* hdcpwidget.entitlements */,
+				1B92B5DC1E60226400943C17 /* TodayViewController.swift */,
+				1B92B5DE1E60226400943C17 /* MainInterface.storyboard */,
+				1B92B5E11E60226400943C17 /* Info.plist */,
+			);
+			path = hdcpwidget;
 			sourceTree = "<group>";
 		};
 		1BB0CF121C9E732F00D4D738 /* HDVideoPlayer */ = {
@@ -740,6 +792,7 @@
 				356F39341C3A23E90056DF44 /* HDCP */,
 				356F394C1C3A23EA0056DF44 /* HDCPTests */,
 				356F39571C3A23EA0056DF44 /* HDCPUITests */,
+				1B92B5DB1E60226400943C17 /* hdcpwidget */,
 				356F39331C3A23E90056DF44 /* Products */,
 				0FE20ED4C6ED96A5FFF64458 /* Frameworks */,
 				8A35A50923463EDFB44DFD1D /* Pods */,
@@ -752,6 +805,7 @@
 				356F39321C3A23E90056DF44 /* HDCP.app */,
 				356F39491C3A23EA0056DF44 /* HDCPTests.xctest */,
 				356F39541C3A23EA0056DF44 /* HDCPUITests.xctest */,
+				1B92B5D81E60226400943C17 /* hdcpwidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -759,6 +813,7 @@
 		356F39341C3A23E90056DF44 /* HDCP */ = {
 			isa = PBXGroup;
 			children = (
+				1B92B5E91E60228900943C17 /* HDCP.entitlements */,
 				356F398C1C3A68830056DF44 /* Vendors */,
 				356F39861C3A4B2E0056DF44 /* Model */,
 				356F39851C3A4B250056DF44 /* Service */,
@@ -1078,6 +1133,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1B92B5D71E60226400943C17 /* hdcpwidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B92B5E51E60226400943C17 /* Build configuration list for PBXNativeTarget "hdcpwidget" */;
+			buildPhases = (
+				1B92B5D41E60226400943C17 /* Sources */,
+				1B92B5D51E60226400943C17 /* Frameworks */,
+				1B92B5D61E60226400943C17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hdcpwidget;
+			productName = hdcpwidget;
+			productReference = 1B92B5D81E60226400943C17 /* hdcpwidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		356F39311C3A23E90056DF44 /* HDCP */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 356F395D1C3A23EA0056DF44 /* Build configuration list for PBXNativeTarget "HDCP" */;
@@ -1088,10 +1160,12 @@
 				356F39301C3A23E90056DF44 /* Resources */,
 				0D78ABAF705624C25505059A /* [CP] Embed Pods Frameworks */,
 				F46C58EA254C50FD0F3B5550 /* [CP] Copy Pods Resources */,
+				1B92B5E81E60226400943C17 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1B92B5E31E60226400943C17 /* PBXTargetDependency */,
 			);
 			name = HDCP;
 			productName = HDCP;
@@ -1146,14 +1220,30 @@
 		356F392A1C3A23E90056DF44 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = batonsoft;
 				TargetAttributes = {
+					1B92B5D71E60226400943C17 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 67SL8Y88GF;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					356F39311C3A23E90056DF44 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 67SL8Y88GF;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					356F39481C3A23EA0056DF44 = {
 						CreatedOnToolsVersion = 7.1;
@@ -1183,11 +1273,20 @@
 				356F39311C3A23E90056DF44 /* HDCP */,
 				356F39481C3A23EA0056DF44 /* HDCPTests */,
 				356F39531C3A23EA0056DF44 /* HDCPUITests */,
+				1B92B5D71E60226400943C17 /* hdcpwidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1B92B5D61E60226400943C17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B92B5E01E60226400943C17 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		356F39301C3A23E90056DF44 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1362,6 +1461,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1B92B5D41E60226400943C17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B92B5DD1E60226400943C17 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		356F392E1C3A23E90056DF44 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1539,6 +1646,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B92B5E31E60226400943C17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B92B5D71E60226400943C17 /* hdcpwidget */;
+			targetProxy = 1B92B5E21E60226400943C17 /* PBXContainerItemProxy */;
+		};
 		356F394B1C3A23EA0056DF44 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 356F39311C3A23E90056DF44 /* HDCP */;
@@ -1552,6 +1664,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1B92B5DE1E60226400943C17 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1B92B5DF1E60226400943C17 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		356F39391C3A23EA0056DF44 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1571,6 +1691,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1B92B5E61E60226400943C17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = hdcpwidget/hdcpwidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 67SL8Y88GF;
+				INFOPLIST_FILE = hdcpwidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuyanzhang.hdcp.hdcpwidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1B92B5E71E60226400943C17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CODE_SIGN_ENTITLEMENTS = hdcpwidget/hdcpwidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 67SL8Y88GF;
+				INFOPLIST_FILE = hdcpwidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuyanzhang.hdcp.hdcpwidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		356F395B1C3A23EA0056DF44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1656,16 +1820,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 52C83AF1284A95E3D105B8E3 /* Pods-HDCP.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HDCP/HDCP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 67SL8Y88GF;
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.HDCP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuyanzhang.hdcp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1679,16 +1845,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 37855BE4261224BB58354C87 /* Pods-HDCP.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HDCP/HDCP.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 67SL8Y88GF;
 				INFOPLIST_FILE = HDCP/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dentiyun.HDCP;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xuyanzhang.hdcp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1756,6 +1924,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1B92B5E51E60226400943C17 /* Build configuration list for PBXNativeTarget "hdcpwidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B92B5E61E60226400943C17 /* Debug */,
+				1B92B5E71E60226400943C17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		356F392D1C3A23E90056DF44 /* Build configuration list for PBXProject "HDCP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

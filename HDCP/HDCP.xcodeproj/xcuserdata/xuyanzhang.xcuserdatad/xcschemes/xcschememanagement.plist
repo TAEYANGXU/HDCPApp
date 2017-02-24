@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>hdcpwidget.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1B92B5D71E60226400943C17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>356F39311C3A23E90056DF44</key>
 		<dict>
 			<key>primary</key>

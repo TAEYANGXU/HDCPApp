@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.0</string>
+	<string>2.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -26,7 +26,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.haodou.HDCP</string>
+			<string>com.xuyanzhang.hdcp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wxa31fc3ddf49a3a53</string>
@@ -36,15 +36,25 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.haodou.HDCP</string>
+			<string>com.xuyanzhang.hdcp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ41DEEB66</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.xuyanzhang.hdcp</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>hdcp</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20170215</string>
+	<string>20170224</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>

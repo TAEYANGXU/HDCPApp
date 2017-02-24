@@ -57,6 +57,7 @@ class Constants: NSObject {
     static let HDAppVersion:String = "Version"
     static let HDHistory:String = "History"
     static let HDSign:String = "HD_CLIENT_SIGN"
+    static let HDPushIndex:String = "HD_PUSH_INDEX"
     
     /**
      *   通知名称

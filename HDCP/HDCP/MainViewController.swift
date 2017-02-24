@@ -23,6 +23,18 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         setupTabBarView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        let userDefualt = UserDefaults.standard;
+        let indexString  = userDefualt.object(forKey: Constants.HDPushIndex) as? String;
+        if (indexString != nil) {
+            userDefualt.removeObject(forKey: Constants.HDPushIndex);
+            userDefualt.synchronize();
+            let index = Int(indexString!);
+            self.selectedIndex = index!;
+        }
+    }
+    
     /**
      *  初始化Tabar
      */

@@ -21,22 +21,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //设置导航栏和标签栏样式
-        setUpBarStyle()
+        setUpBarStyle();
         
         //ShareSDK 初始化
-        HDShareSDKManager.initializeShareSDK()
+        HDShareSDKManager.initializeShareSDK();
         
         //欢迎导航页面
-        showWelcome()
+        showWelcome();
         
         //监听网络变化
-        networkMonitoring()
+        networkMonitoring();
         
         //缓存参数设置
-        setCache()
+        setCache();
         
         //用户数据初始化
-        loadUserInfo()
+        loadUserInfo();
+        
+        
+        add3DTouch();
         
         return true
     }
@@ -67,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //  MARK: - 欢迎界面
-    
     func showWelcome(){
     
         /**
@@ -106,8 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    //  MARK: - UINavigationBar/UITabBar Style
-    
+    //  MARK: - 设置导航栏和标签栏样式
     func setUpBarStyle(){
         
         /**
@@ -141,10 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     }
     
-    /**
-    *  网络监听
-    */
-    
+    //  MARK: - 网络监听
     func networkMonitoring(){
         
 //        let reachability: Reachability
@@ -182,9 +180,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
     }
     
-    /**
-     *  缓存参数设置
-     */
+    //  MARK: - 缓存参数设置
     func setCache(){
         
         //是否将图片缓存到内存
@@ -196,9 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    /**
-     *  初始化当前登录用户数据
-     */
+    //  MARK: - 初始化当前登录用户数据
     func loadUserInfo(){
     
         //判断用户是否已登录
@@ -211,6 +205,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             HDUserInfoManager.shareInstance.load()
         }
         
+    }
+    
+    //  MARK: - 添加3DTouch功能
+    func add3DTouch(){
+        
+        if (UIDevice().systemVersion as NSString).doubleValue > 8.0 {
+            
+            let ggShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_off_04");
+            let dtShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_on_02");
+            let myShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_off_05");
+            
+            let ggShortcutItem = UIApplicationShortcutItem(type: "TAB_GG", localizedTitle: "逛逛", localizedSubtitle: "", icon: ggShortcutIcon, userInfo: nil);
+            let dtShortcutItem = UIApplicationShortcutItem(type: "TAB_DT", localizedTitle: "动态", localizedSubtitle: "", icon: dtShortcutIcon, userInfo: nil);
+            let myShortcutItem = UIApplicationShortcutItem(type: "TAB_CENTER", localizedTitle: "个人中心", localizedSubtitle: "", icon: myShortcutIcon, userInfo: nil);
+            
+            UIApplication.shared.shortcutItems = [ggShortcutItem,dtShortcutItem,myShortcutItem];
+            
+        }
+    }
+    
+    //  MARK: - 3DTouch事件处理
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        if shortcutItem.type == "TAB_GG" {
+            let userDefualt = UserDefaults.standard;
+            userDefualt.set("1", forKey: Constants.HDPushIndex)
+            userDefualt.synchronize()
+            self.window?.rootViewController = MainViewController()
+        }
+        
+        if shortcutItem.type == "TAB_DT" {
+            let userDefualt = UserDefaults.standard;
+            userDefualt.set("3", forKey: Constants.HDPushIndex)
+            userDefualt.synchronize()
+            self.window?.rootViewController = MainViewController()
+        }
+        
+        if shortcutItem.type == "TAB_CENTER" {
+            let userDefualt = UserDefaults.standard;
+            userDefualt.set("4", forKey: Constants.HDPushIndex)
+            userDefualt.synchronize()
+            self.window?.rootViewController = MainViewController()
+        }
     }
 }
 

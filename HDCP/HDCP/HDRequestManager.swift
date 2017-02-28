@@ -19,8 +19,8 @@ open class HDRequestManager: NSObject {
      */
     static func doGetRequest(_ URL:String,completeBlock:@escaping ((_ response:DataResponse<Any>)->Void)){
         
-        HDLog.LogOut("PostURL" as AnyObject, obj: URL as AnyObject)
-        
+//        HDLog.LogOut("PostURL" as AnyObject, obj: URL as AnyObject)
+        print("PostURL\(URL as AnyObject)")
         Alamofire.request(URL).responseJSON { response in
             if response.result.error == nil {
                 
@@ -28,8 +28,8 @@ open class HDRequestManager: NSObject {
                  *  请求成功
                  */
                 let text:String = NSString(data: response.data!, encoding: String.Encoding.utf8.rawValue)! as String
-                HDLog.LogOut("Data" as AnyObject, obj: text as AnyObject)
-                
+//                HDLog.LogOut("Data" as AnyObject, obj: text as AnyObject)
+                print("Data\(text as AnyObject)")
                 
             }else{
                 
@@ -38,7 +38,8 @@ open class HDRequestManager: NSObject {
                  
                  - print: 错误信息
                  */
-                HDLog.LogOut("error" as AnyObject, obj: (response.result.error)! as AnyObject)
+//                HDLog.LogOut("error" as AnyObject, obj: (response.result.error)! as AnyObject)
+                print("error\((response.result.error)! as AnyObject)")
                 
             }
             
@@ -56,7 +57,8 @@ open class HDRequestManager: NSObject {
      */
     static func doPostRequest(_ param:[String : AnyObject],URL:String,completeBlock:@escaping ((_ response:DataResponse<Any>)->Void)){
         
-        HDLog.LogOut("PostURL" as AnyObject, obj: URL as AnyObject)
+        //HDLog.LogOut("PostURL" as AnyObject, obj: URL as AnyObject)
+        print("PostURL\(URL as AnyObject)")
         
         Alamofire.request(URL, method: .post, parameters: param, encoding: URLEncoding.default).responseJSON { response in
             
@@ -66,8 +68,8 @@ open class HDRequestManager: NSObject {
                  *  请求成功
                  */
                 let text:String = NSString(data: response.data!, encoding: String.Encoding.utf8.rawValue)! as String
-                HDLog.LogOut("Data" as AnyObject, obj: text as AnyObject)
-                
+//                HDLog.LogOut("Data" as AnyObject, obj: text as AnyObject)
+                print("Data\(text as AnyObject)")
             }else{
                 
                 /**
@@ -75,7 +77,8 @@ open class HDRequestManager: NSObject {
                  
                  - print: 错误信息
                  */
-                HDLog.LogOut("error" as AnyObject, obj: (response.result.error)! as AnyObject)
+//                HDLog.LogOut("error" as AnyObject, obj: (response.result.error)! as AnyObject)
+                print("error\((response.result.error)! as AnyObject)")
             }
             
             completeBlock(response)

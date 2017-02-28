@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double AlamofireVersionNumber;
-FOUNDATION_EXPORT const unsigned char AlamofireVersionString[];
+FOUNDATION_EXPORT double Pods_HDCP_hdcpwidgetVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_HDCP_hdcpwidgetVersionString[];
 

@@ -41,6 +41,7 @@
 		1BB0CF181C9E73C200D4D738 /* HDVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF171C9E73C200D4D738 /* HDVideoPlayerView.m */; };
 		1BB0CF1B1C9E74F800D4D738 /* HDVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1A1C9E74F800D4D738 /* HDVideoPlayerController.m */; };
 		1BB0CF1D1C9E7A7B00D4D738 /* HDVideo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BB0CF1C1C9E7A7B00D4D738 /* HDVideo.xcassets */; };
+		1BF048131E64238400F40BF5 /* HDRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF381C3B6974003B1364 /* HDRequestManager.swift */; };
 		3502FF361C44D6D70083F303 /* HDHM02Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF351C44D6D70083F303 /* HDHM02Model.swift */; };
 		3502FF3B1C44DA620083F303 /* HDHM02Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3A1C44DA620083F303 /* HDHM02Service.swift */; };
 		3502FF3E1C44DD470083F303 /* HDHM02Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502FF3D1C44DD470083F303 /* HDHM02Controller.swift */; };
@@ -185,6 +186,7 @@
 		35F8CF4A1C3BCDF4003B1364 /* HDHM01Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F8CF491C3BCDF4003B1364 /* HDHM01Button.swift */; };
 		4A7D4B12AD351A30EDC0D7F6 /* Pods_HDCP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977D0C093088951BA282438E /* Pods_HDCP.framework */; };
 		6121196F168346A43F0E9A7A /* Pods_HDCPTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C8E14B2F98D2F933806AF3 /* Pods_HDCPTests.framework */; };
+		CC7B046AB6BE8A4C6E21FBEF /* Pods_HDCP_hdcpwidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63E352942E79453F2B5A7BA5 /* Pods_HDCP_hdcpwidget.framework */; };
 		EEFB1E9C196625717033E11F /* Pods_HDCPUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA6EFF6FB7F5ADC3927C933 /* Pods_HDCPUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -442,10 +444,13 @@
 		4AA6EFF6FB7F5ADC3927C933 /* Pods_HDCPUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDCPUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C83AF1284A95E3D105B8E3 /* Pods-HDCP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDCP/Pods-HDCP.debug.xcconfig"; sourceTree = "<group>"; };
 		5BF86B0E6D135F1B8877D39D /* Pods-HDCPUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCPUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDCPUITests/Pods-HDCPUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		63E352942E79453F2B5A7BA5 /* Pods_HDCP_hdcpwidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDCP_hdcpwidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78CBD7AC4F05CB718638B7C5 /* Pods-HDCP-hdcpwidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCP-hdcpwidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDCP-hdcpwidget/Pods-HDCP-hdcpwidget.debug.xcconfig"; sourceTree = "<group>"; };
 		977D0C093088951BA282438E /* Pods_HDCP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDCP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D773508D95D0E6385B4DEC /* Pods-HDCPTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCPTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HDCPTests/Pods-HDCPTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFF9E47D148CD09EE3E1946B /* Pods-HDCPUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCPUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDCPUITests/Pods-HDCPUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D3C8E14B2F98D2F933806AF3 /* Pods_HDCPTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HDCPTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F09436442581DDEC3C55C3C2 /* Pods-HDCP-hdcpwidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HDCP-hdcpwidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-HDCP-hdcpwidget/Pods-HDCP-hdcpwidget.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,6 +459,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B92B5DA1E60226400943C17 /* NotificationCenter.framework in Frameworks */,
+				CC7B046AB6BE8A4C6E21FBEF /* Pods_HDCP_hdcpwidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +511,7 @@
 				D3C8E14B2F98D2F933806AF3 /* Pods_HDCPTests.framework */,
 				4AA6EFF6FB7F5ADC3927C933 /* Pods_HDCPUITests.framework */,
 				1B92B5D91E60226400943C17 /* NotificationCenter.framework */,
+				63E352942E79453F2B5A7BA5 /* Pods_HDCP_hdcpwidget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1126,6 +1133,8 @@
 				39315C7891035760363C1A96 /* Pods-HDCPTests.release.xcconfig */,
 				5BF86B0E6D135F1B8877D39D /* Pods-HDCPUITests.debug.xcconfig */,
 				BFF9E47D148CD09EE3E1946B /* Pods-HDCPUITests.release.xcconfig */,
+				78CBD7AC4F05CB718638B7C5 /* Pods-HDCP-hdcpwidget.debug.xcconfig */,
+				F09436442581DDEC3C55C3C2 /* Pods-HDCP-hdcpwidget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1137,9 +1146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1B92B5E51E60226400943C17 /* Build configuration list for PBXNativeTarget "hdcpwidget" */;
 			buildPhases = (
+				664C4A4759D817097D593836 /* [CP] Check Pods Manifest.lock */,
 				1B92B5D41E60226400943C17 /* Sources */,
 				1B92B5D51E60226400943C17 /* Frameworks */,
 				1B92B5D61E60226400943C17 /* Resources */,
+				29803123BE9EC364478B13F9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1353,6 +1364,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HDCPTests/Pods-HDCPTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		29803123BE9EC364478B13F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HDCP-hdcpwidget/Pods-HDCP-hdcpwidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6206C92790778299FDBA40BE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1366,6 +1392,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HDCPUITests/Pods-HDCPUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		664C4A4759D817097D593836 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		81192A527E8CC002487937E0 /* [CP] Check Pods Manifest.lock */ = {
@@ -1466,6 +1507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B92B5DD1E60226400943C17 /* TodayViewController.swift in Sources */,
+				1BF048131E64238400F40BF5 /* HDRequestManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1693,6 +1735,7 @@
 /* Begin XCBuildConfiguration section */
 		1B92B5E61E60226400943C17 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 78CBD7AC4F05CB718638B7C5 /* Pods-HDCP-hdcpwidget.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1715,6 +1758,7 @@
 		};
 		1B92B5E71E60226400943C17 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F09436442581DDEC3C55C3C2 /* Pods-HDCP-hdcpwidget.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1931,6 +1975,7 @@
 				1B92B5E71E60226400943C17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		356F392D1C3A23E90056DF44 /* Build configuration list for PBXProject "HDCP" */ = {
 			isa = XCConfigurationList;

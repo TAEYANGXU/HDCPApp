@@ -20,7 +20,6 @@ target 'HDCP' do
     pod 'Alamofire', '~> 4.0'
     pod 'SnapKit', '~> 3.0.2'
     pod 'ObjectMapper', '~> 2.1'
-    pod 'SDWebImage', '~>3.7'
     pod 'ShareSDK3','3.5.2'
     pod 'MOBFoundation'
     pod 'ShareSDK3/ShareSDKPlatforms/WeChat'

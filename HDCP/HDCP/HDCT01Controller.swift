@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 private let ct01Array = [[["title":"豆友","image":"DYIcon"],
     ["title":"动态","image":"DTIcon"],["title":"话题","image":"HTIcon"],
@@ -251,7 +252,8 @@ class HDCT01Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             HDLog.LogOut(HDUserInfoManager.shareInstance.avatar!)
             
             userName?.text = HDUserInfoManager.shareInstance.userName
-            headerIcon?.sd_setImage(with: URL(string: HDUserInfoManager.shareInstance.avatar!), placeholderImage: UIImage(named: "defaultIcon"))
+            
+            headerIcon?.kf.setImage(with: URL(string: HDUserInfoManager.shareInstance.avatar!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
         }else{
         

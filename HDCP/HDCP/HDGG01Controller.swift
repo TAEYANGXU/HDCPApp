@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+
 private let gg01Array = [["title":"厨房宝典","image":"CFBDIcon"],
     ["title":"应用推荐","image":"YYTJIcon"],
     ["title":"意见反馈","image":"YJFKIcon"],
@@ -426,13 +426,7 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let array2d = self.hdGG01Response.array2D![(indexPath as NSIndexPath).row] as! Array<HDGG01ListModel>
             
             let leftModel = array2d[0]
-            
-            let leftImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: leftModel.image!)
-            if let _ = leftImage {
-                leftImageView!.imageView.image = leftImage
-            }else{
-                leftImageView!.imageView.sd_setImage(with:URL(string: (leftModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            }
+            leftImageView!.imageView.kf.setImage(with: URL(string: (leftModel.image!)), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
             leftImageView?.title.text = leftModel.title
             leftImageView?.delegate = self
@@ -440,12 +434,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             leftImageView!.index = 0
             
             let topModel = array2d[1]
-            let topImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: topModel.image!)
-            if let _ = topImage {
-                topImageView!.imageView.image = topImage
-            }else{
-                topImageView!.imageView.sd_setImage(with:URL(string: (topModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            }
+            
+            topImageView!.imageView.kf.setImage(with: URL(string: (topModel.image!)), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
             topImageView?.title.text = topModel.title
             topImageView?.delegate = self
@@ -453,12 +443,8 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             topImageView!.index = 1
             
             let bottomModel = array2d[2]
-            let bottomImage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: bottomModel.image!)
-            if let _ = bottomImage {
-                bottomImageView!.imageView.image = bottomImage
-            }else{
-                bottomImageView!.imageView.sd_setImage(with:URL(string: (bottomModel.image!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            }
+            
+            bottomImageView!.imageView.kf.setImage(with: URL(string: (bottomModel.image!)), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
             bottomImageView?.title.text = bottomModel.title
             bottomImageView?.delegate = self
@@ -552,21 +538,22 @@ class HDGG01Controller: BaseViewController ,UITableViewDelegate,UITableViewDataS
             let array2d = self.hdGG01Response.array2D![(indexPath as NSIndexPath).row] as! Array<HDGG01ListModel>
             
             let rightModel:HDGG01ListModel = array2d[0]
-            rightImageView!.imageView.sd_setImage(with:URL(string: rightModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            rightImageView!.imageView.kf.setImage(with: URL(string: rightModel.image!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+            
             rightImageView?.title.text = rightModel.title
             rightImageView?.delegate = self
             rightImageView?.indexPath = indexPath
             rightImageView!.index = 0
             
             let topModel = array2d[1]
-            topImageView!.imageView.sd_setImage(with:URL(string: topModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            topImageView!.imageView.kf.setImage(with: URL(string: topModel.image!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             topImageView?.title.text = topModel.title
             topImageView?.delegate = self
             topImageView?.indexPath = indexPath
             topImageView!.index = 1
             
-            let bottomModel = array2d[2] 
-            bottomImageView!.imageView.sd_setImage(with:URL(string: bottomModel.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            let bottomModel = array2d[2]
+            bottomImageView!.imageView.kf.setImage(with: URL(string: bottomModel.image!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             bottomImageView?.title.text = bottomModel.title
             bottomImageView?.delegate = self
             bottomImageView?.indexPath = indexPath

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 
 private let ct06ArrayLogin = [[["title":"社交绑定"],
     ["title":"消息设置"],["title":"隐私设置"],["title":"账号安全"]],
@@ -68,15 +67,15 @@ class HDCT06Controller: UITableViewController{
     
     func getCacheSize() -> CGFloat {
         
-        let size = SDImageCache.shared().getSize()
-        let mb:CGFloat = CGFloat(size/1024/1024)
+//        let size = SDImageCache.shared().getSize()
+        let mb:CGFloat = CGFloat(1024*1024*2/1024/1024)
         
         return mb
     }
     
     // MARK: - 删除本地缓存
     
-    func deleteCacheFile() -> Bool {
+    open func deleteCacheFile() -> Bool {
         
         showHud()
         

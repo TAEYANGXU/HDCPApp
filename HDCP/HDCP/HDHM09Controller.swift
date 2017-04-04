@@ -207,11 +207,13 @@ class HDHM09Controller: UIViewController,UIScrollViewDelegate {
         attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
         pageFlag?.attributedText =  attributed
         
-        centerImageView!.sd_setImage(with:URL(string: cmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        centerImageView!.kf.setImage(with: URL(string: cmodel.stepPhoto!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
         let lmodel = steps![((index-1)+(steps?.count)!)%(steps?.count)!]
-        leftImageView!.sd_setImage(with:URL(string: lmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        leftImageView!.kf.setImage(with: URL(string: lmodel.stepPhoto!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
         let rmodel = steps![((index+1)+(steps?.count)!)%(steps?.count)!]
-        rightImageView!.sd_setImage(with:URL(string: rmodel.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        rightImageView!.kf.setImage(with: URL(string: rmodel.stepPhoto!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         context?.text = cmodel.intro
         /// 计算文本高度 重新赋值

@@ -986,7 +986,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
         userName.text = dy02Info?.userInfo?.userName
         commentCount.text = String(format: "评论:%d", (listModel?.data?.commentCnt)!)
         viewCount.text = String(format: "浏览:%ld", (dy02Info?.viewCount)!)
-        headIcon.sd_setImage(with:URL(string: (dy02Info?.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+        headIcon.kf.setImage(with: URL(string: (dy02Info?.userInfo?.avatar)!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         titleLb.text = dy02Info?.title
         createTime.text = String(format: "创建日期:%@", (dy02Info?.reviewTime)!)
         
@@ -1024,7 +1024,7 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
             
             WS.hidenHud()
             WS.dy02Info = hdResponse.result?.info
-            WS.videoPlayerController?.movieBackgroundView.sd_setImage(with:URL(string: (WS.dy02Info?.cover)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            WS.videoPlayerController?.movieBackgroundView.kf.setImage(with: URL(string: (WS.dy02Info?.cover)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
             if WS.dy02Info?.hasVideo == 1 {
             
@@ -1549,7 +1549,8 @@ class HDDY02Controller: UIViewController,HDVideoPlayerDelegate,UIScrollViewDeleg
                 commentView?.isHidden = true
             }
             
-            icon?.sd_setImage(with:URL(string: (model.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+            icon?.kf.setImage(with: URL(string: (model.avatar)!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+            
             username?.text = model.userName
             createTime?.text = model.createTime
             content?.text = model.content

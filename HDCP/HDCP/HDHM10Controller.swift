@@ -468,8 +468,8 @@ class HDHM10Controller: UIViewController,UITableViewDataSource,UITableViewDelega
 
         
         let model = commentArray[(indexPath as NSIndexPath).row]
+        icon?.kf.setImage(with: URL(string: (model.avatar)!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        icon?.sd_setImage(with:URL(string: (model.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
         username?.text = model.userName
         createTime?.text = model.createTime
         content?.text = model.content

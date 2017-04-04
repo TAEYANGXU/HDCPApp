@@ -190,7 +190,8 @@ class HDHM06Controller: UITableViewController {
         }
         
         let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM06ListModel
-        imageView?.sd_setImage(with:URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        imageView?.kf.setImage(with: URL(string: model.cover!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+        
         title?.text = model.title
         userName?.text = String(format: "by %@", model.userName!)
         

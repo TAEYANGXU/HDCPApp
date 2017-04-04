@@ -109,7 +109,7 @@ class HDHM07Controller: UITableViewController {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! HDHM07Cell
         
         let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM07ListModel
-        cell.coverImageV?.sd_setImage(with:URL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        cell.coverImageV?.kf.setImage(with: URL(string: model.image!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         cell.title?.text = model.title
         cell.content?.text = model.content
 

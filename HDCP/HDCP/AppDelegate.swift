@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import SDWebImage
 import Alamofire
 import RxSwift
 
@@ -184,11 +183,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setCache(){
         
         //是否将图片缓存到内存
-        SDImageCache.shared().shouldCacheImagesInMemory = true
-        //缓存将保留5天
-        SDImageCache.shared().maxCacheAge = 5*24*60*60
-        //缓存最大占有内存100MB
-        SDImageCache.shared().maxCacheSize = UInt(1024*1024*100)
+//        SDImageCache.shared().shouldCacheImagesInMemory = true
+//        //缓存将保留5天
+//        SDImageCache.shared().maxCacheAge = 5*24*60*60
+//        //缓存最大占有内存100MB
+//        SDImageCache.shared().maxCacheSize = UInt(1024*1024*100)
         
     }
     

@@ -176,7 +176,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 
             })
             
-            self.headImageView?.sd_setImage(with:URL(string: (hm08Response.result?.info?.cover)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            self.headImageView?.kf.setImage(with: URL(string: (hm08Response.result?.info?.cover)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
 
         
@@ -250,9 +250,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
                 make.height.equalTo(50)
             })
             
-            headIcon.sd_setImage(with:URL(string: (hm08Response.result?.info?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
-            
-            
+            headIcon.kf.setImage(with: URL(string: (hm08Response.result?.info?.avatar)!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
             viewCount = UILabel()
             viewCount.textColor = UIColor.lightGray
@@ -759,8 +757,7 @@ class HDHM08Controller: BaseViewController,UITableViewDelegate,UITableViewDataSo
             
             let imageView = UIImageView()
             cell.contentView.addSubview(imageView)
-            imageView.sd_setImage(with:URL(string: model!.stepPhoto!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            
+            imageView.kf.setImage(with: URL(string: model!.stepPhoto!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             imageView.snp.makeConstraints( { (make) -> Void in
                 
                 make.top.equalTo(cell.contentView).offset(10)

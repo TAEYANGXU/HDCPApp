@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -278,7 +280,7 @@ class HDCT08Controller: UITableViewController {
         }
         
         let model = dataArray[(indexPath as NSIndexPath).row] as! HDCT08ListModel
-        icon?.sd_setImage(with:URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+        icon?.kf.setImage(with: URL(string: model.avatar), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         /// 文本宽度计算
         let text:NSString = NSString(string: model.userName)

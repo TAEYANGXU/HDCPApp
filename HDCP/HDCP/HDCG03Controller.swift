@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -292,8 +294,7 @@ class HDCG03Controller: UITableViewController,UISearchBarDelegate {
             let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! HDHM04Cell
             
             let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM04ListModel
-            
-            cell.coverImageV?.sd_setImage(with: URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+            cell.coverImageV?.kf.setImage(with: URL(string: model.cover!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             cell.title?.text = model.title
             cell.count?.text = String(format: "%d收藏  %d浏览", model.commentCount!, model.viewCount!)
             

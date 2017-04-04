@@ -189,8 +189,8 @@ class HDHM05Controller: BaseViewController ,UICollectionViewDelegate,UICollectio
         }
         
         let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM05ListModel
+        imageView?.kf.setImage(with: URL(string: model.cover!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
-        imageView?.sd_setImage(with:URL(string: model.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
         title?.text = model.title
         
         return cell

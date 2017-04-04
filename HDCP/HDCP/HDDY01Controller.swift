@@ -570,7 +570,7 @@ class HDDY01Controller: UITableViewController {
         
         name?.text = model.userInfo?.userName
         
-        icon?.sd_setImage(with:URL(string: (model.userInfo?.avatar)!), placeholderImage: UIImage(named: "defaultIcon"))
+        icon?.kf.setImage(with: URL(string: (model.userInfo?.avatar)!), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         title?.text = model.data?.title
         
@@ -581,8 +581,7 @@ class HDDY01Controller: UITableViewController {
             content?.text = String(format: "%@", model.data!.content!)
         }
         
-        
-        imageView?.sd_setImage(with:URL(string:  (model.data?.img)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        imageView?.kf.setImage(with: URL(string:  (model.data?.img)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         
         time?.text = model.data?.createTime
         

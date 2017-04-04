@@ -397,9 +397,8 @@ class HDCT09Controller: UITableViewController {
             
             
             let model = ct09HotList[(indexPath as NSIndexPath).row]
-            
-            hotImageV?.sd_setImage(with: URL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            uIcon?.sd_setImage(with: URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+            hotImageV?.kf.setImage(with: URL(string: model.img), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+            uIcon?.kf.setImage(with: URL(string: model.avatar), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             userName?.text = model.userName
             content?.text = model.previewContent
             title?.text = model.title
@@ -521,8 +520,8 @@ class HDCT09Controller: UITableViewController {
             }
             
             let model = ct09GroupList[(indexPath as NSIndexPath).row]
+            topicImageV?.kf.setImage(with: URL(string: model.img), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
             
-            topicImageV?.sd_setImage(with: URL(string: model.img), placeholderImage: UIImage(named: "noDataDefaultIcon"))
             title?.text = model.name
             ViewDesc?.text = model.viewDesc
             desc?.text = model.desc
@@ -587,7 +586,8 @@ class HDCT09Controller: UITableViewController {
                         
                     }
                     
-                    icon?.sd_setImage(with: URL(string: model.avatar), placeholderImage: UIImage(named: "defaultIcon"))
+                    icon?.kf.setImage(with: URL(string: model.avatar), placeholder: UIImage(named:"defaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+                    
                     //去空格
                     let whitespace = CharacterSet.whitespacesAndNewlines
                     username?.text = model.userName.trimmingCharacters(in: whitespace)

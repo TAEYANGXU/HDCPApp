@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 import Kingfisher
 
 private let cateArray = [["title":"口味","image":"KWIcon"],
@@ -211,26 +210,18 @@ class HDCG01Controller: UITableViewController,UISearchBarDelegate {
         
         let model = dataArray[(indexPath as NSIndexPath).row] as HDCG01ListModel
         
-        let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model.imgUrl!)
-        if let _ = image {
-            icon?.image = image
-        }else{
-            icon?.kf.setImage(with: URL(string:model.imgUrl!),
-                              placeholder: UIImage(named: "noDataDefaultIcon"),
-                              options: nil,
-                              progressBlock: { receivedSize, totalSize in
-                                
-                },
-                              completionHandler: { image, error, cacheType, imageURL in
-                                
-            })
-            //icon?.sd_setImageWithURL(with: URL(string:model.imgUrl!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-//            icon?.sd_setImage(with:URL(string: (model.imgUrl!)), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        }
+        icon?.kf.setImage(with: URL(string:model.imgUrl!),
+                          placeholder: UIImage(named: "noDataDefaultIcon"),
+                          options: nil,
+                          progressBlock: { receivedSize, totalSize in
+                            
+        },
+                          completionHandler: { image, error, cacheType, imageURL in
+                            
+        })
+
         
         title?.text =   model.cate!
-        
-//        arrow?.image = UIImage(named: "arrowIcon")
         
         return cell
     }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SDWebImage
 import Alamofire
 import SnapKit
 
@@ -633,12 +632,7 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                 
             }
          
-            let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model!.cover!)
-            if let _ = image {
-               rowView!.imageView.image = image
-            }else{
-               rowView!.imageView.sd_setImage(with:URL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            }
+            rowView!.imageView.kf.setImage(with: URL(string: model!.cover!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
          
         }
         
@@ -774,19 +768,11 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
                     make.height.equalTo(100)
                 }
                 
-                
             }
          
-            let image:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: model!.cover!)
-            if let _ = image {
-               rowView!.imageView.image = image
-            }else{
-               rowView!.imageView.sd_setImage(with:URL(string: model!.cover!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-            }
-            
+            rowView!.imageView.kf.setImage(with: URL(string: model!.cover!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         }
-        
-        
+
     }
     // MARK: - 通知事件
    
@@ -844,30 +830,15 @@ class HDHM01Controller: BaseViewController,UIScrollViewDelegate {
         */
         headerTitle.text = cmodel!.title
       
-        let Cimage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: cmodel?.cover!)
-        if let _ = Cimage {
-            centerImageView!.image = Cimage
-        }else{
-            centerImageView!.sd_setImage(with:URL(string: (cmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        }
+        centerImageView!.kf.setImage(with: URL(string: (cmodel?.cover!)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
       
         let lmodel = self.hdHM01Response?.result?.recipeList![((index-1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
       
-        let Limage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: lmodel?.cover!)
-        if let _ = Limage {
-            leftImageView!.image = Limage
-        }else{
-            leftImageView!.sd_setImage(with:URL(string: (lmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        }
+        leftImageView!.kf.setImage(with: URL(string: (lmodel?.cover!)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
       
         let rmodel = self.hdHM01Response?.result?.recipeList![((index+1)+(self.hdHM01Response?.result?.recipeList?.count)!)%(self.hdHM01Response?.result?.recipeList?.count)!]
       
-        let Rimage:UIImage? = SDImageCache.shared().imageFromDiskCache(forKey: rmodel?.cover!)
-        if let _ = Rimage {
-            rightImageView!.image = Rimage
-        }else{
-            rightImageView!.sd_setImage(with:URL(string: (rmodel?.cover!)!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
-        }
+        rightImageView!.kf.setImage(with: URL(string: (rmodel?.cover!)!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
       
     }
     

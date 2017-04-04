@@ -179,7 +179,7 @@ class HDHM03Controller: UITableViewController {
         
         /// 设置UI内容
         let model = dataArray[(indexPath as NSIndexPath).row] as! HDHM03List
-        hm03ImageView?.sd_setImage(with:URL(string: model.image!), placeholderImage: UIImage(named: "noDataDefaultIcon"))
+        hm03ImageView?.kf.setImage(with: URL(string: model.image!), placeholder: UIImage(named:"noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
         title?.text = model.title
         content?.text = model.content
         

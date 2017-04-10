@@ -10,114 +10,114 @@ import UIKit
 
 class HDGG03Controller: UITableViewController {
 
-    var dataArray:Array<HDCG01TagModel>!
-    
+    var dataArray: Array<HDCG01TagModel>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "食材百科"
-        
+
         dataArray = HDCG01Service().getTagListByCate("流行食材")
-        
+
         setupUI()
-        
+
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        
+
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
-    
-    deinit{
-    
+
+    deinit {
+
         HDLog.LogClassDestory("HDGG03Controller")
-        
+
     }
-    
+
     // MARK: - 创建UI视图
-    
-    func setupUI(){
-        
+
+    func setupUI() {
+
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
-        
+
     }
-    
+
     // MARK: - events
-    
-    func backAction(){
-        
+
+    func backAction() {
+
         navigationController!.popViewController(animated: true)
-        
+
     }
-    
+
     // MARK: - UITableView  delegate/datasource
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        
-        
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+
         return dataArray.count
     }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
+
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        
-        
+
+
         /**
          *  名称
          */
-        var title:UILabel? = cell.viewWithTag(2000) as? UILabel
+        var title: UILabel? = cell.viewWithTag(2000) as? UILabel
         if title == nil {
-            
+
             title = UILabel()
             title?.tag = 2000
             title?.textColor = Constants.HDMainTextColor
             title?.font = UIFont.systemFont(ofSize: 16)
             cell.contentView.addSubview(title!)
             title?.snp.makeConstraints( { (make) -> Void in
-                
+
                 make.width.equalTo(200)
                 make.height.equalTo(44)
                 make.left.equalTo(cell.contentView).offset(16)
                 make.top.equalTo(cell.contentView).offset(0)
             })
         }
-        
+
         /**
          *  箭头
          */
-        var arrow:UIImageView? = cell.viewWithTag(3000) as? UIImageView
+        var arrow: UIImageView? = cell.viewWithTag(3000) as? UIImageView
         if arrow == nil {
-            
+
             arrow = UIImageView()
             arrow?.tag = 3000
             cell.contentView.addSubview(arrow!)
-            
+
             arrow?.snp.makeConstraints( { (make) -> Void in
-                
+
                 make.width.equalTo(20)
                 make.height.equalTo(20)
                 make.right.equalTo(cell.contentView).offset(-20)
                 make.top.equalTo(cell.contentView).offset(12)
-                
+
             })
-            
+
         }
-        
+
         let model = dataArray[(indexPath as NSIndexPath).row]
-        
-        title?.text =   model.name
+
+        title?.text = model.name
         arrow?.image = UIImage(named: "arrowIcon")
-        
+
         return cell
-        
+
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         let model = dataArray[(indexPath as NSIndexPath).row]
         let hdHM04VC = HDHM04Controller()
         let tmodel = TagListModel()

@@ -18,28 +18,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+
         //设置导航栏和标签栏样式
         setUpBarStyle();
-        
+
         //ShareSDK 初始化
         HDShareSDKManager.initializeShareSDK();
-        
+
         //欢迎导航页面
         showWelcome();
-        
+
         //监听网络变化
         networkMonitoring();
-        
+
         //缓存参数设置
         setCache();
-        
+
         //用户数据初始化
         loadUserInfo();
-        
-        
+
+
         add3DTouch();
-        
+
         return true
     }
 
@@ -65,85 +65,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         HDCoreDataManager.sharedInstance.saveContext()
-    
+
     }
-    
+
     //  MARK: - 欢迎界面
-    func showWelcome(){
-    
+    func showWelcome() {
+
         /**
          *  判断欢迎界面是否已经执行
          */
-        
+
         let userDefault = UserDefaults.standard
-        let appVersion:String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-        
-        
+        let appVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+
+
         if (userDefault.string(forKey: Constants.HDAppVersion)) == nil {
-            
+
             //第一次进入
             userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
             userDefault.synchronize()
             self.window?.rootViewController = WelcomeController()
-            
-        }else{
-            
+
+        } else {
+
             //版本升级后，根据版本号来判断是否进入
-            let version:String =  (userDefault.string(forKey: Constants.HDAppVersion))!
+            let version: String = (userDefault.string(forKey: Constants.HDAppVersion))!
             if ( appVersion == version) {
-                
+
                 UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
                 self.window?.rootViewController = MainViewController()
-                
-            }else{
-                
+
+            } else {
+
                 userDefault.setValue(appVersion, forKey: Constants.HDAppVersion)
                 userDefault.synchronize()
                 self.window?.rootViewController = WelcomeController()
-                
+
             }
-            
+
         }
-        
+
     }
-    
+
     //  MARK: - 设置导航栏和标签栏样式
-    func setUpBarStyle(){
-        
+    func setUpBarStyle() {
+
         /**
         *  导航栏样式
         */
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
 //        UINavigationBar.appearance().barTintColor = CoreUtils.HDColor(245, g: 161, b: 0, a: 1)
         /**
         *  状态栏字体设置白色
         */
 //        UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: true)
-        
+
         /**
         *  底部TabBar的颜色
         */
         UITabBar.appearance().shadowImage = UIImage()
-        UITabBar.appearance().tintColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
-        UITabBar.appearance().backgroundColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
-        UITabBar.appearance().barTintColor = CoreUtils.HDfromHexValue(0xFFFFFF,alpha: 1.0)
+        UITabBar.appearance().tintColor = CoreUtils.HDfromHexValue(0xFFFFFF, alpha: 1.0)
+        UITabBar.appearance().backgroundColor = CoreUtils.HDfromHexValue(0xFFFFFF, alpha: 1.0)
+        UITabBar.appearance().barTintColor = CoreUtils.HDfromHexValue(0xFFFFFF, alpha: 1.0)
 //        UITabBar.appearance().selectedImageTintColor = UIColor.clearColor()
-        
+
         /**
         *  底部TabBar字体正常状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor,NSFontAttributeName:UIFont.systemFont(ofSize: 13)], for:UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor, NSFontAttributeName: UIFont.systemFont(ofSize: 13)], for: UIControlState.normal)
         /**
         *  底部TabBar字体选择状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor,NSFontAttributeName:UIFont.systemFont(ofSize: 13)], for:UIControlState.selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor, NSFontAttributeName: UIFont.systemFont(ofSize: 13)], for: UIControlState.selected)
 
     }
-    
+
     //  MARK: - 网络监听
-    func networkMonitoring(){
-        
+    func networkMonitoring() {
+
 //        let reachability: Reachability
 //        do {
 //            reachability = try Reachability.reachabilityForInternetConnection()
@@ -151,8 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("Unable to create Reachability")
 //            return
 //        }
-//        
-//        
+//
+//
 //        reachability.whenReachable = { reachability in
 //            // this is called on a background thread, but UI updates must
 //            // be on the main thread, like this:
@@ -171,76 +171,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                print("Not reachable")
 //            }
 //        }
-//        
+//
 //        do {
 //            try reachability.startNotifier()
 //        } catch {
 //            print("Unable to start notifier")
 //        }
     }
-    
+
     //  MARK: - 缓存参数设置
-    func setCache(){
-        
+    func setCache() {
+
         //是否将图片缓存到内存
 //        SDImageCache.shared().shouldCacheImagesInMemory = true
 //        //缓存将保留5天
 //        SDImageCache.shared().maxCacheAge = 5*24*60*60
 //        //缓存最大占有内存100MB
 //        SDImageCache.shared().maxCacheSize = UInt(1024*1024*100)
-        
+
     }
-    
+
     //  MARK: - 初始化当前登录用户数据
-    func loadUserInfo(){
-    
+    func loadUserInfo() {
+
         //判断用户是否已登录
         let defaults = UserDefaults.standard
         let sign = defaults.object(forKey: Constants.HDSign)
-        
+
         if let _ = sign {
-            
+
             //初始化用户数据
             HDUserInfoManager.shareInstance.load()
         }
-        
+
     }
-    
+
     //  MARK: - 添加3DTouch功能
-    func add3DTouch(){
-        
+    func add3DTouch() {
+
         if (UIDevice().systemVersion as NSString).doubleValue > 8.0 {
-            
+
             let ggShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_off_04");
             let dtShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_on_02");
             let myShortcutIcon = UIApplicationShortcutIcon(templateImageName: "tab_icon_off_05");
-            
+
             let ggShortcutItem = UIApplicationShortcutItem(type: "TAB_GG", localizedTitle: "逛逛", localizedSubtitle: "", icon: ggShortcutIcon, userInfo: nil);
             let dtShortcutItem = UIApplicationShortcutItem(type: "TAB_DT", localizedTitle: "动态", localizedSubtitle: "", icon: dtShortcutIcon, userInfo: nil);
             let myShortcutItem = UIApplicationShortcutItem(type: "TAB_CENTER", localizedTitle: "个人中心", localizedSubtitle: "", icon: myShortcutIcon, userInfo: nil);
-            
-            UIApplication.shared.shortcutItems = [ggShortcutItem,dtShortcutItem,myShortcutItem];
-            
+
+            UIApplication.shared.shortcutItems = [ggShortcutItem, dtShortcutItem, myShortcutItem];
+
         }
     }
-    
+
     //  MARK: - 3DTouch事件处理
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        
+
         if shortcutItem.type == "TAB_GG" {
             let userDefualt = UserDefaults.standard;
             userDefualt.set("1", forKey: Constants.HDPushIndex)
             userDefualt.synchronize()
             self.window?.rootViewController = MainViewController()
         }
-        
+
         if shortcutItem.type == "TAB_DT" {
             let userDefualt = UserDefaults.standard;
             userDefualt.set("3", forKey: Constants.HDPushIndex)
             userDefualt.synchronize()
             self.window?.rootViewController = MainViewController()
         }
-        
+
         if shortcutItem.type == "TAB_CENTER" {
             let userDefualt = UserDefaults.standard;
             userDefualt.set("4", forKey: Constants.HDPushIndex)

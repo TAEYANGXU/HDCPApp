@@ -268,7 +268,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
       }
 
 
-      if self.hdHM01Response?.result?.recipeList?.count > 0 {
+      if (self.hdHM01Response?.result?.recipeList?.count)! >= 0 {
 
          if headerSView == nil {
 
@@ -302,7 +302,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          headerSView?.addSubview(centerImageView!)
          let ctapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
          centerImageView?.addGestureRecognizer(ctapGes)
-
+         centerImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
          leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Constants.HDSCREENWITH, height: HeadViewHeight))
          leftImageView!.contentMode = UIViewContentMode.scaleToFill;
@@ -310,14 +310,15 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          headerSView?.addSubview(leftImageView!)
          let ltapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
          centerImageView?.addGestureRecognizer(ltapGes)
-
+         leftImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+         
          rightImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH * 2, y: 0, width: Constants.HDSCREENWITH, height: HeadViewHeight))
          rightImageView!.contentMode = UIViewContentMode.scaleToFill;
          rightImageView?.isUserInteractionEnabled = true
          headerSView?.addSubview(rightImageView!)
          let rtapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
          centerImageView?.addGestureRecognizer(rtapGes)
-
+         rightImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
          /**
             *  分页栏
@@ -370,7 +371,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
 
          index = 0;
-         setInfoByCurrentImageIndex(index!)
+//         setInfoByCurrentImageIndex(index!)
 
       }
 
@@ -803,18 +804,18 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    func loadImage() {
 
 
-      if headerSView!.contentOffset.x > Constants.HDSCREENWITH {
+//      if headerSView!.contentOffset.x > Constants.HDSCREENWITH {
+//
+//         //向左滑动
+//         index = (index! + 1 + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!
+//
+//      } else if headerSView!.contentOffset.x < Constants.HDSCREENWITH {
+//
+//         //向右滑动
+//         index = (index! - 1 + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!
+//      }
 
-         //向左滑动
-         index = (index! + 1 + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!
-
-      } else if headerSView!.contentOffset.x < Constants.HDSCREENWITH {
-
-         //向右滑动
-         index = (index! - 1 + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!
-      }
-
-      setInfoByCurrentImageIndex(index!)
+//      setInfoByCurrentImageIndex(index!)
 
 
    }
@@ -830,15 +831,15 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
         */
       headerTitle.text = cmodel!.title
 
-      centerImageView!.kf.setImage(with: URL(string: (cmodel?.cover!)!), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+      centerImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
-      let lmodel = self.hdHM01Response?.result?.recipeList![((index - 1) + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!]
+//      let lmodel = self.hdHM01Response?.result?.recipeList![((index - 1) + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!]
 
-      leftImageView!.kf.setImage(with: URL(string: (lmodel?.cover!)!), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+      leftImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
-      let rmodel = self.hdHM01Response?.result?.recipeList![((index + 1) + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!]
+//      let rmodel = self.hdHM01Response?.result?.recipeList![((index + 1) + (self.hdHM01Response?.result?.recipeList?.count)!) % (self.hdHM01Response?.result?.recipeList?.count)!]
 
-      rightImageView!.kf.setImage(with: URL(string: (rmodel?.cover!)!), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
+      rightImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
    }
 

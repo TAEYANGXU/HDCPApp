@@ -18,7 +18,7 @@
 第三方库
 
     Alamofire : 网络数据请求库
-    SDWebImage : 网络图片加载库
+    Kingfisher : 网络图片加载库
     MJRefresh : 下拉刷新
     MBProgressHUD ：提示HUD
     SnapKit ：UI自动布局库

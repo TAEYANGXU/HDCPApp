@@ -48,7 +48,11 @@ class HDHM02Controller: UITableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-
+        
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
     // MARK: - 提示动画显示和隐藏

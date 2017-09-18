@@ -84,7 +84,7 @@ class HDHM05Controller: BaseViewController, UICollectionViewDelegate, UICollecti
         self.collectionView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
             WS.doGetRequestData(WS.cid, limit: 10, offset: WS.offset)
         })
-
+        
     }
 
     // MARK: - 提示动画显示和隐藏

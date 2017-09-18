@@ -10,16 +10,14 @@ import UIKit
 
 class HDCG02Controller: UITableViewController {
 
-    var dataArray: Array<HDCG01TagModel>!
+    open var dataArray: Array<HDCG01TagModel>!
     var name: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = name
-
-        dataArray = HDCG01Service().getTagListByCate(name)
-
+        
         setupUI()
 
     }
@@ -43,7 +41,10 @@ class HDCG02Controller: UITableViewController {
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
     // MARK: - events

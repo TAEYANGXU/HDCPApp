@@ -45,7 +45,10 @@ class HDCT09Controller: UITableViewController {
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "starCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
 

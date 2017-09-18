@@ -145,7 +145,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    override func viewDidLayoutSubviews() {
 
       super.viewDidLayoutSubviews()
-
+      
       if self.hdHM01Response?.result?.tagList?.count > 0 {
          let height: Int = (self.hdHM01Response?.result?.tagList?.count)! / 4 * TagHeight
          baseView.contentSize = CGSize(width: Constants.HDSCREENWITH, height: HeadViewHeight + Constants.HDSCREENWITH / 4 + 5 + CGFloat(height) + 300 + 300 + CGFloat(Constants.HDSpace * 4))
@@ -225,7 +225,10 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
             make.width.equalTo(Constants.HDSCREENWITH)
             make.bottom.equalTo(WS.view).offset(0)
          }
-
+         //兼容IOS11
+         if #available(iOS 11.0, *) {
+            baseView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+         }
          /**
             *  添加下拉刷新
             */
@@ -236,7 +239,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
 
          })
-
+         
       }
 
    }
@@ -945,7 +948,8 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
      *   菜谱详情
      */
    func headGesAction(_ ges: UITapGestureRecognizer) {
-
+      
+      return
       let recopeMddel: RecipeListModel = (self.hdHM01Response?.result?.recipeList![index!])!
       let hdHM08VC = HDHM08Controller()
       hdHM08VC.rid = recopeMddel.rid

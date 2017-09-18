@@ -146,7 +146,10 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         self.tableView.register(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.register(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell2")
         self.tableView.backgroundColor = UIColor.white
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
         searchBar = UISearchBar()
         searchBar.placeholder = "搜索菜谱、食材或功效"
         searchBar.delegate = self

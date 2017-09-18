@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let version: String = (userDefault.string(forKey: Constants.HDAppVersion))!
             if ( appVersion == version) {
 
-                UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
+//                UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent, animated: true)
                 self.window?.rootViewController = MainViewController()
 
             } else {

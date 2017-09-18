@@ -85,6 +85,10 @@ class HDDY01Controller: UITableViewController {
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "DY01Cell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
 

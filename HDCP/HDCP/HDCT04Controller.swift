@@ -39,6 +39,10 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
         self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

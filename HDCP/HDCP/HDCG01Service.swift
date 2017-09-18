@@ -28,6 +28,7 @@ class HDCG01Service {
                 /// JSON 转换成对象
                 let response = Mapper<HDCG01Response>().map(JSONObject: response.result.value)
                 
+                successBlock(response!)
                 
                 self.addEntity(response!, finishBlcok: { () -> Void in
                     

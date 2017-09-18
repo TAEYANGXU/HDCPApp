@@ -20,7 +20,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
     var headImageView: UIImageView?
     var infoView: UIView?
     var introView: UILabel?
-    var tableView: UITableView?
+    var tableView: UITableView!
     var tipsView: UIView?
     var shareView: UIView!
     var shareSubView: HDShareView!
@@ -143,6 +143,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
             })
 
+            
             //计算容器的大小
             let size = CoreUtils.getTextRectSize((hm08Response.result?.info?.intro!)! as NSString, font: UIFont.systemFont(ofSize: 15), size: CGSize(width: Constants.HDSCREENWITH - 30, height: 99999))
             let stepHeight = (hm08Response.result?.info?.steps?.count)! * 80 + 30

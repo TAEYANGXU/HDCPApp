@@ -50,6 +50,11 @@ class HDHM06Controller: UITableViewController {
         WS.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
             WS.doGetRequestData(10, offset: WS.offset)
         })
+        
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
 

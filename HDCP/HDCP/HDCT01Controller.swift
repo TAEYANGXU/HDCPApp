@@ -222,7 +222,10 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
         self.tableView.tableFooterView = UIView()
         self.tableView.addSubview(headerBg!)
         self.view.addSubview(self.tableView)
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
     func refreshUI() {

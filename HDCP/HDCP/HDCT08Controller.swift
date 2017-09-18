@@ -68,7 +68,10 @@ class HDCT08Controller: UITableViewController {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
         //当列表滚动到底端 视图自动刷新
         unowned let WS = self
         self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in

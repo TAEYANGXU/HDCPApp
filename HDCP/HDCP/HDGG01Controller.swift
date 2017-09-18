@@ -18,7 +18,7 @@ private let gg01Array = [["title": "厨房宝典", "image": "CFBDIcon"],
 class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewDataSource, HDGG01RowViewProtocol {
 
     var hdGG01Response: HDGG01Response!
-    var tableView: UITableView?
+    var tableView: UITableView!
     var headerView: UIView?
     var count: Int!
 
@@ -44,7 +44,10 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             self.tableView!.reloadData()
 
             self.tableView?.isHidden = false
-
+            //兼容IOS11
+            if #available(iOS 11.0, *) {
+                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            }
             doGetRequestData()
 
         } else {

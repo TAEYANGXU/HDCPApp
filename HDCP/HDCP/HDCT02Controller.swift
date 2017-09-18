@@ -49,15 +49,20 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
         self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+            tableView.scrollIndicatorInsets = tableView.contentInset;
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
 
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
-
     }
-
+    
     deinit {
 
         HDLog.LogClassDestory("HDCT02Controller")
@@ -132,7 +137,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
      */
     func forgetAction() {
 
-
+        
     }
 
     // MARK: - UITableView delegate/datasource

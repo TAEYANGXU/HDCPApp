@@ -33,20 +33,22 @@ class HDCG01Controller: UITableViewController, UISearchBarDelegate {
 
         setupUI()
 
-        if HDCG01Service().isExistEntity() {
-            /**
-            *  读取本地数据
-            */
-            dataArray = HDCG01Service().getAllTagListEntity()
-
-        } else {
-
-            if CoreUtils.networkIsReachable() {
-
-                doGetRequestData()
-
-            }
-        }
+        doGetRequestData()
+//
+//        if HDCG01Service().isExistEntity() {
+//            /**
+//            *  读取本地数据
+//            */
+//            dataArray = HDCG01Service().getAllTagListEntity()
+//
+//        } else {
+//
+//            if CoreUtils.networkIsReachable() {
+//
+//                doGetRequestData()
+//
+//            }
+//        }
 
 
     }
@@ -82,7 +84,10 @@ class HDCG01Controller: UITableViewController, UISearchBarDelegate {
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
-
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
 
         searchBar = UISearchBar()
         searchBar.placeholder = "搜索菜谱、食材或功效"
@@ -239,6 +244,7 @@ class HDCG01Controller: UITableViewController, UISearchBarDelegate {
 
         let hdcg02VC = HDCG02Controller()
         hdcg02VC.name = model.cate
+        hdcg02VC.dataArray = model.tags
         self.hidesBottomBarWhenPushed = true;
         self.navigationController?.pushViewController(hdcg02VC, animated: true)
         self.hidesBottomBarWhenPushed = false;

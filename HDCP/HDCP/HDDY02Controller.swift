@@ -47,7 +47,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
     var menuView: UIView?
     var menuLineView: UIView?
 
-    var scrollView: UIScrollView?
+    var scrollView: UIScrollView!
 
     //详情
     var detailView: UIScrollView?
@@ -255,7 +255,11 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
             })
 
-
+            //兼容IOS11
+            if #available(iOS 11.0, *) {
+                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            }
+            
             detailView = UIScrollView()
             scrollView?.addSubview(detailView!)
             detailView!.snp.makeConstraints( { (make) in

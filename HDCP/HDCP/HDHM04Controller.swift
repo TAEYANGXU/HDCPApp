@@ -54,13 +54,17 @@ class HDHM04Controller: UITableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.register(HDHM04Cell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-
+        
         //当列表滚动到底端 视图自动刷新
         unowned let WS = self;
         self.tableView?.mj_footer = HDRefreshGifFooter(refreshingBlock: { () -> Void in
             WS.doGetRequestData(WS.tagModel!.id!, limit: 10, offset: WS.offset)
         })
-
+        
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
     }
 
     // MARK: - 提示动画显示和隐藏

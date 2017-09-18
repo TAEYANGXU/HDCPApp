@@ -83,7 +83,11 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
         */
         let tapGes = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         tableView.addGestureRecognizer(tapGes)
-
+        
+        //兼容IOS11
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+        }
 
         putView = UIView()
         putView.backgroundColor = Constants.HDBGViewColor

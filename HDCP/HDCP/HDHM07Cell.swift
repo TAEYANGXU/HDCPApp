@@ -11,98 +11,98 @@ import UIKit
 class HDHM07Cell: UITableViewCell {
 
     //图片
-    var coverImageV:UIImageView?
+    var coverImageV: UIImageView?
     //名称
-    var title:UILabel?
+    var title: UILabel?
     //介绍
-    var content:UILabel?
-    
+    var content: UILabel?
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         createSubviews()
-        
+
     }
-    
-    func createSubviews(){
-        
-        
+
+    func createSubviews() {
+
+
         if coverImageV == nil {
-            
+
             coverImageV = UIImageView()
             coverImageV?.layer.cornerRadius = 2
             coverImageV?.layer.masksToBounds = true
             self.contentView.addSubview(coverImageV!)
-            
+
             coverImageV?.snp.makeConstraints( { (make) -> Void in
-                
+
                 make.left.equalTo(self.contentView).offset(16)
                 make.top.equalTo(self.contentView).offset(10)
                 make.width.equalTo(80)
                 make.height.equalTo(60)
-                
+
             })
-            
+
         }
-        
+
         if title == nil {
-            
-            
+
+
             title = UILabel()
             title?.font = UIFont.systemFont(ofSize: 16)
             title?.textColor = Constants.HDMainTextColor
             self.contentView.addSubview(title!)
-            
+
             title?.snp.makeConstraints( { (make) -> Void in
-                
+
                 make.left.equalTo(coverImageV!.snp.right).offset(5)
                 make.right.equalTo(self.contentView).offset(-20)
                 make.top.equalTo(self.contentView).offset(10)
                 make.height.equalTo(25)
-                
+
             })
-            
+
         }
-        
+
         if content == nil {
-            
+
             content = UILabel()
-            content?.numberOfLines = 2 
+            content?.numberOfLines = 2
             content?.font = UIFont.systemFont(ofSize: 13)
             content?.textColor = UIColor.lightGray
             self.contentView.addSubview(content!)
-            
+
             content?.snp.makeConstraints( { (make) -> Void in
-                
+
                 make.left.equalTo(coverImageV!.snp.right).offset(5)
                 make.right.equalTo(self.contentView).offset(-20)
                 make.top.equalTo(title!.snp.bottom).offset(0)
                 make.height.equalTo(35)
-                
+
             })
-            
-            
+
+
         }
-        
+
     }
-    
-    
+
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Configure the view for the selected state
     }
-    
-    
+
+
 }

@@ -17,23 +17,23 @@ class HDCT11Controller: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        
+
         super.viewWillAppear(animated)
         self.title = "消息"
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
-        
+
     }
-    
-    deinit{
-        
+
+    deinit {
+
         HDLog.LogClassDestory("HDCT11Controller")
     }
-    
+
     // MARK: - events
-    func backAction(){
-        
+    func backAction() {
+
         navigationController!.popViewController(animated: true)
-        
+
     }
 
 }

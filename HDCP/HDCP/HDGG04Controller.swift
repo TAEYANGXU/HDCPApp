@@ -8,51 +8,51 @@
 
 import UIKit
 
-class HDGG04Controller: BaseViewController ,UITextViewDelegate{
+class HDGG04Controller: BaseViewController, UITextViewDelegate {
 
-    var btn:UIButton?
-    var textView:UITextView?
-    var placeholder:UILabel?
-    
+    var btn: UIButton?
+    var textView: UITextView?
+    var placeholder: UILabel?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "意见反馈"
-        
+
         setupUI()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        
+
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
     }
-    
-    deinit{
-        
+
+    deinit {
+
         HDLog.LogClassDestory("HDGG03Controller")
-        
+
     }
-    
+
     // MARK: - 创建UI视图
-    
-    func setupUI(){
-        
+
+    func setupUI() {
+
         textView = UITextView()
         textView?.font = UIFont.systemFont(ofSize: 15)
         textView?.autoresizingMask = UIViewAutoresizing.flexibleWidth
         textView?.delegate = self
         self.view.addSubview(textView!)
         textView?.becomeFirstResponder()
-        
+
         textView?.snp.makeConstraints( { (make) -> Void in
-            
+
             make.top.equalTo(self.view).offset(0)
             make.left.equalTo(self.view).offset(0)
             make.height.equalTo(120)
             make.width.equalTo(Constants.HDSCREENWITH)
         })
-        
+
         btn = UIButton(type: UIButtonType.custom)
         btn?.setTitle("提交", for: UIControlState())
         btn?.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
@@ -64,79 +64,79 @@ class HDGG04Controller: BaseViewController ,UITextViewDelegate{
         btn?.layer.masksToBounds = true
         btn?.addTarget(self, action: #selector(onClickAction), for: UIControlEvents.touchUpInside)
         self.view.addSubview(btn!)
-        
+
         btn?.snp.makeConstraints( { (make) -> Void in
-            
+
             make.top.equalTo(textView!.snp.bottom).offset(40)
             make.left.equalTo(self.view).offset(20)
-            make.width.equalTo(Constants.HDSCREENWITH-40)
+            make.width.equalTo(Constants.HDSCREENWITH - 40)
             make.height.equalTo(40)
-            
+
         })
-        
+
         placeholder = UILabel()
-        
+
         placeholder?.textColor = UIColor.lightGray
         placeholder?.text = "说点什么"
         placeholder?.backgroundColor = UIColor.clear
         placeholder?.isEnabled = false
         placeholder?.font = UIFont.systemFont(ofSize: 15)
         self.view.addSubview(placeholder!)
-        
+
         placeholder?.snp.makeConstraints( { (make) -> Void in
-            
+
             make.top.equalTo(self.view).offset(7)
             make.left.equalTo(self.view).offset(8)
             make.height.equalTo(20)
             make.width.equalTo(100)
-            
+
         })
-        
+
     }
-    
+
     // MARK: - 提示动画显示和隐藏
-    func showHud(){
-        
+    func showHud() {
+
         CoreUtils.showProgressHUD(self.view)
-        
+
     }
-    
-    func hidenHud(){
-        
+
+    func hidenHud() {
+
         CoreUtils.hidProgressHUD(self.view)
-        
+
         backAction()
     }
-    
+
     // MARK: - events
-    
-    func backAction(){
-        
+
+    func backAction() {
+
         navigationController!.popViewController(animated: true)
-        
+
     }
-    
-    func onClickAction(){
-    
+
+    func onClickAction() {
+
         if textView!.text.characters.count == 0 {
-            
+
             CoreUtils.showWarningHUD(self.view, title: "请说点什么")
-        }else{
-        
+        } else {
+
             showHud()
             self.perform(#selector(hidenHud), with: self, afterDelay: 1.5)
         }
-        
+
     }
-    
+
     // MARK: - UITextView delegate
-    func textViewDidChange(_ textView: UITextView){
-    
+    func textViewDidChange(_ textView: UITextView) {
+
         if textView.text.characters.count == 0 {
-        
+
             placeholder?.text = "说点什么"
-        }else{
-        
+        } else {
+
             placeholder?.text = ""
         }
     }

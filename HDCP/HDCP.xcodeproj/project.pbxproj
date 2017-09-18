@@ -1233,7 +1233,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = batonsoft;
+				ORGANIZATIONNAME = xuyanzhang;
 				TargetAttributes = {
 					1B92B5D71E60226400943C17 = {
 						CreatedOnToolsVersion = 8.2.1;

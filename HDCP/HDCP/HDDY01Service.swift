@@ -47,7 +47,7 @@ class HDDY01Service {
                 /// JSON 转换成对象
                 let response = Mapper<HDDY01Response>().map(JSONObject: response.result.value)
                 DispatchQueue.global().async {
-                
+                    
                     //更新本地数据
 //                    self.deleteEntity()
 //                    self.addEntity(response!)

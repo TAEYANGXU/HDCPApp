@@ -780,7 +780,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    }
    // MARK: - 通知事件
 
-   func hm01Notification(_ noti: Notification) {
+   @objc func hm01Notification(_ noti: Notification) {
 
       let flag = (noti as NSNotification).userInfo!["FLAG"] as? String
 
@@ -863,7 +863,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
       netStatusView?.isHidden = false
 
    }
-   func hideNetView() {
+   @objc func hideNetView() {
 
       netStatusView?.isHidden = true
    }
@@ -912,7 +912,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    /**
     *   菜谱列表
     */
-   func collectGesAction(_ ges: UITapGestureRecognizer) {
+   @objc func collectGesAction(_ ges: UITapGestureRecognizer) {
 
       let view = ges.view as! HDHM01RowView
       let model = self.hdHM01Response?.result?.collectList?[view.tag - 100]
@@ -930,7 +930,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    /**
      *   厨房宝典详情
      */
-   func wikiGesAction(_ ges: UITapGestureRecognizer) {
+   @objc func wikiGesAction(_ ges: UITapGestureRecognizer) {
 
       let view = ges.view as! HDHM01RowView
       let model = self.hdHM01Response?.result?.wikiList?[view.tag - 100]
@@ -947,7 +947,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    /**
      *   菜谱详情
      */
-   func headGesAction(_ ges: UITapGestureRecognizer) {
+   @objc func headGesAction(_ ges: UITapGestureRecognizer) {
       
       return
       let recopeMddel: RecipeListModel = (self.hdHM01Response?.result?.recipeList![index!])!
@@ -960,7 +960,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
    }
 
-   func menuBtnOnclick(_ btn: UIButton) {
+   @objc func menuBtnOnclick(_ btn: UIButton) {
 
       let tag: Int = btn.tag - 300
       switch tag {
@@ -1016,7 +1016,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
    //更多
 
-   func moreAction(_ btn: UIButton) {
+   @objc func moreAction(_ btn: UIButton) {
 
       switch(btn.tag) {
 
@@ -1043,7 +1043,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
    }
 
    //分类
-   func tagBtnOnclick(_ btn: UIButton) {
+   @objc func tagBtnOnclick(_ btn: UIButton) {
 
       let model: TagListModel = (self.hdHM01Response?.result?.tagList![btn.tag - 1000])!
       let hdHM04VC = HDHM04Controller()
@@ -1054,7 +1054,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
    }
 
-   func pageAction(_ sender: AnyObject) {
+   @objc func pageAction(_ sender: AnyObject) {
 
 
       headerSView!.contentOffset = CGPoint(x: Constants.HDSCREENWITH, y: 0)

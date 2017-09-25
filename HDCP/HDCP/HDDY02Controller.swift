@@ -686,7 +686,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
     }
 
     // MARK: - 分享视图显示和隐藏
-    func hideShareView() {
+    @objc func hideShareView() {
 
         unowned let WS = self
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -915,7 +915,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
     }
 
     // MARK: - events
-    func backAction() {
+    @objc func backAction() {
 
         videoPlayerController?.close()
         navigationController!.popViewController(animated: true)
@@ -934,7 +934,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
     }
 
     //显示/隐藏分享视图
-    func share() {
+    @objc func share() {
 
         if (shareView.isHidden) {
 
@@ -948,7 +948,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
     }
 
-    func menuAction(_ btn: UIButton) {
+    @objc func menuAction(_ btn: UIButton) {
 
 
         switch btn.tag {

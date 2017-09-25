@@ -193,7 +193,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
     }
 
     // MARK: - 键盘变化
-    func keyboardWillShow(_ note: Notification) {
+    @objc func keyboardWillShow(_ note: Notification) {
 
 
         let rect = (note as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey]
@@ -220,7 +220,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
     }
 
-    func keyboardWillHide(_ note: Notification) {
+    @objc func keyboardWillHide(_ note: Notification) {
 
         unowned let WS = self
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -242,7 +242,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
     }
 
-    func keyboardWillChange(_ note: Notification) {
+    @objc func keyboardWillChange(_ note: Notification) {
 
 
 
@@ -308,7 +308,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
@@ -317,7 +317,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
     /**
      * 隐藏键盘
      */
-    func hideKeyBoard() {
+    @objc func hideKeyBoard() {
 
         textView.resignFirstResponder()
 
@@ -327,7 +327,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
     /**
      *  发送评论
      */
-    func sendComment() {
+    @objc func sendComment() {
 
         if textView.text?.characters.count > 0 {
 
@@ -491,8 +491,8 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
             let str: String = model.content.components(separatedBy: ":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
             content?.attributedText = attributed
         } else {
 

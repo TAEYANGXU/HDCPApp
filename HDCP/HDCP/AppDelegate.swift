@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         *  导航栏样式
         */
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Heiti SC", size: 18.0)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "Heiti SC", size: 18.0)!]
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
 //        UINavigationBar.appearance().barTintColor = CoreUtils.HDColor(245, g: 161, b: 0, a: 1)
         /**
@@ -133,11 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         *  底部TabBar字体正常状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainTextColor, NSFontAttributeName: UIFont.systemFont(ofSize: 13)], for: UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Constants.HDMainTextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], for: UIControlState.normal)
         /**
         *  底部TabBar字体选择状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: Constants.HDMainColor, NSFontAttributeName: UIFont.systemFont(ofSize: 13)], for: UIControlState.selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Constants.HDMainColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], for: UIControlState.selected)
 
     }
 

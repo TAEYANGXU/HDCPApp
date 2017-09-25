@@ -91,7 +91,7 @@ class WelcomeController: UIViewController {
 
     // MARK: - events
 
-    func toMain() {
+    @objc func toMain() {
 
         /**
          *  欢迎界面只展示一次

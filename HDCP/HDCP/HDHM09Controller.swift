@@ -170,7 +170,7 @@ class HDHM09Controller: UIViewController, UIScrollViewDelegate {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         self.dismiss(animated: true) { () -> Void in }
 
@@ -203,8 +203,8 @@ class HDHM09Controller: UIViewController, UIScrollViewDelegate {
         let str = String(format: "%d/%d", index + 1, (steps?.count)!)
         let str2: String = str.components(separatedBy: "/")[0]
         let attributed = NSMutableAttributedString(string: str)
-        attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 26), range: NSMakeRange(0, str2.characters.count))
-        attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 26), range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
         pageFlag?.attributedText = attributed
 
         centerImageView!.kf.setImage(with: URL(string: cmodel.stepPhoto!), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)

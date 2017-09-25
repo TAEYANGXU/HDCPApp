@@ -81,7 +81,7 @@ class HDCT08Controller: UITableViewController {
     }
 
     // MARK: - events
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
@@ -287,7 +287,7 @@ class HDCT08Controller: UITableViewController {
 
         /// 文本宽度计算
         let text: NSString = NSString(string: model.userName)
-        let attributes = [NSFontAttributeName: name!.font]
+        let attributes = [NSAttributedStringKey.font: name!.font]
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect = text.boundingRect(with: CGSize(width: 200, height: 300), options: option, attributes: attributes, context: nil)
         name?.text = model.userName

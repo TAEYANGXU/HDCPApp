@@ -69,7 +69,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     }
 
     // MARK: - events
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
@@ -91,7 +91,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     /**
      *  用户注册
      */
-    func registAction() {
+    @objc func registAction() {
 
         let hdct03VC = HDCT03Controller()
         self.hidesBottomBarWhenPushed = true;
@@ -101,7 +101,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     /**
      *  用户登录
      */
-    func loginAction() {
+    @objc func loginAction() {
 
 
         guard username.text?.characters.count > 0 else {
@@ -135,7 +135,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     /**
      *  忘记密码
      */
-    func forgetAction() {
+    @objc func forgetAction() {
 
         
     }

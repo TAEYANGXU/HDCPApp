@@ -70,7 +70,7 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
     }
 
     // MARK: - events
-    func backAction() {
+    @objc func backAction() {
 
         for vc in (self.navigationController?.viewControllers)! {
 
@@ -86,7 +86,7 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
     /**
      *  倒计时
      */
-    func timerAction() {
+    @objc func timerAction() {
 
         if second == 0 {
             timer.invalidate()
@@ -104,7 +104,7 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
     /**
      *  重新获取
      */
-    func againAction() {
+    @objc func againAction() {
 
         timer.invalidate()
         timer = nil
@@ -113,7 +113,7 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
         timer.fire()
     }
 
-    func completeAction() {
+    @objc func completeAction() {
 
 
 

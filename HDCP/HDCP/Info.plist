@@ -83,8 +83,6 @@
 	<string>是否允许此应用使用你的相机？</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>是否允许此应用访问你的媒体资料库？</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

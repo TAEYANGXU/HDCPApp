@@ -173,7 +173,7 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         CoreUtils.hidProgressHUD(self.tableView)
     }
 
-    func cancel() {
+    @objc func cancel() {
 
         navigationController!.popToRootViewController(animated: false)
 

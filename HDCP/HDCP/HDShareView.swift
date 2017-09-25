@@ -157,7 +157,7 @@ open class HDShareView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tagBtnOnclick(_ btn:UIButton){
+    @objc func tagBtnOnclick(_ btn:UIButton){
         
         if (self.delegate != nil) {
             

@@ -210,7 +210,7 @@ class CoreUtils: NSObject {
     
     static func getTextRectSize(_ text:NSString,font:UIFont,size:CGSize) -> CGRect {
         
-        let attributes = [NSFontAttributeName: font]
+        let attributes = [NSAttributedStringKey.font: font]
         
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         

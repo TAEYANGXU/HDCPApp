@@ -475,7 +475,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
     }
 
     // MARK: - 分享视图显示和隐藏
-    func hideShareView() {
+    @objc func hideShareView() {
 
         unowned let WS = self
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
@@ -509,7 +509,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
@@ -518,7 +518,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
     /**
      *  查看评论
      */
-    func commentAction() {
+    @objc func commentAction() {
 
         let hd10VC = HDHM10Controller()
         hd10VC.rid = self.rid
@@ -526,7 +526,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
         self.navigationController?.pushViewController(hd10VC, animated: true)
     }
 
-    func share() {
+    @objc func share() {
 
         if (shareView.isHidden) {
 
@@ -544,7 +544,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
     /**
      *  选中cell 进入烹饪步骤页面
      */
-    func selectRowAction(_ ges: UITapGestureRecognizer) {
+    @objc func selectRowAction(_ ges: UITapGestureRecognizer) {
 
         let touchView = ges.view
         let indexPath = IndexPath(row: (touchView?.tag)!, section: 1)

@@ -269,7 +269,7 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
     }
 
     // MARK: - 通知事件
-    func ct01Notification(_ note: Notification) {
+    @objc func ct01Notification(_ note: Notification) {
 
 
         let flag = (note as NSNotification).userInfo!["FLAG"] as? String
@@ -299,7 +299,7 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
 
     // MARK: - events
-    func loginOrRegistAction() {
+    @objc func loginOrRegistAction() {
 
         let hdct02VC = HDCT02Controller()
         self.hidesBottomBarWhenPushed = true;
@@ -307,7 +307,7 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
         self.hidesBottomBarWhenPushed = false;
     }
 
-    func cntAction(_ btn: UIButton) {
+    @objc func cntAction(_ btn: UIButton) {
 
         switch(btn.tag) {
 

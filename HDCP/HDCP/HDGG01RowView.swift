@@ -76,7 +76,7 @@ class HDGG01RowView: UIView {
 
     }
 
-    func onClickAction() {
+    @objc func onClickAction() {
 
         if (self.delegate != nil) {
 

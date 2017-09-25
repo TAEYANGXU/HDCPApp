@@ -104,14 +104,14 @@ class HDCT06Controller: UITableViewController {
 
     }
 
-    func hidenHud() {
+    @objc func hidenHud() {
 
         CoreUtils.hidProgressHUD(self.view)
     }
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 

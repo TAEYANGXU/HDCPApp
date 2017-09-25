@@ -181,7 +181,7 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
     // MARK: - 通知事件
 
-    func gg01Notification(_ noti: Notification) {
+    @objc func gg01Notification(_ noti: Notification) {
 
         let flag = (noti as NSNotification).userInfo!["FLAG"] as? String
 
@@ -197,9 +197,9 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
     }
 
-    // MARK: - onclik events
+    // MARK: - onclik events@objc 
 
-    func menuBtnOnclick(_ btn: UIButton) {
+    @objc func menuBtnOnclick(_ btn: UIButton) {
 
         let tag: Int = btn.tag - 400
         switch tag {

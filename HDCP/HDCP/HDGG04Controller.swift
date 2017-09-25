@@ -101,7 +101,7 @@ class HDGG04Controller: BaseViewController, UITextViewDelegate {
 
     }
 
-    func hidenHud() {
+    @objc func hidenHud() {
 
         CoreUtils.hidProgressHUD(self.view)
 
@@ -110,13 +110,13 @@ class HDGG04Controller: BaseViewController, UITextViewDelegate {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
     }
 
-    func onClickAction() {
+    @objc func onClickAction() {
 
         if textView!.text.characters.count == 0 {
 

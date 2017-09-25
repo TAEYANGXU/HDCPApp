@@ -161,7 +161,7 @@ class HDDY01Controller: UITableViewController {
     }
 
     // MARK: - events
-    func commentAction(_ tap: UITapGestureRecognizer) {
+    @objc func commentAction(_ tap: UITapGestureRecognizer) {
 
 
         let view = tap.view as! DYView;
@@ -611,8 +611,8 @@ class HDDY01Controller: UITableViewController {
             let str = String(format: "%d", (model.data?.commentCnt)!)
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
+            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
             commentCnt?.attributedText = attributed
 
         } else {

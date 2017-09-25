@@ -125,7 +125,7 @@ class HDHM05Controller: BaseViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 

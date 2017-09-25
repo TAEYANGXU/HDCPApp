@@ -50,7 +50,7 @@ class HDGG03Controller: UITableViewController {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 

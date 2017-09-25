@@ -47,13 +47,13 @@ class HDCT03Controller: UITableViewController {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
     }
 
-    func nextAction() {
+    @objc func nextAction() {
 
 
         guard CoreUtils.isMobileNumber(mobile.text!) else {
@@ -69,7 +69,7 @@ class HDCT03Controller: UITableViewController {
 
     }
 
-    func protocolAction() {
+    @objc func protocolAction() {
 
         let hdct07VC = HDCT07Controller()
         self.hidesBottomBarWhenPushed = true;
@@ -169,8 +169,8 @@ class HDCT03Controller: UITableViewController {
 
             let title = "注册即表示同意《微菜谱协议》"
             let attributed = NSMutableAttributedString(string: title)
-            attributed.addAttribute(NSFontAttributeName, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(7, 7))
-            attributed.addAttribute(NSForegroundColorAttributeName, value: Constants.HDMainColor, range: NSMakeRange(7, 7))
+            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(7, 7))
+            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDMainColor, range: NSMakeRange(7, 7))
 
 
             let protocolT = UILabel()

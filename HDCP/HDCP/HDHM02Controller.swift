@@ -69,13 +69,13 @@ class HDHM02Controller: UITableViewController {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
     }
 
-    func didHeaderView(_ ges: UITapGestureRecognizer) {
+    @objc func didHeaderView(_ ges: UITapGestureRecognizer) {
 
 
         let headerView = ges.view

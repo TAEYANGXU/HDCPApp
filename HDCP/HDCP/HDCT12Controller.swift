@@ -33,7 +33,7 @@ class HDCT12Controller: UIViewController {
     }
 
     // MARK: - events
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 

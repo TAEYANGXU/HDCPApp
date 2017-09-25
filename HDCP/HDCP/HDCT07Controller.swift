@@ -62,7 +62,7 @@ class HDCT07Controller: BaseViewController, UIWebViewDelegate {
 
     // MARK: - events
 
-    func backAction() {
+    @objc func backAction() {
 
         navigationController!.popViewController(animated: true)
 
@@ -75,7 +75,7 @@ class HDCT07Controller: BaseViewController, UIWebViewDelegate {
 
     }
 
-    func hidenHud() {
+    @objc func hidenHud() {
 
         CoreUtils.hidProgressHUD(self.webView!)
     }

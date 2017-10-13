@@ -34,15 +34,15 @@
 
 项目运行
 
-  > ######运行App需要安装[CocoaPods1.1.0](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
-  > ######打开[CoreData](http://blog.csdn.net/likendsl/article/details/16160677)的SQL语句输出开关<br/> 
+  > 运行App需要安装[CocoaPods1.1.0](http://www.cnblogs.com/wayne23/p/3912882.html)，安装完成后,打开终端进入HDCP目录,执行pod install 下载第三方库,下载完成即可运行。<br/> 
+  > 打开[CoreData](http://blog.csdn.net/likendsl/article/details/16160677)的SQL语句输出开关<br/> 
 
 Swift学习
 
-  > ######[The Swift Programming Language 中文版](http://wiki.jikexueyuan.com/project/swift/)<br/> 
-  > ######[Let's Swift – WRITE THE CODE. CHANGE THE WORLD.](http://letsswift.com/)<br/> 
-  > ######[Swift.org](https://swift.org/)<br/> 
-  > ######[Swift开放源码](https://github.com/apple/swift)<br/> 
+  > [The Swift Programming Language 中文版](http://wiki.jikexueyuan.com/project/swift/)<br/> 
+  > [Let's Swift – WRITE THE CODE. CHANGE THE WORLD.](http://letsswift.com/)<br/> 
+  > [Swift.org](https://swift.org/)<br/> 
+  > [Swift开放源码](https://github.com/apple/swift)<br/> 
 
 项目效果图 
 

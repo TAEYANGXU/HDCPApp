@@ -43,12 +43,12 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
 
-        let button = UIButton(type: UIButtonType.custom) as UIButton
+        let button = UIButton(type: UIButton.ButtonType.custom) as UIButton
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setBackgroundImage(UIImage(named: "shareIcon"), for: UIControlState())
-        button.addTarget(self, action: #selector(share), for: UIControlEvents.touchUpInside)
-        button.contentMode = UIViewContentMode.scaleToFill
+        button.setBackgroundImage(UIImage(named: "shareIcon"), for: UIControl.State())
+        button.addTarget(self, action: #selector(share), for: UIControl.Event.touchUpInside)
+        button.contentMode = UIView.ContentMode.scaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
     }
@@ -548,7 +548,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
         let touchView = ges.view
         let indexPath = IndexPath(row: (touchView?.tag)!, section: 1)
-        tableView?.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.none)
+        tableView?.selectRow(at: indexPath, animated: true, scrollPosition: UITableView.ScrollPosition.none)
 
         let hdHM09VC = HDHM09Controller()
         hdHM09VC.index = touchView?.tag
@@ -612,16 +612,16 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
             /**
              *  微信朋友圈
              */
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.subTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
-
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-            }, shareFail: { () -> Void in
-                HDLog.LogOut("失败")
-                CoreUtils.showWarningHUD(self.view, title: "分享失败")
-            }, shareCancel: { () -> Void in
-                HDLog.LogOut("取消")
-            })
+//            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: (headImageView?.image)!, type: SSDKPlatformType.subTypeWechatTimeline, url: url, shareSuccess: { () -> Void in
+//
+//                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+//                HDLog.LogOut("成功")
+//            }, shareFail: { () -> Void in
+//                HDLog.LogOut("失败")
+//                CoreUtils.showWarningHUD(self.view, title: "分享失败")
+//            }, shareCancel: { () -> Void in
+//                HDLog.LogOut("取消")
+//            })
 
 
             break
@@ -629,17 +629,17 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
             /**
              *  QQ
              */
-
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
-
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-            }, shareFail: { () -> Void in
-                HDLog.LogOut("失败")
-                CoreUtils.showWarningHUD(self.view, title: "分享失败")
-            }, shareCancel: { () -> Void in
-                HDLog.LogOut("取消")
-            })
+            
+//            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: headImageView?.image?.jpegData(compressionQuality: 0.3), type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
+//
+//                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+//                HDLog.LogOut("成功")
+//            }, shareFail: { () -> Void in
+//                HDLog.LogOut("失败")
+//                CoreUtils.showWarningHUD(self.view, title: "分享失败")
+//            }, shareCancel: { () -> Void in
+//                HDLog.LogOut("取消")
+//            })
 
 
             break
@@ -647,16 +647,16 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
             /**
              *  QQ空间
              */
-            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((headImageView?.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
-
-                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
-                HDLog.LogOut("成功")
-            }, shareFail: { () -> Void in
-                HDLog.LogOut("失败")
-                CoreUtils.showWarningHUD(self.view, title: "分享失败")
-            }, shareCancel: { () -> Void in
-                HDLog.LogOut("取消")
-            })
+//            HDShareSDKManager.doShareSDK((hm08Response.result?.info?.title)!, context: (hm08Response.result?.info?.intro)!, image: UIImage(data: headImageView?.image?.jpegData(compressionQuality: 0.3), type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
+//
+//                CoreUtils.showSuccessHUD(self.view, title: "分享成功")
+//                HDLog.LogOut("成功")
+//            }, shareFail: { () -> Void in
+//                HDLog.LogOut("失败")
+//                CoreUtils.showWarningHUD(self.view, title: "分享失败")
+//            }, shareCancel: { () -> Void in
+//                HDLog.LogOut("取消")
+//            })
 
             break
         case 4:
@@ -748,7 +748,7 @@ class HDHM08Controller: BaseViewController, UITableViewDelegate, UITableViewData
                 weight.text = model?.weight
             }
 
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         } else {
             /**

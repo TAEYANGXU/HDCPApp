@@ -50,14 +50,14 @@ class HDHM09Controller: UIViewController, UIScrollViewDelegate {
 
         if cancelBtn == nil {
 
-            cancelBtn = UIButton(type: UIButtonType.custom) as UIButton
-            cancelBtn?.setTitle("x", for: UIControlState())
+            cancelBtn = UIButton(type: UIButton.ButtonType.custom) as UIButton
+            cancelBtn?.setTitle("x", for: UIControl.State())
             cancelBtn?.layer.cornerRadius = 15
             cancelBtn?.titleLabel?.textAlignment = NSTextAlignment.center
             cancelBtn?.layer.masksToBounds = true
-            cancelBtn?.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+            cancelBtn?.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
             cancelBtn?.layer.borderWidth = 0.5
-            cancelBtn?.addTarget(self, action: #selector(backAction), for: UIControlEvents.touchUpInside)
+            cancelBtn?.addTarget(self, action: #selector(backAction), for: UIControl.Event.touchUpInside)
             cancelBtn?.layer.borderColor = Constants.HDMainColor.cgColor
             self.view.addSubview(cancelBtn!)
 
@@ -103,17 +103,17 @@ class HDHM09Controller: UIViewController, UIScrollViewDelegate {
 
 
             centerImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH, y: 0, width: Constants.HDSCREENWITH, height: 200))
-            centerImageView!.contentMode = UIViewContentMode.scaleToFill;
+            centerImageView!.contentMode = UIView.ContentMode.scaleToFill;
             imageScrollView?.addSubview(centerImageView!)
 
 
             leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Constants.HDSCREENWITH, height: 200))
-            leftImageView!.contentMode = UIViewContentMode.scaleToFill;
+            leftImageView!.contentMode = UIView.ContentMode.scaleToFill;
             imageScrollView?.addSubview(leftImageView!)
 
 
             rightImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH * 2, y: 0, width: Constants.HDSCREENWITH, height: 200))
-            rightImageView!.contentMode = UIViewContentMode.scaleToFill;
+            rightImageView!.contentMode = UIView.ContentMode.scaleToFill;
             imageScrollView?.addSubview(rightImageView!)
 
 
@@ -203,8 +203,8 @@ class HDHM09Controller: UIViewController, UIScrollViewDelegate {
         let str = String(format: "%d/%d", index + 1, (steps?.count)!)
         let str2: String = str.components(separatedBy: "/")[0]
         let attributed = NSMutableAttributedString(string: str)
-        attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 26), range: NSMakeRange(0, str2.characters.count))
-        attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 26), range: NSMakeRange(0, str2.characters.count))
+        attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str2.characters.count))
         pageFlag?.attributedText = attributed
 
         centerImageView!.kf.setImage(with: URL(string: cmodel.stepPhoto!), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)

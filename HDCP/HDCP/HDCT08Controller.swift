@@ -65,12 +65,12 @@ class HDCT08Controller: UITableViewController {
     func setupUI() {
 
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
         //当列表滚动到底端 视图自动刷新
         unowned let WS = self
@@ -287,7 +287,7 @@ class HDCT08Controller: UITableViewController {
 
         /// 文本宽度计算
         let text: NSString = NSString(string: model.userName)
-        let attributes = [NSAttributedStringKey.font: name!.font]
+        let attributes = [NSAttributedString.Key.font: name!.font]
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         let rect = text.boundingRect(with: CGSize(width: 200, height: 300), options: option, attributes: attributes, context: nil)
         name?.text = model.userName

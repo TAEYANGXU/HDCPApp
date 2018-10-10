@@ -46,7 +46,7 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             self.tableView?.isHidden = false
             //兼容IOS11
             if #available(iOS 11.0, *) {
-                self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+                self.tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
             }
             doGetRequestData()
 
@@ -104,15 +104,15 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
                     let btn = HDGG01Button()
                     btn.tag = index + 400
-                    btn.setImage(UIImage(named: gg01Array[index]["image"]!), for: UIControlState())
-                    btn.setTitle(gg01Array[index]["title"]!, for: UIControlState())
+                    btn.setImage(UIImage(named: gg01Array[index]["image"]!), for: UIControl.State())
+                    btn.setTitle(gg01Array[index]["title"]!, for: UIControl.State())
                     btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
                     btn.backgroundColor = UIColor.white
                     btn.titleLabel?.textAlignment = NSTextAlignment.center
                     btn.layer.borderWidth = 0.5
                     btn.layer.borderColor = Constants.HDBGViewColor.cgColor
-                    btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
-                    btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+                    btn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
+                    btn.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
                     headerView!.addSubview(btn)
 
                     unowned let WS = self
@@ -142,7 +142,7 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             tableView?.delegate = self
             tableView?.dataSource = self
             tableView?.backgroundColor = UIColor.clear
-            tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+            tableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
             self.tableView?.isHidden = true
             self.view.addSubview(self.tableView!)
             tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
@@ -454,7 +454,7 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             bottomImageView?.indexPath = indexPath
             bottomImageView!.index = 2
 
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
             return cell
         } else {
@@ -562,7 +562,7 @@ class HDGG01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             bottomImageView?.indexPath = indexPath
             bottomImageView!.index = 2
 
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
             return cell
         }

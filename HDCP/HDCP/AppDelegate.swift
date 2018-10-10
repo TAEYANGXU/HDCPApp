@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         //设置导航栏和标签栏样式
@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         *  导航栏样式
         */
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont(name: "Heiti SC", size: 18.0)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont(name: "Heiti SC", size: 18.0)!]
         UINavigationBar.appearance().barTintColor = Constants.HDMainColor
 //        UINavigationBar.appearance().barTintColor = CoreUtils.HDColor(245, g: 161, b: 0, a: 1)
         /**
@@ -133,11 +133,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /**
         *  底部TabBar字体正常状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Constants.HDMainTextColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], for: UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Constants.HDMainTextColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: UIControl.State.normal)
         /**
         *  底部TabBar字体选择状态颜色
         */
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: Constants.HDMainColor, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13)], for: UIControlState.selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: Constants.HDMainColor, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)], for: UIControl.State.selected)
 
     }
 

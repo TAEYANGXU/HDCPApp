@@ -40,7 +40,7 @@ class HDGG04Controller: BaseViewController, UITextViewDelegate {
 
         textView = UITextView()
         textView?.font = UIFont.systemFont(ofSize: 15)
-        textView?.autoresizingMask = UIViewAutoresizing.flexibleWidth
+        textView?.autoresizingMask = UIView.AutoresizingMask.flexibleWidth
         textView?.delegate = self
         self.view.addSubview(textView!)
         textView?.becomeFirstResponder()
@@ -53,16 +53,16 @@ class HDGG04Controller: BaseViewController, UITextViewDelegate {
             make.width.equalTo(Constants.HDSCREENWITH)
         })
 
-        btn = UIButton(type: UIButtonType.custom)
-        btn?.setTitle("提交", for: UIControlState())
-        btn?.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+        btn = UIButton(type: UIButton.ButtonType.custom)
+        btn?.setTitle("提交", for: UIControl.State())
+        btn?.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
         btn?.backgroundColor = UIColor.white
         btn?.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         btn?.layer.borderColor = Constants.HDMainColor.cgColor
         btn?.layer.borderWidth = 1
         btn?.layer.cornerRadius = 5
         btn?.layer.masksToBounds = true
-        btn?.addTarget(self, action: #selector(onClickAction), for: UIControlEvents.touchUpInside)
+        btn?.addTarget(self, action: #selector(onClickAction), for: UIControl.Event.touchUpInside)
         self.view.addSubview(btn!)
 
         btn?.snp.makeConstraints( { (make) -> Void in

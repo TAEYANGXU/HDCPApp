@@ -38,10 +38,10 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
     }
 
@@ -91,11 +91,11 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
         if second == 0 {
             timer.invalidate()
             secondBtn.isEnabled = true
-            secondBtn.setTitle("重新获取", for: UIControlState())
+            secondBtn.setTitle("重新获取", for: UIControl.State())
         } else {
 
             secondBtn.isEnabled = false
-            secondBtn.setTitle(String(format: "重新获取(%d)", second), for: UIControlState())
+            secondBtn.setTitle(String(format: "重新获取(%d)", second), for: UIControl.State())
             second -= 1
         }
 
@@ -130,7 +130,7 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         if (indexPath as NSIndexPath).row == 0 {
 
@@ -171,14 +171,14 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
 
             })
 
-            secondBtn = UIButton(type: UIButtonType.custom)
+            secondBtn = UIButton(type: UIButton.ButtonType.custom)
             secondBtn.layer.cornerRadius = 5
             secondBtn.layer.masksToBounds = true
             secondBtn.layer.borderWidth = 1
             secondBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             secondBtn.layer.borderColor = Constants.HDMainColor.cgColor
-            secondBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
-            secondBtn.addTarget(self, action: #selector(againAction), for: UIControlEvents.touchUpInside)
+            secondBtn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
+            secondBtn.addTarget(self, action: #selector(againAction), for: UIControl.Event.touchUpInside)
             secondBtn.backgroundColor = UIColor.white
             cell.contentView.addSubview(secondBtn)
 
@@ -288,13 +288,13 @@ class HDCT04Controller: UITableViewController, UITextFieldDelegate {
 
         } else {
 
-            let completeBtn = UIButton(type: UIButtonType.custom)
-            completeBtn.setTitle("完成", for: UIControlState())
+            let completeBtn = UIButton(type: UIButton.ButtonType.custom)
+            completeBtn.setTitle("完成", for: UIControl.State())
             completeBtn.backgroundColor = Constants.HDMainColor
-            completeBtn.addTarget(self, action: #selector(completeAction), for: UIControlEvents.touchUpInside)
+            completeBtn.addTarget(self, action: #selector(completeAction), for: UIControl.Event.touchUpInside)
             completeBtn.layer.cornerRadius = 5
             completeBtn.layer.masksToBounds = true
-            completeBtn.setTitleColor(UIColor.white, for: UIControlState())
+            completeBtn.setTitleColor(UIColor.white, for: UIControl.State())
             cell.contentView.addSubview(completeBtn)
 
             completeBtn.snp.makeConstraints({ (make) -> Void in

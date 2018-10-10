@@ -26,10 +26,10 @@ class HDCT03Controller: UITableViewController {
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
 
     }
@@ -88,7 +88,7 @@ class HDCT03Controller: UITableViewController {
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         if (indexPath as NSIndexPath).row == 0 {
 
@@ -147,15 +147,15 @@ class HDCT03Controller: UITableViewController {
         } else {
 
 
-            let nextBtn = UIButton(type: UIButtonType.custom)
-            nextBtn.setTitle("下一步", for: UIControlState())
+            let nextBtn = UIButton(type: UIButton.ButtonType.custom)
+            nextBtn.setTitle("下一步", for: UIControl.State())
             nextBtn.backgroundColor = UIColor.white
-            nextBtn.addTarget(self, action: #selector(nextAction), for: UIControlEvents.touchUpInside)
+            nextBtn.addTarget(self, action: #selector(nextAction), for: UIControl.Event.touchUpInside)
             nextBtn.layer.cornerRadius = 5
             nextBtn.layer.masksToBounds = true
             nextBtn.layer.borderWidth = 1
             nextBtn.layer.borderColor = Constants.HDMainColor.cgColor
-            nextBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+            nextBtn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
             cell.contentView.addSubview(nextBtn)
 
             nextBtn.snp.makeConstraints( { (make) -> Void in
@@ -169,8 +169,8 @@ class HDCT03Controller: UITableViewController {
 
             let title = "注册即表示同意《微菜谱协议》"
             let attributed = NSMutableAttributedString(string: title)
-            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(7, 7))
-            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDMainColor, range: NSMakeRange(7, 7))
+            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 16), range: NSMakeRange(7, 7))
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDMainColor, range: NSMakeRange(7, 7))
 
 
             let protocolT = UILabel()
@@ -196,11 +196,11 @@ class HDCT03Controller: UITableViewController {
 
             })
 
-            let loginBtn = UIButton(type: UIButtonType.custom)
-            loginBtn.setTitle("已有账号，点击登录", for: UIControlState())
+            let loginBtn = UIButton(type: UIButton.ButtonType.custom)
+            loginBtn.setTitle("已有账号，点击登录", for: UIControl.State())
             loginBtn.backgroundColor = UIColor.clear
-            loginBtn.addTarget(self, action: #selector(backAction), for: UIControlEvents.touchUpInside)
-            loginBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+            loginBtn.addTarget(self, action: #selector(backAction), for: UIControl.Event.touchUpInside)
+            loginBtn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
             cell.contentView.addSubview(loginBtn)
 
             loginBtn.snp.makeConstraints( { (make) -> Void in

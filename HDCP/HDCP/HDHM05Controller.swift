@@ -54,7 +54,7 @@ class HDHM05Controller: BaseViewController, UICollectionViewDelegate, UICollecti
 
         //网格的位置和大小
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: Constants.HDSCREENWITH / 2 - 20, height: Constants.HDSCREENWITH / 2 - 20)
 
 

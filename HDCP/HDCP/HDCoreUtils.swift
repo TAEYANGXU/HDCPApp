@@ -47,11 +47,11 @@ class CoreUtils: NSObject {
      */
     static func HDBackBarButtonItem(_ sel:Selector,taget:AnyObject)->(UIBarButtonItem){
         
-        let button = UIButton(type: UIButtonType.custom) as UIButton
+        let button = UIButton(type: UIButton.ButtonType.custom) as UIButton
         button.frame = CGRect(x: 0, y: 0, width: 10, height: 20)
-        button.setBackgroundImage(UIImage(named: "back_icon_white"), for: UIControlState.normal)
-        button.addTarget(taget, action: sel, for: UIControlEvents.touchUpInside)
-        button.contentMode = UIViewContentMode.scaleToFill
+        button.setBackgroundImage(UIImage(named: "back_icon_white"), for: UIControl.State.normal)
+        button.addTarget(taget, action: sel, for: UIControl.Event.touchUpInside)
+        button.contentMode = UIView.ContentMode.scaleToFill
         let backItem = UIBarButtonItem(customView: button)
         
         return backItem;
@@ -210,7 +210,7 @@ class CoreUtils: NSObject {
     
     static func getTextRectSize(_ text:NSString,font:UIFont,size:CGSize) -> CGRect {
         
-        let attributes = [NSAttributedStringKey.font: font]
+        let attributes = [NSAttributedString.Key.font: font]
         
         let option = NSStringDrawingOptions.usesLineFragmentOrigin
         

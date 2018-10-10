@@ -39,13 +39,13 @@ open class HDShareView: UIView {
             
                 let btn = HDShareButton()
                 btn.backgroundColor = UIColor.white
-                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
                 btn.tag = i + 1000;
                 btn.titleLabel?.textAlignment = NSTextAlignment.center
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-                btn.setTitle(resourceArray[i]["title"], for: UIControlState())
-                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControlState())
-                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+                btn.setTitle(resourceArray[i]["title"], for: UIControl.State())
+                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControl.State())
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-180)/6
@@ -73,13 +73,13 @@ open class HDShareView: UIView {
             
                 let btn = HDShareButton()
                 btn.backgroundColor = UIColor.white
-                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
                 btn.tag = i + 1000;
                 btn.titleLabel?.textAlignment = NSTextAlignment.center
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-                btn.setTitle(resourceArray[i]["title"], for: UIControlState())
-                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControlState())
-                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+                btn.setTitle(resourceArray[i]["title"], for: UIControl.State())
+                btn.setImage(UIImage(named:resourceArray[i]["image"]!), for: UIControl.State())
+                btn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
                 self.addSubview(btn)
                 
                 let space = (Constants.HDSCREENWITH-CGFloat(3*HDShareButtonHeight))/6
@@ -134,11 +134,11 @@ open class HDShareView: UIView {
         
         let cancelBtn = UIButton()
         cancelBtn.backgroundColor = UIColor.white
-        cancelBtn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
-        cancelBtn.setTitle("取消", for: UIControlState())
+        cancelBtn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
+        cancelBtn.setTitle("取消", for: UIControl.State())
         cancelBtn.tag = 4 + 1000;
         cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+        cancelBtn.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
         self.addSubview(cancelBtn)
         
         cancelBtn.snp.makeConstraints { (make) -> Void in

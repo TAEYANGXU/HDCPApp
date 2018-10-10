@@ -62,17 +62,17 @@ class WelcomeController: UIViewController {
 
             if i == 5 {
 
-                let btn = UIButton(type: UIButtonType.custom)
+                let btn = UIButton(type: UIButton.ButtonType.custom)
                 btn.backgroundColor = UIColor.clear
-                btn.setTitle("立即体验", for: UIControlState())
+                btn.setTitle("立即体验", for: UIControl.State())
                 btn.layer.cornerRadius = 5;
                 btn.layer.masksToBounds = true
-                btn.setTitleColor(Constants.HDYellowColor, for: UIControlState.normal)
+                btn.setTitleColor(Constants.HDYellowColor, for: UIControl.State.normal)
                 btn.layer.borderColor = Constants.HDMainColor.cgColor
                 btn.layer.borderWidth = 1
                 welcomeView?.addSubview(btn)
 
-                btn.addTarget(self, action: #selector(toMain), for: UIControlEvents.touchUpInside)
+                btn.addTarget(self, action: #selector(toMain), for: UIControl.Event.touchUpInside)
 
                 btn.snp.makeConstraints( { (make) -> Void in
 

@@ -51,7 +51,7 @@ class HDHM02Controller: UITableViewController {
         
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
     }
 
@@ -94,7 +94,7 @@ class HDHM02Controller: UITableViewController {
         dataArray[tag] = model
 
         //刷新指定组
-        self.tableView.reloadSections(IndexSet(integer: tag), with: UITableViewRowAnimation.fade)
+        self.tableView.reloadSections(IndexSet(integer: tag), with: UITableView.RowAnimation.fade)
 
 
     }
@@ -355,7 +355,7 @@ class HDHM02Controller: UITableViewController {
 
         }
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         return cell
     }

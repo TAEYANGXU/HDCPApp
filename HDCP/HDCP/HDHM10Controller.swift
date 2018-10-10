@@ -86,7 +86,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
         
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
 
         putView = UIView()
@@ -137,12 +137,12 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
         }
 
 
-        commitBtn = UIButton(type: UIButtonType.custom)
-        commitBtn.setTitle("发送", for: UIControlState())
+        commitBtn = UIButton(type: UIButton.ButtonType.custom)
+        commitBtn.setTitle("发送", for: UIControl.State())
         commitBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         commitBtn.backgroundColor = Constants.HDMainColor
-        commitBtn.setTitleColor(UIColor.white, for: UIControlState())
-        commitBtn.addTarget(self, action: #selector(sendComment), for: UIControlEvents.touchUpInside)
+        commitBtn.setTitleColor(UIColor.white, for: UIControl.State())
+        commitBtn.addTarget(self, action: #selector(sendComment), for: UIControl.Event.touchUpInside)
         commitBtn.layer.cornerRadius = 5
         commitBtn.layer.masksToBounds = true
         putView.addSubview(commitBtn)
@@ -154,11 +154,10 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
             make.width.equalTo(60)
             make.height.equalTo(40)
         }
-
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name(rawValue:"keyboardWillShowNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name(rawValue:"keyboardWillHideNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: NSNotification.Name(rawValue:"keyboardWillChangeFrameNotification"), object: nil)
 
 
     }
@@ -185,9 +184,10 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
         /**
         *  移除通知
         */
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"keyboardWillShowNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"keyboardWillHideNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"keyboardWillChangeFrameNotification"), object: nil)
 
         HDLog.LogClassDestory("HDHM10Controller")
     }
@@ -196,7 +196,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
     @objc func keyboardWillShow(_ note: Notification) {
 
 
-        let rect = (note as NSNotification).userInfo![UIKeyboardFrameEndUserInfoKey]
+        let rect = (note as NSNotification).userInfo![UIResponder.keyboardFrameEndUserInfoKey]
 
         let height: CGFloat = ((rect as AnyObject).cgRectValue.height)
 
@@ -213,7 +213,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
                 /// cell滚动到底部
                 let indexPath = IndexPath(row: WS.commentArray.count - 1, section: 0)
-                WS.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: false)
+                WS.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: false)
             }
 
         })
@@ -235,7 +235,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
                 /// cell滚动到底部
                 let indexPath = IndexPath(row: WS.commentArray.count - 1, section: 0)
-                WS.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: false)
+                WS.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: false)
             }
 
         })
@@ -345,7 +345,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
             tableView.reloadData()
 
             let indexPath = IndexPath(row: commentArray.count - 1, section: 0)
-            tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.bottom, animated: true)
+            tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.bottom, animated: true)
 
             textView.text = ""
 
@@ -367,7 +367,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         /**
         *   头像
@@ -491,8 +491,8 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
             let str: String = model.content.components(separatedBy: ":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
-            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
             content?.attributedText = attributed
         } else {
 

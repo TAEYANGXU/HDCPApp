@@ -86,7 +86,7 @@ class HDCG01Controller: UITableViewController, UISearchBarDelegate {
         self.tableView.tableFooterView = UIView()
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
 
         searchBar = UISearchBar()
@@ -149,7 +149,7 @@ class HDCG01Controller: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         /**
          *  图标
          */

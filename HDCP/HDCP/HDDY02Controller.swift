@@ -102,12 +102,12 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
         self.view.backgroundColor = UIColor.white
         self.navigationItem.leftBarButtonItem = CoreUtils.HDBackBarButtonItem(#selector(backAction), taget: self)
 
-        let button = UIButton(type: UIButtonType.custom) as UIButton
+        let button = UIButton(type: UIButton.ButtonType.custom) as UIButton
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        button.setBackgroundImage(UIImage(named: "shareIcon"), for: UIControlState())
-        button.addTarget(self, action: #selector(share), for: UIControlEvents.touchUpInside)
-        button.contentMode = UIViewContentMode.scaleToFill
+        button.setBackgroundImage(UIImage(named: "shareIcon"), for: UIControl.State())
+        button.addTarget(self, action: #selector(share), for: UIControl.Event.touchUpInside)
+        button.contentMode = UIView.ContentMode.scaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
 
@@ -199,16 +199,16 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
             for i in 0..<titleArray.count {
 
-                let btn = UIButton(type: UIButtonType.custom)
-                btn .setTitle(titleArray[i], for: UIControlState())
+                let btn = UIButton(type: UIButton.ButtonType.custom)
+                btn .setTitle(titleArray[i], for: UIControl.State())
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
                 btn.tag = 2016 + i
-                btn.addTarget(self, action: #selector(menuAction(_:)), for: UIControlEvents.touchUpInside)
-                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                btn.addTarget(self, action: #selector(menuAction(_:)), for: UIControl.Event.touchUpInside)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
                 menuView?.addSubview(btn)
 
                 if i == 0 {
-                    btn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+                    btn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
                 }
                 btn.snp.makeConstraints( { (make) in
 
@@ -257,7 +257,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
             //兼容IOS11
             if #available(iOS 11.0, *) {
-                scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+                scrollView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
             }
             
             detailView = UIScrollView()
@@ -582,7 +582,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
             activityIndicatorView = UIActivityIndicatorView()
             activityIndicatorView?.startAnimating()
-            activityIndicatorView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            activityIndicatorView?.style = UIActivityIndicatorView.Style.gray
             activityIndicatorView?.center = CGPoint(x: Constants.HDSCREENWITH / 2, y: CGFloat(Constants.HDSCREENHEIGHT - vedioHeight! - 40 - 64) / 2)
             commentView?.addSubview(activityIndicatorView!)
 
@@ -774,7 +774,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
         hideShareView()
 
         let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", (listModel?.data?.id!)!)
-
+        let  sImage = videoPlayerController?.movieBackgroundView.image?.jpegData(compressionQuality: 0.3) as! UIImage
         switch tag {
 
         case 0:
@@ -815,7 +815,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
              *  QQ
              */
 
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: sImage, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -832,7 +832,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
             /**
              *  QQ空间
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: sImage, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -865,7 +865,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
             if view.isMember(of: UIButton.classForCoder()) {
 
                 let btn = view as! UIButton
-                btn.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+                btn.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
 
             }
 
@@ -885,7 +885,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
             btn = menuView?.viewWithTag(2018) as? UIButton
         }
 
-        btn!.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+        btn!.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
 
         unowned let WS = self
         UIView.animate(withDuration: 0.3, animations: {
@@ -1088,7 +1088,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
         hideShareView()
 
         let url = String(format: "http://m.haodou.com/recipe/%d?device=iphone&hash=7408f5dd81db1165cd1896e8175a75e4&siteid=1004&appinstall=0", (listModel?.data?.id!)!)
-
+        let  sImage = videoPlayerController?.movieBackgroundView.image?.jpegData(compressionQuality: 0.3) as! UIImage
         switch type {
 
         case 0:
@@ -1129,7 +1129,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
              *  QQ
              */
 
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: sImage, type: SSDKPlatformType.subTypeQQFriend, url: url, shareSuccess: { () -> Void in
 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1146,7 +1146,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
             /**
              *  QQ空间
              */
-            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: UIImage(data: UIImageJPEGRepresentation((videoPlayerController?.movieBackgroundView.image)!, 0.3)!)!, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
+            HDShareSDKManager.doShareSDK((dy02Info!.title)!, context: (dy02Info?.intro)!, image: sImage, type: SSDKPlatformType.subTypeQZone, url: url, shareSuccess: { () -> Void in
 
                 CoreUtils.showSuccessHUD(self.view, title: "分享成功")
                 HDLog.LogOut("成功")
@@ -1233,7 +1233,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
 
         if stuffTableView == tableView {
 
-            let cell = UITableViewCell.init(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+            let cell = UITableViewCell.init(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
 
             /**
              *   食材
@@ -1287,7 +1287,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
                 weight.text = model.weight
             }
 
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
 
         } else if stepsTableView == tableView {
@@ -1358,7 +1358,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
              */
             let cell = tableView.dequeueReusableCell(withIdentifier: "commentCell", for: indexPath)
 
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
             let model = commentList[(indexPath as NSIndexPath).row]
 

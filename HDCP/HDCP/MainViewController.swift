@@ -49,10 +49,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if hdhm01vc == nil {
 
             hdhm01vc = HDHM01Controller()
-            hdhm01vc.tabBarItem = UITabBarItem(title: "菜谱", image: UIImage(named: "tab_icon_off_01")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_01")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            hdhm01vc.tabBarItem = UITabBarItem(title: "菜谱", image: UIImage(named: "tab_icon_off_01")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_01")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))
             hdhm01vc.title = "菜谱"
             navc = UINavigationController(rootViewController: hdhm01vc)
-            self.addChildViewController(navc)
+            self.addChild(navc)
 
         }
 
@@ -63,10 +63,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if hdgg01vc == nil {
 
             hdgg01vc = HDGG01Controller()
-            hdgg01vc.tabBarItem = UITabBarItem(title: "逛逛", image: UIImage(named: "tab_icon_off_04")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_04")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            hdgg01vc.tabBarItem = UITabBarItem(title: "逛逛", image: UIImage(named: "tab_icon_off_04")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_04")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))
             hdgg01vc.title = "逛逛"
             navc = UINavigationController(rootViewController: hdgg01vc)
-            self.addChildViewController(navc)
+            self.addChild(navc)
 
         }
 
@@ -76,10 +76,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if hdcg01vc == nil {
 
             hdcg01vc = HDCG01Controller()
-            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            hdcg01vc.tabBarItem = UITabBarItem(title: "分类", image: UIImage(named: "tab_icon_off_03")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_03")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))
             hdcg01vc.title = "分类"
             navc = UINavigationController(rootViewController: hdcg01vc)
-            self.addChildViewController(navc)
+            self.addChild(navc)
 
         }
 
@@ -90,10 +90,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if hddy01vc == nil {
 
             hddy01vc = HDDY01Controller()
-            hddy01vc.tabBarItem = UITabBarItem(title: "动态", image: UIImage(named: "tab_icon_off_02")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            hddy01vc.tabBarItem = UITabBarItem(title: "动态", image: UIImage(named: "tab_icon_off_02")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_02")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))
             hddy01vc.title = "动态"
             navc = UINavigationController(rootViewController: hddy01vc)
-            self.addChildViewController(navc)
+            self.addChild(navc)
 
         }
 
@@ -103,10 +103,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if hdct01vc == nil {
 
             hdct01vc = HDCT01Controller()
-            hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal))
+            hdct01vc.tabBarItem = UITabBarItem(title: "我的", image: UIImage(named: "tab_icon_off_05")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "tab_icon_on_05")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal))
             hdct01vc.title = "我的"
             navc = UINavigationController(rootViewController: hdct01vc)
-            self.addChildViewController(navc)
+            self.addChild(navc)
 
         }
 

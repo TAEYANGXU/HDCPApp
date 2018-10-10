@@ -190,10 +190,10 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
         let space = Constants.HDSCREENWITH / 3
         for i in 0 ..< cntArray.count {
 
-            let btn = UIButton(type: UIButtonType.custom)
+            let btn = UIButton(type: UIButton.ButtonType.custom)
             btn.tag = 1000 + i
-            btn.setTitleColor(UIColor.white, for: UIControlState())
-            btn.addTarget(self, action: #selector(cntAction(_:)), for: UIControlEvents.touchUpInside)
+            btn.setTitleColor(UIColor.white, for: UIControl.State())
+            btn.addTarget(self, action: #selector(cntAction(_:)), for: UIControl.Event.touchUpInside)
             btn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             cntView?.addSubview(btn)
             btn.snp.makeConstraints( { (make) -> Void in
@@ -213,10 +213,10 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
 
     func createtableView() {
 
-        self.tableView = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
+        self.tableView = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsetsMake(kHeadViewHeight, 0, 0, 0)
+        self.tableView.contentInset = UIEdgeInsets(top: kHeadViewHeight, left: 0, bottom: 0, right: 0)
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
         self.tableView.tableFooterView = UIView()
@@ -224,7 +224,7 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(self.tableView)
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
     }
 
@@ -244,13 +244,13 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
             //关注 粉丝 好友
 
             let gzBtn = cntView?.viewWithTag(1000) as! UIButton
-            gzBtn.setTitle(String(format: "关注: %d", HDUserInfoManager.shareInstance.followCnt!), for: UIControlState())
+            gzBtn.setTitle(String(format: "关注: %d", HDUserInfoManager.shareInstance.followCnt!), for: UIControl.State())
 
             let fsBtn = cntView?.viewWithTag(1001) as! UIButton
-            fsBtn.setTitle(String(format: "粉丝: %d", HDUserInfoManager.shareInstance.fansCount!), for: UIControlState())
+            fsBtn.setTitle(String(format: "粉丝: %d", HDUserInfoManager.shareInstance.fansCount!), for: UIControl.State())
 
             let hyBtn = cntView?.viewWithTag(1002) as! UIButton
-            hyBtn.setTitle(String(format: "好友: %d", HDUserInfoManager.shareInstance.friendCnt!), for: UIControlState())
+            hyBtn.setTitle(String(format: "好友: %d", HDUserInfoManager.shareInstance.friendCnt!), for: UIControl.State())
 
             HDLog.LogOut(HDUserInfoManager.shareInstance.avatar!)
 
@@ -340,8 +340,8 @@ class HDCT01Controller: BaseViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         /**
          *  图标

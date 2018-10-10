@@ -48,11 +48,11 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
         self.tableView?.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = UIColor.white
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
-            tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
+            tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0);
             tableView.scrollIndicatorInsets = tableView.contentInset;
         }
     }
@@ -151,7 +151,7 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
 
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         if (indexPath as NSIndexPath).row == 0 {
 
@@ -251,11 +251,11 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
 
         } else {
 
-            let forgetBtn = UIButton(type: UIButtonType.custom)
-            forgetBtn.setTitle("忘记密码?", for: UIControlState())
+            let forgetBtn = UIButton(type: UIButton.ButtonType.custom)
+            forgetBtn.setTitle("忘记密码?", for: UIControl.State())
             forgetBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            forgetBtn.addTarget(self, action: #selector(forgetAction), for: UIControlEvents.touchUpInside)
-            forgetBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+            forgetBtn.addTarget(self, action: #selector(forgetAction), for: UIControl.Event.touchUpInside)
+            forgetBtn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
             cell.contentView.addSubview(forgetBtn)
 
             forgetBtn.snp.makeConstraints( { (make) -> Void in
@@ -268,11 +268,11 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
             })
 
 
-            let registBtn = UIButton(type: UIButtonType.custom)
-            registBtn.setTitle("注册", for: UIControlState())
+            let registBtn = UIButton(type: UIButton.ButtonType.custom)
+            registBtn.setTitle("注册", for: UIControl.State())
             registBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            registBtn.addTarget(self, action: #selector(registAction), for: UIControlEvents.touchUpInside)
-            registBtn.setTitleColor(Constants.HDMainColor, for: UIControlState.normal)
+            registBtn.addTarget(self, action: #selector(registAction), for: UIControl.Event.touchUpInside)
+            registBtn.setTitleColor(Constants.HDMainColor, for: UIControl.State.normal)
             cell.contentView.addSubview(registBtn)
 
             registBtn.snp.makeConstraints( { (make) -> Void in
@@ -285,13 +285,13 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
             })
 
 
-            let loginBtn = UIButton(type: UIButtonType.custom)
-            loginBtn.setTitle("登录", for: UIControlState())
+            let loginBtn = UIButton(type: UIButton.ButtonType.custom)
+            loginBtn.setTitle("登录", for: UIControl.State())
             loginBtn.backgroundColor = Constants.HDMainColor
-            loginBtn.addTarget(self, action: #selector(loginAction), for: UIControlEvents.touchUpInside)
+            loginBtn.addTarget(self, action: #selector(loginAction), for: UIControl.Event.touchUpInside)
             loginBtn.layer.cornerRadius = 5
             loginBtn.layer.masksToBounds = true
-            loginBtn.setTitleColor(UIColor.white, for: UIControlState())
+            loginBtn.setTitleColor(UIColor.white, for: UIControl.State())
             cell.contentView.addSubview(loginBtn)
 
             loginBtn.snp.makeConstraints( { (make) -> Void in

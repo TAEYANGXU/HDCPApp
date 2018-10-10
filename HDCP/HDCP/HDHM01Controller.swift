@@ -227,7 +227,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          }
          //兼容IOS11
          if #available(iOS 11.0, *) {
-            baseView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            baseView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
          }
          /**
             *  添加下拉刷新
@@ -300,7 +300,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
 
          centerImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH, y: 0, width: Constants.HDSCREENWITH, height: HeadViewHeight))
-         centerImageView!.contentMode = UIViewContentMode.scaleToFill;
+         centerImageView!.contentMode = UIView.ContentMode.scaleToFill;
          centerImageView?.isUserInteractionEnabled = true
          headerSView?.addSubview(centerImageView!)
          let ctapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
@@ -308,7 +308,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          centerImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
 
          leftImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: Constants.HDSCREENWITH, height: HeadViewHeight))
-         leftImageView!.contentMode = UIViewContentMode.scaleToFill;
+         leftImageView!.contentMode = UIView.ContentMode.scaleToFill;
          leftImageView?.isUserInteractionEnabled = true
          headerSView?.addSubview(leftImageView!)
          let ltapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
@@ -316,7 +316,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          leftImageView!.kf.setImage(with: URL(string: "http://img1.hoto.cn/haodou/recipev4/wiki/1d5ff0c46.jpg"), placeholder: UIImage(named: "noDataDefaultIcon"), options: nil, progressBlock: nil, completionHandler: nil)
          
          rightImageView = UIImageView(frame: CGRect(x: Constants.HDSCREENWITH * 2, y: 0, width: Constants.HDSCREENWITH, height: HeadViewHeight))
-         rightImageView!.contentMode = UIViewContentMode.scaleToFill;
+         rightImageView!.contentMode = UIView.ContentMode.scaleToFill;
          rightImageView?.isUserInteractionEnabled = true
          headerSView?.addSubview(rightImageView!)
          let rtapGes: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headGesAction(_:)))
@@ -330,7 +330,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          if pageControl == nil {
 
             pageControl = UIPageControl()
-            pageControl?.addTarget(self, action: #selector(pageAction(_:)), for: UIControlEvents.touchUpInside)
+            pageControl?.addTarget(self, action: #selector(pageAction(_:)), for: UIControl.Event.touchUpInside)
             pageControl?.numberOfPages = 3;
             pageControl?.currentPage = 0;
             pageControl?.pageIndicatorTintColor = Constants.HDMainColor
@@ -414,12 +414,12 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
             btn = HDHM01Button()
             btn!.tag = i + 300
-            btn!.setImage(UIImage(named: resourceArray[i]["image"]!), for: UIControlState())
-            btn!.setTitle(resourceArray[i]["title"]!, for: UIControlState())
+            btn!.setImage(UIImage(named: resourceArray[i]["image"]!), for: UIControl.State())
+            btn!.setTitle(resourceArray[i]["title"]!, for: UIControl.State())
             btn!.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             btn!.titleLabel?.textAlignment = NSTextAlignment.center
-            btn!.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
-            btn!.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+            btn!.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
+            btn!.addTarget(self, action: #selector(menuBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
             menuView.addSubview(btn!)
 
             btn!.snp.makeConstraints { (make) -> Void in
@@ -479,13 +479,13 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
 
                btn = UIButton()
                btn!.backgroundColor = UIColor.white
-               btn!.setTitleColor(Constants.HDMainTextColor, for: UIControlState.normal)
+               btn!.setTitleColor(Constants.HDMainTextColor, for: UIControl.State.normal)
                btn!.tag = index + 1000;
                btn!.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-               btn!.setTitle(model.name, for: UIControlState())
+               btn!.setTitle(model.name, for: UIControl.State())
                btn!.layer.borderWidth = 0.5
                btn!.layer.borderColor = Constants.HDBGViewColor.cgColor
-               btn!.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControlEvents.touchUpInside)
+               btn!.addTarget(self, action: #selector(tagBtnOnclick(_:)), for: UIControl.Event.touchUpInside)
                tagListView.addSubview(btn!)
 
                btn!.snp.makeConstraints( { (make) -> Void in
@@ -590,7 +590,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          onclickBtn.tag = 10000
          onclickBtn.backgroundColor = UIColor.clear
          collectListView.addSubview(onclickBtn)
-         onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControlEvents.touchUpInside)
+         onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControl.Event.touchUpInside)
 
          onclickBtn.snp.makeConstraints( { (make) -> Void in
 
@@ -725,7 +725,7 @@ class HDHM01Controller: BaseViewController, UIScrollViewDelegate {
          onclickBtn.tag = 20000
          onclickBtn.backgroundColor = UIColor.clear
          wikiListView.addSubview(onclickBtn)
-         onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControlEvents.touchUpInside)
+         onclickBtn.addTarget(self, action: #selector(moreAction(_:)), for: UIControl.Event.touchUpInside)
 
          onclickBtn.snp.makeConstraints( { (make) -> Void in
 

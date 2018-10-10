@@ -56,13 +56,13 @@ class HDCT10Controller: UITableViewController {
     func setupUI() {
 
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "myCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
 
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
         //当列表滚动到底端 视图自动刷新
         unowned let WS = self;
@@ -208,8 +208,8 @@ class HDCT10Controller: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView .dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.accessoryType = UITableViewCellAccessoryType.none
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        cell.accessoryType = UITableViewCell.AccessoryType.none
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
         //头像
         var icon = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -526,8 +526,8 @@ class HDCT10Controller: UITableViewController {
             let str = String(format: "%d", (model.data?.commentCnt)!)
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
-            attributed.addAttribute(NSAttributedStringKey.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSAttributedStringKey.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
             commentCnt?.attributedText = attributed
 
         } else {

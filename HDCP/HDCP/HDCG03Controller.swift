@@ -98,12 +98,12 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         self.navigationItem.hidesBackButton = true
 
 
-        let button = UIButton(type: UIButtonType.custom) as UIButton
+        let button = UIButton(type: UIButton.ButtonType.custom) as UIButton
         button.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.setTitle("取消", for: UIControlState())
-        button.addTarget(self, action: #selector(cancel), for: UIControlEvents.touchUpInside)
-        button.contentMode = UIViewContentMode.scaleToFill
+        button.setTitle("取消", for: UIControl.State())
+        button.addTarget(self, action: #selector(cancel), for: UIControl.Event.touchUpInside)
+        button.contentMode = UIView.ContentMode.scaleToFill
         let rightItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = rightItem
 
@@ -148,7 +148,7 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         self.tableView.backgroundColor = UIColor.white
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
         searchBar = UISearchBar()
         searchBar.placeholder = "搜索菜谱、食材或功效"
@@ -372,17 +372,17 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         }
     }
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
 
         if (indexPath as NSIndexPath).row != 0 {
-            return UITableViewCellEditingStyle.delete
+            return UITableViewCell.EditingStyle.delete
         } else {
-            return UITableViewCellEditingStyle.none
+            return UITableViewCell.EditingStyle.none
         }
 
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         self.hisDataArray.removeObject(at: (indexPath as NSIndexPath).row)
 
@@ -400,7 +400,7 @@ class HDCG03Controller: UITableViewController, UISearchBarDelegate {
         userDefault.set(NSArray(array: hisArray), forKey: Constants.HDHistory)
         userDefault.synchronize()
 
-        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        self.tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
 
         if hisArray.count == 0 {
 

@@ -126,7 +126,7 @@ class HDCT06Controller: UITableViewController {
         self.tableView.tableFooterView = UIView()
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
     }
 
@@ -241,12 +241,12 @@ class HDCT06Controller: UITableViewController {
 
         if (indexPath as NSIndexPath).section == 1 || (indexPath as NSIndexPath).section == 3 {
 
-            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
 
 
         } else {
 
-            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
 
         }
 

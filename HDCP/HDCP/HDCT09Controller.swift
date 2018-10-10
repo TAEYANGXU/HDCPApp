@@ -44,10 +44,10 @@ class HDCT09Controller: UITableViewController {
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "groupCell")
         self.tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "starCell")
         self.tableView.backgroundColor = Constants.HDBGViewColor
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //兼容IOS11
         if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never;
+            tableView.contentInsetAdjustmentBehavior = UIScrollView.ContentInsetAdjustmentBehavior.never;
         }
     }
 
@@ -204,8 +204,8 @@ class HDCT09Controller: UITableViewController {
         if (indexPath as NSIndexPath).section == 0 {
 
             let cell = tableView .dequeueReusableCell(withIdentifier: "hotCell", for: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.none
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
             //图片
             var hotImageV = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -412,8 +412,8 @@ class HDCT09Controller: UITableViewController {
         } else if (indexPath as NSIndexPath).section == 1 {
 
             let cell = tableView .dequeueReusableCell(withIdentifier: "groupCell", for: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.none
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
             //图片
             var topicImageV = cell.contentView.viewWithTag(1000) as? UIImageView
@@ -533,8 +533,8 @@ class HDCT09Controller: UITableViewController {
         } else {
 
             let cell = tableView .dequeueReusableCell(withIdentifier: "starCell", for: indexPath)
-            cell.accessoryType = UITableViewCellAccessoryType.none
-            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 
 
             if todayStar.count > 0 {

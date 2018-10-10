@@ -30,7 +30,7 @@
 项目备注
 
     App有些功能还没有实现,会抽空在后续更新。
-    要求:IOS8.0以上,Xcode 8.0 以上。
+    要求:IOS8.0以上,Xcode 9.0 以上。
 
 项目运行
 
@@ -46,5 +46,5 @@ Swift学习
 
 项目效果图 
 
-   ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/DY.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/CP.gif)  ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/GG.gif)   ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/FL.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/PHB.gif)  ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/FXCP.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/PL.gif) 
+   ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/gif001.gif) ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/gif002.gif)  ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/gif003.gif)   ![](https://github.com/AlbertXYZ/HDCP/raw/master/Images/gif004.gif) 
 

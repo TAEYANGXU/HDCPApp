@@ -59,7 +59,7 @@ open class HDRequestManager: NSObject {
 
         //HDLog.LogOut("PostURL" as AnyObject, obj: URL as AnyObject)
         print("PostURL\(URL as AnyObject)")
-
+        
         Alamofire.request(URL, method: .post, parameters: param, encoding: URLEncoding.default).responseJSON { response in
 
             if response.result.error == nil {

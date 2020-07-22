@@ -28,134 +28,140 @@
 #endif
 
 
-open class ConstraintMakerExtendable: ConstraintMakerRelatable {
+public class ConstraintMakerExtendable: ConstraintMakerRelatable {
     
-    open var left: ConstraintMakerExtendable {
+    public var left: ConstraintMakerExtendable {
         self.description.attributes += .left
         return self
     }
     
-    open var top: ConstraintMakerExtendable {
+    public var top: ConstraintMakerExtendable {
         self.description.attributes += .top
         return self
     }
     
-    open var bottom: ConstraintMakerExtendable {
+    public var bottom: ConstraintMakerExtendable {
         self.description.attributes += .bottom
         return self
     }
     
-    open var right: ConstraintMakerExtendable {
+    public var right: ConstraintMakerExtendable {
         self.description.attributes += .right
         return self
     }
     
-    open var leading: ConstraintMakerExtendable {
+    public var leading: ConstraintMakerExtendable {
         self.description.attributes += .leading
         return self
     }
     
-    open var trailing: ConstraintMakerExtendable {
+    public var trailing: ConstraintMakerExtendable {
         self.description.attributes += .trailing
         return self
     }
     
-    open var width: ConstraintMakerExtendable {
+    public var width: ConstraintMakerExtendable {
         self.description.attributes += .width
         return self
     }
     
-    open var height: ConstraintMakerExtendable {
+    public var height: ConstraintMakerExtendable {
         self.description.attributes += .height
         return self
     }
     
-    open var centerX: ConstraintMakerExtendable {
+    public var centerX: ConstraintMakerExtendable {
         self.description.attributes += .centerX
         return self
     }
     
-    open var centerY: ConstraintMakerExtendable {
+    public var centerY: ConstraintMakerExtendable {
         self.description.attributes += .centerY
         return self
     }
     
     @available(*, deprecated:3.0, message:"Use lastBaseline instead")
-    open var baseline: ConstraintMakerExtendable {
+    public var baseline: ConstraintMakerExtendable {
         self.description.attributes += .lastBaseline
         return self
     }
     
-    open var lastBaseline: ConstraintMakerExtendable {
+    public var lastBaseline: ConstraintMakerExtendable {
         self.description.attributes += .lastBaseline
         return self
     }
     
     @available(iOS 8.0, OSX 10.11, *)
-    open var firstBaseline: ConstraintMakerExtendable {
+    public var firstBaseline: ConstraintMakerExtendable {
         self.description.attributes += .firstBaseline
         return self
     }
     
     @available(iOS 8.0, *)
-    open var leftMargin: ConstraintMakerExtendable {
+    public var leftMargin: ConstraintMakerExtendable {
         self.description.attributes += .leftMargin
         return self
     }
     
     @available(iOS 8.0, *)
-    open var rightMargin: ConstraintMakerExtendable {
+    public var rightMargin: ConstraintMakerExtendable {
         self.description.attributes += .rightMargin
         return self
     }
     
     @available(iOS 8.0, *)
-    open var bottomMargin: ConstraintMakerExtendable {
+    public var topMargin: ConstraintMakerExtendable {
+        self.description.attributes += .topMargin
+        return self
+    }
+    
+    @available(iOS 8.0, *)
+    public var bottomMargin: ConstraintMakerExtendable {
         self.description.attributes += .bottomMargin
         return self
     }
     
     @available(iOS 8.0, *)
-    open var leadingMargin: ConstraintMakerExtendable {
+    public var leadingMargin: ConstraintMakerExtendable {
         self.description.attributes += .leadingMargin
         return self
     }
     
     @available(iOS 8.0, *)
-    open var trailingMargin: ConstraintMakerExtendable {
+    public var trailingMargin: ConstraintMakerExtendable {
         self.description.attributes += .trailingMargin
         return self
     }
     
     @available(iOS 8.0, *)
-    open var centerXWithinMargins: ConstraintMakerExtendable {
+    public var centerXWithinMargins: ConstraintMakerExtendable {
         self.description.attributes += .centerXWithinMargins
         return self
     }
     
     @available(iOS 8.0, *)
-    open var centerYWithinMargins: ConstraintMakerExtendable {
+    public var centerYWithinMargins: ConstraintMakerExtendable {
         self.description.attributes += .centerYWithinMargins
         return self
     }
     
-    open var edges: ConstraintMakerExtendable {
+    public var edges: ConstraintMakerExtendable {
         self.description.attributes += .edges
         return self
     }
-    open var size: ConstraintMakerExtendable {
+    public var size: ConstraintMakerExtendable {
         self.description.attributes += .size
         return self
     }
     
     @available(iOS 8.0, *)
-    open var margins: ConstraintMakerExtendable {
+    public var margins: ConstraintMakerExtendable {
         self.description.attributes += .margins
         return self
     }
     
     @available(iOS 8.0, *)
-    open var centerWithinMargins: ConstraintMakerExtendable {
+    public var centerWithinMargins: ConstraintMakerExtendable {
         self.description.attributes += .centerWithinMargins
         return self
     }

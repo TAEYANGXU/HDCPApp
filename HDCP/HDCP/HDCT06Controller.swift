@@ -26,7 +26,7 @@ class HDCT06Controller: UITableViewController {
         [["title": "关于"],
             ["title": "意见反馈"], ["title": "给我们评星"]], []]
     var titleArray = ["个人", "通用", "支持", ""]
-    var cacheSize: CGFloat = 0.0;
+    var cacheSize: Float = 0.0;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +65,11 @@ class HDCT06Controller: UITableViewController {
 
     // MARK: - 计算缓存大小
 
-    func getCacheSize() -> CGFloat {
+    func getCacheSize() -> Float {
 
 //        let size = SDImageCache.shared().getSize()
-        let mb: CGFloat = CGFloat(1024 * 1024 * 2 / 1024 / 1024)
+        
+        let mb: Float = Float(1024 * 1024 * 2 / 1024 / 1024)
 
         return mb
     }

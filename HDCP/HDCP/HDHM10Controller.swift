@@ -329,7 +329,7 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
      */
     @objc func sendComment() {
 
-        if textView.text?.characters.count > 0 {
+        if textView.text?.count > 0 {
 
             let mutableArray = NSMutableArray(array: commentArray)
             let model = HDHM10Comment()
@@ -491,8 +491,8 @@ class HDHM10Controller: UIViewController, UITableViewDataSource, UITableViewDele
 
             let str: String = model.content.components(separatedBy: ":")[0]
             let attributed = NSMutableAttributedString(string: model.content)
-            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.count))
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(0, str.count))
             content?.attributedText = attributed
         } else {
 

@@ -578,7 +578,7 @@ class HDDY01Controller: UITableViewController {
 
         title?.text = model.data?.title
 
-        if model.data!.tagName!.characters.count > 0 {
+        if model.data!.tagName!.count > 0 {
 
             content?.text = String(format: "[%@]%@", model.data!.tagName!, model.data!.content!)
         } else {
@@ -611,8 +611,8 @@ class HDDY01Controller: UITableViewController {
             let str = String(format: "%d", (model.data?.commentCnt)!)
             let comentStr = String(format: "查看全部%d条评论", (model.data?.commentCnt)!)
             let attributed = NSMutableAttributedString(string: comentStr)
-            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.characters.count))
-            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(4, str.characters.count))
+            attributed.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 15), range: NSMakeRange(0, str.count))
+            attributed.addAttribute(NSAttributedString.Key.foregroundColor, value: Constants.HDYellowColor, range: NSMakeRange(4, str.count))
             commentCnt?.attributedText = attributed
 
         } else {

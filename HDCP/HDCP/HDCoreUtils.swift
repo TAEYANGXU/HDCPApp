@@ -150,7 +150,7 @@ class CoreUtils: NSObject {
         hud.mode = MBProgressHUDMode.customView;
         hud.customView = UIImageView(image: UIImage(named: "37x-warning"))
         
-        if title.characters.count>0 {
+        if title.count>0 {
         
             hud.labelText = title;
             
@@ -180,7 +180,7 @@ class CoreUtils: NSObject {
         hud.mode = MBProgressHUDMode.customView;
         hud.customView = UIImageView(image: UIImage(named: "37x-success"))
         
-        if title.characters.count>0 {
+        if title.count>0 {
             
             hud.labelText = title;
             

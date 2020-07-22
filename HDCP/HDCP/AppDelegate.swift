@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setUpBarStyle();
 
         //ShareSDK 初始化
-        HDShareSDKManager.initializeShareSDK();
+//        HDShareSDKManager.initializeShareSDK();
 
         //欢迎导航页面
         showWelcome();

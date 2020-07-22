@@ -104,13 +104,13 @@ class HDCT02Controller: UITableViewController, UITextFieldDelegate {
     @objc func loginAction() {
 
 
-        guard username.text?.characters.count > 0 else {
+        guard username.text?.count > 0 else {
 
             CoreUtils.showWarningHUD(self.view, title: "请输入用户名")
             return
         }
 
-        guard password.text?.characters.count > 0 else {
+        guard password.text?.count > 0 else {
 
             CoreUtils.showWarningHUD(self.view, title: "请输入密码")
             return

@@ -6,7 +6,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2014-2016 Hearst
+//  Copyright (c) 2014-2018 Tristan Himmelman
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -108,9 +108,13 @@ public final class Mapper<N: BaseMappable> {
 			}
 		} else if let klass = N.self as? ImmutableMappable.Type { // Check if object is ImmutableMappable
 			do {
-				return try klass.init(map: map) as? N
+				if var object = try klass.init(map: map) as? N {
+					object.mapping(map: map)
+					return object
+				}
 			} catch let error {
 				#if DEBUG
+				#if !os(Linux)
 				let exception: NSException
 				if let mapError = error as? MapError {
 					exception = NSException(name: .init(rawValue: "MapError"), reason: mapError.description, userInfo: nil)
@@ -118,6 +122,7 @@ public final class Mapper<N: BaseMappable> {
 					exception = NSException(name: .init(rawValue: "ImmutableMappableError"), reason: error.localizedDescription, userInfo: nil)
 				}
 				exception.raise()
+				#endif
 				#endif
 			}
 		} else {
@@ -186,7 +191,7 @@ public final class Mapper<N: BaseMappable> {
 	public func mapDictionary(JSON: [String: [String: Any]]) -> [String: N]? {
 		// map every value in dictionary to type N
 		let result = JSON.filterMap(map)
-		if result.isEmpty == false {
+		if !result.isEmpty {
 			return result
 		}
 		
@@ -232,7 +237,7 @@ public final class Mapper<N: BaseMappable> {
 			mapArray(JSONArray: $0)
         }
         
-		if result.isEmpty == false {
+		if !result.isEmpty {
 			return result
 		}
         
@@ -242,13 +247,11 @@ public final class Mapper<N: BaseMappable> {
 	/// Maps an 2 dimentional array of JSON dictionaries to a 2 dimentional array of Mappable objects
 	public func mapArrayOfArrays(JSONObject: Any?) -> [[N]]? {
 		if let JSONArray = JSONObject as? [[[String: Any]]] {
-			var objectArray = [[N]]()
-			for innerJSONArray in JSONArray {
-				let array = mapArray(JSONArray: innerJSONArray)
-				objectArray.append(array)
+			let objectArray = JSONArray.map { innerJSONArray in
+				return mapArray(JSONArray: innerJSONArray)
 			}
 			
-			if objectArray.isEmpty == false {
+			if !objectArray.isEmpty {
 				return objectArray
 			}
 		}

@@ -723,7 +723,7 @@ class HDDY02Controller: UIViewController, HDVideoPlayerDelegate, UIScrollViewDel
     func getVedioUrl(_ str: String) -> String {
 
         var vedioUrl = ""
-        if str.characters.count > 0 {
+        if str.count > 0 {
 
             let arrayStr = str.components(separatedBy: "/l/")[1]
             let str = arrayStr.components(separatedBy: "_")[0]

@@ -15,7 +15,7 @@ open class HDCoreDataManager: NSObject {
      *  单利模式
      */
 
-    open static let sharedInstance = HDCoreDataManager()
+    public static let sharedInstance = HDCoreDataManager()
 
 //    class var shareInstance: HDCoreDataManager {
 //

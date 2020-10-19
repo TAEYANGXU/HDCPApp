@@ -1,6 +1,6 @@
 ![](https://camo.githubusercontent.com/f0604df64b4db3dad5b2a23439b9c253abedeae3/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f53776966742d332e302d6f72616e67652e737667)<br/>
 
-                                                            微菜谱
+              微菜谱
 
 结构分析
 
